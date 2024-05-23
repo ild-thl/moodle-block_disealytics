@@ -1,0 +1,99 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_disealytics/config_menu
+
+    Template purpose and description.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * none
+
+    Example context (json):
+    {
+
+    }
+}}
+<div class="modal fade block_disealytics-main-modal" id="configMainModal">
+    <div class="modal-dialog">
+        <div class="modal-content content-modal-main">
+            <div class="modal-header">
+                <h5 class="modal-title text-semibold disea-blue">{{#str}} main_config_title, block_disealytics {{/str}}</h5>
+                <a class="block_disealytics-close-modal-btn" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">{{#str}} main_config_desc, block_disealytics {{/str}}</p>
+                <div class="config-section">
+                    <h5 class="consent-title">{{#str}} main_config_consent_title, block_disealytics {{/str}}</h5>
+                    <a  id="block_disealytics_config_consent_menu"
+                        class="dashboard-button"
+                        data-toggle="modal"
+                        data-target="#configConsentModal">
+                        <i class="fa fa-toggle-on disea-green" aria-hidden="true"></i>
+                    </a>
+                    <span class="consent-desc text-small disea-gray">{{#str}} main_config_consent_desc, block_disealytics {{/str}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade block_disealytics-main-modal" id="configConsentModal">
+    <div class="modal-dialog">
+        <div class="modal-content content-modal-main">
+            <div class="modal-header">
+                <h5 class="modal-title text-semibold disea-blue">{{#str}} consent_config_title, block_disealytics {{/str}}</h5>
+                <a class="block_disealytics-close-modal-btn" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">{{#str}} consent_config_desc, block_disealytics {{/str}}</p>
+                <ul>
+                    <li>{{#str}} consent_config_list_item_1, block_disealytics {{/str}}</li>
+                    <li>{{#str}} consent_config_list_item_2, block_disealytics {{/str}}</li>
+                    <li>{{#str}} consent_config_list_item_3, block_disealytics {{/str}}</li>
+                </ul>
+                <a href="{{agreementurl}}" class="disea-blue text-small">{{#str}} consent_config_link, block_disealytics {{/str}}</a>
+                <p class="disea-space"></p>
+                <div class="btn-container" style="display: flex; gap: 8px; justify-content: end;">
+                    <button class="disea-cancel-btn btn btn-secondary" data-dismiss="modal">{{#str}}consent_config_btn_cancel, block_disealytics {{/str}}</button>
+                    <button class="disea-delete-btn btn btn-danger text-small">{{#str}}consent_config_btn_delete, block_disealytics {{/str}}</button>
+                    <button class="disea-save-btn btn btn-primary text-small">{{#str}}consent_config_btn_save, block_disealytics {{/str}}</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{{#js}}
+
+    require(['block_disealytics/add_interaction'],
+    function(addInteraction) {
+    addInteraction.changeToggleIcon();
+    });
+
+{{/js}}

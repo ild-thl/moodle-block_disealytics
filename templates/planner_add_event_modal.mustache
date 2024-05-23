@@ -1,0 +1,155 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_disealytics/planner_add_event_modal
+
+    Template purpose and description.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * none
+
+    Example context (json):
+    {
+
+    }
+}}
+<div class="block_disealytics">
+    <p class="modal-desc">{{#str}} planner_add_event_modal_desc, block_disealytics {{/str}}</p>
+    <div id="create-planner-event-container">
+        <div class="planner-event-name-input planner-event-input-block">
+            <div class="planner-event-input-headline">
+                <span>{{#str}}planner_event_name_label, block_disealytics {{/str}}</span>
+            </div>
+            <div class="planner-event-input-content">
+                <label for="planner-event-name-input">
+                    <input type="text" id="planner-event-name-input" placeholder="{{#str}}planner_event_name_placeholder, block_disealytics {{/str}}"
+                           required>
+                </label>
+            </div>
+        </div>
+        <div class="planner-event-date-input planner-event-input-block">
+            <div class="planner-event-input-headline">
+                <span>{{#str}}planner_event_date_label, block_disealytics {{/str}}</span>
+            </div>
+            <div class="planner-event-input-content">
+                <label for="planner-date-start-input">
+                    <input type="date" id="planner-date-start-input" name="planner-date-start-input">
+                </label>
+                <label for="planner-time-start-input">
+                    <input type="time" id="planner-time-start-input" name="planner-time-start-input">
+                </label>
+            </div>
+        </div>
+        <div class="planner-event-location planner-event-input-block">
+            <div class="planner-event-input-headline">
+                <span>{{#str}}planner_event_location_label, block_disealytics {{/str}}</span>
+            </div>
+            <div class="planner-event-input-content">
+                <label for="planner-event-location-input">
+                    <input type="text" id="planner-event-location-input"
+                           placeholder="{{#str}}planner_event_location_placeholder, block_disealytics {{/str}}">
+                </label>
+            </div>
+        </div>
+        <div class="planner-event-type planner-event-input-block">
+            <div class="planner-event-input-headline">
+                <span>{{#str}}planner_event_type_label, block_disealytics {{/str}}</span>
+            </div>
+            <div class="planner-event-input-content">
+                <label for="planner-event-type-input">
+                    <select id="planner-event-type-input" name="planner-event-type-input">
+                        <option value="1" selected>{{#str}}planner_event_type_value_1, block_disealytics {{/str}}</option>
+                        <option value="2">{{#str}}planner_event_type_value_2, block_disealytics {{/str}}</option>
+                        <option value="3">{{#str}}planner_event_type_value_3, block_disealytics {{/str}}</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="planner-event-duration-input planner-event-input-block">
+            <div class="planner-event-input-headline">
+                <span>{{#str}}planner_event_duration_label, block_disealytics {{/str}}</span>
+            </div>
+            <div class="planner-event-input-content">
+                <div>
+                    <label for="planner-no-end-input">
+                        <input type="radio" name="planner-option" id="planner-no-end-input" checked>
+                    </label>
+                    <span>{{#str}}planner_event_no-end_label, block_disealytics {{/str}}</span>
+                </div>
+                <div>
+                    <label for="planner-until-input">
+                        <input type="radio" name="planner-option" id="planner-until-input">
+                    </label>
+                    <span>{{#str}}planner_event_until_label, block_disealytics {{/str}}</span>
+                    <label for="planner-date-end-input">
+                        <input type="date" id="planner-date-end-input" name="planner-date-end-input" disabled>
+                    </label>
+                    <label for="planner-time-end-input">
+                        <input type="time" id="planner-time-end-input" name="planner-time-end-input" disabled>
+                    </label>
+                </div>
+                <div>
+                    <label for="planner-duration-input">
+                        <input type="radio" name="planner-option" id="planner-duration-input">
+                    </label>
+                    <label for="planner-duration-text">
+                        <span>{{#str}}planner_event_duration-in-min_label, block_disealytics {{/str}}</span>
+                        <input type="text" id="planner-duration-text" value="90" disabled>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="planner-event-repetitions planner-event-input-block">
+            <div class="planner-event-input-headline">
+                <span>{{#str}}planner_event_repetitions_label, block_disealytics {{/str}}</span>
+            </div>
+            <div class="planner-event-input-content">
+                <label for="planner-event-repetitions-input-checkbox">
+                    <input type="checkbox" id="planner-event-repetitions-input-checkbox"> {{#str}}planner_event_repetitions_text, block_disealytics {{/str}}
+                </label>
+                <label for="planner-event-repetitions-input">
+                    <input type="text" id="planner-event-repetitions-input" value="1" disabled>
+                </label>
+            </div>
+        </div>
+
+        <div class="planner-info-messages">
+        <span style="font-size:small;" id="planner-name-invalid" class="hidden planner-invalid text-small">
+            {{#str}} planner_name_invalid, block_disealytics {{/str}}</span>
+            <span style="font-size:small;" id="planner-name-missing" class="hidden planner-invalid text-small">
+                {{#str}} planner_name_missing, block_disealytics {{/str}}</span>
+            <span style="font-size:small;" id="planner-date-invalid" class="hidden planner-invalid text-small">
+                {{#str}} planner_date_invalid, block_disealytics {{/str}}</span>
+            <span style="font-size:small;" id="planner_repetition_invalid" class="hidden planner-invalid text-small">
+                {{#str}} planner_repetition_invalid, block_disealytics {{/str}}</span>
+            <span style="font-size:small;" id="planner_input_invalid" class="hidden planner-invalid text-small">
+                {{#str}} planner_input_invalid, block_disealytics {{/str}}</span>
+        </div>
+
+        <div class="btn-container" style="display: flex; gap: 8px; justify-content: end;">
+            <button id="cancel-planner-date" class="close cancel-planner-date disea-cancel-btn btn btn-secondary text-small" data-action="hide">{{#str}}
+                planner_cancel_event, block_disealytics {{/str}}</button>
+            <button id="save-planner-date" class="save-planner-date disea-save-btn btn btn-primary text-small">{{#str}} planner_save_event, block_disealytics {{/str}}</button>
+        </div>
+    </div>
+</div>

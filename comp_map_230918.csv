@@ -1,0 +1,139 @@
+component;target;action;comp_map;cat_map;code;spec;median;medmad_tau
+assignsubmission_comments;comment;created;Assignment;Ending;1;;0 days 00:00:00;0 days 00:00:00
+assignsubmission_comments;comment;deleted;Assignment;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+assignsubmission_file;assessable;uploaded;Assignment;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+assignsubmission_file;submission;created;Assignment;Ending;1;;0 days 00:00:00;0 days 00:00:00
+assignsubmission_file;submission;updated;Assignment;Ending;1;;0 days 00:00:00;0 days 00:00:00
+assignsubmission_onlinetext;assessable;uploaded;Assignment;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+assignsubmission_onlinetext;submission;created;Assignment;Ending;1;;0 days 00:00:00;0 days 00:00:00
+assignsubmission_onlinetext;submission;assigned;Assignment;Simultaneous;1;;;
+booktool_print;book;printed;Book;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+booktool_print;chapter;printed;Book;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+core;calendar_event;created;Calendar;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;calendar_event;deleted;Calendar;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;calendar_event;updated;Calendar;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;calendar_subscription;created;Calendar;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;calendar_subscription;deleted;Calendar;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+core;calendar_subscription;updated;Calendar;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;course;viewed;Course home, Site home;Starting;1;course_or_site_home;;
+core;course_category;viewed;Course list;Starting;1;;0 days 00:00:11;0 days 00:00:20
+core;course_information;viewed;Course list;Starting;1;;0 days 00:00:12;0 days 00:00:22
+core;course_resources_list;viewed;Course list;Starting;1;;0 days 00:00:11;0 days 00:00:16
+core;course_user_report;viewed;Grades;Starting;1;;0 days 00:00:24;0 days 00:00:43
+core;courses;searched;Course list;Instantaneous;1;;;
+core;dashboard;reset;Dashboard, User Profile;Instantaneous;1;;;
+core;dashboard;viewed;Dashboard;Starting;1;;0 days 00:00:07;0 days 00:00:11
+core;grade_item;created;Grades;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;grade_item;updated;Grades;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;group;created;Group;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;group;deleted;Group;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+core;group;updated;Group;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;group_member;added;Group;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+core;group_member;removed;Group;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+core;group_message;sent;Messaging;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;message;deleted;Messaging;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+core;message;sent;Messaging;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;message;viewed;Messaging;Starting;1;;0 days 00:00:32;0 days 00:01:04
+core;message_contact;added;Messaging;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+core;message_contact;removed;Messaging;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+core;message_user;blocked;Messaging;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+core;notes;viewed;Notes;Starting;1;;0 days 00:00:50;0 days 00:01:33
+core;question;viewed;Quiz;Starting;1;;0 days 00:00:17;0 days 00:00:31
+core;user;loggedin;User login;Starting;1;;;
+core;user;loggedout;User logout;Instantaneous;1;;;
+core;user;updated;User profile;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;user_list;viewed;Participant profile;Starting;1;;0 days 00:00:21;0 days 00:00:36
+core;user_password;updated;User profile;Ending;1;;0 days 00:00:00;0 days 00:00:00
+core;user_profile;viewed;User profile, Participant profile;Starting;1;user_or_participant_profile;;
+core_h5p;h5p;viewed;H5P;Opening;1;;0 days 00:01:20;0 days 00:02:42
+forumreport_summary;report;viewed;Forum;Starting;1;;0 days 00:00:24;0 days 00:00:24
+mod_assign;assessable;submitted;Assignment;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_assign;course_module;viewed;Assignment;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_assign;feedback;viewed;Assignment;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_assign;submission;viewed;Assignment;Starting;1;;0 days 00:00:09;0 days 00:00:18
+mod_assign;submission_confirmation_form;viewed;Assignment;Starting;1;;0 days 00:00:03;0 days 00:00:06
+mod_assign;submission_form;viewed;Assignment;Starting;1;;0 days 00:00:12;0 days 00:00:24
+mod_assign;submission_status;updated;Assignment;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_assign;submission_status;viewed;Assignment;Starting;1;;0 days 00:00:04;0 days 00:00:08
+mod_attendance;attendance;taken;Attendance;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_attendance;attendance_taken_by;student;Attendance;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_attendance;status;added;Attendance;Ending;1;;0 days 00:00:00;0 days 00:00:00
+mod_attendance;status;updated;Attendance;Ending;1;;0 days 00:00:00;0 days 00:00:00
+mod_bigbluebuttonbn;activity;viewed;BigBlueButton;Starting;1;;0 days 00:00:06;0 days 00:00:09
+mod_bigbluebuttonbn;meeting;joined;BigBlueButton;Starting;1;;0 days 00:10:28;0 days 00:20:34
+mod_bigbluebuttonbn;meeting;left;BigBlueButton;Ending;1;;0 days 00:00:00;0 days 00:00:00
+mod_bigbluebuttonbn;recording;viewed;BigBlueButton;Starting;1;;0 days 00:11:23;0 days 00:22:34
+mod_book;chapter;viewed;Book;Starting;1;;0 days 00:00:09;0 days 00:00:18
+mod_book;course_module;viewed;Book;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_chat;course_module;viewed;Chat;Starting;1;;0 days 00:00:10;0 days 00:00:16
+mod_chat;message;sent;Chat;Ending;1;;0 days 00:00:00;0 days 00:00:00
+mod_chat;sessions;viewed;Chat;Starting;1;;0 days 00:00:06;0 days 00:00:09
+mod_choice;answer;created;Choice;Closing;1;;;
+mod_choice;answer;deleted;Choice;Closing;1;;;
+mod_choice;course_module;viewed;Choice;Opening;1;;0 days 00:00:19;0 days 00:00:34
+mod_data;course_module;viewed;Data;Starting;1;;0 days 00:00:18;0 days 00:00:32
+mod_etherpad;course_module;viewed;Etherpad;Starting;1;;0 days 00:00:40;0 days 00:01:15
+mod_etherpadlite;course_module;viewed;Etherpad;Starting;1;;0 days 00:00:40;0 days 00:01:15
+mod_feedback;course_module;viewed;Feedback;Opening;1;;0 days 00:00:19;0 days 00:00:34
+mod_feedback;response;deleted;Feedback;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_feedback;response;submitted;Feedback;Closing;1;;0 days 00:00:04;0 days 00:00:06
+mod_forum;assessable;uploaded;Forum;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_forum;course;searched;Forum;Starting;1;;0 days 00:00:21;0 days 00:00:37
+mod_forum;course_module;viewed;Forum;Starting;1;;0 days 00:00:05;0 days 00:00:08
+mod_forum;discussion;created;Forum;Starting;1;;0 days 00:00:00;0 days 00:00:00
+mod_forum;discussion;deleted;Forum;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_forum;discussion;viewed;Forum;Starting;1;;0 days 00:00:30;0 days 00:00:56
+mod_forum;discussion_subscription;created;Forum;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_forum;discussion_subscription;deleted;Forum;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_forum;post;created;Forum;Starting;1;;0 days 00:00:00;0 days 00:00:00
+mod_forum;post;deleted;Forum;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_forum;post;updated;Forum;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_forum;subscribers;viewed;Forum;Starting;1;;0 days 00:00:05;0 days 00:00:10
+mod_forum;subscription;created;Forum;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_forum;subscription;deleted;Forum;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_glossary;comment;created;Glossary;Ending;1;;0 days 00:00:00;0 days 00:00:00
+mod_glossary;comment;deleted;Glossary;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_glossary;course_module;viewed;Glossary;Starting;1;;0 days 00:00:32;0 days 00:01:00
+mod_glossary;entry;viewed;Glossary;Starting;1;;0 days 00:00:20;0 days 00:00:34
+mod_groupselect;course_module;viewed;Groupselect;Starting;1;;0 days 00:00:13;0 days 00:00:25
+mod_groupselect;export_link;created;Groupselect;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_h5pactivity;course_module;viewed;H5P;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_h5pactivity;statement;received;H5P;Closing;1;;0 days 00:00:00;0 days 00:00:00
+mod_lesson;content_page;viewed;Lesson;Starting;1;;0 days 00:00:00;0 days 00:00:00
+mod_lesson;course_module;viewed;Lesson;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_lesson;lesson;ended;Lesson;Starting;1;;0 days 00:00:16;0 days 00:00:25
+mod_lesson;lesson;restarted;Lesson;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_lesson;lesson;resumed;Lesson;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_lesson;lesson;started;Lesson;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_lesson;question;answered;Lesson;Closing;1;;0 days 00:00:01;0 days 00:00:02
+mod_lesson;question;viewed;Lesson;Opening;1;;0 days 00:00:00;0 days 00:00:00
+mod_ocyulinc;course_module;viewed;yulinc;Starting;1;;0 days 00:04:53;0 days 00:09:43
+mod_page;course_module;viewed;Page;Starting;1;;0 days 00:00:31;0 days 00:00:58
+mod_quiz;attempt;becameoverdue;Quiz;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_quiz;attempt;deleted;Quiz;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_quiz;attempt;reviewed;Quiz;Starting;1;;0 days 00:00:17;0 days 00:00:34
+mod_quiz;attempt;started;Quiz;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_quiz;attempt;submitted;Quiz;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_quiz;attempt;viewed;Quiz;Closing;1;;0 days 00:00:17;0 days 00:00:31
+mod_quiz;attempt_preview;started;Quiz;Starting;1;;0 days 00:00:01;0 days 00:00:02
+mod_quiz;attempt_summary;viewed;Quiz;Starting;1;;0 days 00:00:04;0 days 00:00:05
+mod_quiz;course_module;viewed;Quiz;Starting;1;;0 days 00:00:06;0 days 00:00:10
+mod_resource;course_module;viewed;Resource;Starting;1;;0 days 00:01:30;0 days 00:02:58
+mod_scheduler;booking;added;Scheduler;Ending;1;;0 days 00:00:00;0 days 00:00:00
+mod_scheduler;booking;removed;Scheduler;Instantaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_scheduler;booking_form;viewed;Scheduler;Starting;1;;0 days 00:00:09;0 days 00:00:18
+mod_survey;course_module;viewed;Survey;Opening;1;;0 days 00:00:06;0 days 00:00:08
+mod_url;course_module;viewed;URL;Starting;1;;0 days 00:00:22;0 days 00:00:44
+mod_wiki;comments;viewed;Wiki;Starting;1;;0 days 00:00:03;0 days 00:00:04
+mod_wiki;course_module;viewed;Wiki;Starting;1;;0 days 00:00:43;0 days 00:01:22
+mod_wiki;page;viewed;Wiki;Starting;1;;0 days 00:00:36;0 days 00:01:06
+mod_wiki;page_diff;viewed;Wiki;Starting;1;;0 days 00:00:26;0 days 00:00:39
+mod_wiki;page_history;viewed;Wiki;Starting;1;;0 days 00:00:10;0 days 00:00:15
+mod_wiki;page_version;viewed;Wiki;Starting;1;;0 days 00:00:23;0 days 00:00:36
+mod_workshop;assessable;uploaded;Workshop;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_workshop;course_module;viewed;Workshop;Starting;1;;0 days 00:00:32;0 days 00:01:00
+mod_workshop;phase;switched;Workshop;Simultaneous;1;;0 days 00:00:00;0 days 00:00:00
+mod_workshop;submission;created;Workshop;Ending;1;;0 days 00:00:00;0 days 00:00:00
+mod_workshop;submission;updated;Workshop;Ending;1;;0 days 00:00:00;0 days 00:00:00
+mod_workshop;submission;viewed;Workshop;Starting;1;;0 days 00:03:18;0 days 00:06:33
+mod_yulinc;course_module;viewed;yulinc;Starting;1;;0 days 00:04:53;0 days 00:09:43

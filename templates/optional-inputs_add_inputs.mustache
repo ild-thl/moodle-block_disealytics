@@ -1,0 +1,87 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_disealytics/optional-inputs_add_inputs
+
+    Template purpose and description.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * none
+
+    Example context (json):
+    {
+
+    }
+}}
+{{^files_left}}
+    <p class="show-when-all-optional-inputs-exist">{{#str}}optional_input_all_inputs_set, block_disealytics {{/str}}</p>
+{{/files_left}}
+{{#files_left}}
+    <div class="add-optional-input-btn">
+        <button id="add-optional-input-fields" class="disea-save-btn btn btn-primary">
+            <span>{{#str}}add-optional-input, block_disealytics {{/str}}</span>
+        </button>
+    </div>
+    {{#optional_inputs}}
+        <div class="add-optional-input-container hidden" style="margin-top:8px;" data-courseid="{{courseid}}">
+            <h5>{{#str}}optional_input_document, block_disealytics {{/str}}</h5>
+            <select id="optional-input-document" class="text-small">
+                <option data-documentselected="0">{{#str}}optional_input_no_selection, block_disealytics {{/str}}</option>
+                {{#file_names}}
+                    <option data-documentselected="1">{{name}}</option>
+                {{/file_names}}
+            </select>
+            <div class="optional-inputs-error">
+                <p class="warning-optional-input pageerror text-small hidden">{{#str}}optional_input_page_error, block_disealytics {{/str}}</p>
+                <p class="warning-optional-input nodocumentselectederror text-small hidden">{{#str}}optional_input_no_document_selected_error, block_disealytics {{/str}}</p>
+                <p class="warning-optional-input negativepageerror text-small hidden">{{#str}}optional_input_negative_page_error, block_disealytics {{/str}}</p>
+                <p class="warning-optional-input lastpagezeroerror text-small hidden">{{#str}}optional_input_page_zero_error, block_disealytics {{/str}}</p>
+                <p class="warning-optional-input pageoverflowerror text-small hidden">{{#str}}optional_input_page_overflow_error, block_disealytics {{/str}}</p>
+                <p class="warning-optional-input notanumbererror text-small hidden">{{#str}}optional_input_pattern_error, block_disealytics {{/str}}</p>
+                <p class="warning-optional-input expenditureoftimeoverflowerror text-small hidden">{{#str}}
+                    optional_input_expenditure_of_time_overflow_error, block_disealytics {{/str}}
+                    <br></p>
+            </div>
+            <div style="display: grid; grid-gap: 8px;">
+                <div class="grid-container">
+                    <label for="optional-input-currentpage">{{#str}}optional_input_current_page, block_disealytics {{/str}} </label>
+                    <input style="width: 50px" id="optional-input-currentpage" class="check-pattern text-small" type="number" value="1" min="1" max="1000" step="1" required>
+                </div>
+                <div class="grid-container">
+                    <label for="optional-input-lastpage">{{#str}}optional_input_last_page, block_disealytics {{/str}} </label>
+                    <input style="width: 50px" id="optional-input-lastpage" class="check-pattern text-small" type="number" value="1" min="1" max="1000" step="1" required>
+                </div>
+                <div class="grid-container">
+                    <label for="optional-input-expenditureoftime">{{#str}}optional_input_expenditureoftime, block_disealytics {{/str}} </label>
+                    <input style="width: 50px" id="optional-input-expenditureoftime" class="check-pattern text-small" type="number" value="1" min="1" max="500" step="1" required>
+                </div>
+            </div>
+
+            <div class="btn-container" style="margin-bottom: 0; margin-top: 15px">
+                <button id="cancel-optional-input-button" class="disea-cancel-btn btn btn-secondary text-small">{{#str}}optional_input_cancel, block_disealytics {{/str}}</button>
+                <button id="add-optional-input-button" class="disea-save-btn btn btn-primary text-small" data-dismiss="modal">{{#str}}optional_input_save, block_disealytics {{/str}}</button>
+            </div>
+        </div>
+        <span id="optional-inputs-save-successful" class="hidden">{{#str}}optional_input_save_success, block_disealytics {{/str}}</span>
+    {{/optional_inputs}}
+{{/files_left}}

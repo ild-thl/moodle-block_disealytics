@@ -1,0 +1,91 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_disealytics/optional-input
+
+    Template purpose and description.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * none
+
+    Example context (json):
+    {
+
+    }
+}}
+<span id="optional-inputs-deletion-successful" class="hidden">{{#str}}optional_input_delete_success, block_disealytics {{/str}}</span>
+<div data-numberOfDocuments="{{number_of_documents}}"
+     style="margin-bottom: 5px;">
+    <div class="optional-input-container" data-optionalinputid="{{optionalinputid}}">
+        <h5>{{documentname}}</h5>
+        <div>
+            <span>{{#str}}optional_input_pages, block_disealytics {{/str}}: </span>
+            <span>{{currentpage}} / {{lastpage}}</span>
+        </div>
+        <div>
+            <span>{{#str}}optional_input_expenditureoftime, block_disealytics {{/str}}: </span>
+            <span>{{expenditureoftime}}</span>
+        </div>
+        <div class="btn-container">
+            <button class="delete-optional-input-button disea-delete-btn btn btn-danger text-small" data-dismiss="modal">{{#str}}optional_input_delete, block_disealytics {{/str}}</button>
+            <button class="edit-optional-input-button disea-save-btn btn btn-primary text-small">{{#str}}optional_input_edit, block_disealytics {{/str}}</button>
+        </div>
+    </div>
+    <div class="edit-optional-input-container hidden" data-optionalinputid="{{optionalinputid}}">
+            <div>
+                <h5 id="optional-input-document-name-{{optionalinputid}}" class="optional-input-document-name">{{documentname}}</h5>
+                <p class="optional-input-update-warning warning-optional-input pageerror text-small hidden">
+                    {{#str}}optional_input_page_error, block_disealytics {{/str}}</p>
+                <p class="optional-input-update-warning warning-optional-input nodocumentselectederror text-small hidden">
+                    {{#str}}optional_input_no_document_selected_error, block_disealytics {{/str}}</p>
+                <p class="optional-input-update-warning warning-optional-input negativepageerror text-small hidden">
+                    {{#str}}optional_input_negative_page_error, block_disealytics {{/str}}</p>
+                <p class="optional-input-update-warning warning-optional-input lastpagezeroerror text-small hidden">
+                    {{#str}}optional_input_page_zero_error, block_disealytics {{/str}}</p>
+                <p class="optional-input-update-warning warning-optional-input pageoverflowerror text-small hidden">
+                    {{#str}}optional_input_page_overflow_error, block_disealytics {{/str}}</p>
+                <p class="optional-input-update-warning warning-optional-input expenditureoftimeoverflowerror text-small hidden">
+                    {{#str}}optional_input_expenditure_of_time_overflow_error, block_disealytics {{/str}}<br></p>
+                <div style="display: grid; grid-gap: 8px;">
+                    <div class="grid-container">
+                        <label for="optional-input-update-currentpage-{{optionalinputid}}">{{#str}}optional_input_current_page, block_disealytics {{/str}} </label>
+                        <input style="width: 50px" id="optional-input-update-currentpage-{{optionalinputid}}" class="optional-input-update-currentpage check-pattern text-small" type="number" value="{{currentpage}}" min="1" max="1000" step="1" required>
+                    </div>
+                    <div class="grid-container">
+                        <label for="optional-input-update-lastpage-{{optionalinputid}}">{{#str}}optional_input_last_page, block_disealytics {{/str}} </label>
+                        <input style="width: 50px" id="optional-input-update-lastpage-{{optionalinputid}}" class="optional-input-update-lastpage check-pattern text-small" type="number" value="{{lastpage}}" min="1" max="1000" step="1" required>
+                    </div>
+                    <div class="grid-container">
+                        <label for="optional-input-update-expenditureoftime-{{optionalinputid}}">{{#str}}optional_input_expenditureoftime, block_disealytics {{/str}} </label>
+                        <input style="width: 50px" id="optional-input-update-expenditureoftime-{{optionalinputid}}" class="optional-input-update-expenditureoftime check-pattern text-small" type="number" value="{{expenditureoftime}}" min="1" max="500" step="1" required>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-container" style="margin-bottom: 0; margin-top: 15px">
+                <button class="cancel-update-optional-input-button disea-cancel-btn text-small">{{#str}}optional_input_cancel, block_disealytics {{/str}}</button>
+                <button class="update-optional-input-button disea-save-btn text-small" data-dismiss="modal">{{#str}}optional_input_save, block_disealytics {{/str}}</button>
+            </div>
+        <span id="optional-inputs-update-successful-{{optionalinputid}}" class="optional-inputs-update-successful hidden">{{#str}}optional_input_save_success, block_disealytics {{/str}}</span>
+    </div>
+
+</div>

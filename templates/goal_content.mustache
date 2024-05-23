@@ -1,0 +1,76 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_disealytics/goal-content
+
+    Template purpose and description.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * none
+
+    Example context (json):
+    {
+
+    }
+}}
+<div data-goal-id="{{goalid}}" class="goal-content" data-goal-finished="{{finished}}" data-goal-timestamp="{{timestamp}}">
+
+    <div class="goal-view-mode">
+        <label for="goal-{{goalid}}">
+            <input type="checkbox" class="goal-checkbox hide-when-editing" id="goal-{{goalid}}" name="goal-{{goalid}}" value="{{name}}" style="cursor:pointer;">
+        </label>
+        <span class="goal-name">{{name}}<br><span style="font-size: smaller">{{coursename}}</span></span>
+        <div class="goal-date">
+            <span class="text-small"><i class="goal-change-date fa fa-calendar"></i> {{#userdate}} {{timestamp}}, {{#str}} strftimedatetimeshort, core_langconfig {{/str}} {{/userdate}}</span>
+        </div>
+        <span id="edit-goal" class="hidden"><i class="fa fa-pencil"></i></span>
+    </div>
+
+    <div class="goal-edit-mode hidden">
+        <hr>
+        <label for="goal-set-name-input">
+            <textarea id="goal-set-name-input"></textarea>
+        </label>
+
+        <div class="goal-date-time" style="display:flex;gap:1em;">
+            <label for="goal-set-date-input">
+                <input type="date" id="goal-set-date-input" name="goal-set-date-input" required>
+            </label>
+
+            <label for="goal-set-time-input">
+                <input type="time" id="goal-set-time-input" name="goal-set-time-input" required>
+            </label>
+        </div>
+        <div class="goal-info-messages">
+            <span style="font-size:small;" id="edit-goal-name-invalid" class="hidden goal-invalid text-small">{{#str}}goal_name_invalid, block_disealytics {{/str}}</span>
+            <span style="font-size:small;" id="edit-goal-name-missing" class="hidden goal-invalid text-small">{{#str}}goal_name_missing, block_disealytics {{/str}}</span>
+            <span style="font-size:small;" id="edit-goal-date-missing" class="hidden goal-invalid text-small">{{#str}}goal_date_missing, block_disealytics {{/str}}</span>
+        </div>
+
+        <div class="goal-btn-container">
+            <button id="cancel-goal-edit" class="disea-cancel-btn btn btn-secondary text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
+            <button id="save-goal-edit" class="disea-save-btn btn btn-primary text-small">{{#str}}goal_input_update, block_disealytics {{/str}}</button>
+        </div>
+        <hr>
+    </div>
+</div>

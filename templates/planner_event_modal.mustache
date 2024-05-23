@@ -1,0 +1,75 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_disealytics/planner_event_modal
+
+    Template purpose and description.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * none
+
+    Example context (json):
+    {
+
+    }
+}}
+<div class="modal fade block_disealytics-planner-event-modal outer-modal-{{dateid}}" data-container="block_disealytics/event-{{dateid}}-modal">
+    <div class="modal-dialog">
+        <div class="modal-content content-modal-event-{{dateid}}">
+            <div class="modal-header">
+                <h5 class="modal-title text-semibold disea-blue">{{name}}</h5>
+                <a class="block_disealytics-close-modal-btn" data-dismiss="modal">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <div class="planner-event-modal">
+                    <span class="planner-event-modal-title">{{eventTypeName}}</span>
+                    <div class="planner-event-modal-items">
+                        <span class="planner-event-modal-title">{{#str}} planner_event_date_label, block_disealytics {{/str}}:</span>
+                        <span class="event-time">{{#userdate}}{{timestampStart}}, {{#str}}strftimedatetimeshort, core_langconfig{{/str}}{{/userdate}}
+                            {{#hasEnd}}
+                                - {{#userdate}}{{timestampEnd}}, {{#str}}strftimedatetimeshort, core_langconfig{{/str}}{{/userdate}}
+                            {{/hasEnd}}
+                    </span>
+                    </div>
+                    {{#location}}
+                        <div class="planner-event-modal-items">
+                            <span class="planner-event-modal-title">{{#str}} planner_event_location_label, block_disealytics {{/str}}:</span>
+                            <span class="event-location">{{.}}</span>
+                        </div>
+                    {{/location}}
+                    <div class="planner-event-modal-items">
+                        <span class="planner-event-modal-title">{{#str}} planner_event_course_label, block_disealytics {{/str}}:</span>
+                        <span class="event-location">{{courseName}}</span>
+                    </div>
+                </div>
+                <div class="btn-container" style="display: flex; gap: 8px; justify-content: end;">
+                    <button class="disea-cancel-btn btn btn-secondary text-small" data-dismiss="modal">{{#str}}
+                        planner_cancel_event, block_disealytics {{/str}}</button>
+                    <button id="delete-planner-date-{{dateid}}" class="disea-delete-btn delete-event-from-planner btn btn-danger text-small" data-dismiss="modal">{{#str}}planner_delete_event, block_disealytics {{/str}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

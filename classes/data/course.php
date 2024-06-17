@@ -16,6 +16,8 @@
 
 namespace block_disealytics\data;
 
+use DateInterval;
+use DateTime;
 use dml_exception;
 /**
  * Class course
@@ -33,6 +35,7 @@ class course {
      */
     public static function get_all_courses_of_user_current_semester(int $userid): array {
         global $DB;
+        $now = (new DateTime())->format("U");
         $sql = "SELECT c.instanceid AS courseid, cr.fullname AS coursename, cr.enddate AS coursetimestamp
             FROM {context} c
             JOIN {role_assignments} ra ON c.id = ra.contextid
@@ -40,15 +43,21 @@ class course {
             JOIN {course} cr ON c.instanceid = cr.id
             WHERE c.contextlevel = :contextlevel
               AND u.id = :userid
-              AND FROM_UNIXTIME(cr.startdate) <= NOW()
-              AND (DATE_ADD(FROM_UNIXTIME(cr.enddate), INTERVAL 1 MONTH) >= NOW() OR cr.enddate IS NULL OR cr.enddate = 0)
+              AND cr.startdate <= :now
               ";
-        // AND (DATE_ADD(FROM_UNIXTIME(cr.enddate), INTERVAL 1 MONTH) >= NOW() OR cr.enddate IS NULL).
         $params = [
             'contextlevel' => CONTEXT_COURSE,
             'userid' => $userid,
+            'now' => $now,
         ];
-        return $DB->get_records_sql($sql, $params);
+        $data = $DB->get_records_sql($sql, $params);
+        return array_filter($data, function($item) use ($now) {
+            if ($item->enddate == 0) {
+                return true;
+            }
+            $end = DateTime::createFromFormat("U", $item->enddate)->add(new DateInterval("P1M"));
+            return $end->format("U") >= $now;
+        });
     }
 
     /**

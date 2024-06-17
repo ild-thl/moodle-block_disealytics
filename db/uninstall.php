@@ -29,7 +29,7 @@
  */
 function xmldb_block_disealytics_uninstall(): void {
     global $DB;
-    $prefs = $DB->get_records_sql("SELECT id, name, userid FROM mdl_user_preferences WHERE name LIKE '%block_disealytics%'");
+    $prefs = $DB->get_records_sql("SELECT id, name, userid FROM {user_preferences} WHERE name LIKE '%block_disealytics%'");
     foreach ($prefs as $pref) {
         unset_user_preference($pref->name, $pref->userid);
     }

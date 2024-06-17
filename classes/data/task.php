@@ -47,16 +47,15 @@ class task {
      * @param mixed $tasks
      * @return array
      */
-    public static function block_learningdashboard_group_and_reduce(mixed $tasks): array {
+    public static function block_disealytics_group_and_reduce(mixed $tasks): array {
         $groupedtasks = [];
         foreach ($tasks as $task) {
             $groupedtasks[strtolower($task->component)][] = $task;
         }
         uasort($groupedtasks, function ($a, $b) {
             // Sort the task groups based on the number ob tasks in the group.
-            // Idea: Sort based on the sum of the duration of the tasks in a group, e.g.
+            // Sort based on the sum of the duration of the tasks in a group, e.g.
             return array_sum(array_column($b, 'duration')) <=> array_sum(array_column($a, 'duration'));
-            // Return count($b) <=> count($a).
         });
         // Get only the first three groups, or less if there are less.
         return array_slice($groupedtasks, 0, min(3, count($groupedtasks)), true);

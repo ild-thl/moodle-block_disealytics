@@ -399,8 +399,6 @@ $string['privacy:metadata:user_n_events'] = 'user_n_events';
 $string['privacy:metadata:user_duration'] = 'user_duration';
 $string['privacy:metadata:user_timecreated'] = 'user_timecreated';
 
-$string['block_my_consent_block'] = 'DiSEA consent block';
-
 $string['config_title'] = 'Course for log data';
 $string['config_text'] = 'Please enter the course ID for the course in which the log data is to be saved.';
 
@@ -430,9 +428,6 @@ $string['edit'] = 'Edit';
 
 $string['choice_no'] = 'You have declined consent';
 $string['choice_yes'] = 'You have accepted consent';
-
-$string['log_task_name'] = 'Disea Log Task';
-$string['decline_task_name'] = 'Disea decline Task';
 
 $string['messageprovider'] = 'Disea Message Provider';
 $string['messageprovider:logdata_disea'] = 'Disea Message Provider';

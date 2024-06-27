@@ -36,6 +36,8 @@ use external_api;
 use external_function_parameters;
 use external_value;
 use invalid_parameter_exception;
+use required_capability_exception;
+use restricted_context_exception;
 use stdClass;
 
 /**
@@ -101,6 +103,8 @@ class optional_input extends external_api {
      * @throws invalid_parameter_exception
      * @throws dml_exception
      * @throws coding_exception
+     * @throws restricted_context_exception
+     * @throws required_capability_exception
      */
     public static function execute(
         string $calltype,
@@ -117,12 +121,11 @@ class optional_input extends external_api {
                 'expenditureoftime' => $expenditureoftime]);
         require_once($CFG->dirroot . '/blocks/disealytics/classes/learningdata.php');
 
-        if ($courseid != -1) {
-            $context = context_course::instance($courseid);
-            $PAGE->set_context($context);
-            $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
-            $PAGE->set_course($course);
-        }
+        // Security checks.
+        $context = context_course::instance($courseid);
+        self::validate_context($context);
+        require_capability('block/disealytics:editlearningdashboard', $context);
+
 
         $data = new stdClass();
         if ($id !== -1) {

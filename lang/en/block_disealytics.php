@@ -30,6 +30,7 @@ $string['plugin-title'] = 'Learning Dashboard';
 $string['disea'] = 'DiSEA Learning Dashboard';
 $string['disealytics:addinstance'] = 'Add a new DiSEA Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new DiSEA Dashboard block to my Dashboard.';
+$string['disealytics:editlearningdashboard'] = 'Edit the Learning Dashboard.';
 $string['languagesetting'] = 'en';
 $string['consent_start_msg'] = 'Please consent to data processing in order to use the plugin.';
 $string['consent_start_btn'] = 'Consent and use plugin';

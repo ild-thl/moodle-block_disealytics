@@ -63,10 +63,10 @@ class refresh_view extends external_api {
         $views = json_decode($viewlist);
         require_once($CFG->dirroot . '/blocks/disealytics/classes/learningdata.php');
 
+        // Security checks.
         $context = context_course::instance($courseid);
-        $PAGE->set_context($context);
-        $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
-        $PAGE->set_course($course);
+        self::validate_context($context);
+        require_capability('block/disealytics:editlearningdashboard', $context);
 
         // Load UserSettings or sensible defaults.
         $editing = get_user_preferences('block_disealytics_editing', '0');

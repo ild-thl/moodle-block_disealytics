@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
 
+use context_course;
 use dml_exception;
 use block_disealytics\learningdata;
 use external_api;
@@ -81,10 +82,12 @@ class update_learning_goal extends external_api {
      * @return string $result
      * @throws invalid_parameter_exception
      * @throws dml_exception
+     * @throws \restricted_context_exception
+     * @throws \required_capability_exception
      */
     public static function execute(string $goalid, int $duedate, string $goalname, bool $finished): string {
 
-        global $CFG;
+        global $CFG, $COURSE;
 
         // Validate parameters.
         self::validate_parameters(self::execute_parameters(), [
@@ -94,6 +97,12 @@ class update_learning_goal extends external_api {
                 'finished' => $finished,
         ]);
         require_once($CFG->dirroot . '/blocks/disealytics/classes/learningdata.php');
+
+        // Security checks.
+        $context = context_course::instance($COURSE->id);
+        self::validate_context($context);
+        require_capability('block/disealytics:editlearningdashboard', $context);
+
         $goal = new stdClass();
         $goal->id = $goalid;
         $goal->description = $goalname;

@@ -25,11 +25,14 @@
 namespace block_disealytics\external;
 
 use block_disealytics\data\course;
+use context_course;
 use dml_exception;
 use external_api;
 use external_function_parameters;
 use external_value;
 use invalid_parameter_exception;
+use required_capability_exception;
+use restricted_context_exception;
 
 /**
  * Class category_view
@@ -41,9 +44,11 @@ class category_view extends external_api {
      * @param mixed $selectedcategory
      * @return false|string $result
      * @throws dml_exception|invalid_parameter_exception
+     * @throws restricted_context_exception
+     * @throws required_capability_exception
      */
     public static function execute(mixed $selectedcategory): bool|string {
-        global $USER;
+        global $USER, $COURSE;
         self::validate_parameters(self::execute_parameters(), [
                 'selectedcategory' => $selectedcategory,
         ]);
@@ -54,6 +59,11 @@ class category_view extends external_api {
                 $response[] = $course;
             }
         }
+        // Security checks.
+        $context = context_course::instance($COURSE->id);
+        self::validate_context($context);
+        require_capability('block/disealytics:editlearningdashboard', $context);
+
         // Return response to ajax call and hide everything that doesn't match the category.
         return json_encode($response);
     }

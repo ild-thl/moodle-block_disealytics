@@ -28,11 +28,14 @@ defined('MOODLE_INTERNAL') || die();
 global $CFG;
 require_once($CFG->libdir . '/externallib.php');
 
+use context_course;
 use dml_exception;
 use external_api;
 use external_function_parameters;
 use external_value;
 use invalid_parameter_exception;
+use required_capability_exception;
+use restricted_context_exception;
 
 /**
  * Class modid_to_courseid
@@ -60,13 +63,22 @@ class modid_to_courseid extends external_api {
      * @return false|int $coursemod->course
      * @throws invalid_parameter_exception
      * @throws dml_exception
+     * @throws restricted_context_exception
+     * @throws required_capability_exception
      */
     public static function execute(int $modid): bool|int {
 
         self::validate_parameters(self::execute_parameters(), [
                 'modid' => $modid,
         ]);
-        global $DB;
+        global $DB, $COURSE;
+
+        // Security checks.
+        $context = context_course::instance($COURSE->id);
+        self::validate_context($context);
+        require_capability('block/disealytics:editlearningdashboard', $context);
+
+
         $coursemod = $DB->get_record('course_modules', ['id' => $modid], 'id, course');
         return $coursemod->course;
     }

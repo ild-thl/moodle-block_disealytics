@@ -52,14 +52,6 @@ class tasktransform extends scheduled_task {
 
         // Time as unix timestamp. Returns 0 on first run.
         $time = $this->get_last_run_time();
-        // When $time is == 0 this task never ran, so we use the last log_task time if it exists.
-        if ($time == 0) {
-            $sqlt = "SELECT MAX(timestart) as timestart FROM {task_log} WHERE classname = 'block_my_consent_block\\\\task\\\\log_task'";
-            $logtasktime = $DB->get_record_sql($sqlt)->timestart;
-            if ($logtasktime != null) {
-                $time = $logtasktime;
-            }
-        }
 
         $selectstring =
                 'l.id, l.component, l.action, l.target, ' . 'l.userid, c.id as courseid, l.relateduserid, l.timecreated ';

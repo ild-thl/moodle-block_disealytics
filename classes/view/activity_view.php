@@ -120,20 +120,12 @@ class activity_view extends base_view {
             );
             if (count($transformtimes) > 0) {
                 $transformtime = max($transformtimes);
-            } else {
-                $logtimes = array_column(
-                    $DB->get_records('task_log', ["classname" => "block_my_consent_block\\task\\log_task"]),
-                    'timestart'
-                );
-                if (count($logtimes) > 0) {
-                    $transformtime = max($logtimes);
-                }
             }
 
             if ($transformtime) {
                 $output['datadate'] = userdate($transformtime, get_string('strftimedatefullshort', 'langconfig'));
             }
-            $groupedtasks = task::block_learningdashboard_group_and_reduce($tasks);
+            $groupedtasks = task::block_disealytics_group_and_reduce($tasks);
             // Reverse it for easy popping.
             $groupedtasks = array_reverse($groupedtasks, true);
             $chart1 = new chart_bar();
@@ -171,7 +163,7 @@ class activity_view extends base_view {
                 $start = $dates["start"];
                 $end = $dates["end"];
                 $halfyeartasks = task::block_disealytics_get_user_tasks($start->format("U"), $end->format("U"), $course->courseid);
-                $halfyeartasks = task::block_learningdashboard_group_and_reduce($halfyeartasks);
+                $halfyeartasks = task::block_disealytics_group_and_reduce($halfyeartasks);
                 $halfyeartasks = array_reverse($halfyeartasks, true);
 
                 $halfyeartasks = task::block_disealytics_make_task_buckets(

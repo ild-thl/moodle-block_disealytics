@@ -78,11 +78,11 @@ class update_learning_goal extends external_api {
      * @param int $duedate the goal ID
      * @param string $goalname the goal name
      * @param bool $finished finished target
-     * @return string $result
+     * @return bool $result
      * @throws invalid_parameter_exception
      * @throws dml_exception
      */
-    public static function execute(string $goalid, int $duedate, string $goalname, bool $finished): string {
+    public static function execute(string $goalid, int $duedate, string $goalname, bool $finished): bool {
 
         global $CFG;
 
@@ -100,7 +100,7 @@ class update_learning_goal extends external_api {
         $goal->duedate = $duedate;
         $goal->finished = $finished;
         learningdata::update_goal($goal);
-        return 'Goal ID: ' . $goalid . ' updated name with: ' . $goalname . ' and due date ' . $duedate . '.';
+        return true;
     }
 
     /**
@@ -109,6 +109,6 @@ class update_learning_goal extends external_api {
      * @return external_value jsonobj
      */
     public static function execute_returns(): external_value {
-        return new external_value(PARAM_RAW);
+        return new external_value(PARAM_BOOL);
     }
 }

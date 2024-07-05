@@ -50,7 +50,7 @@ class optional_input extends external_api {
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
                 'calltype' => new external_value(
-                    PARAM_RAW,
+                    PARAM_ALPHA,
                     'Defines the type calltype. Calltype might be adding, deleting or updating',
                     VALUE_REQUIRED
                 ),
@@ -97,7 +97,7 @@ class optional_input extends external_api {
      * @param int $currentpage last page that was read in the document
      * @param int $lastpage last page of the document
      * @param int $expenditureoftime expenditure of time
-     * @return string $result
+     * @return bool $result
      * @throws invalid_parameter_exception
      * @throws dml_exception
      * @throws coding_exception
@@ -110,7 +110,7 @@ class optional_input extends external_api {
         int $currentpage = 0,
         int $lastpage = 1,
         int $expenditureoftime = 0
-    ): string {
+    ): bool {
         global $DB, $PAGE, $CFG;
         self::validate_parameters(self::execute_parameters(), ['calltype' => $calltype, 'id' => $id, 'name' => $name,
                 'currentpage' => $currentpage, 'lastpage' => $lastpage, 'courseid' => $courseid,
@@ -140,7 +140,7 @@ class optional_input extends external_api {
         } else if ($calltype === 'delete') {
             learningdata::delete_optional_input($id);
         }
-        return 'Executed optional input ' . $calltype;
+        return true;
     }
 
     /**
@@ -149,6 +149,6 @@ class optional_input extends external_api {
      * @return external_value jsonobj
      */
     public static function execute_returns(): external_value {
-        return new external_value(PARAM_RAW);
+        return new external_value(PARAM_BOOL);
     }
 }

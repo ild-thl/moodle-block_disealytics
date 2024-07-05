@@ -107,7 +107,7 @@ class update_planner_event extends external_api {
      * @param string|null $location
      * @param int|null $eventtype
      * @param int|null $repetitions
-     * @return string
+     * @return bool
      * @throws dml_exception
      * @throws invalid_parameter_exception
      */
@@ -121,7 +121,7 @@ class update_planner_event extends external_api {
         ?string $location = null,
         ?int $eventtype = null,
         ?int $repetitions = null
-    ): string {
+    ): bool {
         global $USER;
 
         self::validate_parameters(self::execute_parameters(), [
@@ -181,7 +181,7 @@ class update_planner_event extends external_api {
             planner::delete_date($dateid);
         }
 
-        return 'Operation was successful.';
+        return true;
     }
 
     /**
@@ -190,6 +190,6 @@ class update_planner_event extends external_api {
      * @return external_value jsonobj
      */
     public static function execute_returns(): external_value {
-        return new external_value(PARAM_RAW);
+        return new external_value(PARAM_BOOL);
     }
 }

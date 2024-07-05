@@ -122,7 +122,7 @@ const renderMainTemplate = (views, viewmode, agreementurl) => {
     Template.renderForPromise("block_disealytics/main", maintemplatedata)
         .then(({html, js}) => {
             Template.replaceNodeContents('.block_disealytics .content', html, js);
-            renderEditingMode('0');
+             return renderEditingMode('0');
         }).catch(ex => window.console.log(ex));
 };
 
@@ -349,20 +349,20 @@ if (ButtonClose) {
  * @param {string} nodeSelector div-container-selector in which the view is located
  * @param {object} viewInfo all template-data of the view
  * @param {string} editing whether editing is turned on right now
- * @param {string} expanded_view which view is currently expanded
+ * @param {string} expandedView which view is currently expanded
  * @param {string} viewtype current view name
  */
-const renderViewTemplate = (nodeSelector, viewInfo, editing, expanded_view, viewtype) => {
+const renderViewTemplate = (nodeSelector, viewInfo, editing, expandedView, viewtype) => {
     if (nodeIsEmpty(nodeSelector) || viewIsOld(viewtype)) {
         Template.renderForPromise(viewInfo.template_path, viewInfo.data)
             .then(({html, js}) => {
                 Template.replaceNodeContents(nodeSelector, html, js);
                 renderEditingMode(editing);
-                renderExpandedView(expanded_view);
+                renderExpandedView(expandedView);
                 if (viewtype === 'learning-goals-view') {
                     initGoalEventListeners();
                 }
-                unsetOld(viewtype);
+                return unsetOld(viewtype);
             }).catch(ex => window.console.log(ex));
     }
 };

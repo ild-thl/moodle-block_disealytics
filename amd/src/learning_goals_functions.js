@@ -73,21 +73,21 @@ export function initGoalEventListeners() {
 
     // Show the create a goal form.
     if (showGoalFormBtn) {
-        showGoalFormBtn.addEventListener('click', function () {
+        showGoalFormBtn.addEventListener('click', function() {
             createGoalForm.classList.remove('hidden');
         });
     }
 
     // Saving goal in database.
     if (saveGoalBtn) {
-        saveGoalBtn.addEventListener('click', function () {
+        saveGoalBtn.addEventListener('click', function() {
             saveGoal();
         });
     }
 
     // Cancel/reset the create a goal form.
     if (cancelGoalBtn) {
-        cancelGoalBtn.addEventListener('click', function () {
+        cancelGoalBtn.addEventListener('click', function() {
             const goalNameInput = document.getElementById('goal-name-input');
 
             // Reset the form.
@@ -102,7 +102,7 @@ export function initGoalEventListeners() {
 
     // Delete a goal from the database.
     for (const deleteGoalBtn of deleteGoalBtns) {
-        deleteGoalBtn.addEventListener('click', function () {
+        deleteGoalBtn.addEventListener('click', function() {
             const goalId = deleteGoalBtn.parentNode.id;
             deleteGoal(goalId);
         });
@@ -112,7 +112,7 @@ export function initGoalEventListeners() {
     if (editGoalsBtn) {
         editGoalsBtn.addEventListener('click', () => {
             // Set the color for the editing pencil on/off.
-            if(editGoalsBtn.querySelector('i').classList.contains('editing-off')) {
+            if (editGoalsBtn.querySelector('i').classList.contains('editing-off')) {
                 editGoalsBtn.querySelector('i').classList.remove('editing-off');
                 editGoalsBtn.querySelector('i').style.color = 'var(--diseared)';
             } else {
@@ -288,10 +288,10 @@ async function saveGoal() {
                         goalname: goalNameInput,
                         duedate: timestamp,
                     }
-                }])[0].done(function () {
+                }])[0].done(function() {
                     // Resolve the promise when done.
                     resolve();
-                }).fail(function (err) {
+                }).fail(function(err) {
                     // Reject the promise if there's an error.
                     reject(err);
                 });
@@ -406,7 +406,7 @@ function editGoal(goalContent) {
             if (validateInputs('update', updatedName, combinedDateTime, combinedDateTimeString, goalContent)) {
                 const updatedTimestamp = Number(combinedDateTime.getTime() / 1000);
                 await updateGoal(goalId, updatedName, updatedTimestamp, goalStatus).then(() => {
-                    setEditingModeForLearningGoals();
+                    return setEditingModeForLearningGoals();
                 });
             }
         });
@@ -436,10 +436,10 @@ async function updateGoal(id, name, date, finished) {
                 duedate: date,
                 finished: finished === true ? 1 : 0
             }
-        }])[0].done(function () {
+        }])[0].done(function() {
             updateView(getCourseId(), ['learning-goals-view']);
             resolve(); // Resolve the promise when done
-        }).fail(function (err) {
+        }).fail(function(err) {
             window.console.error(err);
             reject(err); // Reject the promise if there's an error
         });
@@ -461,12 +461,12 @@ function deleteGoal(id) {
             args: {
                 goalid: id
             }
-        }])[0].done(function () {
+        }])[0].done(function() {
             // Update the view after successfully deleting the goal.
             updateView(getCourseId(), ['learning-goals-view']);
             // Resolve the promise when done.
             resolve();
-        }).fail(function (err) {
+        }).fail(function(err) {
             // Log the error to the console.
             window.console.error(err);
             // Reject the promise if there's an error.

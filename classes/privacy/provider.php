@@ -35,7 +35,9 @@ use dml_exception;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
-class provider implements core_userlist_provider, \core_privacy\local\metadata\provider, \core_privacy\local\request\plugin\provider {
+class provider implements core_userlist_provider,
+        \core_privacy\local\metadata\provider,
+        \core_privacy\local\request\plugin\provider {
     /**
      * Get the list of metadata.
      *

@@ -316,7 +316,6 @@ export function getCombinedDateTime(dateId, timeId) {
  * @returns {Promise<void>} - A promise that resolves when the event is successfully added to the planner.
  * @throws {Error} - Throws an error if there is an issue during the process.
  */
-// eslint-disable-next-line consistent-return,require-jsdoc
 export async function addEventToPlanner() {
     try {
         const name = getValueById('planner-event-name-input');
@@ -420,9 +419,7 @@ export async function addEventToPlanner() {
                     await showMessage(document.getElementById('planner-repetition-invalid'));
                     return false;
             }
-        }
-        // Validation with no end date.
-        else {
+        } else {
             switch (validateInputs(name, location, startDate, null, null, repetitionsCheckbox, repetitions)) {
                 case 'correct':
                     await new Promise((resolve, reject) => {
@@ -506,8 +503,13 @@ export function deleteEventFromPlanner(id) {
  * @param {number | null} repetitions - The number of repetitions for the event, or null if no repetitions.
  * @returns {string} - True if all inputs are valid, otherwise false.
  */
-// eslint-disable-next-line max-len,require-jsdoc
-export function validateInputs(name, location, startDate, endDate = null, duration = null, repCheckbox = false, repetitions = null) {
+export function validateInputs(name,
+                               location,
+                               startDate,
+                               endDate = null,
+                               duration = null,
+                               repCheckbox = false,
+                               repetitions = null) {
     const eventsInvalid = document.getElementsByClassName('planner-invalid');
 
     for (const event of eventsInvalid) {

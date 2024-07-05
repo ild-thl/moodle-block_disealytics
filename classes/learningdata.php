@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+
 namespace block_disealytics;
 
 use block_disealytics\data\course;
@@ -333,7 +334,7 @@ class learningdata {
      * @return mixed
      * @throws dml_exception
      */
-    public function get_finished_goals(int $courseid = null): mixed {
+    public function get_finished_goals(?int $courseid = null): mixed {
         if (!$this->storage['finished_goals']) {
             global $DB, $USER, $COURSE;
             $goals = $DB->get_records(

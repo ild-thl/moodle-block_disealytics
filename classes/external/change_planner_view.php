@@ -68,13 +68,13 @@ class change_planner_view extends external_api {
      * @param int $month
      * @param int $year
      * @param string $direction
-     * @return string
+     * @return bool
      * @throws coding_exception
      * @throws dml_exception
      * @throws invalid_parameter_exception
      * @throws Exception
      */
-    public static function execute(int $courseid, int $day, int $month, int $year, string $direction): string {
+    public static function execute(int $courseid, int $day, int $month, int $year, string $direction): bool {
         global $DB, $PAGE, $CFG;
 
         self::validate_parameters(self::execute_parameters(), [
@@ -111,7 +111,7 @@ class change_planner_view extends external_api {
 
         planner::block_disealytics_change_month_display_in_database($day, $month, $year);
 
-        return 'Date changed.';
+        return true;
     }
 
     /**
@@ -120,6 +120,6 @@ class change_planner_view extends external_api {
      * @return external_value jsonobj
      */
     public static function execute_returns(): external_value {
-        return new external_value(PARAM_RAW);
+        return new external_value(PARAM_BOOL);
     }
 }

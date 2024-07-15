@@ -428,8 +428,8 @@ $string['edit'] = 'Bearbeiten';
 $string['choice_no'] = 'Sie haben die Einwilligung abgelehnt';
 $string['choice_yes'] = 'Sie haben die Einwilligung angenommen';
 
-$string['messageprovider'] = 'Disea Message Provider';
-$string['messageprovider:logdata_disea'] = 'Disea Message Provider';
+$string['messageprovider'] = 'DiSEA Message Provider';
+$string['messageprovider:logdata_disea'] = 'DiSEA Message Provider';
 
 $string['download'] = 'Herunterladen';
 $string['back'] = 'Zur&uuml;ck';

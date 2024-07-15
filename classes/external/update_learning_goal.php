@@ -48,12 +48,12 @@ class update_learning_goal extends external_api {
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
             'goalid' => new external_value(
-                PARAM_RAW,
+                PARAM_INT,
                 'Goal id',
                 VALUE_REQUIRED
             ),
             'duedate' => new external_value(
-                PARAM_RAW,
+                PARAM_INT,
                 'A date, that shows the deadline of the goal',
                 VALUE_REQUIRED
             ),
@@ -63,7 +63,7 @@ class update_learning_goal extends external_api {
                 VALUE_REQUIRED
             ),
             'finished' => new external_value(
-                PARAM_RAW,
+                PARAM_BOOL,
                 'Checks if target is finished',
                 VALUE_REQUIRED
             ),
@@ -78,11 +78,11 @@ class update_learning_goal extends external_api {
      * @param int $duedate the goal ID
      * @param string $goalname the goal name
      * @param bool $finished finished target
-     * @return string $result
+     * @return bool $result
      * @throws invalid_parameter_exception
      * @throws dml_exception
      */
-    public static function execute(string $goalid, int $duedate, string $goalname, bool $finished): string {
+    public static function execute(string $goalid, int $duedate, string $goalname, bool $finished): bool {
 
         global $CFG;
 
@@ -100,7 +100,7 @@ class update_learning_goal extends external_api {
         $goal->duedate = $duedate;
         $goal->finished = $finished;
         learningdata::update_goal($goal);
-        return 'Goal ID: ' . $goalid . ' updated name with: ' . $goalname . ' and due date ' . $duedate . '.';
+        return true;
     }
 
     /**
@@ -109,6 +109,6 @@ class update_learning_goal extends external_api {
      * @return external_value jsonobj
      */
     public static function execute_returns(): external_value {
-        return new external_value(PARAM_RAW);
+        return new external_value(PARAM_BOOL);
     }
 }

@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+
 namespace block_disealytics\view;
 defined('MOODLE_INTERNAL') || die();
 global $CFG;
@@ -154,9 +155,6 @@ class activity_view extends base_view {
                 'Saturday',
                 'Sunday',
             ]));
-            // Reference: $chart->get_xaxis(0, true);.
-            // Reference: $chart->get_yaxis(0, true)->set_label("Minuten");.
-
             $output['maincharts'][] = ['chartdata' => json_encode($chart1), 'withtable' => true,
                 'uniqid' => uniqid('block_disealytics_')];
                 $dates = learningdata::get_current_halfyear_dates();

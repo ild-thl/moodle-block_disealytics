@@ -16,8 +16,6 @@
 
 namespace block_disealytics\view;
 
-defined('MOODLE_INTERNAL') || die();
-
 use block_disealytics\learningdata;
 use coding_exception;
 use DateInterval;

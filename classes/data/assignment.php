@@ -147,7 +147,7 @@ class assignment {
      * @param int|null $courseid The ID of the course
      * @throws dml_exception
      */
-    public function __construct(mixed $moduleinfo, int $courseid = null) {
+    public function __construct(mixed $moduleinfo, ?int $courseid = null) {
         global $DB, $USER, $COURSE;
         $this->modinfo = $moduleinfo;
         $this->id = $moduleinfo->instance;

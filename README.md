@@ -35,7 +35,7 @@ JavaScript are used for client-side scripting. They handle user interactions and
 Clone this repository into the blocks directory of your moodle installation:
 
 ```
-git clone https://github.com/ild-thl/moodle-block_learner_dashboard.git disealytics
+git clone https://github.com/ild-thl/moodle-block_disealytics.git disealytics
 ```
 
 ### Configuring

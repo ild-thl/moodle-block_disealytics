@@ -498,6 +498,7 @@ class assignment {
      * self::GRADE_STATUS_NEUTRAL if the grade status is neutral.
      *
      * @throws dml_exception
+     * @throws coding_exception
      */
     public function block_disealytics_gen_grade_status(): int {
         switch ($this->block_disealytics_get_gradetype()) {
@@ -507,7 +508,7 @@ class assignment {
                 if ($this->gradegrade) {
                     $coursescale = $DB->get_record("scale", ['id' => $this->gradegrade->rawscaleid]);
                 }
-                if ($coursescale && $coursescale->scale == 'nicht bestanden, Nacharbeit, bestanden') {
+                if ($coursescale && $coursescale->scale == get_string('assignment_view_specific_scale', 'block_disealytics')) {
                     if ($this->block_disealytics_has_grade()) {
                         switch ($this->block_disealytics_get_grade()) {
                             case 1:

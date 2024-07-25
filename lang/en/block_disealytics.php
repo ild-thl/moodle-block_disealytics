@@ -31,6 +31,8 @@ $string['disea'] = 'DiSEA Learning Dashboard';
 $string['disealytics:addinstance'] = 'Add a new DiSEA Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new DiSEA Dashboard block to my dashboard.';
 $string['languagesetting'] = 'en';
+$string['login_alert'] = 'Please log in to use the DiSEA Dashboard.';
+$string['course_alert'] = 'The DiSEA Dashboard can only be displayed on the main course page.';
 $string['consent_start_msg'] = 'Please consent to data processing in order to use the plugin.';
 $string['consent_start_btn'] = 'Consent and use plugin';
 $string['change-to-expandable-view'] = 'Go to the detail view ...';
@@ -108,6 +110,7 @@ $string['assignment_view_hover_incomplete'] = 'Assignment incomplete, submitted 
 $string['assignment_view_hover_selfcheck'] = 'Assignment has been self-marked as completed, but may still need to be reviewed by the instructor';
 $string['assignment_view_hover_neutral'] = 'Neutral status. No action is required';
 $string['assignment_view_load-less-assignments'] = 'Show less';
+$string['assignment_view_specific_scale'] = 'failed, rework, passed';
 
 // Learninggoals view.
 $string['learning-goals-view'] = 'Learning Goals';

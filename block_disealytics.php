@@ -57,12 +57,12 @@ class block_disealytics extends block_base {
 
         // TODO: Rework this? Workaround to errors happening when index.php is viewed without being logged in.
         if (!isloggedin()) {
-            $this->content->text = 'Bitte melden Sie sich an, um das DiSEA Dashboard benutzten zu können.';
+            $this->content->text = get_string('login_alert', 'block_disealytics');
             return $this->content;
         }
 
         if (!str_contains($this->page->pagetype, 'course-view-')) {
-            $this->content->text = 'Das DiSEA Dashboard kann nur auf der Kurshauptseite angezeigt werden.';
+            $this->content->text = get_string('course_alert', 'block_disealytics');
             return $this->content;
         }
 

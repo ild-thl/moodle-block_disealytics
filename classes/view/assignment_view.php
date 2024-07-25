@@ -136,7 +136,7 @@ class assignment_view extends base_view {
             }
         } else {
             $this->output["no_table"] = 'yes';
-            $this->output['info'] = 'View a Course with assignments to see assignment information here.';
+            $this->output['info'] = get_string('nodata', 'block_disealytics');
         }
 
         if (count(assignment::block_disealytics_get_course_assignments($COURSE->id)) > 3) {

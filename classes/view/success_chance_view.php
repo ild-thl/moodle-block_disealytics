@@ -74,10 +74,10 @@ class success_chance_view extends base_view {
                 $this->output['charts'][] = ['chartdata' => json_encode($chartdatastatus),
                         'uniqid' => uniqid('block_disealytics_')];
             } else {
-                $this->output['nodata'] = get_string('success-chance-no-data', 'block_disealytics');
+                $this->output['nodata'] = get_string('nodata', 'block_disealytics');
             }
         } else {
-            $this->output['nodata'] = get_string('success-chance-no-data', 'block_disealytics');
+            $this->output['nodata'] = get_string('nodata', 'block_disealytics');
         }
         $this->output["info_summary"] = get_string('success-chance_info_summary', 'block_disealytics');
     }

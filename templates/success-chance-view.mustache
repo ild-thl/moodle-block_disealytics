@@ -79,6 +79,7 @@
     </div>
 
     <div class="panel-body">
+        {{^nodata}}
         <br>
         <div id="pvl-doughnut">
             <p class="pvl-probability">{{pvlProbability}} %</p>
@@ -96,7 +97,11 @@
             <p class="disea-orange text-small text-semibold">{{assignment_info_text_incomplete}}</p>
             <p class="disea-red text-small text-semibold">{{assignment_info_text_failed}}</p>
         </div>
+        {{/nodata}}
 
+        {{#nodata}}
+            <p>{{nodata}}</p>
+        {{/nodata}}
 
         <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
              data-container="block_disealytics/expandable-{{view_type}}">
@@ -127,10 +132,6 @@
 
         </div>
 
-        {{#nodata}}
-            <p>{{nodata}}</p>
-        {{/nodata}}
-
     </div>
 
 
@@ -159,27 +160,29 @@
                 </div>
             </div>
         </div>
-            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
-                 data-container="block_disealytics/expandable-{{view_type}}">
-                <p>{{#str}}success-chance_info_text_expanded, block_disealytics {{/str}}</p>
-            </div>
+        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
+             data-container="block_disealytics/expandable-{{view_type}}">
+            <p>{{#str}}success-chance_info_text_expanded, block_disealytics {{/str}}</p>
+        </div>
 
-            <div id="pvl-doughnut">
-                <p class="pvl-probability">{{pvlProbability}} %</p>
-                {{#charts}}
-                    {{> core/chart }}
-                {{/charts}}
-            </div>
-            <br>
-            <div class="success-chance-assignments">
-                <p>{{#str}}pvl_assignment_info_text_summary_semester, block_disealytics {{/str}}</p>
-                <p class="disea-green text-small text-semibold">{{assignment_info_text_okay}}</p>
-                <p class="disea-green text-small text-semibold">{{assignment_info_text_submitted}}</p>
-                <p class="disea-gray text-small text-semibold">{{assignment_info_text_selfcheck}}</p>
-                <p class="disea-orange text-small text-semibold">{{assignment_info_text_notsubmitted}}</p>
-                <p class="disea-orange text-small text-semibold">{{assignment_info_text_incomplete}}</p>
-                <p class="disea-red text-small text-semibold">{{assignment_info_text_failed}}</p>
-            </div>
+        {{^nodata}}
+        <div id="pvl-doughnut">
+            <p class="pvl-probability">{{pvlProbability}} %</p>
+            {{#charts}}
+                {{> core/chart }}
+            {{/charts}}
+        </div>
+        <br>
+        <div class="success-chance-assignments">
+            <p>{{#str}}pvl_assignment_info_text_summary_semester, block_disealytics {{/str}}</p>
+            <p class="disea-green text-small text-semibold">{{assignment_info_text_okay}}</p>
+            <p class="disea-green text-small text-semibold">{{assignment_info_text_submitted}}</p>
+            <p class="disea-gray text-small text-semibold">{{assignment_info_text_selfcheck}}</p>
+            <p class="disea-orange text-small text-semibold">{{assignment_info_text_notsubmitted}}</p>
+            <p class="disea-orange text-small text-semibold">{{assignment_info_text_incomplete}}</p>
+            <p class="disea-red text-small text-semibold">{{assignment_info_text_failed}}</p>
+        </div>
+        {{/nodata}}
 
         <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
              data-container="block_disealytics/expandable-{{view_type}}">
@@ -254,6 +257,7 @@
             <p>{{#str}}success-chance_info_text_expanded, block_disealytics {{/str}}</p>
         </div>
 
+        {{^nodata}}
         <div id="pvl-doughnut">
             <p class="pvl-probability">{{pvlProbability}} %</p>
             {{#charts}}
@@ -270,6 +274,7 @@
             <p class="disea-orange text-small text-semibold">{{assignment_info_text_incomplete}}</p>
             <p class="disea-red text-small text-semibold">{{assignment_info_text_failed}}</p>
         </div>
+        {{/nodata}}
 
         <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
              data-container="block_disealytics/expandable-{{view_type}}">

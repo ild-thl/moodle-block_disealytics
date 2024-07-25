@@ -263,7 +263,6 @@ $string['success-chance_help_info_text_expanded'] = 'In der Detailansicht der "P
 $string['success-chance_info_text'] = 'Betrachten Sie die PVL-Wahrscheinlichkeit: Die PVL-Wahrscheinlichkeit zeigt Ihnen, wie viele Bewertungspunkte Sie erhalten haben.';
 $string['success-chance_info_text_expanded'] = 'Die PVL-Wahrscheinlichkeit zeigt Ihnen den Status der Einsendeaufgaben an.';
 $string['pvl_success-chance-chart-text'] = 'PVL-Wahrscheinlichkeit';
-$string['success-chance-no-data'] = 'Keine Daten zur Anzeige der Erfolgschance in diesem Kurs vohanden.';
 $string['success-chance-label-failed'] = 'PVL-Wahrscheinlichkeit';
 
 $string['pvl_assignment_info_text_summary_modul'] = 'Im laufenden Modul sieht Ihre Bilanz wie folgt aus:';
@@ -291,7 +290,7 @@ $string['progress-bar_nodata'] = 'Es sind derzeit keine Lesefortschritte festgeh
 $string['activity_view_expanded_subtitle'] = "Anmeldungen im Monat";
 $string['study-progress_expanded_info_text'] = 'Die "Aufgabengewichtung" wird anhand der bereitgestellten Aufgaben in diesem Kurs berechnet. Jeder Aufgabe wird ein Wert zugewiesen, der sich nach dem Status richtet: "negativ (rotes X)", "neutral (grauer Kreis oder gelbes Dreieck)" oder "positiv (grünes Häkchen)".';
 
-$string['nodata'] = 'Keine Daten vorhanden';
+$string['nodata'] = 'Es sind keine Daten zu dieser Karte im Kurs vorhanden.';
 $string['activity_view_refresh'] = "Letzte Aktualisierung";
 
 $string['task_tasktransform'] = 'Tasktransformation';

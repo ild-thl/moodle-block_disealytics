@@ -264,7 +264,6 @@ $string['success-chance_help_info_text_expanded'] = "In the detailed view of the
 $string['success-chance_info_text'] = 'Look at the PVL-Probability: The PVL-Probability shows you how many assessment points you have received.';
 $string['success-chance_info_text_expanded'] = 'The PVL-Probability shows you the status of the submitted assignments.';
 $string['pvl_success-chance-chart-text'] = 'PVL-Probability';
-$string['success-chance-no-data'] = 'No data available to indicate the chance of success in this course.';
 $string['success-chance-label-failed'] = 'PVL-Probability';
 
 $string['pvl_assignment_info_text_summary_modul'] = 'Your PVL-Probability for the current module is as follows:';
@@ -293,7 +292,7 @@ $string['progress-bar_nodata'] = 'No reading progress is currently recorded. Add
 $string['activity_view_expanded_subtitle'] = "Monthly logins";
 $string['study-progress_expanded_info_text'] = "The 'assignment rating' is calculated based on the assignments provided in this course. Each assignment is given a value depending on its status: 'negative (red X)', 'neutral (grey circle or yellow triangle)' or 'positive (green checkmark)'.";
 
-$string['nodata'] = 'No data available';
+$string['nodata'] = 'There is no data available in the course for this card.';
 $string['activity_view_refresh'] = "Last update";
 
 $string['task_tasktransform'] = 'Task transformation';

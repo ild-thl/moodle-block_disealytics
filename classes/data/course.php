@@ -60,7 +60,6 @@ class course {
      */
     public static function get_all_courses_of_user(int $userid): array {
         global $DB;
-        // Left Join, falls es keine zugeordnete kategorie/Semester gibt.
         $sql = "SELECT c.instanceid AS courseid, cr.fullname AS coursename, cat.name AS categoryname, cr.enddate AS coursetimestamp
             FROM {context} c
             JOIN {role_assignments} ra ON c.id = ra.contextid

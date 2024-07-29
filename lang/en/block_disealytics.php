@@ -25,21 +25,21 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'DiSEA Dashboard';
-$string['plugin-title'] = 'Learning Dashboard';
-$string['disea'] = 'DiSEA Learning Dashboard';
-$string['disealytics:addinstance'] = 'Add a new DiSEA Dashboard block.';
-$string['disealytics:myaddinstance'] = 'Add a new DiSEA Dashboard block to my dashboard.';
+$string['pluginname'] = 'Learner Dashboard';
+$string['plugin-title'] = 'Learner Dashboard';
+$string['disea'] = 'Learner Dashboard';
+$string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
+$string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
 $string['languagesetting'] = 'en';
-$string['login_alert'] = 'Please log in to use the DiSEA Dashboard.';
-$string['course_alert'] = 'The DiSEA Dashboard can only be displayed on the main course page.';
+$string['login_alert'] = 'Please log in to use the Learner Dashboard.';
+$string['course_alert'] = 'The Learner Dashboard can only be displayed on the main course page.';
 $string['consent_start_msg'] = 'Please consent to data processing in order to use the plugin.';
 $string['consent_start_btn'] = 'Consent and use plugin';
 $string['change-to-expandable-view'] = 'Go to the detail view ...';
 
 $string['nouserconsent'] = 'Consent to required data processing.';
 
-$string['diseasettings'] = 'DiSEA Learning Dashboard settings';
+$string['diseasettings'] = 'Learner Dashboard settings';
 $string['activityviewsetting'] = 'Show activity overview';
 $string['assignmentviewsetting'] = 'Show assignment overview';
 $string['editing_mode_setting'] = 'Activate editing mode';
@@ -87,7 +87,7 @@ $string['Dec'] = 'December';
 $string['calendarweeks'] = 'calendar weeks';
 
 $string['testcontent'] = 'This is test content.';
-$string['testfooter'] = 'The DiSEA Dashboard is loading.';
+$string['testfooter'] = 'The Learner Dashboard is loading.';
 
 // Selection Form.
 $string['select_view'] = 'Select view';
@@ -203,9 +203,9 @@ $string['modal_remove_text_2'] = " remove the card from the dashboard? You can a
 $string['modal_remove_cancel'] = "Cancel";
 $string['modal_remove_check'] = "Remove from dashboard";
 
-$string['main_help_title'] = "Help page for the Learning Dashboard";
+$string['main_help_title'] = "Help page for the Learner Dashboard";
 $string['main_help_views_summary'] = "Classification of cards";
-$string['main_help_views_details'] = "The Learning Dashboard (LD) contains cards in which various information or functions are included. Cards can be added to the LD and deleted again. There are many different topics from which you can compile your personal LD. Information on the various topics is available via the help function in the individual cards.";
+$string['main_help_views_details'] = "The Learner Dashboard (LD) contains cards in which various information or functions are included. Cards can be added to the LD and deleted again. There are many different topics from which you can compile your personal LD. Information on the various topics is available via the help function in the individual cards.";
 $string['main_help_add_remove_summary'] = "Adding or removing cards";
 $string['main_help_add_remove_details'] = 'To add or remove cards, click on the pencil icon on the overall view page. You can then remove individual cards by clicking on the "x" symbol in the top right-hand corner of a card. Under your selected cards in the LD, you have the option of adding further cards to the LD.';
 $string['main_help_help_summary'] = "Recurring functions within the cards";
@@ -213,15 +213,15 @@ $string['main_help_help_details'] = 'Each card and the dashboard itself contains
 $string['main_help_edit_summary'] = "Editing mode";
 $string['main_help_edit_details'] = "Clicking on the pencil icon starts the editing mode for adding or deleting cards in the dashboard (see Figure 1). You can use this feature to customise your dashboard with the cards that are relevant to you. Click on the red X on the relevant card to remove it. You can add a new card by selecting the \"Add card\" button. This button opens a new dialogue with the available cards.";
 $string['main_add_view_title'] = "Add cards";
-$string['main_add_view_info_text'] = "Select the cards you would like to have displayed in the DiSEA dashboard.";
+$string['main_add_view_info_text'] = "Select the cards you would like to have displayed in the Learner Dashboard.";
 $string['main_add_view_info_text_empty'] = "You have added all available cards.";
 
 $string['main_config_title'] = "Configuration";
-$string['main_config_desc'] = "You can configure the Learning Dashboard here.";
+$string['main_config_desc'] = "You can configure the Learner Dashboard here.";
 $string['main_config_consent_title'] = "Data processing";
 $string['main_config_consent_desc'] = "You have consented to the data processing.";
 $string['consent_config_title'] = "Data processing";
-$string['consent_config_desc'] = "Would you like to withdraw your consent to data processing? The Learning Dashboard can then no longer be used and the following data will be deleted:";
+$string['consent_config_desc'] = "Would you like to withdraw your consent to data processing? The Learner Dashboard can then no longer be used and the following data will be deleted:";
 $string['consent_config_list_item_1'] = "Self-defined learning goals";
 $string['consent_config_list_item_2'] = "Settings of the progress bar (input learning materials)";
 $string['consent_config_list_item_3'] = "Dates of the 'Planning Assistant'";
@@ -380,7 +380,7 @@ $string['privacy:metadata:user_goal_description'] = 'goal_description';
 $string['privacy:metadata:user_goal_finished'] = 'goal_finished';
 
 // For: block_disealytics_opin.
-$string['privacy:metadata:block_disealytics_user_pages'] = 'User pages of the Learning Dashboard';
+$string['privacy:metadata:block_disealytics_user_pages'] = 'User pages of the Learner Dashboard';
 $string['privacy:metadata:user_pages_id'] = 'user_pages_id';
 $string['privacy:metadata:user_pages_usermodified'] = 'user_pages_usermodified';
 $string['privacy:metadata:user_pages_courseid'] = 'user_pages_courseid';

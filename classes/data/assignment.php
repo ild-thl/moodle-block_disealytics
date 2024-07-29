@@ -488,7 +488,7 @@ class assignment {
     }
 
     /**
-     * Generate the grade status for the learning dashboard item.
+     * Generate the grade status for the Learner Dashboard item.
      *
      * @return int Returns the grade status:
      * self::GRADE_STATUS_FAILED if the item's grade is failed.

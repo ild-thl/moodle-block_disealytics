@@ -171,7 +171,7 @@ class block_disealytics extends block_base {
     }
 
     /**
-     * Checks if the user has given consent to use the DiSEA Dashboard.
+     * Checks if the user has given consent to use the Learner Dashboard.
      * @throws dml_exception
      */
     private function getuserconsent(): bool {

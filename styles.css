@@ -768,14 +768,9 @@
 }
 
 .block_disealytics .progress-bar-btn {
-    color: white;
     background: var(--diseablue);
-    display: flex;
-    width: 252px;
-    height: 32px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    width: -moz-available; /* stylelint-disable-line csstree/validator */
+    width: -webkit-fill-available; /* stylelint-disable-line csstree/validator *//* stylelint-disable-line declaration-block-no-duplicate-properties  */
     border: none;
 }
 

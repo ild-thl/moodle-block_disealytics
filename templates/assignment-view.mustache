@@ -102,9 +102,9 @@
                 </table>
             {{/table}}
 
-            {{#no_table}}
+            {{#nodata}}
                 <p>{{info}}</p>
-            {{/no_table}}
+            {{/nodata}}
 
 
         </div>
@@ -212,9 +212,13 @@
 
             {{/tables}}
         </div>
-
-        {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
+        {{^data_in_course}}
+            <p>{{#str}}assignment_view_no_assignments_available, block_disealytics{{/str}}</p>
+        {{/data_in_course}}
+        {{#data_in_course}}
+            {{> block_disealytics/bottom_navigation }}
+            {{> block_disealytics/panel_editing_footer }}
+        {{/data_in_course}}
     </div>
 
 {{/viewmode_halfyear}}
@@ -317,8 +321,13 @@
             </div>
         </div>
 
-        {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
+        {{^data_in_course}}
+            <p>{{#str}}assignment_view_no_assignments_available, block_disealytics{{/str}}</p>
+        {{/data_in_course}}
+        {{#data_in_course}}
+            {{> block_disealytics/bottom_navigation }}
+            {{> block_disealytics/panel_editing_footer }}
+        {{/data_in_course}}
     </div>
 {{/viewmode_global}}
 

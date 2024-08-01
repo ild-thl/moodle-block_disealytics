@@ -111,6 +111,7 @@ $string['assignment_view_hover_selfcheck'] = 'Assignment has been self-marked as
 $string['assignment_view_hover_neutral'] = 'Neutral status. No action is required';
 $string['assignment_view_load-less-assignments'] = 'Show less';
 $string['assignment_view_specific_scale'] = 'failed, rework, passed';
+$string['assignment_view_no_assignments_available'] = 'You are not enrolled in any course in the selected semester that contains assignments.';
 
 // Learninggoals view.
 $string['learning-goals-view'] = 'Learning Goals';
@@ -170,7 +171,6 @@ $string['progress_bar_manage_optional_input'] = 'Manage course learning material
 $string['progress_bar_modal_intro'] = 'Here you can add documents, videos or links that have been uploaded in the selected course as learning material.';
 $string['add-optional-input'] = 'Add course learning material';
 $string['optional_input_no_selection'] = 'No selection';
-$string['optional_input_no_optional_input_exists'] = 'No content available. To add some, click on the pencil within the card and select the desired document.';
 $string['optional_input_all_inputs_set'] = 'You added all available learning materials of the course.';
 $string['optional_input_document'] = 'Select document';
 $string['optional_input_pages'] = 'Pages read';
@@ -292,7 +292,7 @@ $string['progress-bar_nodata'] = 'No reading progress is currently recorded. Add
 $string['activity_view_expanded_subtitle'] = "Monthly logins";
 $string['study-progress_expanded_info_text'] = "The 'assignment rating' is calculated based on the assignments provided in this course. Each assignment is given a value depending on its status: 'negative (red X)', 'neutral (grey circle or yellow triangle)' or 'positive (green checkmark)'.";
 
-$string['nodata'] = 'There is no data available in the course for this card.';
+$string['nodata'] = 'There is no data available.';
 $string['activity_view_refresh'] = "Last update";
 
 $string['task_tasktransform'] = 'Task transformation';
@@ -301,13 +301,13 @@ $string['task_tasktransform'] = 'Task transformation';
 $string['planner-view'] = 'Planning Assistant';
 $string['planner_help_info_text'] = "This card gives you an overview of your upcoming web conferences, assignments or other activities. You can add further appointments by simply clicking on a day of your choice. You can view all appointments in the detailed view.";
 $string['planner_help_info_text_expanded'] = "This card gives you an overview of your upcoming web conferences, assignments or other activities. You can add further appointments by simply clicking on a day of your choice. You can view all appointments in the detailed view.";
-$string['planner-view_monday_short'] = "Mon";
-$string['planner-view_tuesday_short'] = "Tue";
-$string['planner-view_wednesday_short'] = "Wed";
-$string['planner-view_thursday_short'] = "Thu";
-$string['planner-view_friday_short'] = "Fri";
-$string['planner-view_saturday_short'] = "Sat";
-$string['planner-view_sunday_short'] = "Sun";
+$string['planner-view_monday_short'] = "Mo";
+$string['planner-view_tuesday_short'] = "Tu";
+$string['planner-view_wednesday_short'] = "We";
+$string['planner-view_thursday_short'] = "Th";
+$string['planner-view_friday_short'] = "Fr";
+$string['planner-view_saturday_short'] = "Sa";
+$string['planner-view_sunday_short'] = "Su";
 $string['planner-view_today_label'] = "Today";
 $string['planner-view_global_label'] = "Dates in the month";
 $string['planner-view_tomorrow_label'] = "Tomorrow";

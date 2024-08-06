@@ -57,7 +57,7 @@ class tasktransform extends scheduled_task {
                 'l.id, l.component, l.action, l.target, ' . 'l.userid, c.id as courseid, l.relateduserid, l.timecreated ';
 
         // SQL Query to get logdata in interval of one week.
-        $query1 = 'SELECT ' . $selectstring . ' FROM {logstore_standard_log} l ' . 'LEFT JOIN {course} c ' .
+        $query1 = '(SELECT ' . $selectstring . ' FROM {logstore_standard_log} l ' . 'LEFT JOIN {course} c ' .
                 'ON l.courseid = c.id ' .
                 'WHERE (l.relateduserid IN (SELECT DISTINCT userid FROM {block_disealytics_consent} disea2 ' .
                 'WHERE disea2.choice = 1 AND disea2.timecreated < ' . $time . ')' .
@@ -70,7 +70,7 @@ class tasktransform extends scheduled_task {
                 'WHERE l.relateduserid IN (SELECT DISTINCT userid FROM {block_disealytics_consent} disea2 ' .
                 'WHERE disea2.choice = 1 AND disea2.timemodified >' . $time . ') ' .
                 'OR l.userid IN (SELECT DISTINCT userid FROM {block_disealytics_consent} disea2 ' .
-                'WHERE disea2.choice = 1 AND disea2.timemodified >' . $time . ') ';
+                'WHERE disea2.choice = 1 AND disea2.timemodified >' . $time . ')) ORDER BY id';
 
         // Get Logdata from database.
         $data = array_values($DB->get_records_sql($query1));
@@ -262,6 +262,11 @@ class tasktransform extends scheduled_task {
         // Group data by userid.
         foreach ($data as $log) {
             $databyuserid[$log->userid][] = $log;
+        }
+        foreach ($databyuserid as $bucket) {
+            $bucket = usort($bucket, function($a, $b) {
+                return $a->timecreated <=> $b->timecreated;
+            });
         }
         foreach ($databyuserid as $bucket) {
             $iterator = new ArrayIterator($bucket);

@@ -20,6 +20,7 @@ use block_disealytics\learningdata;
 use coding_exception;
 use DateInterval;
 use DatePeriod;
+use DateTime;
 use Exception;
 
 /**
@@ -35,21 +36,21 @@ abstract class base_view {
      */
     public array $output;
     /**
-     * @var mixed Start date
+     * @var DateTime Start date
      */
-    protected mixed $start;
+    protected DateTime $start;
     /**
-     * @var mixed End date
+     * @var DateTime End date
      */
-    protected mixed $end;
+    protected DateTime $end;
 
     /**
      * base_view constructor.
      *
-     * @param mixed $timeframe
+     * @param  $timeframe
      * @throws Exception
      */
-    public function __construct(mixed $timeframe) {
+    public function __construct($timeframe) {
         $timeframedates = learningdata::get_current_halfyear_dates();
         $this->start = $timeframedates["start"];
         $this->end = $timeframedates["end"];
@@ -58,11 +59,11 @@ abstract class base_view {
     /**
      * Gives an array with all the calenderweeks in between the input dates.
      *
-     * @param mixed $unit
+     * @param  $unit
      * @return array
      * @throws Exception
      */
-    protected function dividetimeframe(mixed $unit): array {
+    protected function dividetimeframe($unit): array {
         $interval = new DateInterval('P1' . $unit);
         $daterange = new DatePeriod($this->start, $interval, $this->end);
         $names = [];
@@ -76,12 +77,12 @@ abstract class base_view {
     /**
      * Gives an array with all the calenderweeks in between the input dates.
      *
-     * @param mixed $start
-     * @param mixed $end
+     * @param  $start
+     * @param  $end
      * @return array
      * @throws Exception
      */
-    protected static function get_weeknrs(mixed $start, mixed $end): array {
+    protected static function get_weeknrs($start, $end): array {
         $interval = new DateInterval('P1W');
         $daterange = new DatePeriod($start, $interval, $end);
         $names = [];

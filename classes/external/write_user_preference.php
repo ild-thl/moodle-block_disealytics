@@ -59,12 +59,12 @@ class write_user_preference extends external_api {
     /**
      * Execute the service.
      *
-     * @param mixed $info
+     * @param  array $info
      * @return string $result
      * @throws invalid_parameter_exception
      * @throws coding_exception|dml_exception
      */
-    public static function execute(mixed $info): string {
+    public static function execute(array $info): string {
         self::validate_parameters(self::execute_parameters(), [
                 'info' => $info,
         ]);

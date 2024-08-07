@@ -39,14 +39,14 @@ class style {
     /**
      * Map a value from one range to another.
      *
-     * @param mixed $val
-     * @param mixed $inputmin
-     * @param mixed $inputmax
-     * @param mixed $outputmin
-     * @param mixed $outputmax
-     * @return float|int
+     * @param float $val
+     * @param float $inputmin
+     * @param float $inputmax
+     * @param float $outputmin
+     * @param float $outputmax
+     * @return float
      */
-    public static function map($val, $inputmin, $inputmax, $outputmin, $outputmax) {
+    public static function map(float $val, float $inputmin, float $inputmax, float $outputmin, float $outputmax) {
         $inputrange = $inputmax - $inputmin;
         $outputrange = $outputmax - $outputmin;
         $scale = $outputrange / $inputrange;

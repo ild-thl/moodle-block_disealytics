@@ -16,6 +16,7 @@
 
 namespace block_disealytics\data;
 
+use cm_info;
 use coding_exception;
 use dml_exception;
 use html_writer;
@@ -143,11 +144,11 @@ class assignment {
     /**
      * Constructor for the assignment class.
      *
-     * @param mixed $moduleinfo The module information of the assignment
+     * @param cm_info $moduleinfo The module information of the assignment
      * @param int|null $courseid The ID of the course
      * @throws dml_exception
      */
-    public function __construct($moduleinfo, ?int $courseid = null) {
+    public function __construct(cm_info $moduleinfo, ?int $courseid = null) {
         global $DB, $USER, $COURSE;
         $this->modinfo = $moduleinfo;
         $this->id = $moduleinfo->instance;
@@ -240,7 +241,7 @@ class assignment {
 
     /**
      * Get the set due date of the assignment.
-     * @return mixed Returns the due date of the assignment.
+     * @return Returns the due date of the assignment.
      */
     private function block_disealytics_get_duedate() {
         return $this->assign->duedate;
@@ -281,7 +282,7 @@ class assignment {
 
     /**
      * Get the grade type of assignment.
-     * @return mixed Returns the grade type of assignment.
+     * @return Returns the grade type of assignment.
      */
     public function block_disealytics_get_gradetype() {
         return $this->gradeitem->gradetype;

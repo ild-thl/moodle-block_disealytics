@@ -133,6 +133,10 @@ class progress_bar_view extends base_view {
         $output['data'] = $data;
         $output['number_of_documents'] = $filescount;
 
+        if ($filescount > 0) {
+            $this->output['data_in_course'] = true;
+        }
+
         return $output;
     }
 
@@ -258,7 +262,7 @@ class progress_bar_view extends base_view {
             if ($this->generate_chart_and_preview($data, $initalbars, $course)) {
                 $this->output["viewmode_module"]['course'][] = $course;
             } else {
-                $this->output["viewmode_module"]['nodata'] = get_string('progress-bar_nodata', 'block_disealytics');
+                $this->output["viewmode_module"]['nodata'] = true;
             }
         }
     }
@@ -307,9 +311,10 @@ class progress_bar_view extends base_view {
                 $initalbars = 3;
                 if ($this->generate_chart_and_preview($data, $initalbars, $course)) {
                     $this->output["viewmode_halfyear"]['course'][] = $course;
-                } else {
-                    $this->output["viewmode_halfyear"]['nodata'] = get_string('progress-bar_nodata', 'block_disealytics');
                 }
+            }
+            if (empty($this->output["viewmode_halfyear"]['course'])) {
+                $this->output["viewmode_halfyear"]['nodata'] = true;
             }
         }
     }
@@ -375,10 +380,11 @@ class progress_bar_view extends base_view {
                     $initalbars = 3;
                     if ($this->generate_chart_and_preview($data, $initalbars, $course)) {
                         $this->output["viewmode_global"]['course'][] = $course;
-                    } else {
-                        $this->output["viewmode_global"]['nodata'] = get_string('progress-bar_nodata', 'block_disealytics');
                     }
                 }
+            }
+            if (empty($this->output["viewmode_global"]['course'])) {
+                $this->output["viewmode_global"]['nodata'] = true;
             }
         }
     }

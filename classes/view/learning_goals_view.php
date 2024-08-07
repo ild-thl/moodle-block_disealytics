@@ -87,6 +87,10 @@ class learning_goals_view extends base_view {
         $goals = $this->learningdata->get_goals();
         $finishedgoals = $this->learningdata->get_finished_goals();
         $this->set_learning_goals($goals, $finishedgoals);
+
+        if (count($goals) === 0) {
+            $this->output["nodata"] = true;
+        }
     }
 
     /**
@@ -164,6 +168,10 @@ class learning_goals_view extends base_view {
         $goalsarray = $this->learningdata->get_goals_semester();
         $finishedgoalsarray = $this->learningdata->get_finished_goals_semester();
         $this->set_learning_goals($goalsarray, $finishedgoalsarray);
+
+        if (count($goalsarray) === 0) {
+            $this->output["nodata"] = true;
+        }
     }
 
     /**
@@ -217,5 +225,9 @@ class learning_goals_view extends base_view {
         $goalsarray = $this->learningdata->get_goals_global($goalsforselectedsemester);
         $finishedgoalsarray = $this->learningdata->get_finished_goals_global($goalsforselectedsemester);
         $this->set_learning_goals($goalsarray, $finishedgoalsarray);
+
+        if (count($goalsarray) === 0) {
+            $this->output["nodata"] = true;
+        }
     }
 }

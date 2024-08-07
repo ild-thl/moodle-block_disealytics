@@ -72,21 +72,22 @@
                         data-actiontype="block_disealytics/toggle-expansion"><i
                         style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
             </a></span>{{title}}</h1>
-                {{^nodata}}
                     <div class="navigation-icons">
+                        {{^nodata}}
                         <a id="block_disealytics_progress_config_menu"
                            class="dashboard-button"
                            data-toggle="modal"
                            data-target="#progressConfigModal">
                             <i class="fa fa-pencil"></i>
                         </a>
+                        {{/nodata}}
                         <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
                            data-toggle="modal"
                            data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
                                 class="fa fa-question"></i>
                         </a>
                     </div>
-                {{/nodata}}
+
             </div>
         </div>
         <div class="panel-body">
@@ -110,14 +111,17 @@
                     {{/charts_preview}}
                 {{/course}}
             </div>
+
             {{#nodata}}
-                <p>{{#str}} optional_input_no_optional_input_exists, block_disealytics {{/str}}</p>
-                <button id="block_disealytics_progress_config_menu"
-                        class="dashboard-button progress-bar-btn btn btn-primary"
-                        data-toggle="modal"
-                        data-target="#progressConfigModal">
-                    {{#str}} optional-inputs-view, block_disealytics {{/str}}
-                </button>
+                <p>{{#str}} nodata, block_disealytics {{/str}}</p>
+                {{#files_left}}
+                    <button id="block_disealytics_progress_config_menu"
+                            class="dashboard-button progress-bar-btn btn btn-primary"
+                            data-toggle="modal"
+                            data-target="#progressConfigModal">
+                        {{#str}} optional-inputs-view, block_disealytics {{/str}}
+                    </button>
+                {{/files_left}}
             {{/nodata}}
 
         </div>
@@ -129,10 +133,8 @@
             {{/course}}
         </div>
 
-        {{^nodata}}
-            {{> block_disealytics/bottom_navigation }}
-            {{> block_disealytics/panel_editing_footer }}
-        {{/nodata}}
+        {{> block_disealytics/bottom_navigation }}
+        {{> block_disealytics/panel_editing_footer }}
 
     </div>
 {{/viewmode_module}}
@@ -188,6 +190,17 @@
 
                 </div>
             {{/course}}
+            {{#nodata}}
+                <p>{{#str}} nodata, block_disealytics {{/str}}</p>
+                {{#files_left}}
+                    <button id="block_disealytics_progress_config_menu"
+                            class="dashboard-button progress-bar-btn btn btn-primary"
+                            data-toggle="modal"
+                            data-target="#progressConfigModal">
+                        {{#str}} optional-inputs-view, block_disealytics {{/str}}
+                    </button>
+                {{/files_left}}
+            {{/nodata}}
         </div>
 
         {{> block_disealytics/bottom_navigation }}
@@ -254,6 +267,17 @@
                     {{/charts_preview}}
                 </div>
             {{/course}}
+            {{#nodata}}
+                <p>{{#str}} nodata, block_disealytics {{/str}}</p>
+                {{#files_left}}
+                    <button id="block_disealytics_progress_config_menu"
+                            class="dashboard-button progress-bar-btn btn btn-primary"
+                            data-toggle="modal"
+                            data-target="#progressConfigModal">
+                        {{#str}} optional-inputs-view, block_disealytics {{/str}}
+                    </button>
+                {{/files_left}}
+            {{/nodata}}
         </div>
 
         {{> block_disealytics/bottom_navigation }}

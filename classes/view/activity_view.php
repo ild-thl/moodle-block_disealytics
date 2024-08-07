@@ -107,6 +107,7 @@ class activity_view extends base_view {
         $monday = (new DateTime("previous week monday"))->format("U");
         $sunday = (new DateTime("now"))->format("U");
         $output = null;
+        $output["nodata"] = false;
 
         $output["coursename"] = $course->coursename;
         $tasks = task::block_disealytics_get_user_tasks($monday, $sunday, $course->courseid);
@@ -181,6 +182,8 @@ class activity_view extends base_view {
                 $chart2->set_labels(base_view::get_weeknrs($start, $end));
                 $output['detailcharts'][] = ['chartdata' => json_encode($chart2), 'withtable' => true,
                     'uniqid' => uniqid('block_disealytics_')];
+        } else {
+            $output["nodata"] = true;
         }
         return $output;
     }
@@ -210,6 +213,13 @@ class activity_view extends base_view {
         $allcoursesofusercurrentsemester = course::get_all_courses_of_user_current_semester($USER->id);
         foreach ($allcoursesofusercurrentsemester as $course) {
             $outputs[] = $this->get_course_output($course);
+        }
+        $this->output["nodata"] = true;
+        foreach ($outputs as $output) {
+            if ($output["nodata"] === false) {
+                $this->output["nodata"] = false;
+                break;
+            }
         }
         $this->output["outputs"] = $outputs;
         return $this->output;
@@ -260,8 +270,16 @@ class activity_view extends base_view {
                 $outputs[] = $this->get_course_output($course, true);
             }
         }
-        $this->output["outputs"] = $outputs;
 
+        $this->output["nodata"] = true;
+        foreach ($outputs as $output) {
+            if ($output["nodata"] === false) {
+                $this->output["nodata"] = false;
+                break;
+            }
+        }
+
+        $this->output["outputs"] = $outputs;
         return $this->output;
     }
 }

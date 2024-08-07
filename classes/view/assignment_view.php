@@ -135,8 +135,8 @@ class assignment_view extends base_view {
                 }
             }
         } else {
-            $this->output["no_table"] = 'yes';
-            $this->output['info'] = 'View a Course with assignments to see assignment information here.';
+            $this->output["nodata"] = true;
+            $this->output['info'] = get_string('nodata', 'block_disealytics');
         }
 
         if (count(assignment::block_disealytics_get_course_assignments($COURSE->id)) > 3) {
@@ -166,6 +166,8 @@ class assignment_view extends base_view {
         $this->output["tables"] = [];
 
         $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
+
+        $this->output["data_in_course"] = false;
 
         foreach ($allusercourses as $course) {
             $assignments = assignment::block_disealytics_get_course_assignments($course->courseid);
@@ -197,6 +199,7 @@ class assignment_view extends base_view {
         $this->output["categories"] = [];
         $allusercourses = course::get_all_courses_of_user($USER->id);
         $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->categoryname);
+        $this->output["data_in_course"] = false;
         foreach ($allusercourses as $course) {
             $assignments = assignment::block_disealytics_get_course_assignments((int) $course->courseid);
             if ($semesterfilter === $course->categoryname || !$semesterfilter) {
@@ -230,7 +233,7 @@ class assignment_view extends base_view {
     protected function block_disealytics_generate_assignments(mixed $course, array $assignments): void {
         if ($course->courseid != 1 && count($assignments) > 0) {
             $table = [];
-            $table["table"] = 'yes';
+            $table["table"] = true;
             $table["assignstring"] = get_string('assignment', 'block_disealytics');
             $table["submitstring"] = get_string('status', 'block_disealytics');
             $table["coursename"] = $course->coursename;
@@ -260,6 +263,7 @@ class assignment_view extends base_view {
             $this->output["tables"][] = $table;
             $this->output["first_three_elements"] = $table["first_three"];
             $this->output["after_first_three_elements"] = $table["after_first_three"];
+            $this->output["data_in_course"] = true;
         }
         if (count(assignment::block_disealytics_get_course_assignments($course->courseid)) > 3) {
             $this->output["more_than_three"][] = 'yes';

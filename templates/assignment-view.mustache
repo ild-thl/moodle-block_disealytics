@@ -35,7 +35,6 @@
         "title": "Assignments"
     }
 }}
-{{> block_disealytics/view_modal}}
 {{#editmode}}
     <div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
          data-container="block_disealytics/editing-{{view_type}}">
@@ -59,26 +58,25 @@
     </div>
 {{/editmode}}
 {{#viewmode}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{view_type}}">
+<div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{view_type}}">
 
-        <div class="panel-heading">
-            <div class="flex-container">
-                <h1 id="title"><span class="show-when-expanded"><a
-                        style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
-                        data-actiontype="block_disealytics/toggle-expansion"><i
-                        style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
+    <div class="panel-heading">
+        <div class="flex-container">
+            <h1 id="title"><span class="show-when-expanded"><a
+                    style="cursor: pointer; text-decoration: none"
+                    class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
+                    data-action="block_disealytics/expand-{{view_type}}"
+                    data-actiontype="block_disealytics/toggle-expansion"><i
+                    style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
             </a></span>{{title}}</h1>
-                <div class="navigation-icons">
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
-                    </a>
-                </div>
+            <div class="navigation-icons">
+                <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                    <i class="fa fa-question"></i>
+                </a>
             </div>
         </div>
+    </div>
+{{#viewmode_module}}
         <div class="panel-body hide-when-expanded">
             {{#table}}
                 <table class="table-of-assignments">
@@ -105,10 +103,7 @@
             {{#nodata}}
                 <p>{{info}}</p>
             {{/nodata}}
-
-
         </div>
-
         <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
             {{#table_elements_first_three}}{{/table_elements_first_three}}
 
@@ -128,33 +123,11 @@
                 </table>
             {{/table}}
         </div>
-        {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
+    {{> block_disealytics/bottom_navigation }}
     </div>
-{{/viewmode}}
+{{/viewmode_module}}
 {{#viewmode_halfyear}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{view_type}}">
-
-        <div class="panel-heading">
-            <div class="flex-container">
-                <h1 id="title"><span class="show-when-expanded"><a
-                        style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
-                        data-actiontype="block_disealytics/toggle-expansion"><i
-                        style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-            </a></span>{{title}}</h1>
-                <div class="navigation-icons">
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        {{#tables}}
+    {{#tables}}
             <button class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container hide-when-expanded">
                 <span id="title">{{coursename}}</span>
                 <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
@@ -217,32 +190,11 @@
         {{/data_in_course}}
         {{#data_in_course}}
             {{> block_disealytics/bottom_navigation }}
-            {{> block_disealytics/panel_editing_footer }}
         {{/data_in_course}}
     </div>
 
 {{/viewmode_halfyear}}
 {{#viewmode_global}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{view_type}}">
-
-        <div class="panel-heading">
-            <div class="flex-container">
-                <h1 id="title"><span class="show-when-expanded"><a
-                        style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
-                        data-actiontype="block_disealytics/toggle-expansion"><i
-                        style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-            </a></span>{{title}}</h1>
-                <div class="navigation-icons">
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
         <div class="categories-container">
             <div class="course-category-global">
                 {{#categories}}
@@ -326,10 +278,10 @@
         {{/data_in_course}}
         {{#data_in_course}}
             {{> block_disealytics/bottom_navigation }}
-            {{> block_disealytics/panel_editing_footer }}
         {{/data_in_course}}
     </div>
 {{/viewmode_global}}
+{{/viewmode}}
 
 {{#js}}
     require(['block_disealytics/add_interaction'], function(addInteraction) {

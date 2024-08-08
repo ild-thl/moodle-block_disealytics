@@ -79,9 +79,9 @@ class learning_goals_view extends base_view {
         $this->output["title"] =
                 get_string(self::TITLE, 'block_disealytics');
         $this->output["help_info_text"] =
-                get_string('learning-goals_help_info_text', 'block_disealytics');
+                get_string('learning-goals-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] =
-                get_string('learning-goals_help_info_text_expanded', 'block_disealytics');
+                get_string('learning-goals-view_help_info_text_expanded', 'block_disealytics');
 
         // Goals.
         $goals = $this->learningdata->get_goals();
@@ -160,11 +160,12 @@ class learning_goals_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
-            $this->output["viewmode_halfyear"] = true;
+            $this->output["viewmode"] = true;
         }
+        $this->output["viewmode_halfyear"] = true;
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('learning-goals_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('learning-goals_help_info_text_expanded', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('learning-goals-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('learning-goals-view_help_info_text_expanded', 'block_disealytics');
         $goalsarray = $this->learningdata->get_goals_semester();
         $finishedgoalsarray = $this->learningdata->get_finished_goals_semester();
         $this->set_learning_goals($goalsarray, $finishedgoalsarray);
@@ -189,11 +190,12 @@ class learning_goals_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
-            $this->output["viewmode_global"] = true;
+            $this->output["viewmode"] = true;
         }
+        $this->output["viewmode_global"] = true;
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('learning-goals_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('learning-goals_help_info_text_expanded', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('learning-goals-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('learning-goals-view_help_info_text_expanded', 'block_disealytics');
 
         $this->output["categories"] = [];
 

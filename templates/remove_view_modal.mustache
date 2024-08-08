@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template block_disealytics/view_modal
+    @template block_disealytics/remove_view_modal
 
     Template purpose and description.
 
@@ -33,29 +33,6 @@
 
     }
 }}
-<div id="{{view_type}}-info-modal" class="modal fade outer-modal-{{view_type}}" data-container="block_disealytics/{{view_type}}-modal">
-    <div class="modal-dialog">
-        <div class="modal-content content-modal-{{view_type}}">
-            <div class="modal-header">
-                <h5 class="modal-title">{{#str}}modal_info_title, block_disealytics {{/str}} {{title}}</h5>
-                <a class="block_disealytics-close-modal-btn" data-dismiss="modal">
-                    <i class="fa fa-times"></i>
-                </a>
-            </div>
-
-            <div class="modal-body">
-                <div class="hide-when-expanded">
-                    <p>{{{help_info_text}}}</p>
-                </div>
-                <div class="show-when-expanded">
-                    <p>{{{help_info_text_expanded}}}</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
 <div id="{{view_type}}-remove-modal" class="modal fade" data-container="block_disealytics/{{view_type}}-remove-modal">
     <div class="modal-dialog">
         <div class="modal-content content-remove-modal-{{view_type}}">

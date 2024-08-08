@@ -35,205 +35,27 @@
         "title": "Learning Goals"
     }
 }}
-{{> block_disealytics/view_modal}}
 {{#editmode}}
-<div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
-     data-container="block_disealytics/editing-{{view_type}}">
-    <svg id="{{view_type}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M45.6135 22.8398C45.6135 34.5484 35.7336 44.0898 23.4835 44.0898C11.2335 44.0898 1.35352 34.5484 1.35352 22.8398C1.35352 11.1312 11.2335 1.58984 23.4835 1.58984C35.7336 1.58984 45.6135 11.1312 45.6135 22.8398Z" stroke="#0f6cbf" stroke-width="1.5"/>
-        <path d="M28.8663 9.82178H16.3984V21.801H28.8663V9.82178Z" fill="#0f6cbf" stroke="#0f6cbf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M18.459 15.2147L22.4567 19.0558L30.7508 8.83984" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M29.0645 24.6064H16.207V36.9601H29.0645V24.6064Z" fill="#0f6cbf"/>
-        <path d="M28.8663 24.7935H16.3984V36.7727H28.8663V24.7935Z" stroke="#0f6cbf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M18.459 30.1864L22.4567 34.0275L30.7508 23.8115" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <h1 class="editing-headline">{{title}}</h1>
-    <a class="dashboard-button block_disealytics-open-delete-modal-{{view_type}} block_disealytics-open-delete-modal"
-       data-toggle="modal"
-       data-target="#{{view_type}}-remove-modal">
-        <i class="text-danger fa fa-times"></i>
-    </a>
-</div>
+    <div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
+         data-container="block_disealytics/editing-{{view_type}}">
+        <svg id="{{view_type}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M45.6135 22.8398C45.6135 34.5484 35.7336 44.0898 23.4835 44.0898C11.2335 44.0898 1.35352 34.5484 1.35352 22.8398C1.35352 11.1312 11.2335 1.58984 23.4835 1.58984C35.7336 1.58984 45.6135 11.1312 45.6135 22.8398Z"
+                  stroke="#0f6cbf" stroke-width="1.5"/>
+            <path d="M28.8663 9.82178H16.3984V21.801H28.8663V9.82178Z" fill="#0f6cbf" stroke="#0f6cbf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18.459 15.2147L22.4567 19.0558L30.7508 8.83984" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M29.0645 24.6064H16.207V36.9601H29.0645V24.6064Z" fill="#0f6cbf"/>
+            <path d="M28.8663 24.7935H16.3984V36.7727H28.8663V24.7935Z" stroke="#0f6cbf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18.459 30.1864L22.4567 34.0275L30.7508 23.8115" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1 class="editing-headline">{{title}}</h1>
+        <a class="dashboard-button block_disealytics-open-delete-modal-{{view_type}} block_disealytics-open-delete-modal"
+           data-toggle="modal"
+           data-target="#{{view_type}}-remove-modal">
+            <i class="text-danger fa fa-times"></i>
+        </a>
+    </div>
 {{/editmode}}
 {{#viewmode}}
-<div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
-
-    <div class="panel-heading">
-        <div class="flex-container">
-            <h1 id="title"><span class="show-when-expanded"><a
-                    style="cursor: pointer; text-decoration: none"
-                    class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                    data-action="block_disealytics/expand-{{view_type}}"
-                    data-actiontype="block_disealytics/toggle-expansion"><i
-                    style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-            </a></span>{{title}}</h1>
-            <div class="navigation-icons">
-                <a id="edit-goals" class="edit-button-{{view_type}}">
-                    <i class="fa fa-pencil editing-off"></i>
-                    <span class="hidden">{{#str}}goal_editing, block_disealytics{{/str}}</span>
-                </a>
-                <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                   data-toggle="modal"
-                   data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                        class="fa fa-question"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="panel-body">
-        <div class="new-goal-btn">
-            <a class="flex-container" id="show-goal-form">
-                <span>{{#str}}learning-goals_add_goal, block_disealytics{{/str}}</span>
-                <i class="fa fa-plus"></i>
-            </a>
-        </div>
-        <span style="font-size:small;" id="goal-limit" class="hidden goal-invalid">
-            <i class="fa fa-exclamation-triangle"></i> {{#str}}goal_limit, block_disealytics{{/str}}
-        </span>
-        <div id="create-goal-container" class="hidden">
-
-            <label for="goal-name-input">
-                <textarea id="goal-name-input" class="text-small" placeholder="{{#str}}goal_placeholder, block_disealytics {{/str}}"></textarea>
-            </label>
-
-            <div class="goal-date-time" style="display:flex;gap:1em;">
-                <label for="goal-due-date-input">
-                    <input type="date" id="goal-due-date-input" class="text-small" name="goal-due-date-input" required>
-                </label>
-
-                <label for="goal-due-time-input">
-                    <input type="time" id="goal-due-time-input" class="text-small" name="goal-due-time-input" required>
-                </label>
-            </div>
-
-
-            <div class="goal-info-messages">
-                <span style="font-size:small;" id="goal-name-invalid" class="hidden goal-invalid text-small">{{#str}}goal_name_invalid, block_disealytics {{/str}}</span>
-                <span style="font-size:small;" id="goal-name-missing" class="hidden goal-invalid text-small">{{#str}}goal_name_missing, block_disealytics {{/str}}</span>
-                <span style="font-size:small;" id="goal-date-missing" class="hidden goal-invalid text-small">{{#str}}goal_date_missing, block_disealytics {{/str}}</span>
-            </div>
-
-            <div class="goal-btn-container">
-                <button id="cancel-goal" class="disea-cancel-btn text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
-                <button id="save-goal" class="disea-save-btn text-small">{{#str}}goal_input_save, block_disealytics {{/str}}</button>
-            </div>
-
-        </div>
-
-        {{^nodata}}
-            <hr class="hide-when-editing">
-            <div class="learning-goals-progress-bar"><label for="learning-goals-progress"><span>{{number_of_finished_goals}} / {{number_of_goals}} {{#str}}
-                goals_reached, block_disealytics{{/str}}</span></label>
-                <progress id="learning-goals-progress" value="{{number_of_finished_goals}}" max="{{number_of_goals}}"></progress>
-            </div>
-            {{#time_container}}
-                <div id="learning-goals-panel-accordion">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_today, block_disealytics{{/str}}</span>
-                        <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-1">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-today goals-list">
-                            {{#goals_today}}
-
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_today}}
-                        </div>
-                    </div>
-                    <hr class="hide-when-editing">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_tomorrow, block_disealytics{{/str}}</span>
-                        <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-2">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-tomorrow goals-list">
-                            {{#goals_tomorrow}}
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_tomorrow}}
-                        </div>
-                    </div>
-                    <hr class="hide-when-editing">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_thisweek, block_disealytics{{/str}}</span>
-                        <i id="icon-3" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-3">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-thisweek goals-list">
-                            {{#goals_thisweek}}
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_thisweek}}
-                        </div>
-                    </div>
-                    <hr class="hide-when-editing">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_thismonth, block_disealytics{{/str}}</span>
-                        <i id="icon-4" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-4">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-thismonth goals-list">
-                            {{#goals_thismonth}}
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_thismonth}}
-                        </div>
-                    </div>
-                    <hr class="hide-when-editing">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_infuture, block_disealytics{{/str}}</span>
-                        <i id="icon-5" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-5">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-infuture goals-list">
-                            {{#goals_infuture}}
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_infuture}}
-                        </div>
-                    </div>
-                    <hr class="hide-when-editing">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_finished_past, block_disealytics{{/str}}</span>
-                        <i id="icon-6" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-6">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-finished-past goals-list">
-                            {{#goals_finished_past}}
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_finished_past}}
-                        </div>
-                    </div>
-                </div>
-            {{/time_container}}
-        {{/nodata}}
-    </div>
-
-    <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
-    </div>
-
-
-    {{> block_disealytics/bottom_navigation }}
-    {{> block_disealytics/panel_editing_footer }}
-
-</div>
-{{/viewmode}}
-{{#viewmode_halfyear}}
     <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
 
         <div class="panel-heading">
@@ -250,351 +72,464 @@
                         <i class="fa fa-pencil editing-off"></i>
                         <span class="hidden">{{#str}}goal_editing, block_disealytics{{/str}}</span>
                     </a>
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
+                    <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                        <i class="fa fa-question"></i>
                     </a>
                 </div>
             </div>
         </div>
+        {{#viewmode_module}}
+            <div class="panel-body">
+                <div class="new-goal-btn">
+                    <a class="flex-container" id="show-goal-form">
+                        <span>{{#str}}learning-goals_add_goal, block_disealytics{{/str}}</span>
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+                <span style="font-size:small;" id="goal-limit" class="hidden goal-invalid">
+            <i class="fa fa-exclamation-triangle"></i> {{#str}}goal_limit, block_disealytics{{/str}}
+        </span>
+                <div id="create-goal-container" class="hidden">
 
-        <div class="panel-body">
-            <div class="new-goal-btn">
-                <a class="flex-container" id="show-goal-form">
-                    <span>{{#str}}learning-goals_add_goal, block_disealytics{{/str}}</span>
-                    <i class="fa fa-plus"></i>
-                </a>
+                    <label for="goal-name-input">
+                        <textarea id="goal-name-input" class="text-small" placeholder="{{#str}}goal_placeholder, block_disealytics {{/str}}"></textarea>
+                    </label>
+
+                    <div class="goal-date-time" style="display:flex;gap:1em;">
+                        <label for="goal-due-date-input">
+                            <input type="date" id="goal-due-date-input" class="text-small" name="goal-due-date-input" required>
+                        </label>
+
+                        <label for="goal-due-time-input">
+                            <input type="time" id="goal-due-time-input" class="text-small" name="goal-due-time-input" required>
+                        </label>
+                    </div>
+
+
+                    <div class="goal-info-messages">
+                        <span style="font-size:small;" id="goal-name-invalid" class="hidden goal-invalid text-small">{{#str}}goal_name_invalid, block_disealytics {{/str}}</span>
+                        <span style="font-size:small;" id="goal-name-missing" class="hidden goal-invalid text-small">{{#str}}goal_name_missing, block_disealytics {{/str}}</span>
+                        <span style="font-size:small;" id="goal-date-missing" class="hidden goal-invalid text-small">{{#str}}goal_date_missing, block_disealytics {{/str}}</span>
+                    </div>
+
+                    <div class="goal-btn-container">
+                        <button id="cancel-goal" class="disea-cancel-btn text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
+                        <button id="save-goal" class="disea-save-btn text-small">{{#str}}goal_input_save, block_disealytics {{/str}}</button>
+                    </div>
+
+                </div>
+
+                {{^nodata}}
+                    <hr class="hide-when-editing">
+                    <div class="learning-goals-progress-bar"><label for="learning-goals-progress"><span>{{number_of_finished_goals}} / {{number_of_goals}} {{#str}}
+                        goals_reached, block_disealytics{{/str}}</span></label>
+                        <progress id="learning-goals-progress" value="{{number_of_finished_goals}}" max="{{number_of_goals}}"></progress>
+                    </div>
+                    {{#time_container}}
+                        <div id="learning-goals-panel-accordion">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_today, block_disealytics{{/str}}</span>
+                                <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-1">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-today goals-list">
+                                    {{#goals_today}}
+
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_today}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_tomorrow, block_disealytics{{/str}}</span>
+                                <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-2">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-tomorrow goals-list">
+                                    {{#goals_tomorrow}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_tomorrow}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_thisweek, block_disealytics{{/str}}</span>
+                                <i id="icon-3" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-3">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-thisweek goals-list">
+                                    {{#goals_thisweek}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_thisweek}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_thismonth, block_disealytics{{/str}}</span>
+                                <i id="icon-4" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-4">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-thismonth goals-list">
+                                    {{#goals_thismonth}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_thismonth}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_infuture, block_disealytics{{/str}}</span>
+                                <i id="icon-5" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-5">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-infuture goals-list">
+                                    {{#goals_infuture}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_infuture}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_finished_past, block_disealytics{{/str}}</span>
+                                <i id="icon-6" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-6">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-finished-past goals-list">
+                                    {{#goals_finished_past}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_finished_past}}
+                                </div>
+                            </div>
+                        </div>
+                    {{/time_container}}
+                {{/nodata}}
             </div>
-            <span style="font-size:small;" id="goal-limit" class="hidden goal-invalid">
+        {{/viewmode_module}}
+        {{#viewmode_halfyear}}
+            <div class="panel-body">
+                <div class="new-goal-btn">
+                    <a class="flex-container" id="show-goal-form">
+                        <span>{{#str}}learning-goals_add_goal, block_disealytics{{/str}}</span>
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+                <span style="font-size:small;" id="goal-limit" class="hidden goal-invalid">
                 <i class="fa fa-exclamation-triangle"></i> {{#str}}goal_limit, block_disealytics{{/str}}
             </span>
-            <div id="create-goal-container" class="hidden">
-                <label for="goal-name-input">
-                    <textarea id="goal-name-input" class="text-small" placeholder="{{#str}}goal_placeholder, block_disealytics {{/str}}"></textarea>
-                </label>
-
-                <div class="goal-date-time" style="display:flex;gap:1em;">
-                    <label for="goal-due-date-input">
-                        <input type="date" id="goal-due-date-input" class="text-small" name="goal-due-date-input" required>
+                <div id="create-goal-container" class="hidden">
+                    <label for="goal-name-input">
+                        <textarea id="goal-name-input" class="text-small" placeholder="{{#str}}goal_placeholder, block_disealytics {{/str}}"></textarea>
                     </label>
 
-                    <label for="goal-due-time-input">
-                        <input type="time" id="goal-due-time-input" class="text-small" name="goal-due-time-input" required>
-                    </label>
-                </div>
+                    <div class="goal-date-time" style="display:flex;gap:1em;">
+                        <label for="goal-due-date-input">
+                            <input type="date" id="goal-due-date-input" class="text-small" name="goal-due-date-input" required>
+                        </label>
 
-
-                <div class="goal-info-messages">
-                    <span style="font-size:small;" id="goal-name-invalid" class="hidden goal-invalid text-small">{{#str}}goal_name_invalid, block_disealytics {{/str}}</span>
-                    <span style="font-size:small;" id="goal-name-missing" class="hidden goal-invalid text-small">{{#str}}goal_name_missing, block_disealytics {{/str}}</span>
-                    <span style="font-size:small;" id="goal-date-missing" class="hidden goal-invalid text-small">{{#str}}goal_date_missing, block_disealytics {{/str}}</span>
-                </div>
-
-                <div class="goal-btn-container">
-                    <button id="cancel-goal" class="disea-cancel-btn text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
-                    <button id="save-goal" class="disea-save-btn text-small">{{#str}}goal_input_save, block_disealytics {{/str}}</button>
-                </div>
-
-            </div>
-            {{^nodata}}
-                <hr class="hide-when-editing">
-                <div class="learning-goals-progress-bar"><label for="learning-goals-progress"><span>{{number_of_finished_goals}} / {{number_of_goals}} {{#str}}
-                    goals_reached, block_disealytics{{/str}}</span></label>
-                    <progress id="learning-goals-progress" value="{{number_of_finished_goals}}" max="{{number_of_goals}}"></progress>
-                </div>
-                {{#time_container}}
-                    <div id="learning-goals-panel-accordion">
-                        <div class="accordion-head flex-container">
-                            <span>{{#str}}goals_today, block_disealytics{{/str}}</span>
-                            <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content" id="content-1">
-                            <div data-numberofgoals="{{number_of_goals}}" class="goals-today goals-list">
-                                {{#goals_today}}
-
-                                    <div id="{{goalid}}" class="goal-content-finished">
-                                        {{> block_disealytics/goal_content}}
-                                        <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                    </div>
-                                {{/goals_today}}
-                            </div>
-                        </div>
-                        <hr class="hide-when-editing">
-                        <div class="accordion-head flex-container">
-                            <span>{{#str}}goals_tomorrow, block_disealytics{{/str}}</span>
-                            <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content" id="content-2">
-                            <div data-numberofgoals="{{number_of_goals}}" class="goals-tomorrow goals-list">
-                                {{#goals_tomorrow}}
-                                    <div id="{{goalid}}" class="goal-content-finished">
-                                        {{> block_disealytics/goal_content}}
-                                        <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                    </div>
-                                {{/goals_tomorrow}}
-                            </div>
-                        </div>
-                        <hr class="hide-when-editing">
-                        <div class="accordion-head flex-container">
-                            <span>{{#str}}goals_thisweek, block_disealytics{{/str}}</span>
-                            <i id="icon-3" class="fa fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content" id="content-3">
-                            <div data-numberofgoals="{{number_of_goals}}" class="goals-thisweek goals-list">
-                                {{#goals_thisweek}}
-                                    <div id="{{goalid}}" class="goal-content-finished">
-                                        {{> block_disealytics/goal_content}}
-                                        <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                    </div>
-                                {{/goals_thisweek}}
-                            </div>
-                        </div>
-                        <hr class="hide-when-editing">
-                        <div class="accordion-head flex-container">
-                            <span>{{#str}}goals_thismonth, block_disealytics{{/str}}</span>
-                            <i id="icon-4" class="fa fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content" id="content-4">
-                            <div data-numberofgoals="{{number_of_goals}}" class="goals-thismonth goals-list">
-                                {{#goals_thismonth}}
-                                    <div id="{{goalid}}" class="goal-content-finished">
-                                        {{> block_disealytics/goal_content}}
-                                        <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                    </div>
-                                {{/goals_thismonth}}
-                            </div>
-                        </div>
-                        <hr class="hide-when-editing">
-                        <div class="accordion-head flex-container">
-                            <span>{{#str}}goals_infuture, block_disealytics{{/str}}</span>
-                            <i id="icon-5" class="fa fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content" id="content-5">
-                            <div data-numberofgoals="{{number_of_goals}}" class="goals-infuture goals-list">
-                                {{#goals_infuture}}
-                                    <div id="{{goalid}}" class="goal-content-finished">
-                                        {{> block_disealytics/goal_content}}
-                                        <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                    </div>
-                                {{/goals_infuture}}
-                            </div>
-                        </div>
-                        <hr class="hide-when-editing">
-                        <div class="accordion-head flex-container">
-                            <span>{{#str}}goals_finished_past, block_disealytics{{/str}}</span>
-                            <i id="icon-6" class="fa fa-chevron-down accordion-icon"></i>
-                        </div>
-                        <div class="accordion-content" id="content-6">
-                            <div data-numberofgoals="{{number_of_goals}}" class="goals-finished-past goals-list">
-                                {{#goals_finished_past}}
-                                    <div id="{{goalid}}" class="goal-content-finished">
-                                        {{> block_disealytics/goal_content}}
-                                        <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                    </div>
-                                {{/goals_finished_past}}
-                            </div>
-                        </div>
+                        <label for="goal-due-time-input">
+                            <input type="time" id="goal-due-time-input" class="text-small" name="goal-due-time-input" required>
+                        </label>
                     </div>
-                {{/time_container}}
-            {{/nodata}}
-        </div>
 
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
-        </div>
 
-        {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
+                    <div class="goal-info-messages">
+                            <span style="font-size:small;" id="goal-name-invalid" class="hidden goal-invalid text-small">{{#str}}
+                                goal_name_invalid, block_disealytics {{/str}}</span>
+                        <span style="font-size:small;" id="goal-name-missing" class="hidden goal-invalid text-small">{{#str}}
+                            goal_name_missing, block_disealytics {{/str}}</span>
+                        <span style="font-size:small;" id="goal-date-missing" class="hidden goal-invalid text-small">{{#str}}
+                            goal_date_missing, block_disealytics {{/str}}</span>
+                    </div>
 
-    </div>
-{{/viewmode_halfyear}}
-{{#viewmode_global}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
+                    <div class="goal-btn-container">
+                        <button id="cancel-goal" class="disea-cancel-btn text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
+                        <button id="save-goal" class="disea-save-btn text-small">{{#str}}goal_input_save, block_disealytics {{/str}}</button>
+                    </div>
 
-        <div class="panel-heading">
-            <div class="flex-container">
-                <h1 id="title"><span class="show-when-expanded"><a
-                        style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
-                        data-actiontype="block_disealytics/toggle-expansion"><i
-                        style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-            </a></span>{{title}}</h1>
-                <div class="navigation-icons">
-                    <a id="edit-goals" class="edit-button-{{view_type}}">
-                        <i class="fa fa-pencil editing-off"></i>
-                        <span class="hidden">{{#str}}goal_editing, block_disealytics{{/str}}</span>
-                    </a>
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
+                </div>
+                {{^nodata}}
+                    <hr class="hide-when-editing">
+                    <div class="learning-goals-progress-bar"><label for="learning-goals-progress"><span>{{number_of_finished_goals}} / {{number_of_goals}} {{#str}}
+                        goals_reached, block_disealytics{{/str}}</span></label>
+                        <progress id="learning-goals-progress" value="{{number_of_finished_goals}}" max="{{number_of_goals}}"></progress>
+                    </div>
+                    {{#time_container}}
+                        <div id="learning-goals-panel-accordion">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_today, block_disealytics{{/str}}</span>
+                                <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-1">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-today goals-list">
+                                    {{#goals_today}}
+
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_today}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_tomorrow, block_disealytics{{/str}}</span>
+                                <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-2">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-tomorrow goals-list">
+                                    {{#goals_tomorrow}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_tomorrow}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_thisweek, block_disealytics{{/str}}</span>
+                                <i id="icon-3" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-3">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-thisweek goals-list">
+                                    {{#goals_thisweek}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_thisweek}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_thismonth, block_disealytics{{/str}}</span>
+                                <i id="icon-4" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-4">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-thismonth goals-list">
+                                    {{#goals_thismonth}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_thismonth}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_infuture, block_disealytics{{/str}}</span>
+                                <i id="icon-5" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-5">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-infuture goals-list">
+                                    {{#goals_infuture}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_infuture}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_finished_past, block_disealytics{{/str}}</span>
+                                <i id="icon-6" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-6">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-finished-past goals-list">
+                                    {{#goals_finished_past}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_finished_past}}
+                                </div>
+                            </div>
+                        </div>
+                    {{/time_container}}
+                {{/nodata}}
+            </div>
+        {{/viewmode_halfyear}}
+        {{#viewmode_global}}
+            <div class="panel-body">
+                <div class="categories-container">
+                    <div class="course-category-global">
+                        {{#categories}}
+                            <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
+                                {{name}}
+                            </button>
+                        {{/categories}}
+                    </div>
+                </div>
+                <div class="new-goal-btn">
+                    <a class="flex-container" id="show-goal-form">
+                        <span>{{#str}}learning-goals_add_goal, block_disealytics{{/str}}</span>
+                        <i class="fa fa-plus"></i>
                     </a>
                 </div>
-            </div>
-        </div>
-
-        <div class="panel-body">
-            <div class="categories-container">
-                <div class="course-category-global">
-                    {{#categories}}
-                        <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
-                            {{name}}
-                        </button>
-                    {{/categories}}
-                </div>
-            </div>
-            <div class="new-goal-btn">
-                <a class="flex-container" id="show-goal-form">
-                    <span>{{#str}}learning-goals_add_goal, block_disealytics{{/str}}</span>
-                    <i class="fa fa-plus"></i>
-                </a>
-            </div>
-            <span style="font-size:small;" id="goal-limit" class="hidden goal-invalid">
+                <span style="font-size:small;" id="goal-limit" class="hidden goal-invalid">
             <i class="fa fa-exclamation-triangle"></i> {{#str}}goal_limit, block_disealytics{{/str}}
         </span>
-            <div id="create-goal-container" class="hidden">
+                <div id="create-goal-container" class="hidden">
 
-                <label for="goal-name-input">
-                    <textarea id="goal-name-input" class="text-small" placeholder="{{#str}}goal_placeholder, block_disealytics {{/str}}"></textarea>
-                </label>
-
-                <div class="goal-date-time" style="display:flex;gap:1em;">
-                    <label for="goal-due-date-input">
-                        <input type="date" id="goal-due-date-input" class="text-small" name="goal-due-date-input" required>
+                    <label for="goal-name-input">
+                        <textarea id="goal-name-input" class="text-small" placeholder="{{#str}}goal_placeholder, block_disealytics {{/str}}"></textarea>
                     </label>
 
-                    <label for="goal-due-time-input">
-                        <input type="time" id="goal-due-time-input" class="text-small" name="goal-due-time-input" required>
-                    </label>
+                    <div class="goal-date-time" style="display:flex;gap:1em;">
+                        <label for="goal-due-date-input">
+                            <input type="date" id="goal-due-date-input" class="text-small" name="goal-due-date-input" required>
+                        </label>
+
+                        <label for="goal-due-time-input">
+                            <input type="time" id="goal-due-time-input" class="text-small" name="goal-due-time-input" required>
+                        </label>
+                    </div>
+
+
+                    <div class="goal-info-messages">
+                            <span style="font-size:small;" id="goal-name-invalid" class="hidden goal-invalid text-small">{{#str}}
+                                goal_name_invalid, block_disealytics {{/str}}</span>
+                        <span style="font-size:small;" id="goal-name-missing" class="hidden goal-invalid text-small">{{#str}}
+                            goal_name_missing, block_disealytics {{/str}}</span>
+                        <span style="font-size:small;" id="goal-date-missing" class="hidden goal-invalid text-small">{{#str}}
+                            goal_date_missing, block_disealytics {{/str}}</span>
+                    </div>
+
+                    <div class="goal-btn-container">
+                        <button id="cancel-goal" class="disea-cancel-btn text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
+                        <button id="save-goal" class="disea-save-btn text-small">{{#str}}goal_input_save, block_disealytics {{/str}}</button>
+                    </div>
+
                 </div>
 
+                {{^nodata}}
+                    <hr class="hide-when-editing">
+                    <div class="learning-goals-progress-bar"><label for="learning-goals-progress"><span>{{number_of_finished_goals}} / {{number_of_goals}} {{#str}}
+                        goals_reached, block_disealytics{{/str}}</span></label>
+                        <progress id="learning-goals-progress" value="{{number_of_finished_goals}}" max="{{number_of_goals}}"></progress>
+                    </div>
+                    {{#time_container}}
+                        <div id="learning-goals-panel-accordion">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_today, block_disealytics{{/str}}</span>
+                                <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-1">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-today goals-list">
+                                    {{#goals_today}}
 
-                <div class="goal-info-messages">
-                    <span style="font-size:small;" id="goal-name-invalid" class="hidden goal-invalid text-small">{{#str}}goal_name_invalid, block_disealytics {{/str}}</span>
-                    <span style="font-size:small;" id="goal-name-missing" class="hidden goal-invalid text-small">{{#str}}goal_name_missing, block_disealytics {{/str}}</span>
-                    <span style="font-size:small;" id="goal-date-missing" class="hidden goal-invalid text-small">{{#str}}goal_date_missing, block_disealytics {{/str}}</span>
-                </div>
-
-                <div class="goal-btn-container">
-                    <button id="cancel-goal" class="disea-cancel-btn text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
-                    <button id="save-goal" class="disea-save-btn text-small">{{#str}}goal_input_save, block_disealytics {{/str}}</button>
-                </div>
-
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_today}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_tomorrow, block_disealytics{{/str}}</span>
+                                <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-2">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-tomorrow goals-list">
+                                    {{#goals_tomorrow}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_tomorrow}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_thisweek, block_disealytics{{/str}}</span>
+                                <i id="icon-3" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-3">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-thisweek goals-list">
+                                    {{#goals_thisweek}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_thisweek}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_thismonth, block_disealytics{{/str}}</span>
+                                <i id="icon-4" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-4">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-thismonth goals-list">
+                                    {{#goals_thismonth}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_thismonth}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_infuture, block_disealytics{{/str}}</span>
+                                <i id="icon-5" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-5">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-infuture goals-list">
+                                    {{#goals_infuture}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_infuture}}
+                                </div>
+                            </div>
+                            <hr class="hide-when-editing">
+                            <div class="accordion-head flex-container">
+                                <span>{{#str}}goals_finished_past, block_disealytics{{/str}}</span>
+                                <i id="icon-6" class="fa fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content" id="content-6">
+                                <div data-numberofgoals="{{number_of_goals}}" class="goals-finished-past goals-list">
+                                    {{#goals_finished_past}}
+                                        <div id="{{goalid}}" class="goal-content-finished">
+                                            {{> block_disealytics/goal_content}}
+                                            <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
+                                        </div>
+                                    {{/goals_finished_past}}
+                                </div>
+                            </div>
+                        </div>
+                    {{/time_container}}
+                {{/nodata}}
             </div>
-
-            {{^nodata}}
-                <hr class="hide-when-editing">
-                <div class="learning-goals-progress-bar"><label for="learning-goals-progress"><span>{{number_of_finished_goals}} / {{number_of_goals}} {{#str}}
-                    goals_reached, block_disealytics{{/str}}</span></label>
-                    <progress id="learning-goals-progress" value="{{number_of_finished_goals}}" max="{{number_of_goals}}"></progress>
-                </div>
-                {{#time_container}}
-                <div id="learning-goals-panel-accordion">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_today, block_disealytics{{/str}}</span>
-                        <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-1">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-today goals-list">
-                            {{#goals_today}}
-
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_today}}
-                        </div>
-                    </div>
-                    <hr class="hide-when-editing">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_tomorrow, block_disealytics{{/str}}</span>
-                        <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-2">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-tomorrow goals-list">
-                            {{#goals_tomorrow}}
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_tomorrow}}
-                        </div>
-                    </div>
-                    <hr class="hide-when-editing">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_thisweek, block_disealytics{{/str}}</span>
-                        <i id="icon-3" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-3">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-thisweek goals-list">
-                            {{#goals_thisweek}}
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_thisweek}}
-                        </div>
-                    </div>
-                    <hr class="hide-when-editing">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_thismonth, block_disealytics{{/str}}</span>
-                        <i id="icon-4" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-4">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-thismonth goals-list">
-                            {{#goals_thismonth}}
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_thismonth}}
-                        </div>
-                    </div>
-                    <hr class="hide-when-editing">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_infuture, block_disealytics{{/str}}</span>
-                        <i id="icon-5" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-5">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-infuture goals-list">
-                            {{#goals_infuture}}
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_infuture}}
-                        </div>
-                    </div>
-                    <hr class="hide-when-editing">
-                    <div class="accordion-head flex-container">
-                        <span>{{#str}}goals_finished_past, block_disealytics{{/str}}</span>
-                        <i id="icon-6" class="fa fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="content-6">
-                        <div data-numberofgoals="{{number_of_goals}}" class="goals-finished-past goals-list">
-                            {{#goals_finished_past}}
-                                <div id="{{goalid}}" class="goal-content-finished">
-                                    {{> block_disealytics/goal_content}}
-                                    <i class="hide-when-editing delete-goal fa fa-trash" style="color: var(--disea-lightgray); font-size: 1.5em; cursor: pointer;"></i>
-                                </div>
-                            {{/goals_finished_past}}
-                        </div>
-                    </div>
-                </div>
-            {{/time_container}}
-            {{/nodata}}
-        </div>
-
+        {{/viewmode_global}}
         <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
         </div>
 
-
         {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
 
     </div>
-{{/viewmode_global}}
+{{/viewmode}}
 
 {{#js}}
     require(['block_disealytics/add_interaction'], function(addInteraction) {

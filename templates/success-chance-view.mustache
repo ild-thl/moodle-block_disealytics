@@ -35,112 +35,26 @@
         "title": "Success Chance"
     }
 }}
-{{> block_disealytics/view_modal}}
 {{#editmode}}
-<div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
-     data-container="block_disealytics/editing-{{view_type}}">
-    <svg id="{{view_type}}-editing-icon" class="editing-icon" width="47" height="44" viewBox="0 0 47 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M45.6487 22C45.6487 33.7086 35.7687 43.25 23.5187 43.25C11.2686 43.25 1.38867 33.7086 1.38867 22C1.38867 10.2914 11.2686 0.75 23.5187 0.75C35.7687 0.75 45.6487 10.2914 45.6487 22Z" stroke="#0f6cbf" stroke-width="1.5"/>
-        <path d="M23.5239 35.1602C30.9908 35.1602 37.0439 29.3399 37.0439 22.1602C37.0439 14.9805 30.9908 9.16016 23.5239 9.16016C16.057 9.16016 10.0039 14.9805 10.0039 22.1602C10.0039 29.3399 16.057 35.1602 23.5239 35.1602Z" stroke="#0f6cbf" stroke-width="4.72727"/>
-        <path d="M20.2691 22.2475C19.5604 22.2475 18.9883 22.0228 18.5528 21.5735C18.122 21.1242 17.9066 20.5196 17.9066 19.7599C17.9066 18.9307 18.1359 18.2729 18.5945 17.7865C19.0578 17.3001 19.6739 17.0569 20.4428 17.0569C21.1794 17.0569 21.7538 17.277 22.1661 17.7171C22.583 18.1571 22.7915 18.7756 22.7915 19.5723C22.7915 20.3923 22.5622 21.0431 22.1036 21.5249C21.645 22.0066 21.0335 22.2475 20.2691 22.2475ZM20.4012 18.2799C19.7248 18.2799 19.3867 18.7501 19.3867 19.6904C19.3867 20.5799 19.7086 21.0246 20.3525 21.0246C21.0103 21.0246 21.3392 20.5613 21.3392 19.6349C21.3392 18.7315 21.0265 18.2799 20.4012 18.2799ZM27.5443 17.1959L21.0543 27.1602H19.3589L25.8349 17.1959H27.5443ZM26.4742 27.2991C25.7655 27.2991 25.1934 27.0745 24.7579 26.6251C24.3271 26.1758 24.1117 25.5713 24.1117 24.8115C24.1117 23.9823 24.341 23.3245 24.7996 22.8381C25.2628 22.3517 25.8789 22.1085 26.6479 22.1085C27.3891 22.1085 27.9658 22.3263 28.3781 22.7617C28.7904 23.1972 28.9965 23.8133 28.9965 24.61C28.9965 25.43 28.7672 26.0831 28.3086 26.5695C27.85 27.0559 27.2385 27.2991 26.4742 27.2991ZM26.5854 23.3315C25.9137 23.3315 25.5778 23.8017 25.5778 24.7421C25.5778 25.6315 25.9044 26.0762 26.5576 26.0762C27.2154 26.0762 27.5443 25.6129 27.5443 24.6865C27.5443 24.2557 27.4563 23.9221 27.2802 23.6859C27.1042 23.4496 26.8726 23.3315 26.5854 23.3315Z" fill="#0f6cbf"/>
-    </svg>
-    <h1 class="editing-headline">{{title}}</h1>
-    <a class="dashboard-button block_disealytics-open-delete-modal-{{view_type}} block_disealytics-open-delete-modal"
-       data-toggle="modal"
-       data-target="#{{view_type}}-remove-modal">
-        <i class="text-danger fa fa-times"></i>
-    </a>
-</div>
+    <div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
+         data-container="block_disealytics/editing-{{view_type}}">
+        <svg id="{{view_type}}-editing-icon" class="editing-icon" width="47" height="44" viewBox="0 0 47 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M45.6487 22C45.6487 33.7086 35.7687 43.25 23.5187 43.25C11.2686 43.25 1.38867 33.7086 1.38867 22C1.38867 10.2914 11.2686 0.75 23.5187 0.75C35.7687 0.75 45.6487 10.2914 45.6487 22Z"
+                  stroke="#0f6cbf" stroke-width="1.5"/>
+            <path d="M23.5239 35.1602C30.9908 35.1602 37.0439 29.3399 37.0439 22.1602C37.0439 14.9805 30.9908 9.16016 23.5239 9.16016C16.057 9.16016 10.0039 14.9805 10.0039 22.1602C10.0039 29.3399 16.057 35.1602 23.5239 35.1602Z"
+                  stroke="#0f6cbf" stroke-width="4.72727"/>
+            <path d="M20.2691 22.2475C19.5604 22.2475 18.9883 22.0228 18.5528 21.5735C18.122 21.1242 17.9066 20.5196 17.9066 19.7599C17.9066 18.9307 18.1359 18.2729 18.5945 17.7865C19.0578 17.3001 19.6739 17.0569 20.4428 17.0569C21.1794 17.0569 21.7538 17.277 22.1661 17.7171C22.583 18.1571 22.7915 18.7756 22.7915 19.5723C22.7915 20.3923 22.5622 21.0431 22.1036 21.5249C21.645 22.0066 21.0335 22.2475 20.2691 22.2475ZM20.4012 18.2799C19.7248 18.2799 19.3867 18.7501 19.3867 19.6904C19.3867 20.5799 19.7086 21.0246 20.3525 21.0246C21.0103 21.0246 21.3392 20.5613 21.3392 19.6349C21.3392 18.7315 21.0265 18.2799 20.4012 18.2799ZM27.5443 17.1959L21.0543 27.1602H19.3589L25.8349 17.1959H27.5443ZM26.4742 27.2991C25.7655 27.2991 25.1934 27.0745 24.7579 26.6251C24.3271 26.1758 24.1117 25.5713 24.1117 24.8115C24.1117 23.9823 24.341 23.3245 24.7996 22.8381C25.2628 22.3517 25.8789 22.1085 26.6479 22.1085C27.3891 22.1085 27.9658 22.3263 28.3781 22.7617C28.7904 23.1972 28.9965 23.8133 28.9965 24.61C28.9965 25.43 28.7672 26.0831 28.3086 26.5695C27.85 27.0559 27.2385 27.2991 26.4742 27.2991ZM26.5854 23.3315C25.9137 23.3315 25.5778 23.8017 25.5778 24.7421C25.5778 25.6315 25.9044 26.0762 26.5576 26.0762C27.2154 26.0762 27.5443 25.6129 27.5443 24.6865C27.5443 24.2557 27.4563 23.9221 27.2802 23.6859C27.1042 23.4496 26.8726 23.3315 26.5854 23.3315Z"
+                  fill="#0f6cbf"/>
+        </svg>
+        <h1 class="editing-headline">{{title}}</h1>
+        <a class="dashboard-button block_disealytics-open-delete-modal-{{view_type}} block_disealytics-open-delete-modal"
+           data-toggle="modal"
+           data-target="#{{view_type}}-remove-modal">
+            <i class="text-danger fa fa-times"></i>
+        </a>
+    </div>
 {{/editmode}}
 {{#viewmode}}
-<div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{view_type}}">
-
-    <div class="panel-heading">
-        <div class="flex-container">
-            <h1 id="title"><span class="show-when-expanded"><a
-                    style="cursor: pointer; text-decoration: none"
-                    class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                    data-action="block_disealytics/expand-{{view_type}}"
-                    data-actiontype="block_disealytics/toggle-expansion"><i
-                    style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-            </a></span>{{title}}</h1>
-            <div class="navigation-icons">
-                <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                   data-toggle="modal"
-                   data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                        class="fa fa-question"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
-         data-container="block_disealytics/expandable-{{view_type}}">
-        <p>{{#str}}success-chance_info_text_expanded, block_disealytics {{/str}}</p>
-    </div>
-
-    <div class="panel-body">
-        {{^nodata}}
-        <br>
-        <div id="pvl-doughnut">
-            <p class="pvl-probability">{{pvlProbability}} %</p>
-            {{#charts}}
-                {{> core/chart }}
-            {{/charts}}
-        </div>
-        <br>
-        <div class="success-chance-assignments">
-            <p>{{#str}}pvl_assignment_info_text_summary_modul, block_disealytics {{/str}}</p>
-            <p class="disea-green text-small text-semibold">{{assignment_info_text_okay}}</p>
-            <p class="disea-green text-small text-semibold">{{assignment_info_text_submitted}}</p>
-            <p class="disea-gray text-small text-semibold">{{assignment_info_text_selfcheck}}</p>
-            <p class="disea-orange text-small text-semibold">{{assignment_info_text_notsubmitted}}</p>
-            <p class="disea-orange text-small text-semibold">{{assignment_info_text_incomplete}}</p>
-            <p class="disea-red text-small text-semibold">{{assignment_info_text_failed}}</p>
-        </div>
-        {{/nodata}}
-
-        {{#nodata}}
-            <p>{{nodata}}</p>
-        {{/nodata}}
-
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
-             data-container="block_disealytics/expandable-{{view_type}}">
-            <hr style="border-bottom: 1px solid #c2cade; width: 100%;">
-            <table class="table-of-assignments table-of-assignments-pvl">
-                <tr>
-                    <th>{{#str}}assignment, block_disealytics{{/str}}</th>
-                    <th>{{#str}}status, block_disealytics{{/str}}</th>
-                </tr>
-                {{#table_elements}}
-                    <tr>
-                        <td>{{{assignment_link}}}</td>
-                        <td>
-                            {{#small_description}}
-                                <span class="pvl-status-desc {{color}}">
-                                            <span>{{status}}</span>
-                                    </span>
-                            {{/small_description}}
-                            {{#detail_description}}
-                                <span class="pvl-status-desc {{color}} pvl-status-incomplete">
-                                            <span>{{status_type}}</span>
-                                    </span>
-                            {{/detail_description}}
-                        </td>
-                    </tr>
-                {{/table_elements}}
-            </table>
-
-        </div>
-
-    </div>
-
-
-    {{> block_disealytics/bottom_navigation }}
-    {{> block_disealytics/panel_editing_footer }}
-
-</div>
-{{/viewmode}}
-{{#viewmode_halfyear}}
     <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{view_type}}">
         <div class="panel-heading">
             <div class="flex-container">
@@ -152,10 +66,8 @@
                         style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
             </a></span>{{title}}</h1>
                 <div class="navigation-icons">
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
+                    <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                        <i class="fa fa-question"></i>
                     </a>
                 </div>
             </div>
@@ -164,39 +76,89 @@
              data-container="block_disealytics/expandable-{{view_type}}">
             <p>{{#str}}success-chance_info_text_expanded, block_disealytics {{/str}}</p>
         </div>
-
-        {{^nodata}}
-        <div id="pvl-doughnut">
-            <p class="pvl-probability">{{pvlProbability}} %</p>
-            {{#charts}}
-                {{> core/chart }}
-            {{/charts}}
-        </div>
-        <br>
-        <div class="success-chance-assignments">
-            <p>{{#str}}pvl_assignment_info_text_summary_semester, block_disealytics {{/str}}</p>
-            <p class="disea-green text-small text-semibold">{{assignment_info_text_okay}}</p>
-            <p class="disea-green text-small text-semibold">{{assignment_info_text_submitted}}</p>
-            <p class="disea-gray text-small text-semibold">{{assignment_info_text_selfcheck}}</p>
-            <p class="disea-orange text-small text-semibold">{{assignment_info_text_notsubmitted}}</p>
-            <p class="disea-orange text-small text-semibold">{{assignment_info_text_incomplete}}</p>
-            <p class="disea-red text-small text-semibold">{{assignment_info_text_failed}}</p>
-        </div>
-        {{/nodata}}
-
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
-             data-container="block_disealytics/expandable-{{view_type}}">
-            <hr style="border-bottom: 1px solid #c2cade; width: 100%;">
-            {{#tablesNew}}
-                <table class="table-of-assignments table-of-assignments-pvl" data-coursename="{{coursename}}">
-                    <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
-                        <span id="title">{{coursename}}</span>
-                        <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+        {{#viewmode_module}}
+            <div class="panel-body">
+                {{^nodata}}
+                    <br>
+                    <div id="pvl-doughnut">
+                        <p class="pvl-probability">{{pvlProbability}} %</p>
+                        {{#charts}}
+                            {{> core/chart }}
+                        {{/charts}}
                     </div>
-                    <tr>
-                        <th>{{#str}}assignment, block_disealytics{{/str}}</th>
-                        <th>{{#str}}status, block_disealytics{{/str}}</th>
-                    </tr>
+                    <br>
+                    <div class="success-chance-assignments">
+                        <p>{{#str}}pvl_assignment_info_text_summary_modul, block_disealytics {{/str}}</p>
+                        <p class="disea-green text-small text-semibold">{{assignment_info_text_okay}}</p>
+                        <p class="disea-green text-small text-semibold">{{assignment_info_text_submitted}}</p>
+                        <p class="disea-gray text-small text-semibold">{{assignment_info_text_selfcheck}}</p>
+                        <p class="disea-orange text-small text-semibold">{{assignment_info_text_notsubmitted}}</p>
+                        <p class="disea-orange text-small text-semibold">{{assignment_info_text_incomplete}}</p>
+                        <p class="disea-red text-small text-semibold">{{assignment_info_text_failed}}</p>
+                    </div>
+                {{/nodata}}
+                <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
+                     data-container="block_disealytics/expandable-{{view_type}}">
+                    <hr style="border-bottom: 1px solid #c2cade; width: 100%;">
+                    <table class="table-of-assignments table-of-assignments-pvl">
+                        <tr>
+                            <th>{{#str}}assignment, block_disealytics{{/str}}</th>
+                            <th>{{#str}}status, block_disealytics{{/str}}</th>
+                        </tr>
+                        {{#table_elements}}
+                            <tr>
+                                <td>{{{assignment_link}}}</td>
+                                <td>
+                                    {{#small_description}}
+                                        <span class="pvl-status-desc {{color}}">
+                                            <span>{{status}}</span>
+                                    </span>
+                                    {{/small_description}}
+                                    {{#detail_description}}
+                                        <span class="pvl-status-desc {{color}} pvl-status-incomplete">
+                                            <span>{{status_type}}</span>
+                                    </span>
+                                    {{/detail_description}}
+                                </td>
+                            </tr>
+                        {{/table_elements}}
+                    </table>
+
+                </div>
+            </div>
+        {{/viewmode_module}}
+        {{#viewmode_halfyear}}
+            {{^nodata}}
+                <div id="pvl-doughnut">
+                    <p class="pvl-probability">{{pvlProbability}} %</p>
+                    {{#charts}}
+                        {{> core/chart }}
+                    {{/charts}}
+                </div>
+                <br>
+                <div class="success-chance-assignments">
+                    <p>{{#str}}pvl_assignment_info_text_summary_semester, block_disealytics {{/str}}</p>
+                    <p class="disea-green text-small text-semibold">{{assignment_info_text_okay}}</p>
+                    <p class="disea-green text-small text-semibold">{{assignment_info_text_submitted}}</p>
+                    <p class="disea-gray text-small text-semibold">{{assignment_info_text_selfcheck}}</p>
+                    <p class="disea-orange text-small text-semibold">{{assignment_info_text_notsubmitted}}</p>
+                    <p class="disea-orange text-small text-semibold">{{assignment_info_text_incomplete}}</p>
+                    <p class="disea-red text-small text-semibold">{{assignment_info_text_failed}}</p>
+                </div>
+            {{/nodata}}
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
+                 data-container="block_disealytics/expandable-{{view_type}}">
+                <hr style="border-bottom: 1px solid #c2cade; width: 100%;">
+                {{#tablesNew}}
+                    <table class="table-of-assignments table-of-assignments-pvl" data-coursename="{{coursename}}">
+                        <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
+                            <span id="title">{{coursename}}</span>
+                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+                        </div>
+                        <tr>
+                            <th>{{#str}}assignment, block_disealytics{{/str}}</th>
+                            <th>{{#str}}status, block_disealytics{{/str}}</th>
+                        </tr>
                         {{#assigns}}
                             <tr>
                                 <td>{{{assignment_link}}}</td>
@@ -214,128 +176,92 @@
                                 </td>
                             </tr>
                         {{/assigns}}
-                    {{^assigns}}
-                        <tr>
-                            <td>{{#str}}nodata, block_disealytics{{/str}}</td>
-                        </tr>
-                    {{/assigns}}
-                </table>
-            {{/tablesNew}}
+                        {{^assigns}}
+                            <tr>
+                                <td>{{#str}}nodata, block_disealytics{{/str}}</td>
+                            </tr>
+                        {{/assigns}}
+                    </table>
+                {{/tablesNew}}
 
-        </div>
-
-        {{#nodata}}
-            <p>{{nodata}}</p>
-        {{/nodata}}
-
-        {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
-    </div>
-{{/viewmode_halfyear}}
-{{#viewmode_global}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{view_type}}">
-        <div class="panel-heading">
-            <div class="flex-container">
-                <h1 id="title"><span class="show-when-expanded"><a
-                        style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
-                        data-actiontype="block_disealytics/toggle-expansion"><i
-                        style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-            </a></span>{{title}}</h1>
-                <div class="navigation-icons">
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
-                    </a>
-                </div>
             </div>
-        </div>
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
-             data-container="block_disealytics/expandable-{{view_type}}">
-            <p>{{#str}}success-chance_info_text_expanded, block_disealytics {{/str}}</p>
-        </div>
-
-        {{^nodata}}
-        <div id="pvl-doughnut">
-            <p class="pvl-probability">{{pvlProbability}} %</p>
-            {{#charts}}
-                {{> core/chart }}
-            {{/charts}}
-        </div>
-        <br>
-        <div class="success-chance-assignments">
-            <p>{{#str}}pvl_assignment_info_text_summary_global, block_disealytics {{/str}}</p>
-            <p class="disea-green text-small text-semibold">{{assignment_info_text_okay}}</p>
-            <p class="disea-green text-small text-semibold">{{assignment_info_text_submitted}}</p>
-            <p class="disea-gray text-small text-semibold">{{assignment_info_text_selfcheck}}</p>
-            <p class="disea-orange text-small text-semibold">{{assignment_info_text_notsubmitted}}</p>
-            <p class="disea-orange text-small text-semibold">{{assignment_info_text_incomplete}}</p>
-            <p class="disea-red text-small text-semibold">{{assignment_info_text_failed}}</p>
-        </div>
-        {{/nodata}}
-
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
-             data-container="block_disealytics/expandable-{{view_type}}">
-            <hr style="border-bottom: 1px solid #c2cade; width: 100%;">
-
-            <div class="categories-container">
-                <div class="course-category-global">
-                    {{#categories}}
-                        <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
-                            {{name}}
-                        </button>
-                    {{/categories}}
+        {{/viewmode_halfyear}}
+        {{#viewmode_global}}
+            {{^nodata}}
+                <div id="pvl-doughnut">
+                    <p class="pvl-probability">{{pvlProbability}} %</p>
+                    {{#charts}}
+                        {{> core/chart }}
+                    {{/charts}}
                 </div>
-            </div>
+                <br>
+                <div class="success-chance-assignments">
+                    <p>{{#str}}pvl_assignment_info_text_summary_global, block_disealytics {{/str}}</p>
+                    <p class="disea-green text-small text-semibold">{{assignment_info_text_okay}}</p>
+                    <p class="disea-green text-small text-semibold">{{assignment_info_text_submitted}}</p>
+                    <p class="disea-gray text-small text-semibold">{{assignment_info_text_selfcheck}}</p>
+                    <p class="disea-orange text-small text-semibold">{{assignment_info_text_notsubmitted}}</p>
+                    <p class="disea-orange text-small text-semibold">{{assignment_info_text_incomplete}}</p>
+                    <p class="disea-red text-small text-semibold">{{assignment_info_text_failed}}</p>
+                </div>
+            {{/nodata}}
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}} show-when-expanded"
+                 data-container="block_disealytics/expandable-{{view_type}}">
+                <hr style="border-bottom: 1px solid #c2cade; width: 100%;">
 
-            {{#tablesNew}}
-                <table class="table-of-assignments table-of-assignments-pvl" data-coursename="{{coursename}}">
-                    <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
-                        <span id="title">{{coursename}}</span>
-                        <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+                <div class="categories-container">
+                    <div class="course-category-global">
+                        {{#categories}}
+                            <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
+                                {{name}}
+                            </button>
+                        {{/categories}}
                     </div>
-                    <tr>
-                        <th>{{#str}}assignment, block_disealytics{{/str}}</th>
-                        <th>{{#str}}status, block_disealytics{{/str}}</th>
-                    </tr>
-                    {{#assigns}}
+                </div>
+
+                {{#tablesNew}}
+                    <table class="table-of-assignments table-of-assignments-pvl" data-coursename="{{coursename}}">
+                        <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
+                            <span id="title">{{coursename}}</span>
+                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+                        </div>
                         <tr>
-                            <td>{{{assignment_link}}}</td>
-                            <td>
-                                {{#small_description}}
-                                    <span class="pvl-status-desc {{color}}">
+                            <th>{{#str}}assignment, block_disealytics{{/str}}</th>
+                            <th>{{#str}}status, block_disealytics{{/str}}</th>
+                        </tr>
+                        {{#assigns}}
+                            <tr>
+                                <td>{{{assignment_link}}}</td>
+                                <td>
+                                    {{#small_description}}
+                                        <span class="pvl-status-desc {{color}}">
                                                     <span>{{status}}</span>
                                             </span>
-                                {{/small_description}}
-                                {{#detail_description}}
-                                    <span class="pvl-status-desc {{color}} pvl-status-incomplete">
+                                    {{/small_description}}
+                                    {{#detail_description}}
+                                        <span class="pvl-status-desc {{color}} pvl-status-incomplete">
                                                     <span>{{status_type}}</span>
                                             </span>
-                                {{/detail_description}}
-                            </td>
-                        </tr>
-                    {{/assigns}}
-                    {{^assigns}}
-                        <tr>
-                            <td>{{#str}}nodata, block_disealytics{{/str}}</td>
-                        </tr>
-                    {{/assigns}}
-                </table>
-            {{/tablesNew}}
+                                    {{/detail_description}}
+                                </td>
+                            </tr>
+                        {{/assigns}}
+                        {{^assigns}}
+                            <tr>
+                                <td>{{#str}}nodata, block_disealytics{{/str}}</td>
+                            </tr>
+                        {{/assigns}}
+                    </table>
+                {{/tablesNew}}
 
-        </div>
-
+            </div>
+        {{/viewmode_global}}
         {{#nodata}}
             <p>{{nodata}}</p>
         {{/nodata}}
-
         {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
     </div>
-{{/viewmode_global}}
-
+{{/viewmode}}
 {{#js}}
     require(['block_disealytics/add_interaction'], function(addInteraction) {
     addInteraction.init("{{view_type}}");

@@ -23,6 +23,7 @@
 import Ajax from 'core/ajax';
 import ModalFactory from 'core/modal_factory';
 import Templates from 'core/templates';
+import {get_string as getString} from 'core/str';
 import {
     getCourseId,
     getViewlist,
@@ -32,6 +33,7 @@ import {
     updateViewlist
 } from 'block_disealytics/view_selection';
 import {anyViewsEnabled, updateView} from 'block_disealytics/update_view';
+import ViewHelpModal from "./view_help_modal";
 
 /**
  * Initializes the view functionality with the specified viewname.
@@ -322,21 +324,36 @@ const registerEventListener = (viewname) => {
 };
 
 /**
- * Calculates the position for the information window.
+ * Generates the information modal.
  *
  * Is called in the javascript of the main.mustache template and in the registerEventListener function.
  *
- * @param {string} viewname - The viewname in the format of 'viewname-view'.
+ * @param {String} viewname - The button element that triggers the modal.
  * @returns {void}
  */
 export const toggleInformationModal = (viewname) => {
-    const informationButton = document.querySelector('.info-btn-' + viewname);
-    const outerWindow = document.querySelector('.outer-modal-' + viewname);
+    const btn = document.querySelector("#block_disealytics_" + viewname + "_info_btn");
+    const btnExpanded = document.querySelector("#block_disealytics_" + viewname + "_info_btn_expanded");
 
-    if (informationButton && outerWindow) {
-        informationButton.addEventListener("click", function() {
-            // Toggle the 'show' class to display or hide the popup.
-            outerWindow.classList.toggle('show');
+    if (btn) {
+        btn.addEventListener('click', async function() {
+            const modal = await ModalFactory.create({
+                title: getString(viewname, 'block_disealytics'),
+                body: getString(viewname + '_help_info_text', 'block_disealytics'),
+                removeOnClose: true
+            });
+            modal.show();
+        });
+    }
+
+    if (btnExpanded) {
+        btnExpanded.addEventListener('click', async function() {
+            const modal = await ModalFactory.create({
+                title: getString(viewname, 'block_disealytics'),
+                body: getString(viewname + '_help_info_text_expanded', 'block_disealytics'),
+                removeOnClose: true
+            });
+            modal.show();
         });
     }
 };
@@ -475,7 +492,6 @@ export const enableConsentButtons = () => {
         updateSetting("revoke_consent", '', '');
     });
 };
-
 
 export const setCourseCategory = (viewname) => {
     const courseCategories = document.querySelectorAll(".course-category-global-item-" + viewname);

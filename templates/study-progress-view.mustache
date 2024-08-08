@@ -43,284 +43,235 @@
         "submitscore" : "0.4"
     }
 }}
-{{> block_disealytics/view_modal}}
 {{#editmode}}
-<div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
-     data-container="block_disealytics/editing-{{view_type}}">
-    <svg id="{{view_type}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M45.6135 22.9199C45.6135 34.6285 35.7336 44.1699 23.4835 44.1699C11.2335 44.1699 1.35352 34.6285 1.35352 22.9199C1.35352 11.2113 11.2335 1.66992 23.4835 1.66992C35.7336 1.66992 45.6135 11.2113 45.6135 22.9199Z" stroke="#0f6cbf" stroke-width="1.5"/>
-        <path d="M15.537 29.0649L5.85146 29.0693C5.85146 29.0693 5.81752 24.665 7.99252 20.57C10.1675 16.4751 13.8224 14.1587 13.8224 14.1587L18.8316 22.3841C18.8316 22.3841 17.3079 23.6841 16.443 25.3726C15.5781 27.0611 15.537 29.0649 15.537 29.0649Z" fill="#0f6cbf"/>
-        <path d="M32.267 29.0569L41.952 29.0615C41.952 29.0615 41.9859 24.6572 39.8109 20.5623C37.6359 16.4673 33.9811 14.1509 33.9811 14.1509L28.9726 22.3761C28.9726 22.3761 30.4963 23.6761 31.3612 25.3646C32.2261 27.0531 32.267 29.0569 32.267 29.0569Z" fill="#0f6cbf"/>
-        <path d="M20.0671 21.6494L15.608 13.1414C15.608 13.1414 19.3935 10.9998 24.0313 10.9998C28.6691 10.9998 32.4297 13.1414 32.4297 13.1414L27.514 21.4252C27.514 21.4252 25.6509 20.6892 23.7536 20.7174C21.8564 20.7456 20.0671 21.6494 20.0671 21.6494Z" fill="#0f6cbf"/>
-        <path d="M24.0207 21.0533L25.0669 29.2253C25.0673 29.2401 25.0336 29.252 24.9912 29.2523L23.4402 29.2616C23.3981 29.2619 23.3633 29.2501 23.3629 29.2356L23.8704 21.0543C23.872 21.0219 24.0168 21.021 24.0231 21.0533L24.0207 21.0533Z" fill="#0f6cbf"/>
-        <path d="M24.1846 28.2814C24.7524 28.278 25.1967 27.7884 25.177 27.188C25.1572 26.5876 24.6809 26.1036 24.1131 26.1071C23.5453 26.1105 23.101 26.6 23.1207 27.2005C23.1405 27.8009 23.6168 28.2849 24.1846 28.2814Z" fill="#0f6cbf"/>
-    </svg>
-    <h1 class="editing-headline">{{title}}</h1>
-    <a class="dashboard-button block_disealytics-open-delete-modal-{{view_type}} block_disealytics-open-delete-modal"
-       data-toggle="modal"
-       data-target="#{{view_type}}-remove-modal">
-        <i class="text-danger fa fa-times"></i>
-    </a>
-</div>
+    <div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
+         data-container="block_disealytics/editing-{{view_type}}">
+        <svg id="{{view_type}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M45.6135 22.9199C45.6135 34.6285 35.7336 44.1699 23.4835 44.1699C11.2335 44.1699 1.35352 34.6285 1.35352 22.9199C1.35352 11.2113 11.2335 1.66992 23.4835 1.66992C35.7336 1.66992 45.6135 11.2113 45.6135 22.9199Z"
+                  stroke="#0f6cbf" stroke-width="1.5"/>
+            <path d="M15.537 29.0649L5.85146 29.0693C5.85146 29.0693 5.81752 24.665 7.99252 20.57C10.1675 16.4751 13.8224 14.1587 13.8224 14.1587L18.8316 22.3841C18.8316 22.3841 17.3079 23.6841 16.443 25.3726C15.5781 27.0611 15.537 29.0649 15.537 29.0649Z"
+                  fill="#0f6cbf"/>
+            <path d="M32.267 29.0569L41.952 29.0615C41.952 29.0615 41.9859 24.6572 39.8109 20.5623C37.6359 16.4673 33.9811 14.1509 33.9811 14.1509L28.9726 22.3761C28.9726 22.3761 30.4963 23.6761 31.3612 25.3646C32.2261 27.0531 32.267 29.0569 32.267 29.0569Z"
+                  fill="#0f6cbf"/>
+            <path d="M20.0671 21.6494L15.608 13.1414C15.608 13.1414 19.3935 10.9998 24.0313 10.9998C28.6691 10.9998 32.4297 13.1414 32.4297 13.1414L27.514 21.4252C27.514 21.4252 25.6509 20.6892 23.7536 20.7174C21.8564 20.7456 20.0671 21.6494 20.0671 21.6494Z"
+                  fill="#0f6cbf"/>
+            <path d="M24.0207 21.0533L25.0669 29.2253C25.0673 29.2401 25.0336 29.252 24.9912 29.2523L23.4402 29.2616C23.3981 29.2619 23.3633 29.2501 23.3629 29.2356L23.8704 21.0543C23.872 21.0219 24.0168 21.021 24.0231 21.0533L24.0207 21.0533Z"
+                  fill="#0f6cbf"/>
+            <path d="M24.1846 28.2814C24.7524 28.278 25.1967 27.7884 25.177 27.188C25.1572 26.5876 24.6809 26.1036 24.1131 26.1071C23.5453 26.1105 23.101 26.6 23.1207 27.2005C23.1405 27.8009 23.6168 28.2849 24.1846 28.2814Z"
+                  fill="#0f6cbf"/>
+        </svg>
+        <h1 class="editing-headline">{{title}}</h1>
+        <a class="dashboard-button block_disealytics-open-delete-modal-{{view_type}} block_disealytics-open-delete-modal"
+           data-toggle="modal"
+           data-target="#{{view_type}}-remove-modal">
+            <i class="text-danger fa fa-times"></i>
+        </a>
+    </div>
 {{/editmode}}
 {{#viewmode}}
-<div id="block_disealytics-panel-{{view_type}}"
-     class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
-    <div class="panel-heading">
-        <div class="flex-container">
-            <h1 id="title"><span class="show-when-expanded"><a
-                    style="cursor: pointer; text-decoration: none"
-                    class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                    data-action="block_disealytics/expand-{{view_type}}"
-                    data-actiontype="block_disealytics/toggle-expansion"><i
-                    style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
+    <div id="block_disealytics-panel-{{view_type}}"
+         class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
+        <div class="panel-heading">
+            <div class="flex-container">
+                <h1 id="title"><span class="show-when-expanded"><a
+                        style="cursor: pointer; text-decoration: none"
+                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
+                        data-action="block_disealytics/expand-{{view_type}}"
+                        data-actiontype="block_disealytics/toggle-expansion"><i
+                        style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
             </a></span>{{title}}</h1>
-            <div class="navigation-icons">
-                <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                   data-toggle="modal"
-                   data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                        class="fa fa-question"></i>
-                </a>
+                <div class="navigation-icons">
+                    <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                        <i class="fa fa-question"></i>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-        {{#data}}
-            <div class="panel-body">
-                <h5 class="hidden show-when-expanded">{{#str}}study-progress_eval_course, block_disealytics{{/str}}</h5>
-                <br>
-                <div style="display: flex; justify-content: center">
-                    <svg class="speedometer-display" viewBox="297.107 65.323 251.47 136.71"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <g transform="matrix(1, 0, 0, 1, 25.316756, 64.802514)">
-                            <path d="M272.99,125.85h65.25c.15-21.84,12.12-40.87,29.82-51.03l-32.64-56.53c-37.21,21.45-62.29,61.57-62.44,107.56Z"
-                                  fill="#e6332a"/>
-                            <path d="M339.43,127.04h-67.64v-1.2c.08-22.42,6.12-44.41,17.49-63.59,11.04-18.63,26.79-34.19,45.55-45l1.04-.6,33.83,58.6-1.04,.6c-17.88,10.27-29.08,29.43-29.22,50v1.19Zm-65.24-2.39h62.87c.55-20.57,11.69-39.65,29.37-50.27l-31.44-54.46c-17.95,10.58-33.02,25.61-43.65,43.55-10.95,18.48-16.87,39.6-17.15,61.18Z"
-                                  fill="#f2f2f2"/>
-                            <path d="M459.63,18.28l-32.64,56.53c17.7,10.16,29.67,29.19,29.82,51.03h65.25c-.15-45.99-25.23-86.12-62.44-107.56Z"
-                                  fill="#63b22f"/>
-                            <path d="M523.26,127.04h-67.64v-1.19c-.15-20.58-11.34-39.74-29.23-50l-1.04-.6,33.83-58.6,1.04,.6c18.76,10.81,34.51,26.37,45.55,45,11.37,19.18,17.42,41.18,17.49,63.59v1.2Zm-65.27-2.39h62.87c-.28-21.58-6.2-42.71-17.15-61.18-10.63-17.93-25.7-32.97-43.65-43.55l-31.44,54.46c17.68,10.62,28.82,29.69,29.37,50.27Z"
-                                  fill="#f2f2f2"/>
-                            <g>
-                                <path d="M397.53,1.71c-22.62,0-43.82,6.03-62.1,16.57l32.64,56.53c8.68-4.98,18.73-7.85,29.46-7.85s20.78,2.86,29.46,7.85l32.64-56.53c-18.28-10.54-39.49-16.57-62.1-16.57Z"
-                                      fill="#fcea10"/>
-                                <path d="M367.62,76.44l-33.83-58.6,1.04-.6C353.81,6.3,375.49,.52,397.53,.52s43.72,5.78,62.7,16.73l1.04,.6-33.83,58.6-1.04-.59c-8.76-5.03-18.75-7.69-28.87-7.69s-20.11,2.66-28.87,7.69l-1.04,.59Zm29.9-10.68c10.14,0,20.15,2.56,29.02,7.42l31.45-54.47c-18.37-10.35-39.25-15.82-60.46-15.82s-42.09,5.46-60.46,15.82l31.45,54.46c8.87-4.86,18.88-7.42,29.02-7.42Z"
-                                      fill="#f2f2f2"/>
-                            </g>
-                            <circle cx="397.53" cy="124.23" r="6.79" fill="#dadada"/>
-                            <!-- Needle (the next path, default vertical) gets rotated by {angle} to display the correct progress. -->
-                            <path transform="rotate({{angle}} 397.53 124.23)"
-                                  d="M397.81,13.22l2.95,123.61c0,.22-.13,.4-.29,.4h-5.89c-.16,0-.29-.18-.29-.4l2.95-123.61c.01-.49,.56-.49,.58,0Z"
-                                  fill="#1d1d1b"/>
-                            <circle cx="397.53" cy="124.23" r="3.91" fill="#1d1d1b"/>
-                        </g>
-                    </svg>
-
-            </div>
-                <br>
-                <p style="align-self: center;margin-bottom: 0" class="infotext; speedometer">{{{infotext}}}</p>
-
-            </div>
-        {{/data}}
-        {{#nodata}}
-            <p>{{nodata}}</p>
-        {{/nodata}}
-
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}"
-             data-container="block_disealytics/expandable-{{view_type}}">
+        {{#viewmode_module}}
             {{#data}}
-                <p>{{#str}}study-progress_score_is, block_disealytics{{/str}}{{assignscore}}</p>
-                <hr>
-                <h5>{{#str}}study-progress_expanded_title, block_disealytics{{/str}}</h5>
-                {{#barchart}}  {{> core/chart }} {{/barchart}}
-                <br>
-                <p>{{#str}}study-progress_expanded_desc, block_disealytics{{/str}}</p>
-                <span>
-                <p style="white-space: pre-line" class="text-small"><i class="fa fa-arrow-right"></i> {{activityweight}} {{#str}}study-progress_activity_weight, block_disealytics{{/str}}
-                <i class="fa fa-arrow-right"></i> {{documentweight}} {{#str}}study-progress_doc_weight, block_disealytics{{/str}}
-                <i class="fa fa-arrow-right"></i> {{assignmentweight}} {{#str}}study-progress_assign_weight, block_disealytics{{/str}}</p>
-            </span>
+                <div class="panel-body">
+                    <h5 class="hidden show-when-expanded">{{#str}}study-progress_eval_course, block_disealytics{{/str}}</h5>
+                    <br>
+                    <div style="display: flex; justify-content: center">
+                        <svg class="speedometer-display" viewBox="297.107 65.323 251.47 136.71"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <g transform="matrix(1, 0, 0, 1, 25.316756, 64.802514)">
+                                <path d="M272.99,125.85h65.25c.15-21.84,12.12-40.87,29.82-51.03l-32.64-56.53c-37.21,21.45-62.29,61.57-62.44,107.56Z"
+                                      fill="#e6332a"/>
+                                <path d="M339.43,127.04h-67.64v-1.2c.08-22.42,6.12-44.41,17.49-63.59,11.04-18.63,26.79-34.19,45.55-45l1.04-.6,33.83,58.6-1.04,.6c-17.88,10.27-29.08,29.43-29.22,50v1.19Zm-65.24-2.39h62.87c.55-20.57,11.69-39.65,29.37-50.27l-31.44-54.46c-17.95,10.58-33.02,25.61-43.65,43.55-10.95,18.48-16.87,39.6-17.15,61.18Z"
+                                      fill="#f2f2f2"/>
+                                <path d="M459.63,18.28l-32.64,56.53c17.7,10.16,29.67,29.19,29.82,51.03h65.25c-.15-45.99-25.23-86.12-62.44-107.56Z"
+                                      fill="#63b22f"/>
+                                <path d="M523.26,127.04h-67.64v-1.19c-.15-20.58-11.34-39.74-29.23-50l-1.04-.6,33.83-58.6,1.04,.6c18.76,10.81,34.51,26.37,45.55,45,11.37,19.18,17.42,41.18,17.49,63.59v1.2Zm-65.27-2.39h62.87c-.28-21.58-6.2-42.71-17.15-61.18-10.63-17.93-25.7-32.97-43.65-43.55l-31.44,54.46c17.68,10.62,28.82,29.69,29.37,50.27Z"
+                                      fill="#f2f2f2"/>
+                                <g>
+                                    <path d="M397.53,1.71c-22.62,0-43.82,6.03-62.1,16.57l32.64,56.53c8.68-4.98,18.73-7.85,29.46-7.85s20.78,2.86,29.46,7.85l32.64-56.53c-18.28-10.54-39.49-16.57-62.1-16.57Z"
+                                          fill="#fcea10"/>
+                                    <path d="M367.62,76.44l-33.83-58.6,1.04-.6C353.81,6.3,375.49,.52,397.53,.52s43.72,5.78,62.7,16.73l1.04,.6-33.83,58.6-1.04-.59c-8.76-5.03-18.75-7.69-28.87-7.69s-20.11,2.66-28.87,7.69l-1.04,.59Zm29.9-10.68c10.14,0,20.15,2.56,29.02,7.42l31.45-54.47c-18.37-10.35-39.25-15.82-60.46-15.82s-42.09,5.46-60.46,15.82l31.45,54.46c8.87-4.86,18.88-7.42,29.02-7.42Z"
+                                          fill="#f2f2f2"/>
+                                </g>
+                                <circle cx="397.53" cy="124.23" r="6.79" fill="#dadada"/>
+                                <!-- Needle (the next path, default vertical) gets rotated by {angle} to display the correct progress. -->
+                                <path transform="rotate({{angle}} 397.53 124.23)"
+                                      d="M397.81,13.22l2.95,123.61c0,.22-.13,.4-.29,.4h-5.89c-.16,0-.29-.18-.29-.4l2.95-123.61c.01-.49,.56-.49,.58,0Z"
+                                      fill="#1d1d1b"/>
+                                <circle cx="397.53" cy="124.23" r="3.91" fill="#1d1d1b"/>
+                            </g>
+                        </svg>
+
+                    </div>
+                    <br>
+                    <p style="align-self: center;margin-bottom: 0" class="infotext; speedometer">{{{infotext}}}</p>
+
+                </div>
             {{/data}}
-        </div>
+            {{#nodata}}
+                <p>{{nodata}}</p>
+            {{/nodata}}
 
-    {{> block_disealytics/bottom_navigation }}
-    {{> block_disealytics/panel_editing_footer }}
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}"
+                 data-container="block_disealytics/expandable-{{view_type}}">
+                {{#data}}
+                    <p>{{#str}}study-progress_score_is, block_disealytics{{/str}}{{assignscore}}</p>
+                    <hr>
+                    <h5>{{#str}}study-progress_expanded_title, block_disealytics{{/str}}</h5>
+                    {{#barchart}}  {{> core/chart }} {{/barchart}}
+                    <br>
+                    <p>{{#str}}study-progress_expanded_desc, block_disealytics{{/str}}</p>
+                    <span>
+                <p style="white-space: pre-line" class="text-small"><i class="fa fa-arrow-right"></i> {{activityweight}} {{#str}}
+                    study-progress_activity_weight, block_disealytics{{/str}}
+                    <i class="fa fa-arrow-right"></i> {{documentweight}} {{#str}}study-progress_doc_weight, block_disealytics{{/str}}
+                    <i class="fa fa-arrow-right"></i> {{assignmentweight}} {{#str}}study-progress_assign_weight, block_disealytics{{/str}}</p>
+            </span>
+                {{/data}}
+            </div>
+        {{/viewmode_module}}
+        {{#viewmode_halfyear}}
+            {{#data}}
+                <div class="panel-body">
+                    <h5 class="hidden show-when-expanded">{{#str}}study-progress_eval_halfyear, block_disealytics{{/str}}</h5>
+                    <br>
+                    <div style="display: flex; justify-content: center">
+                        <svg class="speedometer-display" viewBox="297.107 65.323 251.47 136.71"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <g transform="matrix(1, 0, 0, 1, 25.316756, 64.802514)">
+                                <path d="M272.99,125.85h65.25c.15-21.84,12.12-40.87,29.82-51.03l-32.64-56.53c-37.21,21.45-62.29,61.57-62.44,107.56Z"
+                                      fill="#e6332a"/>
+                                <path d="M339.43,127.04h-67.64v-1.2c.08-22.42,6.12-44.41,17.49-63.59,11.04-18.63,26.79-34.19,45.55-45l1.04-.6,33.83,58.6-1.04,.6c-17.88,10.27-29.08,29.43-29.22,50v1.19Zm-65.24-2.39h62.87c.55-20.57,11.69-39.65,29.37-50.27l-31.44-54.46c-17.95,10.58-33.02,25.61-43.65,43.55-10.95,18.48-16.87,39.6-17.15,61.18Z"
+                                      fill="#f2f2f2"/>
+                                <path d="M459.63,18.28l-32.64,56.53c17.7,10.16,29.67,29.19,29.82,51.03h65.25c-.15-45.99-25.23-86.12-62.44-107.56Z"
+                                      fill="#63b22f"/>
+                                <path d="M523.26,127.04h-67.64v-1.19c-.15-20.58-11.34-39.74-29.23-50l-1.04-.6,33.83-58.6,1.04,.6c18.76,10.81,34.51,26.37,45.55,45,11.37,19.18,17.42,41.18,17.49,63.59v1.2Zm-65.27-2.39h62.87c-.28-21.58-6.2-42.71-17.15-61.18-10.63-17.93-25.7-32.97-43.65-43.55l-31.44,54.46c17.68,10.62,28.82,29.69,29.37,50.27Z"
+                                      fill="#f2f2f2"/>
+                                <g>
+                                    <path d="M397.53,1.71c-22.62,0-43.82,6.03-62.1,16.57l32.64,56.53c8.68-4.98,18.73-7.85,29.46-7.85s20.78,2.86,29.46,7.85l32.64-56.53c-18.28-10.54-39.49-16.57-62.1-16.57Z"
+                                          fill="#fcea10"/>
+                                    <path d="M367.62,76.44l-33.83-58.6,1.04-.6C353.81,6.3,375.49,.52,397.53,.52s43.72,5.78,62.7,16.73l1.04,.6-33.83,58.6-1.04-.59c-8.76-5.03-18.75-7.69-28.87-7.69s-20.11,2.66-28.87,7.69l-1.04,.59Zm29.9-10.68c10.14,0,20.15,2.56,29.02,7.42l31.45-54.47c-18.37-10.35-39.25-15.82-60.46-15.82s-42.09,5.46-60.46,15.82l31.45,54.46c8.87-4.86,18.88-7.42,29.02-7.42Z"
+                                          fill="#f2f2f2"/>
+                                </g>
+                                <circle cx="397.53" cy="124.23" r="6.79" fill="#dadada"/>
+                                <!-- Needle (the next path, default vertical) gets rotated by {angle} to display the correct progress. -->
+                                <path transform="rotate({{angle}} 397.53 124.23)"
+                                      d="M397.81,13.22l2.95,123.61c0,.22-.13,.4-.29,.4h-5.89c-.16,0-.29-.18-.29-.4l2.95-123.61c.01-.49,.56-.49,.58,0Z"
+                                      fill="#1d1d1b"/>
+                                <circle cx="397.53" cy="124.23" r="3.91" fill="#1d1d1b"/>
+                            </g>
+                        </svg>
 
-</div>
+                    </div>
+                    <br>
+                    <p style="align-self: center;margin-bottom: 0" class="infotext; speedometer">{{{infotext}}}</p>
+
+                </div>
+            {{/data}}
+            {{#nodata}}
+                <p>{{nodata}}</p>
+            {{/nodata}}
+
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}"
+                 data-container="block_disealytics/expandable-{{view_type}}">
+                {{#data}}
+                    <p>{{#str}}study-progress_score_is, block_disealytics{{/str}}{{assignscore}}</p>
+                    <hr>
+                    <h5>{{#str}}study-progress_expanded_title, block_disealytics{{/str}}</h5>
+                    {{#barchart}}  {{> core/chart }} {{/barchart}}
+                    <br>
+                    <p>{{#str}}study-progress_expanded_desc, block_disealytics{{/str}}</p>
+                    <span>
+                <p style="white-space: pre-line" class="text-small"><i class="fa fa-arrow-right"></i> {{activityweight}} {{#str}}
+                    study-progress_activity_weight, block_disealytics{{/str}}
+                    <i class="fa fa-arrow-right"></i> {{documentweight}} {{#str}}study-progress_doc_weight, block_disealytics{{/str}}
+                    <i class="fa fa-arrow-right"></i> {{assignmentweight}} {{#str}}study-progress_assign_weight, block_disealytics{{/str}}</p>
+            </span>
+                {{/data}}
+            </div>
+        {{/viewmode_halfyear}}
+        {{#viewmode_global}}
+            {{#data}}
+                <div class="panel-body">
+                    <h5 class="hidden show-when-expanded">{{#str}}study-progress_eval_global, block_disealytics{{/str}}</h5>
+                    <br>
+                    <div style="display: flex; justify-content: center">
+                        <svg class="speedometer-display" viewBox="297.107 65.323 251.47 136.71"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <g transform="matrix(1, 0, 0, 1, 25.316756, 64.802514)">
+                                <path d="M272.99,125.85h65.25c.15-21.84,12.12-40.87,29.82-51.03l-32.64-56.53c-37.21,21.45-62.29,61.57-62.44,107.56Z"
+                                      fill="#e6332a"/>
+                                <path d="M339.43,127.04h-67.64v-1.2c.08-22.42,6.12-44.41,17.49-63.59,11.04-18.63,26.79-34.19,45.55-45l1.04-.6,33.83,58.6-1.04,.6c-17.88,10.27-29.08,29.43-29.22,50v1.19Zm-65.24-2.39h62.87c.55-20.57,11.69-39.65,29.37-50.27l-31.44-54.46c-17.95,10.58-33.02,25.61-43.65,43.55-10.95,18.48-16.87,39.6-17.15,61.18Z"
+                                      fill="#f2f2f2"/>
+                                <path d="M459.63,18.28l-32.64,56.53c17.7,10.16,29.67,29.19,29.82,51.03h65.25c-.15-45.99-25.23-86.12-62.44-107.56Z"
+                                      fill="#63b22f"/>
+                                <path d="M523.26,127.04h-67.64v-1.19c-.15-20.58-11.34-39.74-29.23-50l-1.04-.6,33.83-58.6,1.04,.6c18.76,10.81,34.51,26.37,45.55,45,11.37,19.18,17.42,41.18,17.49,63.59v1.2Zm-65.27-2.39h62.87c-.28-21.58-6.2-42.71-17.15-61.18-10.63-17.93-25.7-32.97-43.65-43.55l-31.44,54.46c17.68,10.62,28.82,29.69,29.37,50.27Z"
+                                      fill="#f2f2f2"/>
+                                <g>
+                                    <path d="M397.53,1.71c-22.62,0-43.82,6.03-62.1,16.57l32.64,56.53c8.68-4.98,18.73-7.85,29.46-7.85s20.78,2.86,29.46,7.85l32.64-56.53c-18.28-10.54-39.49-16.57-62.1-16.57Z"
+                                          fill="#fcea10"/>
+                                    <path d="M367.62,76.44l-33.83-58.6,1.04-.6C353.81,6.3,375.49,.52,397.53,.52s43.72,5.78,62.7,16.73l1.04,.6-33.83,58.6-1.04-.59c-8.76-5.03-18.75-7.69-28.87-7.69s-20.11,2.66-28.87,7.69l-1.04,.59Zm29.9-10.68c10.14,0,20.15,2.56,29.02,7.42l31.45-54.47c-18.37-10.35-39.25-15.82-60.46-15.82s-42.09,5.46-60.46,15.82l31.45,54.46c8.87-4.86,18.88-7.42,29.02-7.42Z"
+                                          fill="#f2f2f2"/>
+                                </g>
+                                <circle cx="397.53" cy="124.23" r="6.79" fill="#dadada"/>
+                                <!-- Needle (the next path, default vertical) gets rotated by {angle} to display the correct progress. -->
+                                <path transform="rotate({{angle}} 397.53 124.23)"
+                                      d="M397.81,13.22l2.95,123.61c0,.22-.13,.4-.29,.4h-5.89c-.16,0-.29-.18-.29-.4l2.95-123.61c.01-.49,.56-.49,.58,0Z"
+                                      fill="#1d1d1b"/>
+                                <circle cx="397.53" cy="124.23" r="3.91" fill="#1d1d1b"/>
+                            </g>
+                        </svg>
+
+                    </div>
+                    <br>
+                    <p style="align-self: center;margin-bottom: 0" class="infotext; speedometer">{{{infotext}}}</p>
+
+                </div>
+            {{/data}}
+            {{#nodata}}
+                <p>{{nodata}}</p>
+            {{/nodata}}
+
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}"
+                 data-container="block_disealytics/expandable-{{view_type}}">
+                {{#data}}
+                    <p>{{#str}}study-progress_score_is, block_disealytics{{/str}}{{assignscore}}</p>
+                    <hr>
+                    <h5>{{#str}}study-progress_expanded_title, block_disealytics{{/str}}</h5>
+                    {{#barchart}}  {{> core/chart }} {{/barchart}}
+                    <br>
+                    <p>{{#str}}study-progress_expanded_desc, block_disealytics{{/str}}</p>
+                    <span>
+                <p style="white-space: pre-line" class="text-small"><i class="fa fa-arrow-right"></i> {{activityweight}} {{#str}}
+                    study-progress_activity_weight, block_disealytics{{/str}}
+                    <i class="fa fa-arrow-right"></i> {{documentweight}} {{#str}}study-progress_doc_weight, block_disealytics{{/str}}
+                    <i class="fa fa-arrow-right"></i> {{assignmentweight}} {{#str}}study-progress_assign_weight, block_disealytics{{/str}}</p>
+            </span>{{> block_disealytics/bottom_navigation }}
+                {{/data}}
+            </div>
+        {{/viewmode_global}}
+
+        {{> block_disealytics/bottom_navigation }}
+
+    </div>
 {{/viewmode}}
-{{#viewmode_halfyear}}
-    <div id="block_disealytics-panel-{{view_type}}"
-         class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
-
-        <div class="panel-heading">
-            <div class="flex-container">
-                <h1 id="title"><span class="show-when-expanded"><a
-                        style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
-                        data-actiontype="block_disealytics/toggle-expansion"><i
-                        style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-            </a></span>{{title}}</h1>
-                <div class="navigation-icons">
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-
-        {{#data}}
-            <div class="panel-body">
-                <h5 class="hidden show-when-expanded">{{#str}}study-progress_eval_halfyear, block_disealytics{{/str}}</h5>
-                <br>
-                <div style="display: flex; justify-content: center">
-                    <svg class="speedometer-display" viewBox="297.107 65.323 251.47 136.71"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <g transform="matrix(1, 0, 0, 1, 25.316756, 64.802514)">
-                            <path d="M272.99,125.85h65.25c.15-21.84,12.12-40.87,29.82-51.03l-32.64-56.53c-37.21,21.45-62.29,61.57-62.44,107.56Z"
-                                  fill="#e6332a"/>
-                            <path d="M339.43,127.04h-67.64v-1.2c.08-22.42,6.12-44.41,17.49-63.59,11.04-18.63,26.79-34.19,45.55-45l1.04-.6,33.83,58.6-1.04,.6c-17.88,10.27-29.08,29.43-29.22,50v1.19Zm-65.24-2.39h62.87c.55-20.57,11.69-39.65,29.37-50.27l-31.44-54.46c-17.95,10.58-33.02,25.61-43.65,43.55-10.95,18.48-16.87,39.6-17.15,61.18Z"
-                                  fill="#f2f2f2"/>
-                            <path d="M459.63,18.28l-32.64,56.53c17.7,10.16,29.67,29.19,29.82,51.03h65.25c-.15-45.99-25.23-86.12-62.44-107.56Z"
-                                  fill="#63b22f"/>
-                            <path d="M523.26,127.04h-67.64v-1.19c-.15-20.58-11.34-39.74-29.23-50l-1.04-.6,33.83-58.6,1.04,.6c18.76,10.81,34.51,26.37,45.55,45,11.37,19.18,17.42,41.18,17.49,63.59v1.2Zm-65.27-2.39h62.87c-.28-21.58-6.2-42.71-17.15-61.18-10.63-17.93-25.7-32.97-43.65-43.55l-31.44,54.46c17.68,10.62,28.82,29.69,29.37,50.27Z"
-                                  fill="#f2f2f2"/>
-                            <g>
-                                <path d="M397.53,1.71c-22.62,0-43.82,6.03-62.1,16.57l32.64,56.53c8.68-4.98,18.73-7.85,29.46-7.85s20.78,2.86,29.46,7.85l32.64-56.53c-18.28-10.54-39.49-16.57-62.1-16.57Z"
-                                      fill="#fcea10"/>
-                                <path d="M367.62,76.44l-33.83-58.6,1.04-.6C353.81,6.3,375.49,.52,397.53,.52s43.72,5.78,62.7,16.73l1.04,.6-33.83,58.6-1.04-.59c-8.76-5.03-18.75-7.69-28.87-7.69s-20.11,2.66-28.87,7.69l-1.04,.59Zm29.9-10.68c10.14,0,20.15,2.56,29.02,7.42l31.45-54.47c-18.37-10.35-39.25-15.82-60.46-15.82s-42.09,5.46-60.46,15.82l31.45,54.46c8.87-4.86,18.88-7.42,29.02-7.42Z"
-                                      fill="#f2f2f2"/>
-                            </g>
-                            <circle cx="397.53" cy="124.23" r="6.79" fill="#dadada"/>
-                            <!-- Needle (the next path, default vertical) gets rotated by {angle} to display the correct progress. -->
-                            <path transform="rotate({{angle}} 397.53 124.23)"
-                                  d="M397.81,13.22l2.95,123.61c0,.22-.13,.4-.29,.4h-5.89c-.16,0-.29-.18-.29-.4l2.95-123.61c.01-.49,.56-.49,.58,0Z"
-                                  fill="#1d1d1b"/>
-                            <circle cx="397.53" cy="124.23" r="3.91" fill="#1d1d1b"/>
-                        </g>
-                    </svg>
-
-                </div>
-                <br>
-                <p style="align-self: center;margin-bottom: 0" class="infotext; speedometer">{{{infotext}}}</p>
-
-            </div>
-        {{/data}}
-        {{#nodata}}
-            <p>{{nodata}}</p>
-        {{/nodata}}
-
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}"
-             data-container="block_disealytics/expandable-{{view_type}}">
-            {{#data}}
-                <p>{{#str}}study-progress_score_is, block_disealytics{{/str}}{{assignscore}}</p>
-                <hr>
-                <h5>{{#str}}study-progress_expanded_title, block_disealytics{{/str}}</h5>
-                {{#barchart}}  {{> core/chart }} {{/barchart}}
-                <br>
-                <p>{{#str}}study-progress_expanded_desc, block_disealytics{{/str}}</p>
-                <span>
-                <p style="white-space: pre-line" class="text-small"><i class="fa fa-arrow-right"></i> {{activityweight}} {{#str}}study-progress_activity_weight, block_disealytics{{/str}}
-                    <i class="fa fa-arrow-right"></i> {{documentweight}} {{#str}}study-progress_doc_weight, block_disealytics{{/str}}
-                    <i class="fa fa-arrow-right"></i> {{assignmentweight}} {{#str}}study-progress_assign_weight, block_disealytics{{/str}}</p>
-            </span>
-            {{/data}}
-        </div>
-
-        {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
-
-    </div>
-{{/viewmode_halfyear}}
-{{#viewmode_global}}
-    <div id="block_disealytics-panel-{{view_type}}"
-         class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
-
-        <div class="panel-heading">
-            <div class="flex-container">
-                <h1 id="title"><span class="show-when-expanded"><a
-                        style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
-                        data-actiontype="block_disealytics/toggle-expansion"><i
-                        style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-            </a></span>{{title}}</h1>
-                <div class="navigation-icons">
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-
-        {{#data}}
-            <div class="panel-body">
-                <h5 class="hidden show-when-expanded">{{#str}}study-progress_eval_global, block_disealytics{{/str}}</h5>
-                <br>
-                <div style="display: flex; justify-content: center">
-                    <svg class="speedometer-display" viewBox="297.107 65.323 251.47 136.71"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <g transform="matrix(1, 0, 0, 1, 25.316756, 64.802514)">
-                            <path d="M272.99,125.85h65.25c.15-21.84,12.12-40.87,29.82-51.03l-32.64-56.53c-37.21,21.45-62.29,61.57-62.44,107.56Z"
-                                  fill="#e6332a"/>
-                            <path d="M339.43,127.04h-67.64v-1.2c.08-22.42,6.12-44.41,17.49-63.59,11.04-18.63,26.79-34.19,45.55-45l1.04-.6,33.83,58.6-1.04,.6c-17.88,10.27-29.08,29.43-29.22,50v1.19Zm-65.24-2.39h62.87c.55-20.57,11.69-39.65,29.37-50.27l-31.44-54.46c-17.95,10.58-33.02,25.61-43.65,43.55-10.95,18.48-16.87,39.6-17.15,61.18Z"
-                                  fill="#f2f2f2"/>
-                            <path d="M459.63,18.28l-32.64,56.53c17.7,10.16,29.67,29.19,29.82,51.03h65.25c-.15-45.99-25.23-86.12-62.44-107.56Z"
-                                  fill="#63b22f"/>
-                            <path d="M523.26,127.04h-67.64v-1.19c-.15-20.58-11.34-39.74-29.23-50l-1.04-.6,33.83-58.6,1.04,.6c18.76,10.81,34.51,26.37,45.55,45,11.37,19.18,17.42,41.18,17.49,63.59v1.2Zm-65.27-2.39h62.87c-.28-21.58-6.2-42.71-17.15-61.18-10.63-17.93-25.7-32.97-43.65-43.55l-31.44,54.46c17.68,10.62,28.82,29.69,29.37,50.27Z"
-                                  fill="#f2f2f2"/>
-                            <g>
-                                <path d="M397.53,1.71c-22.62,0-43.82,6.03-62.1,16.57l32.64,56.53c8.68-4.98,18.73-7.85,29.46-7.85s20.78,2.86,29.46,7.85l32.64-56.53c-18.28-10.54-39.49-16.57-62.1-16.57Z"
-                                      fill="#fcea10"/>
-                                <path d="M367.62,76.44l-33.83-58.6,1.04-.6C353.81,6.3,375.49,.52,397.53,.52s43.72,5.78,62.7,16.73l1.04,.6-33.83,58.6-1.04-.59c-8.76-5.03-18.75-7.69-28.87-7.69s-20.11,2.66-28.87,7.69l-1.04,.59Zm29.9-10.68c10.14,0,20.15,2.56,29.02,7.42l31.45-54.47c-18.37-10.35-39.25-15.82-60.46-15.82s-42.09,5.46-60.46,15.82l31.45,54.46c8.87-4.86,18.88-7.42,29.02-7.42Z"
-                                      fill="#f2f2f2"/>
-                            </g>
-                            <circle cx="397.53" cy="124.23" r="6.79" fill="#dadada"/>
-                            <!-- Needle (the next path, default vertical) gets rotated by {angle} to display the correct progress. -->
-                            <path transform="rotate({{angle}} 397.53 124.23)"
-                                  d="M397.81,13.22l2.95,123.61c0,.22-.13,.4-.29,.4h-5.89c-.16,0-.29-.18-.29-.4l2.95-123.61c.01-.49,.56-.49,.58,0Z"
-                                  fill="#1d1d1b"/>
-                            <circle cx="397.53" cy="124.23" r="3.91" fill="#1d1d1b"/>
-                        </g>
-                    </svg>
-
-                </div>
-                <br>
-                <p style="align-self: center;margin-bottom: 0" class="infotext; speedometer">{{{infotext}}}</p>
-
-            </div>
-        {{/data}}
-        {{#nodata}}
-            <p>{{nodata}}</p>
-        {{/nodata}}
-
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}"
-             data-container="block_disealytics/expandable-{{view_type}}">
-            {{#data}}
-                <p>{{#str}}study-progress_score_is, block_disealytics{{/str}}{{assignscore}}</p>
-                <hr>
-                <h5>{{#str}}study-progress_expanded_title, block_disealytics{{/str}}</h5>
-                {{#barchart}}  {{> core/chart }} {{/barchart}}
-                <br>
-                <p>{{#str}}study-progress_expanded_desc, block_disealytics{{/str}}</p>
-                <span>
-                <p style="white-space: pre-line" class="text-small"><i class="fa fa-arrow-right"></i> {{activityweight}} {{#str}}study-progress_activity_weight, block_disealytics{{/str}}
-                    <i class="fa fa-arrow-right"></i> {{documentweight}} {{#str}}study-progress_doc_weight, block_disealytics{{/str}}
-                    <i class="fa fa-arrow-right"></i> {{assignmentweight}} {{#str}}study-progress_assign_weight, block_disealytics{{/str}}</p>
-            </span>
-            {{/data}}
-        </div>
-
-        {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
-
-    </div>
-{{/viewmode_global}}
 
 {{#js}}
     require(['block_disealytics/add_interaction'], function(addInteraction) {

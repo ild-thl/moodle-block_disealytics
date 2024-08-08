@@ -35,7 +35,6 @@
         "title": "Planner"
     }
 }}
-{{> block_disealytics/view_modal}}
 {{#editmode}}
     <div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
          data-container="block_disealytics/editing-{{view_type}}">
@@ -60,7 +59,7 @@
         </a>
     </div>
 {{/editmode}}
-{{#viewmode_module}}
+{{#viewmode}}
     <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
 
         <div class="panel-heading">
@@ -76,305 +75,86 @@
                         </a>
                     </span>{{title}}</h1>
                 <div class="navigation-icons">
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
+                    <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                        <i class="fa fa-question"></i>
                     </a>
                 </div>
             </div>
         </div>
-
-        {{^isexpanded}}
-            <div class="panel-body">
-                <div class="block_disealytics-planner-whole hide-when-expanded">
-                    {{#calendar}}
-                        <div class="block_disealytics-planner-left-side" data-day="{{this_day}}" data-month="{{this_month}}" data-year="{{this_year}}">
-                            <div class="month-selection">
-                                <a class="select-last-month select-month-btn">
-                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                </a>
-                                <h3 class="subtitle">{{this_month_name}} {{this_year}}</h3>
-                                <a class="select-next-month select-month-btn">
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="planner-calendar">
-                                <div class="planner-calendar-grid">
-                                    {{#daynames_short}}
-                                        <span class="planner-grid-day">{{dayname}}</span>
-                                    {{/daynames_short}}
+        {{#viewmode_module}}
+            {{^isexpanded}}
+                <div class="panel-body">
+                    <div class="block_disealytics-planner-whole hide-when-expanded">
+                        {{#calendar}}
+                            <div class="block_disealytics-planner-left-side" data-day="{{this_day}}" data-month="{{this_month}}" data-year="{{this_year}}">
+                                <div class="month-selection">
+                                    <a class="select-last-month select-month-btn">
+                                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                    </a>
+                                    <h3 class="subtitle">{{this_month_name}} {{this_year}}</h3>
+                                    <a class="select-next-month select-month-btn">
+                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                    </a>
                                 </div>
-                                <hr class="separator-line">
-                                <div class="planner-calendar-grid">
-                                    {{#daynumbers}}
-                                        {{#isCurrentDay}}
-                                            <a class="add-event-to-planner">
-                                                <span class="hover-overlay"></span>
-                                                <span data-date="{{fullDate}}" class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
-                                            </a>
-                                        {{/isCurrentDay}}
-                                        {{^isCurrentDay}}
-                                            {{#isOtherMonth}}
-                                                <a class="add-event-to-planner" style="cursor:default;">
-                                                    <span class="other-month">{{{daynumber}}}</span>
-                                                </a>
-                                            {{/isOtherMonth}}
-                                            {{^isOtherMonth}}
+                                <div class="planner-calendar">
+                                    <div class="planner-calendar-grid">
+                                        {{#daynames_short}}
+                                            <span class="planner-grid-day">{{dayname}}</span>
+                                        {{/daynames_short}}
+                                    </div>
+                                    <hr class="separator-line">
+                                    <div class="planner-calendar-grid">
+                                        {{#daynumbers}}
+                                            {{#isCurrentDay}}
                                                 <a class="add-event-to-planner">
                                                     <span class="hover-overlay"></span>
-                                                    <span data-date="{{fullDate}}" class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                                    <span data-date="{{fullDate}}"
+                                                          class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
                                                 </a>
-                                            {{/isOtherMonth}}
-                                        {{/isCurrentDay}}
-                                    {{/daynumbers}}
-                                </div>
-                            </div>
-                        </div>
-                    {{/calendar}}
-                    <div class="planner-right-side">
-                        {{#events}}
-                            {{#time_container}}
-                                <div class="planner-events-today planner-events-list">
-                                    <h3 class="subtitle-light">{{#str}} planner-view_today_label, block_disealytics {{/str}}</h3>
-                                    <div class="all-planner-events summary-planner">
-                                        {{#events_today}}
-                                            <div class="planner-event-container"
-                                                 data-toggle="modal"
-                                                 data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
-                                                 {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
-                                                {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
-                                                {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
-                                                <div class="style-block"></div>
-                                                <div class="planner-event-data summary-view">
-                                                    <div class="event-details">
-                                                        <div class="event-details-left">
-                                                            <span class="event-name">{{name}}</span>
-                                                            <span class="event-time">{{#userdate}}{{timestampStart}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
-                                                                {{#hasEnd}}
-                                                                    - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
-                                                                {{/hasEnd}}
-                                                </span>
-                                                        </div>
-                                                        <div class="event-details-right">
-                                                            <i class="fa fa-chevron-right"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {{> block_disealytics/planner_event_modal}}
-                                        {{/events_today}}
+                                            {{/isCurrentDay}}
+                                            {{^isCurrentDay}}
+                                                {{#isOtherMonth}}
+                                                    <a class="add-event-to-planner" style="cursor:default;">
+                                                        <span class="other-month">{{{daynumber}}}</span>
+                                                    </a>
+                                                {{/isOtherMonth}}
+                                                {{^isOtherMonth}}
+                                                    <a class="add-event-to-planner">
+                                                        <span class="hover-overlay"></span>
+                                                        <span data-date="{{fullDate}}"
+                                                              class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                                    </a>
+                                                {{/isOtherMonth}}
+                                            {{/isCurrentDay}}
+                                        {{/daynumbers}}
                                     </div>
                                 </div>
-                            {{/time_container}}
-                        {{/events}}
-                    </div>
-                </div>
-            </div>
-        {{/isexpanded}}
-
-        {{#isexpanded}}
-            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
-
-                <div class="block_disealytics-planner-whole show-when-expanded">
-                    {{#calendar}}
-                    <div class="block_disealytics-planner-left-side" data-day="{{this_day}}" data-month="{{this_month}}" data-year="{{this_year}}">
-                        <div class="month-selection">
-                            <a class="select-last-month select-month-btn">
-                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                            </a>
-                            <h3 class="subtitle">{{this_month_name}} {{this_year}}</h3>
-                            <a class="select-next-month select-month-btn">
-                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="planner-calendar">
-                            <div class="planner-calendar-grid">
-                                {{#daynames_short}}
-                                    <span class="planner-grid-day">{{dayname}}</span>
-                                {{/daynames_short}}
                             </div>
-                            <hr class="separator-line">
-                            <div class="planner-calendar-grid">
-                                {{#daynumbers}}
-                                    {{#isCurrentDay}}
-                                        <a class="add-event-to-planner">
-                                            <span class="hover-overlay"></span>
-                                            <span data-date="{{fullDate}}" class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
-                                        </a>
-                                    {{/isCurrentDay}}
-                                    {{^isCurrentDay}}
-                                        {{#isOtherMonth}}
-                                            <a class="add-event-to-planner" style="cursor:default;">
-                                                <span class="other-month">{{{daynumber}}}</span>
-                                            </a>
-                                        {{/isOtherMonth}}
-                                        {{^isOtherMonth}}
-                                            <a class="add-event-to-planner">
-                                                <span class="hover-overlay"></span>
-                                                <span data-date="{{fullDate}}" class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
-                                            </a>
-                                        {{/isOtherMonth}}
-                                    {{/isCurrentDay}}
-                                {{/daynumbers}}
-                            </div>
-                        </div>
-                    {{/calendar}}
-                </div>
-                    <div class="planner-right-side">
-                        {{#events}}
-                            {{#time_container}}
-                                <div class="planner-events-thismonth planner-events-list">
-                                    <div class="all-planner-events expanded-planner">
-                                        {{#events_thismonth}}
-                                            <div class="planner-event-container"
-                                                 data-toggle="modal"
-                                                 data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
-                                                 {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
-                                                {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
-                                                {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
-                                                <div class="style-block"></div>
-                                                <div class="planner-event-data">
-                                                    <div class="event-date">
-                                                        <span>{{dayNameShort}}</span>
-                                                        <span>{{dayNumber}}</span>
-                                                    </div>
-                                                    <div class="event-details">
-                                                        <div class="event-details-left">
-                                                            <span class="event-name">{{name}}</span>
-                                                            <span class="event-time">{{#userdate}}{{timestampStart}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
-                                                                {{#hasEnd}}
-                                                                    - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
-                                                                {{/hasEnd}}
-                                                </span>
-                                                            {{#eventTypeConference}}<span class="webconference-event">{{.}}</span>{{/eventTypeConference}}
-                                                            {{#eventTypePresence}}<span class="presence-event">{{.}}</span>{{/eventTypePresence}}
-                                                            {{#eventTypeOther}}<span class="other-event">{{.}}</span>{{/eventTypeOther}}
-                                                        </div>
-                                                        <div class="event-details-right">
-                                                            <span>{{#str}} planner_event-details-activity, block_disealytics {{/str}}</span>
-                                                            <i class="fa fa-chevron-right"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {{> block_disealytics/planner_event_modal}}
-                                        {{/events_thismonth}}
-                                    </div>
-                                </div>
-                            {{/time_container}}
-                        {{/events}}
-                    </div>
-                </div>
-            </div>
-        {{/isexpanded}}
-
-        {{> block_disealytics/bottom_navigation }}
-
-        {{> block_disealytics/panel_editing_footer }}
-
-    </div>
-{{/viewmode_module}}
-{{#viewmode_halfyear}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
-
-        <div class="panel-heading">
-            <div class="flex-container">
-                <h1 id="title">
-                    <span class="show-when-expanded">
-                        <a
-                                style="cursor: pointer; text-decoration: none"
-                                class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                                data-action="block_disealytics/expand-{{view_type}}"
-                                data-actiontype="block_disealytics/toggle-expansion">
-                            <i style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-                        </a>
-                    </span>{{title}}</h1>
-                <div class="navigation-icons">
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        {{^isexpanded}}
-            <div class="panel-body">
-
-                <div class="block_disealytics-planner-whole hide-when-expanded">
-                    {{#calendar}}
-                        <div class="block_disealytics-planner-left-side" data-day="{{this_day}}" data-month="{{this_month}}" data-year="{{this_year}}">
-                            <div class="month-selection">
-                                <a class="select-last-month select-month-btn">
-                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                </a>
-                                <h3 class="subtitle">{{this_month_name}} {{this_year}}</h3>
-                                <a class="select-next-month select-month-btn">
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <div class="planner-calendar">
-                                <div class="planner-calendar-grid">
-                                    {{#daynames_short}}
-                                        <span class="planner-grid-day">{{dayname}}</span>
-                                    {{/daynames_short}}
-                                </div>
-                                <hr class="separator-line">
-                                <div class="planner-calendar-grid">
-                                    {{#daynumbers}}
-                                        {{#isCurrentDay}}
-                                            <a class="add-event-to-planner">
-                                                <span class="hover-overlay"></span>
-                                                <span data-date="{{fullDate}}" class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
-                                            </a>
-                                        {{/isCurrentDay}}
-                                        {{^isCurrentDay}}
-                                            {{#isOtherMonth}}
-                                                <a class="add-event-to-planner" style="cursor:default;">
-                                                    <span class="other-month">{{{daynumber}}}</span>
-                                                </a>
-                                            {{/isOtherMonth}}
-                                            {{^isOtherMonth}}
-                                                <a class="add-event-to-planner">
-                                                    <span class="hover-overlay"></span>
-                                                    <span data-date="{{fullDate}}" class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
-                                                </a>
-                                            {{/isOtherMonth}}
-                                        {{/isCurrentDay}}
-                                    {{/daynumbers}}
-                                </div>
-                            </div>
-                        </div>
-                    {{/calendar}}
-                    <div class="planner-right-side">
-
-                        <div class="planner-events-today planner-events-list">
-                            <h3 class="subtitle-light">{{#str}} planner-view_today_label, block_disealytics {{/str}}</h3>
-                            <div class="all-planner-events summary-planner">
-                                {{#course}}
-                                    {{#events}}
-                                        {{#time_container}}
+                        {{/calendar}}
+                        <div class="planner-right-side">
+                            {{#events}}
+                                {{#time_container}}
+                                    <div class="planner-events-today planner-events-list">
+                                        <h3 class="subtitle-light">{{#str}} planner-view_today_label, block_disealytics {{/str}}</h3>
+                                        <div class="all-planner-events summary-planner">
                                             {{#events_today}}
                                                 <div class="planner-event-container"
                                                      data-toggle="modal"
                                                      data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
-                                                     {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
+                                                    {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
                                                     {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
                                                     {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
                                                     <div class="style-block"></div>
                                                     <div class="planner-event-data summary-view">
                                                         <div class="event-details">
                                                             <div class="event-details-left">
-                                                                <span class="event-name">{{courseName}}</span>
                                                                 <span class="event-name">{{name}}</span>
-                                                                <span class="event-time">
-                                                                    {{#userdate}}{{timestampStart}},{{#str}} strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                <span class="event-time">{{#userdate}}{{timestampStart}}, {{#str}}
+                                                                    strftimetime24, core_langconfig{{/str}}{{/userdate}}
                                                                     {{#hasEnd}}
                                                                         - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
                                                                     {{/hasEnd}}
-                                                                    </span>
+                                                </span>
                                                             </div>
                                                             <div class="event-details-right">
                                                                 <i class="fa fa-chevron-right"></i>
@@ -384,165 +164,19 @@
                                                 </div>
                                                 {{> block_disealytics/planner_event_modal}}
                                             {{/events_today}}
-                                        {{/time_container}}
-                                    {{/events}}
-                                {{/course}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {{/isexpanded}}
-
-        {{#isexpanded}}
-            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
-
-                <div class="block_disealytics-planner-whole show-when-expanded">
-                    {{#calendar}}
-                    <div class="block_disealytics-planner-left-side" data-day="{{this_day}}" data-month="{{this_month}}" data-year="{{this_year}}">
-                        <div class="month-selection">
-                            <a class="select-last-month select-month-btn">
-                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                            </a>
-                            <h3 class="subtitle">{{this_month_name}} {{this_year}}</h3>
-                            <a class="select-next-month select-month-btn">
-                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="planner-calendar">
-                            <div class="planner-calendar-grid">
-                                {{#daynames_short}}
-                                    <span class="planner-grid-day">{{dayname}}</span>
-                                {{/daynames_short}}
-                            </div>
-                            <hr class="separator-line">
-                            <div class="planner-calendar-grid">
-                                {{#daynumbers}}
-                                    {{#isCurrentDay}}
-                                        <a class="add-event-to-planner">
-                                            <span class="hover-overlay"></span>
-                                            <span data-date="{{fullDate}}" class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
-                                        </a>
-                                    {{/isCurrentDay}}
-                                    {{^isCurrentDay}}
-                                        {{#isOtherMonth}}
-                                            <a class="add-event-to-planner" style="cursor:default;">
-                                                <span class="other-month">{{{daynumber}}}</span>
-                                            </a>
-                                        {{/isOtherMonth}}
-                                        {{^isOtherMonth}}
-                                            <a class="add-event-to-planner">
-                                                <span class="hover-overlay"></span>
-                                                <span data-date="{{fullDate}}" class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
-                                            </a>
-                                        {{/isOtherMonth}}
-                                    {{/isCurrentDay}}
-                                {{/daynumbers}}
-                            </div>
-                        </div>
-                    {{/calendar}}
-                </div>
-                    <div class="planner-right-side">
-                        <div class="planner-events-thismonth planner-events-list">
-                            <div class="all-planner-events expanded-planner">
-                                {{#course}}
-                                    <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
-                                        <h4>{{coursename}}</h4>
-                                        <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+                                        </div>
                                     </div>
-                                    <div class="all-events-of-course">
-                                        {{#events}}
-                                            {{#time_container}}
-                                                {{#events_thismonth}}
-                                                    <div class="planner-event-container"
-                                                         data-toggle="modal"
-                                                         data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
-                                                         {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
-                                                        {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
-                                                        {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
-                                                        <div class="style-block"></div>
-                                                        <div class="planner-event-data">
-                                                            <div class="event-date">
-                                                                <span>{{dayNameShort}}</span>
-                                                                <span>{{dayNumber}}</span>
-                                                            </div>
-                                                            <div class="event-details">
-                                                                <div class="event-details-left">
-                                                                    <span class="event-name">{{name}}</span>
-                                                                    <span class="event-time">
-                                                                    {{#userdate}}{{timestampStart}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
-                                                                        {{#hasEnd}}
-                                                                            - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
-                                                                        {{/hasEnd}}
-                                                                </span>
-                                                                    {{#eventTypeConference}}<span class="webconference-event">{{.}}</span>{{/eventTypeConference}}
-                                                                    {{#eventTypePresence}}<span class="presence-event">{{.}}</span>{{/eventTypePresence}}
-                                                                    {{#eventTypeOther}}<span class="other-event">{{.}}</span>{{/eventTypeOther}}
-                                                                </div>
-                                                                <div class="event-details-right">
-                                                                    <span>{{#str}} planner_event-details-activity, block_disealytics {{/str}}</span>
-                                                                    <i class="fa fa-chevron-right"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {{> block_disealytics/planner_event_modal}}
-                                                {{/events_thismonth}}
-                                            {{/time_container}}
-                                        {{/events}}
-                                    </div>
-                                {{/course}}
-                            </div>
+                                {{/time_container}}
+                            {{/events}}
                         </div>
                     </div>
                 </div>
-            </div>
-        {{/isexpanded}}
+            {{/isexpanded}}
+            {{#isexpanded}}
+                <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
 
-        {{> block_disealytics/bottom_navigation }}
-
-        {{> block_disealytics/panel_editing_footer }}
-
-    </div>
-{{/viewmode_halfyear}}
-{{#viewmode_global}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
-
-        <div class="panel-heading">
-            <div class="flex-container">
-                <h1 id="title">
-                    <span class="show-when-expanded">
-                        <a
-                                style="cursor: pointer; text-decoration: none"
-                                class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                                data-action="block_disealytics/expand-{{view_type}}"
-                                data-actiontype="block_disealytics/toggle-expansion">
-                            <i style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-                        </a>
-                    </span>{{title}}</h1>
-                <div class="navigation-icons">
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        {{^isexpanded}}
-            <div class="panel-body">
-                <div class="categories-container">
-                    <div class="course-category-global">
-                        {{#categories}}
-                            <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
-                                {{name}}
-                            </button>
-                        {{/categories}}
-                    </div>
-                </div>
-                <div class="block_disealytics-planner-whole hide-when-expanded">
-                    {{#calendar}}
+                    <div class="block_disealytics-planner-whole show-when-expanded">
+                        {{#calendar}}
                         <div class="block_disealytics-planner-left-side" data-day="{{this_day}}" data-month="{{this_month}}" data-year="{{this_year}}">
                             <div class="month-selection">
                                 <a class="select-last-month select-month-btn">
@@ -565,7 +199,8 @@
                                         {{#isCurrentDay}}
                                             <a class="add-event-to-planner">
                                                 <span class="hover-overlay"></span>
-                                                <span data-date="{{fullDate}}" class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                                <span data-date="{{fullDate}}"
+                                                      class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
                                             </a>
                                         {{/isCurrentDay}}
                                         {{^isCurrentDay}}
@@ -577,43 +212,49 @@
                                             {{^isOtherMonth}}
                                                 <a class="add-event-to-planner">
                                                     <span class="hover-overlay"></span>
-                                                    <span data-date="{{fullDate}}" class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                                    <span data-date="{{fullDate}}"
+                                                          class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
                                                 </a>
                                             {{/isOtherMonth}}
                                         {{/isCurrentDay}}
                                     {{/daynumbers}}
                                 </div>
                             </div>
-                        </div>
-                    {{/calendar}}
-                    <div class="planner-right-side">
-                        <div class="planner-events-today planner-events-list">
-                            <h3 class="subtitle-light">{{#str}} planner-view_global_label, block_disealytics {{/str}}</h3>
-                            <div class="all-planner-events summary-planner">
-                                {{#course}}
-                                    {{#events}}
-                                        {{#time_container}}
+                        {{/calendar}}
+                    </div>
+                        <div class="planner-right-side">
+                            {{#events}}
+                                {{#time_container}}
+                                    <div class="planner-events-thismonth planner-events-list">
+                                        <div class="all-planner-events expanded-planner">
                                             {{#events_thismonth}}
                                                 <div class="planner-event-container"
                                                      data-toggle="modal"
                                                      data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
-                                                     {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
+                                                    {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
                                                     {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
                                                     {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
                                                     <div class="style-block"></div>
-                                                    <div class="planner-event-data summary-view">
+                                                    <div class="planner-event-data">
+                                                        <div class="event-date">
+                                                            <span>{{dayNameShort}}</span>
+                                                            <span>{{dayNumber}}</span>
+                                                        </div>
                                                         <div class="event-details">
                                                             <div class="event-details-left">
-                                                                <span class="event-name">{{courseName}}</span>
                                                                 <span class="event-name">{{name}}</span>
-                                                                <span class="event-time">
-                                                                    {{#userdate}}{{timestampStart}},{{#str}} strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                <span class="event-time">{{#userdate}}{{timestampStart}}, {{#str}}
+                                                                    strftimetime24, core_langconfig{{/str}}{{/userdate}}
                                                                     {{#hasEnd}}
                                                                         - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
                                                                     {{/hasEnd}}
-                                                                    </span>
+                                                </span>
+                                                                {{#eventTypeConference}}<span class="webconference-event">{{.}}</span>{{/eventTypeConference}}
+                                                                {{#eventTypePresence}}<span class="presence-event">{{.}}</span>{{/eventTypePresence}}
+                                                                {{#eventTypeOther}}<span class="other-event">{{.}}</span>{{/eventTypeOther}}
                                                             </div>
                                                             <div class="event-details-right">
+                                                                <span>{{#str}} planner_event-details-activity, block_disealytics {{/str}}</span>
                                                                 <i class="fa fa-chevron-right"></i>
                                                             </div>
                                                         </div>
@@ -621,113 +262,305 @@
                                                 </div>
                                                 {{> block_disealytics/planner_event_modal}}
                                             {{/events_thismonth}}
-                                        {{/time_container}}
-                                    {{/events}}
-                                {{/course}}
-                            </div>
+                                        </div>
+                                    </div>
+                                {{/time_container}}
+                            {{/events}}
                         </div>
                     </div>
                 </div>
-            </div>
-        {{/isexpanded}}
+            {{/isexpanded}}
+        {{/viewmode_module}}
+        {{#viewmode_halfyear}}
+            {{^isexpanded}}
+                <div class="panel-body">
 
-        {{#isexpanded}}
-            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
-                <div class="categories-container">
-                    <div class="course-category-global">
-                        {{#categories}}
-                            <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
-                                {{name}}
-                            </button>
-                        {{/categories}}
+                    <div class="block_disealytics-planner-whole hide-when-expanded">
+                        {{#calendar}}
+                            <div class="block_disealytics-planner-left-side" data-day="{{this_day}}" data-month="{{this_month}}" data-year="{{this_year}}">
+                                <div class="month-selection">
+                                    <a class="select-last-month select-month-btn">
+                                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                    </a>
+                                    <h3 class="subtitle">{{this_month_name}} {{this_year}}</h3>
+                                    <a class="select-next-month select-month-btn">
+                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <div class="planner-calendar">
+                                    <div class="planner-calendar-grid">
+                                        {{#daynames_short}}
+                                            <span class="planner-grid-day">{{dayname}}</span>
+                                        {{/daynames_short}}
+                                    </div>
+                                    <hr class="separator-line">
+                                    <div class="planner-calendar-grid">
+                                        {{#daynumbers}}
+                                            {{#isCurrentDay}}
+                                                <a class="add-event-to-planner">
+                                                    <span class="hover-overlay"></span>
+                                                    <span data-date="{{fullDate}}"
+                                                          class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                                </a>
+                                            {{/isCurrentDay}}
+                                            {{^isCurrentDay}}
+                                                {{#isOtherMonth}}
+                                                    <a class="add-event-to-planner" style="cursor:default;">
+                                                        <span class="other-month">{{{daynumber}}}</span>
+                                                    </a>
+                                                {{/isOtherMonth}}
+                                                {{^isOtherMonth}}
+                                                    <a class="add-event-to-planner">
+                                                        <span class="hover-overlay"></span>
+                                                        <span data-date="{{fullDate}}"
+                                                              class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                                    </a>
+                                                {{/isOtherMonth}}
+                                            {{/isCurrentDay}}
+                                        {{/daynumbers}}
+                                    </div>
+                                </div>
+                            </div>
+                        {{/calendar}}
+                        <div class="planner-right-side">
+
+                            <div class="planner-events-today planner-events-list">
+                                <h3 class="subtitle-light">{{#str}} planner-view_today_label, block_disealytics {{/str}}</h3>
+                                <div class="all-planner-events summary-planner">
+                                    {{#course}}
+                                        {{#events}}
+                                            {{#time_container}}
+                                                {{#events_today}}
+                                                    <div class="planner-event-container"
+                                                         data-toggle="modal"
+                                                         data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
+                                                        {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
+                                                        {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
+                                                        {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
+                                                        <div class="style-block"></div>
+                                                        <div class="planner-event-data summary-view">
+                                                            <div class="event-details">
+                                                                <div class="event-details-left">
+                                                                    <span class="event-name">{{courseName}}</span>
+                                                                    <span class="event-name">{{name}}</span>
+                                                                    <span class="event-time">
+                                                                    {{#userdate}}{{timestampStart}},{{#str}} strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                        {{#hasEnd}}
+                                                                            - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                        {{/hasEnd}}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="event-details-right">
+                                                                    <i class="fa fa-chevron-right"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{> block_disealytics/planner_event_modal}}
+                                                {{/events_today}}
+                                            {{/time_container}}
+                                        {{/events}}
+                                    {{/course}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="block_disealytics-planner-whole show-when-expanded">
-                    {{#calendar}}
-                    <div class="block_disealytics-planner-left-side" data-day="{{this_day}}" data-month="{{this_month}}" data-year="{{this_year}}">
-                        <div class="month-selection">
-                            <a class="select-last-month select-month-btn">
-                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                            </a>
-                            <h3 class="subtitle">{{this_month_name}} {{this_year}}</h3>
-                            <a class="select-next-month select-month-btn">
-                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="planner-calendar">
-                            <div class="planner-calendar-grid">
-                                {{#daynames_short}}
-                                    <span class="planner-grid-day">{{dayname}}</span>
-                                {{/daynames_short}}
+            {{/isexpanded}}
+            {{#isexpanded}}
+                <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
+
+                    <div class="block_disealytics-planner-whole show-when-expanded">
+                        {{#calendar}}
+                        <div class="block_disealytics-planner-left-side" data-day="{{this_day}}" data-month="{{this_month}}" data-year="{{this_year}}">
+                            <div class="month-selection">
+                                <a class="select-last-month select-month-btn">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </a>
+                                <h3 class="subtitle">{{this_month_name}} {{this_year}}</h3>
+                                <a class="select-next-month select-month-btn">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </a>
                             </div>
-                            <hr class="separator-line">
-                            <div class="planner-calendar-grid">
-                                {{#daynumbers}}
-                                    {{#isCurrentDay}}
-                                        <a class="add-event-to-planner">
-                                            <span class="hover-overlay"></span>
-                                            <span data-date="{{fullDate}}" class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
-                                        </a>
-                                    {{/isCurrentDay}}
-                                    {{^isCurrentDay}}
-                                        {{#isOtherMonth}}
-                                            <a class="add-event-to-planner" style="cursor:default;">
-                                                <span class="other-month">{{{daynumber}}}</span>
-                                            </a>
-                                        {{/isOtherMonth}}
-                                        {{^isOtherMonth}}
+                            <div class="planner-calendar">
+                                <div class="planner-calendar-grid">
+                                    {{#daynames_short}}
+                                        <span class="planner-grid-day">{{dayname}}</span>
+                                    {{/daynames_short}}
+                                </div>
+                                <hr class="separator-line">
+                                <div class="planner-calendar-grid">
+                                    {{#daynumbers}}
+                                        {{#isCurrentDay}}
                                             <a class="add-event-to-planner">
                                                 <span class="hover-overlay"></span>
-                                                <span data-date="{{fullDate}}" class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                                <span data-date="{{fullDate}}"
+                                                      class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
                                             </a>
-                                        {{/isOtherMonth}}
-                                    {{/isCurrentDay}}
-                                {{/daynumbers}}
+                                        {{/isCurrentDay}}
+                                        {{^isCurrentDay}}
+                                            {{#isOtherMonth}}
+                                                <a class="add-event-to-planner" style="cursor:default;">
+                                                    <span class="other-month">{{{daynumber}}}</span>
+                                                </a>
+                                            {{/isOtherMonth}}
+                                            {{^isOtherMonth}}
+                                                <a class="add-event-to-planner">
+                                                    <span class="hover-overlay"></span>
+                                                    <span data-date="{{fullDate}}"
+                                                          class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                                </a>
+                                            {{/isOtherMonth}}
+                                        {{/isCurrentDay}}
+                                    {{/daynumbers}}
+                                </div>
+                            </div>
+                        {{/calendar}}
+                    </div>
+                        <div class="planner-right-side">
+                            <div class="planner-events-thismonth planner-events-list">
+                                <div class="all-planner-events expanded-planner">
+                                    {{#course}}
+                                        <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
+                                            <h4>{{coursename}}</h4>
+                                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+                                        </div>
+                                        <div class="all-events-of-course">
+                                            {{#events}}
+                                                {{#time_container}}
+                                                    {{#events_thismonth}}
+                                                        <div class="planner-event-container"
+                                                             data-toggle="modal"
+                                                             data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
+                                                            {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
+                                                            {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
+                                                            {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
+                                                            <div class="style-block"></div>
+                                                            <div class="planner-event-data">
+                                                                <div class="event-date">
+                                                                    <span>{{dayNameShort}}</span>
+                                                                    <span>{{dayNumber}}</span>
+                                                                </div>
+                                                                <div class="event-details">
+                                                                    <div class="event-details-left">
+                                                                        <span class="event-name">{{name}}</span>
+                                                                        <span class="event-time">
+                                                                    {{#userdate}}{{timestampStart}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                            {{#hasEnd}}
+                                                                                - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                            {{/hasEnd}}
+                                                                </span>
+                                                                        {{#eventTypeConference}}<span class="webconference-event">{{.}}</span>{{/eventTypeConference}}
+                                                                        {{#eventTypePresence}}<span class="presence-event">{{.}}</span>{{/eventTypePresence}}
+                                                                        {{#eventTypeOther}}<span class="other-event">{{.}}</span>{{/eventTypeOther}}
+                                                                    </div>
+                                                                    <div class="event-details-right">
+                                                                        <span>{{#str}} planner_event-details-activity, block_disealytics {{/str}}</span>
+                                                                        <i class="fa fa-chevron-right"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{> block_disealytics/planner_event_modal}}
+                                                    {{/events_thismonth}}
+                                                {{/time_container}}
+                                            {{/events}}
+                                        </div>
+                                    {{/course}}
+                                </div>
                             </div>
                         </div>
-                    {{/calendar}}
+                    </div>
                 </div>
-                    <div class="planner-right-side">
-
-
-                        <div class="planner-events-thismonth planner-events-list">
-                            <div class="all-planner-events expanded-planner">
-                                {{#course}}
-                                    <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
-                                        <h4>{{coursename}}</h4>
-                                        <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+            {{/isexpanded}}
+        {{/viewmode_halfyear}}
+        {{#viewmode_global}}
+            {{^isexpanded}}
+                <div class="panel-body">
+                    <div class="categories-container">
+                        <div class="course-category-global">
+                            {{#categories}}
+                                <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
+                                    {{name}}
+                                </button>
+                            {{/categories}}
+                        </div>
+                    </div>
+                    <div class="block_disealytics-planner-whole hide-when-expanded">
+                        {{#calendar}}
+                            <div class="block_disealytics-planner-left-side" data-day="{{this_day}}" data-month="{{this_month}}" data-year="{{this_year}}">
+                                <div class="month-selection">
+                                    <a class="select-last-month select-month-btn">
+                                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                    </a>
+                                    <h3 class="subtitle">{{this_month_name}} {{this_year}}</h3>
+                                    <a class="select-next-month select-month-btn">
+                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <div class="planner-calendar">
+                                    <div class="planner-calendar-grid">
+                                        {{#daynames_short}}
+                                            <span class="planner-grid-day">{{dayname}}</span>
+                                        {{/daynames_short}}
                                     </div>
-                                    <div class="all-events-of-course">
+                                    <hr class="separator-line">
+                                    <div class="planner-calendar-grid">
+                                        {{#daynumbers}}
+                                            {{#isCurrentDay}}
+                                                <a class="add-event-to-planner">
+                                                    <span class="hover-overlay"></span>
+                                                    <span data-date="{{fullDate}}"
+                                                          class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                                </a>
+                                            {{/isCurrentDay}}
+                                            {{^isCurrentDay}}
+                                                {{#isOtherMonth}}
+                                                    <a class="add-event-to-planner" style="cursor:default;">
+                                                        <span class="other-month">{{{daynumber}}}</span>
+                                                    </a>
+                                                {{/isOtherMonth}}
+                                                {{^isOtherMonth}}
+                                                    <a class="add-event-to-planner">
+                                                        <span class="hover-overlay"></span>
+                                                        <span data-date="{{fullDate}}"
+                                                              class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                                    </a>
+                                                {{/isOtherMonth}}
+                                            {{/isCurrentDay}}
+                                        {{/daynumbers}}
+                                    </div>
+                                </div>
+                            </div>
+                        {{/calendar}}
+                        <div class="planner-right-side">
+                            <div class="planner-events-today planner-events-list">
+                                <h3 class="subtitle-light">{{#str}} planner-view_global_label, block_disealytics {{/str}}</h3>
+                                <div class="all-planner-events summary-planner">
+                                    {{#course}}
                                         {{#events}}
                                             {{#time_container}}
                                                 {{#events_thismonth}}
                                                     <div class="planner-event-container"
                                                          data-toggle="modal"
                                                          data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
-                                                         {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
+                                                        {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
                                                         {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
                                                         {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
                                                         <div class="style-block"></div>
-                                                        <div class="planner-event-data">
-                                                            <div class="event-date">
-                                                                <span>{{dayNameShort}}</span>
-                                                                <span>{{dayNumber}}</span>
-                                                            </div>
+                                                        <div class="planner-event-data summary-view">
                                                             <div class="event-details">
                                                                 <div class="event-details-left">
+                                                                    <span class="event-name">{{courseName}}</span>
                                                                     <span class="event-name">{{name}}</span>
                                                                     <span class="event-time">
-                                                                    {{#userdate}}{{timestampStart}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                    {{#userdate}}{{timestampStart}},{{#str}} strftimetime24, core_langconfig{{/str}}{{/userdate}}
                                                                         {{#hasEnd}}
                                                                             - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
                                                                         {{/hasEnd}}
-                                                                </span>
-                                                                    {{#eventTypeConference}}<span class="webconference-event">{{.}}</span>{{/eventTypeConference}}
-                                                                    {{#eventTypePresence}}<span class="presence-event">{{.}}</span>{{/eventTypePresence}}
-                                                                    {{#eventTypeOther}}<span class="other-event">{{.}}</span>{{/eventTypeOther}}
+                                                                    </span>
                                                                 </div>
                                                                 <div class="event-details-right">
-                                                                    <span>{{#str}} planner_event-details-activity, block_disealytics {{/str}}</span>
                                                                     <i class="fa fa-chevron-right"></i>
                                                                 </div>
                                                             </div>
@@ -737,21 +570,133 @@
                                                 {{/events_thismonth}}
                                             {{/time_container}}
                                         {{/events}}
-                                    </div>
-                                {{/course}}
+                                    {{/course}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {{/isexpanded}}
+            {{/isexpanded}}
+            {{#isexpanded}}
+                <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
+                    <div class="categories-container">
+                        <div class="course-category-global">
+                            {{#categories}}
+                                <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
+                                    {{name}}
+                                </button>
+                            {{/categories}}
+                        </div>
+                    </div>
+                    <div class="block_disealytics-planner-whole show-when-expanded">
+                        {{#calendar}}
+                        <div class="block_disealytics-planner-left-side" data-day="{{this_day}}" data-month="{{this_month}}" data-year="{{this_year}}">
+                            <div class="month-selection">
+                                <a class="select-last-month select-month-btn">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </a>
+                                <h3 class="subtitle">{{this_month_name}} {{this_year}}</h3>
+                                <a class="select-next-month select-month-btn">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="planner-calendar">
+                                <div class="planner-calendar-grid">
+                                    {{#daynames_short}}
+                                        <span class="planner-grid-day">{{dayname}}</span>
+                                    {{/daynames_short}}
+                                </div>
+                                <hr class="separator-line">
+                                <div class="planner-calendar-grid">
+                                    {{#daynumbers}}
+                                        {{#isCurrentDay}}
+                                            <a class="add-event-to-planner">
+                                                <span class="hover-overlay"></span>
+                                                <span data-date="{{fullDate}}"
+                                                      class="current-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                            </a>
+                                        {{/isCurrentDay}}
+                                        {{^isCurrentDay}}
+                                            {{#isOtherMonth}}
+                                                <a class="add-event-to-planner" style="cursor:default;">
+                                                    <span class="other-month">{{{daynumber}}}</span>
+                                                </a>
+                                            {{/isOtherMonth}}
+                                            {{^isOtherMonth}}
+                                                <a class="add-event-to-planner">
+                                                    <span class="hover-overlay"></span>
+                                                    <span data-date="{{fullDate}}"
+                                                          class="other-day day-in-planner block_disealytics-add-new-event-to-planner {{#hasAppointment}} has-appointment {{/hasAppointment}}">{{{daynumber}}}</span>
+                                                </a>
+                                            {{/isOtherMonth}}
+                                        {{/isCurrentDay}}
+                                    {{/daynumbers}}
+                                </div>
+                            </div>
+                        {{/calendar}}
+                    </div>
+                        <div class="planner-right-side">
 
+
+                            <div class="planner-events-thismonth planner-events-list">
+                                <div class="all-planner-events expanded-planner">
+                                    {{#course}}
+                                        <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
+                                            <h4>{{coursename}}</h4>
+                                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+                                        </div>
+                                        <div class="all-events-of-course">
+                                            {{#events}}
+                                                {{#time_container}}
+                                                    {{#events_thismonth}}
+                                                        <div class="planner-event-container"
+                                                             data-toggle="modal"
+                                                             data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
+                                                            {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
+                                                            {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
+                                                            {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
+                                                            <div class="style-block"></div>
+                                                            <div class="planner-event-data">
+                                                                <div class="event-date">
+                                                                    <span>{{dayNameShort}}</span>
+                                                                    <span>{{dayNumber}}</span>
+                                                                </div>
+                                                                <div class="event-details">
+                                                                    <div class="event-details-left">
+                                                                        <span class="event-name">{{name}}</span>
+                                                                        <span class="event-time">
+                                                                    {{#userdate}}{{timestampStart}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                            {{#hasEnd}}
+                                                                                - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                            {{/hasEnd}}
+                                                                </span>
+                                                                        {{#eventTypeConference}}<span class="webconference-event">{{.}}</span>{{/eventTypeConference}}
+                                                                        {{#eventTypePresence}}<span class="presence-event">{{.}}</span>{{/eventTypePresence}}
+                                                                        {{#eventTypeOther}}<span class="other-event">{{.}}</span>{{/eventTypeOther}}
+                                                                    </div>
+                                                                    <div class="event-details-right">
+                                                                        <span>{{#str}} planner_event-details-activity, block_disealytics {{/str}}</span>
+                                                                        <i class="fa fa-chevron-right"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{> block_disealytics/planner_event_modal}}
+                                                    {{/events_thismonth}}
+                                                {{/time_container}}
+                                            {{/events}}
+                                        </div>
+                                    {{/course}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/isexpanded}}
+        {{/viewmode_global}}
         {{> block_disealytics/bottom_navigation }}
-
-        {{> block_disealytics/panel_editing_footer }}
-
     </div>
-{{/viewmode_global}}
+{{/viewmode}}
 
 {{#js}}
     require(['block_disealytics/add_interaction'],

@@ -42,10 +42,8 @@
                data-action="block_disealytics/toggle-editing">
                 <i class="fa fa-pencil"></i>
             </a>
-            <a class="dashboard-button block_disealytics-container-{{view_type}} expanded-info-btn-{{view_type}}"
-               id="block_disealytics_main_info_button"
-               data-toggle="modal"
-               data-target="#infoMainModal">
+            <a class="dashboard-button"
+               id="block_disealytics_main_info_btn">
                 <i class="fa fa-question"></i>
             </a>
             <a id="block_disealytics_config_menu"
@@ -76,39 +74,6 @@
             <i class="show-when-editing fa fa-arrow-left" style="color: var(--diseablue); justify-self: start;"></i>
             <span class="show-when-editing main-viewmode-label">{{#str}} exit_editing_mode, block_disealytics{{/str}}</span>
         </a>
-    </div>
-    <div class="modal fade block_disealytics-main-modal" id="infoMainModal">
-        <div class="modal-dialog">
-            <div class="modal-content content-modal-main">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{#str}} main_help_title, block_disealytics {{/str}}</h5>
-                    <a class="block_disealytics-close-modal-btn" data-dismiss="modal">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-
-                <div class="modal-body">
-                    <details>
-                        <summary><strong>{{#str}} main_help_views_summary, block_disealytics {{/str}}</strong></summary>
-                        <p>{{#str}} main_help_views_details, block_disealytics {{/str}}</p>
-                    </details>
-                    <details>
-                        <summary><strong>{{#str}} main_help_add_remove_summary, block_disealytics {{/str}}</strong></summary>
-                        <p>{{#str}} main_help_add_remove_details, block_disealytics {{/str}}</p>
-                    </details>
-                    <details>
-                        <summary><strong>{{#str}} main_help_help_summary, block_disealytics {{/str}}</strong></summary>
-                        <p>{{#str}} main_help_help_details, block_disealytics {{/str}}</p>
-                    </details>
-                    <details>
-                        <summary><strong>{{#str}} main_help_edit_summary, block_disealytics {{/str}}</strong></summary>
-                        <p>{{#str}} main_help_edit_details, block_disealytics {{/str}}</p>
-                    </details>
-                </div>
-                <div class="modal-footer">DiSEA Learning Dashboard 2024 - Version 0.2.4 2024071500</div>
-            </div>
-
-        </div>
     </div>
     {{> block_disealytics/config_menu}}
     <p class="show-when-no-view-exists hidden">{{#str}} no-view-exists, block_disealytics {{/str}}</p>

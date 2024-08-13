@@ -85,13 +85,12 @@ class study_progress_view extends base_view {
     /**
      * study_progress_view constructor.
      *
-     * @param $timeframe
      * @throws Exception
      * @throws moodle_exception
      */
-    public function __construct($timeframe) {
+    public function __construct() {
         global $COURSE;
-        parent::__construct($timeframe);
+        parent::__construct();
         if ($COURSE->id != 1 && count(assignment::block_disealytics_get_course_assignments($COURSE->id)) > 0) {
             $this->score = $this->compute_score('module');
         } else {
@@ -102,11 +101,12 @@ class study_progress_view extends base_view {
     /**
      * Compute the score.
      *
-     * @param $type
+     * @param string $type
      * @return float
+     * @throws dml_exception
      * @throws moodle_exception
      */
-    private function compute_score($type): float {
+    private function compute_score(string $type): float {
         global $USER, $COURSE;
 
         $maxassignscore = 0;

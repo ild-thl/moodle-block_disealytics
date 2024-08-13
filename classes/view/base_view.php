@@ -47,10 +47,9 @@ abstract class base_view {
     /**
      * base_view constructor.
      *
-     * @param  $timeframe
      * @throws Exception
      */
-    public function __construct($timeframe) {
+    public function __construct() {
         $timeframedates = learningdata::get_current_halfyear_dates();
         $this->start = $timeframedates["start"];
         $this->end = $timeframedates["end"];
@@ -59,11 +58,11 @@ abstract class base_view {
     /**
      * Gives an array with all the calenderweeks in between the input dates.
      *
-     * @param  $unit
+     * @param string $unit
      * @return array
      * @throws Exception
      */
-    protected function dividetimeframe($unit): array {
+    protected function dividetimeframe(string $unit): array {
         $interval = new DateInterval('P1' . $unit);
         $daterange = new DatePeriod($this->start, $interval, $this->end);
         $names = [];
@@ -77,12 +76,11 @@ abstract class base_view {
     /**
      * Gives an array with all the calenderweeks in between the input dates.
      *
-     * @param  $start
-     * @param  $end
+     * @param DateTime $start
+     * @param DateTime $end
      * @return array
-     * @throws Exception
      */
-    protected static function get_weeknrs($start, $end): array {
+    protected static function get_weeknrs(DateTime $start, DateTime $end): array {
         $interval = new DateInterval('P1W');
         $daterange = new DatePeriod($start, $interval, $end);
         $names = [];

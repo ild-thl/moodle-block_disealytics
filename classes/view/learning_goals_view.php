@@ -48,12 +48,11 @@ class learning_goals_view extends base_view {
     /**
      * learning_goals_view constructor.
      *
-     * @param $timeframe
      * @param learningdata $learningdata
      * @throws Exception
      */
-    public function __construct($timeframe, learningdata $learningdata) {
-        parent::__construct($timeframe);
+    public function __construct(learningdata $learningdata) {
+        parent::__construct();
         $this->learningdata = $learningdata;
     }
 

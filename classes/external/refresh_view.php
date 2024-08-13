@@ -99,7 +99,6 @@ class refresh_view extends external_api {
     private static function processviews(array $views, array &$response): void {
         global $CFG;
         $learningdata = new learningdata();
-        $timeframe = 0;
 
         foreach ($views as $view) {
             if ($view->enabled == 1) {
@@ -109,7 +108,7 @@ class refresh_view extends external_api {
                 require_once($CFG->dirroot . '/blocks/disealytics/classes/view/' . $viewunderscore . '.php');
 
                 $view = (new ReflectionClass('block_disealytics\\view\\' .
-                        str_replace('-', '_', $viewname)))->newInstance($timeframe, $learningdata);
+                        str_replace('-', '_', $viewname)))->newInstance($learningdata);
                 $response[$viewname]["template_path"] = "block_disealytics/" . $viewname;
                 $response[$viewname]["data"] = [];
                 $response[$viewname]["data"]["view_type"] = $viewname;

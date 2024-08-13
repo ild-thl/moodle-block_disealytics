@@ -70,9 +70,16 @@
                     style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
             </a></span>{{title}}</h1>
             <div class="navigation-icons">
-                <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
-                    <i class="fa fa-question"></i>
-                </a>
+                {{^isexpanded}}
+                    <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                        <i class="fa fa-question"></i>
+                    </a>
+                {{/isexpanded}}
+                {{#isexpanded}}
+                    <a id="block_disealytics_{{view_type}}_info_btn_expanded" class="dashboard-button">
+                        <i class="fa fa-question"></i>
+                    </a>
+                {{/isexpanded}}
             </div>
         </div>
     </div>

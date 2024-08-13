@@ -75,9 +75,16 @@
                         </a>
                     </span>{{title}}</h1>
                 <div class="navigation-icons">
-                    <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
-                        <i class="fa fa-question"></i>
-                    </a>
+                    {{^isexpanded}}
+                        <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                            <i class="fa fa-question"></i>
+                        </a>
+                    {{/isexpanded}}
+                    {{#isexpanded}}
+                        <a id="block_disealytics_{{view_type}}_info_btn_expanded" class="dashboard-button">
+                            <i class="fa fa-question"></i>
+                        </a>
+                    {{/isexpanded}}
                 </div>
             </div>
         </div>
@@ -149,8 +156,11 @@
                                                         <div class="event-details">
                                                             <div class="event-details-left">
                                                                 <span class="event-name">{{name}}</span>
-                                                                <span class="event-time">{{#userdate}}{{timestampStart}}, {{#str}}
-                                                                    strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                <span class="event-time">
+                                                                    {{#userdate}}
+                                                                        {{timestampStart}},
+                                                                        {{#str}} strftimetime24, core_langconfig {{/str}}
+                                                                    {{/userdate}}
                                                                     {{#hasEnd}}
                                                                         - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
                                                                     {{/hasEnd}}
@@ -243,8 +253,11 @@
                                                         <div class="event-details">
                                                             <div class="event-details-left">
                                                                 <span class="event-name">{{name}}</span>
-                                                                <span class="event-time">{{#userdate}}{{timestampStart}}, {{#str}}
-                                                                    strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                <span class="event-time">
+                                                                    {{#userdate}}
+                                                                        {{timestampStart}},
+                                                                        {{#str}} strftimetime24, core_langconfig {{/str}}
+                                                                    {{/userdate}}
                                                                     {{#hasEnd}}
                                                                         - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
                                                                     {{/hasEnd}}
@@ -344,7 +357,10 @@
                                                                     <span class="event-name">{{courseName}}</span>
                                                                     <span class="event-name">{{name}}</span>
                                                                     <span class="event-time">
-                                                                    {{#userdate}}{{timestampStart}},{{#str}} strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                    {{#userdate}}
+                                                                        {{timestampStart}},
+                                                                        {{#str}} strftimetime24, core_langconfig{{/str}}
+                                                                    {{/userdate}}
                                                                         {{#hasEnd}}
                                                                             - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
                                                                         {{/hasEnd}}
@@ -445,9 +461,15 @@
                                                                     <div class="event-details-left">
                                                                         <span class="event-name">{{name}}</span>
                                                                         <span class="event-time">
-                                                                    {{#userdate}}{{timestampStart}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                            {{#userdate}}
+                                                                                {{timestampStart}},
+                                                                                {{#str}} strftimetime24, core_langconfig{{/str}}
+                                                                            {{/userdate}}
                                                                             {{#hasEnd}}
-                                                                                - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                                - {{#userdate}}
+                                                                                {{timestampEnd}},
+                                                                                {{#str}} strftimetime24, core_langconfig{{/str}}
+                                                                            {{/userdate}}
                                                                             {{/hasEnd}}
                                                                 </span>
                                                                         {{#eventTypeConference}}<span class="webconference-event">{{.}}</span>{{/eventTypeConference}}
@@ -554,9 +576,15 @@
                                                                     <span class="event-name">{{courseName}}</span>
                                                                     <span class="event-name">{{name}}</span>
                                                                     <span class="event-time">
-                                                                    {{#userdate}}{{timestampStart}},{{#str}} strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                    {{#userdate}}
+                                                                        {{timestampStart}},
+                                                                        {{#str}} strftimetime24, core_langconfig {{/str}}
+                                                                    {{/userdate}}
                                                                         {{#hasEnd}}
-                                                                            - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                            - {{#userdate}}
+                                                                            {{timestampEnd}},
+                                                                            {{#str}} strftimetime24, core_langconfig {{/str}}
+                                                                        {{/userdate}}
                                                                         {{/hasEnd}}
                                                                     </span>
                                                                 </div>
@@ -665,9 +693,15 @@
                                                                     <div class="event-details-left">
                                                                         <span class="event-name">{{name}}</span>
                                                                         <span class="event-time">
-                                                                    {{#userdate}}{{timestampStart}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                            {{#userdate}}
+                                                                                {{timestampStart}},
+                                                                                {{#str}} strftimetime24, core_langconfig {{/str}}
+                                                                            {{/userdate}}
                                                                             {{#hasEnd}}
-                                                                                - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
+                                                                                - {{#userdate}}
+                                                                                    {{timestampEnd}},
+                                                                                    {{#str}} strftimetime24, core_langconfig {{/str}}
+                                                                                {{/userdate}}
                                                                             {{/hasEnd}}
                                                                 </span>
                                                                         {{#eventTypeConference}}<span class="webconference-event">{{.}}</span>{{/eventTypeConference}}

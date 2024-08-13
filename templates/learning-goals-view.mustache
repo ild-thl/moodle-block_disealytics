@@ -72,9 +72,16 @@
                         <i class="fa fa-pencil editing-off"></i>
                         <span class="hidden">{{#str}}goal_editing, block_disealytics{{/str}}</span>
                     </a>
-                    <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
-                        <i class="fa fa-question"></i>
-                    </a>
+                    {{^isexpanded}}
+                        <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                            <i class="fa fa-question"></i>
+                        </a>
+                    {{/isexpanded}}
+                    {{#isexpanded}}
+                        <a id="block_disealytics_{{view_type}}_info_btn_expanded" class="dashboard-button">
+                            <i class="fa fa-question"></i>
+                        </a>
+                    {{/isexpanded}}
                 </div>
             </div>
         </div>

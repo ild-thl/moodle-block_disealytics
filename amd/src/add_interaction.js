@@ -33,7 +33,6 @@ import {
     updateViewlist
 } from 'block_disealytics/view_selection';
 import {anyViewsEnabled, updateView} from 'block_disealytics/update_view';
-import ViewHelpModal from "./view_help_modal";
 
 /**
  * Initializes the view functionality with the specified viewname.

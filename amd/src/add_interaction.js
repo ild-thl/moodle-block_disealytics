@@ -344,7 +344,9 @@ export const toggleInformationModal = (viewname) => {
     if (btn) {
         btn.addEventListener('click', async function() {
             const modal = await ModalFactory.create({
-                title: getString(viewname, 'block_disealytics'),
+                title: viewname === 'main' ?
+                    getString('main_help_title', 'block_disealytics') :
+                    getString(viewname, 'block_disealytics'),
                 body: getString(viewname + '_help_info_text', 'block_disealytics'),
                 removeOnClose: true
             });
@@ -364,27 +366,62 @@ export const toggleInformationModal = (viewname) => {
     }
 };
 
-export const changeToggleIcon = () => {
-    const toggleLink = document.querySelector('#block_disealytics_config_consent_menu');
-    const toggleIcon = toggleLink.querySelector('i');
+/**
+ * Generates the main config modal.
+ *
+ * Is called in the javascript of the main.mustache template.
+ *
+ * @returns {void}
+ */
+export const toggleMainConfigModal = () => {
+    const mainConfigBtn = document.querySelector("#block_disealytics_config_menu");
+    if (mainConfigBtn) {
+        mainConfigBtn.addEventListener('click', async function() {
+            // Create the main config modal with custom content.
+            const modal = await ModalFactory.create({
+                title: await getString('main_config_title', 'block_disealytics'),
+                body: await Templates.render('block_disealytics/config_menu', {id: 1}),
+                removeOnClose: true
+            });
 
-    if (toggleLink && toggleIcon) {
-        toggleLink.addEventListener("click", function() {
-            toggleIcon.classList.remove('disea-green');
-            toggleIcon.classList.remove('fa-toggle-on');
-            toggleIcon.classList.add('disea-gray');
-            toggleIcon.classList.add('fa-toggle-off');
+            // Show the modal.
+            await modal.show();
 
-            // Set a timeout to change the classes back after 1 second.
-            setTimeout(function() {
-                toggleIcon.classList.remove('disea-gray');
-                toggleIcon.classList.remove('fa-toggle-off');
-                toggleIcon.classList.add('disea-green');
-                toggleIcon.classList.add('fa-toggle-on');
-            }, 1000);
+            // Wait until the modal content is fully shown.
+            if (modal.getRoot()) {
+                const mainConsentBtn = document.querySelector("#block_disealytics_config_consent_menu");
+                if (mainConsentBtn) {
+                    const toggleIcon = mainConsentBtn.querySelector('i');
+
+                    mainConsentBtn.addEventListener('click', async function() {
+                        // Toggle icon classes.
+                        toggleIcon.classList.remove('disea-green', 'fa-toggle-on');
+                        toggleIcon.classList.add('disea-gray', 'fa-toggle-off');
+
+                        // Set a timeout to change the classes back after 1 second.
+                        setTimeout(() => {
+                            toggleIcon.classList.remove('disea-gray', 'fa-toggle-off');
+                            toggleIcon.classList.add('disea-green', 'fa-toggle-on');
+                        }, 1000);
+
+                        // Create and show the consent modal.
+                        const consentModal = await ModalFactory.create({
+                            title: await getString('consent_config_title', 'block_disealytics'),
+                            body: await Templates.render('block_disealytics/config_menu_consent', {id: 2}),
+                            removeOnClose: true
+                        });
+
+                        await consentModal.show();
+
+                        // Initialize consent buttons after the consent modal is shown.
+                        enableConsentButtons(consentModal);
+                    });
+                }
+            }
         });
     }
 };
+
 
 /**
  * Toggles the visibility of an accordion content section and updates the toggle icon.
@@ -488,14 +525,18 @@ export const enableViewmodeDropdown = () => {
 /**
  * Adds an EventListener to the consent buttons.
  *
+ * @param {object} modal - The modal to enable the buttons for.
  * @returns {void}
  */
-export const enableConsentButtons = () => {
-    document.querySelector(".disea-delete-btn").addEventListener("click", function() {
+export const enableConsentButtons = (modal = null) => {
+    document.querySelector(".disea-delete-consent-btn").addEventListener("click", function() {
         updateSetting("revoke_consent", '', "delete");
     });
-    document.querySelector(".disea-save-btn").addEventListener("click", function() {
+    document.querySelector(".disea-save-consent-btn").addEventListener("click", function() {
         updateSetting("revoke_consent", '', '');
+    });
+    document.querySelector(".disea-cancel-consent-btn").addEventListener("click", function() {
+        modal.destroy();
     });
 };
 

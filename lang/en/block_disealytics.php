@@ -459,3 +459,7 @@ $string['privacy:metadata:disea_consent:userid'] = 'The ID of the user';
 $string['privacy:metadata:disea_consent:courseid'] = "The ID of the user's course";
 $string['privacy:metadata:disea_consent:choice'] = 'The choice made by the user for the DiSEA declaration of consent.';
 $string['privacy:data'] = 'Data of the user for the DiSEA declaration of consent';
+
+$string['activity_view_axislabel_y'] = 'y-axis: minutes';
+$string['activity_view_main_axislabel_x'] = 'x-axis: days';
+$string['activity_view_detail_axislabel_x'] = 'x-axis: calendarweeks';

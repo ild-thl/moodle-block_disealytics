@@ -78,10 +78,14 @@
             </div>
             <div class="panel-body">
                 <p>{{datadate}}</p>
+                <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
+                <p>{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}
                 {{#maincharts}}  {{> core/chart }} {{/maincharts}}
             </div>
 
             <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
+                <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
+                <p>{{#str}}activity_view_detail_axislabel_x, block_disealytics{{/str}}
                 {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
             </div>
             {{> block_disealytics/bottom_navigation }}
@@ -118,10 +122,14 @@
                             <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
                         </div>
                         <p>{{datadate}}</p>
-                        {{#maincharts}}  {{> core/chart }} {{/maincharts}}
+                        <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
+                        <p>{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}
+                            {{#maincharts}}  {{> core/chart }} {{/maincharts}}
                     </div>
                     <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
-                        {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
+                        <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
+                        <p>{{#str}}activity_view_detail_axislabel_x, block_disealytics{{/str}}
+                            {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
                     </div>
                 {{/outputs}}
             {{/nodata}}
@@ -171,9 +179,13 @@
                             <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
                         </div>
                         <p>{{datadate}}</p>
+                        <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
+                        <p>{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}
                         {{#maincharts}}  {{> core/chart }} {{/maincharts}}
 
                         <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
+                            <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
+                            <p>{{#str}}activity_view_detail_axislabel_x, block_disealytics{{/str}}
                             {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
                         </div>
                     {{/outputs}}

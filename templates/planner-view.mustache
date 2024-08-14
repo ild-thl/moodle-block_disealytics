@@ -26,19 +26,19 @@
     * none
 
     Context variables required for this template:
-    * view_type
+    * viewname
     * title
 
     Example context (json):
     {
-        "view_type": "planner-view",
+        "viewname": "planner-view",
         "title": "Planner"
     }
 }}
 {{#editmode}}
-    <div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
-         data-container="block_disealytics/editing-{{view_type}}">
-        <svg id="{{view_type}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="block_disealytics-editing block_disealytics-editing-{{viewname}}"
+         data-container="block_disealytics/editing-{{viewname}}">
+        <svg id="{{viewname}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M45.26 22.25C45.26 33.9586 35.3801 43.5 23.13 43.5C10.88 43.5 1 33.9586 1 22.25C1 10.5414 10.88 1 23.13 1C35.3801 1 45.26 10.5414 45.26 22.25Z"
                   stroke="#0f6cbf" stroke-width="1.5"/>
             <path d="M11.5878 14.2596C11.5878 13.1634 12.4764 12.2748 13.5725 12.2748H32.4275C33.5236 12.2748 34.4122 13.1634 34.4122 14.2596V15.7481C34.4122 16.0221 34.1901 16.2443 33.916 16.2443H12.084C11.8099 16.2443 11.5878 16.0221 11.5878 15.7481V14.2596Z"
@@ -52,15 +52,13 @@
                   fill="#0f6cbf"/>
         </svg>
         <h1 class="editing-headline">{{title}}</h1>
-        <a class="dashboard-button block_disealytics-open-delete-modal-{{view_type}} block_disealytics-open-delete-modal"
-           data-toggle="modal"
-           data-target="#{{view_type}}-remove-modal">
+        <a class="dashboard-button block_disealytics_remove_modal_{{viewname}}">
             <i class="text-danger fa fa-times"></i>
         </a>
     </div>
 {{/editmode}}
 {{#viewmode}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
+    <div id="block_disealytics-panel-{{viewname}}" class="block_disealytics panel panel-danger view block_disealytics-panel-{{viewname}}">
 
         <div class="panel-heading">
             <div class="flex-container">
@@ -68,20 +66,20 @@
                     <span class="show-when-expanded">
                         <a
                                 style="cursor: pointer; text-decoration: none"
-                                class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                                data-action="block_disealytics/expand-{{view_type}}"
+                                class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{viewname}}"
+                                data-action="block_disealytics/expand-{{viewname}}"
                                 data-actiontype="block_disealytics/toggle-expansion">
                             <i style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
                         </a>
                     </span>{{title}}</h1>
                 <div class="navigation-icons">
                     {{^isexpanded}}
-                        <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                        <a id="block_disealytics_{{viewname}}_info_btn" class="dashboard-button">
                             <i class="fa fa-question"></i>
                         </a>
                     {{/isexpanded}}
                     {{#isexpanded}}
-                        <a id="block_disealytics_{{view_type}}_info_btn_expanded" class="dashboard-button">
+                        <a id="block_disealytics_{{viewname}}_info_btn_expanded" class="dashboard-button">
                             <i class="fa fa-question"></i>
                         </a>
                     {{/isexpanded}}
@@ -183,7 +181,7 @@
                 </div>
             {{/isexpanded}}
             {{#isexpanded}}
-                <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
+                <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
 
                     <div class="block_disealytics-planner-whole show-when-expanded">
                         {{#calendar}}
@@ -384,7 +382,7 @@
                 </div>
             {{/isexpanded}}
             {{#isexpanded}}
-                <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
+                <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
 
                     <div class="block_disealytics-planner-whole show-when-expanded">
                         {{#calendar}}
@@ -437,9 +435,9 @@
                             <div class="planner-events-thismonth planner-events-list">
                                 <div class="all-planner-events expanded-planner">
                                     {{#course}}
-                                        <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
+                                        <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
                                             <h4>{{coursename}}</h4>
-                                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+                                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
                                         </div>
                                         <div class="all-events-of-course">
                                             {{#events}}
@@ -502,7 +500,7 @@
                     <div class="categories-container">
                         <div class="course-category-global">
                             {{#categories}}
-                                <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
+                                <button class="course-category-global-item-{{viewname}} course-category-global-item {{#selected}}selected{{/selected}}">
                                     {{name}}
                                 </button>
                             {{/categories}}
@@ -606,11 +604,11 @@
                 </div>
             {{/isexpanded}}
             {{#isexpanded}}
-                <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
+                <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
                     <div class="categories-container">
                         <div class="course-category-global">
                             {{#categories}}
-                                <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
+                                <button class="course-category-global-item-{{viewname}} course-category-global-item {{#selected}}selected{{/selected}}">
                                     {{name}}
                                 </button>
                             {{/categories}}
@@ -669,9 +667,9 @@
                             <div class="planner-events-thismonth planner-events-list">
                                 <div class="all-planner-events expanded-planner">
                                     {{#course}}
-                                        <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
+                                        <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
                                             <h4>{{coursename}}</h4>
-                                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+                                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
                                         </div>
                                         <div class="all-events-of-course">
                                             {{#events}}
@@ -735,7 +733,7 @@
 {{#js}}
     require(['block_disealytics/add_interaction'],
     function(addInteraction) {
-    addInteraction.init("{{view_type}}");
+    addInteraction.init("{{viewname}}");
     });
 
     require(['block_disealytics/planner_functions'],

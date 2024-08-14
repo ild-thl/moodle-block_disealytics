@@ -26,12 +26,12 @@
     * none
 
     Context variables required for this template:
-    * view_type
+    * viewname
     * title
 
     Example context (json):
     {
-        "view_type": "study-progress-view",
+        "viewname": "study-progress-view",
         "title": "Study Progress",
         "percentage" : "42%",
         "speedometer" : "https://disea.net:80/path/tothe/speedometer.png",
@@ -44,9 +44,9 @@
     }
 }}
 {{#editmode}}
-    <div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
-         data-container="block_disealytics/editing-{{view_type}}">
-        <svg id="{{view_type}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="block_disealytics-editing block_disealytics-editing-{{viewname}}"
+         data-container="block_disealytics/editing-{{viewname}}">
+        <svg id="{{viewname}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M45.6135 22.9199C45.6135 34.6285 35.7336 44.1699 23.4835 44.1699C11.2335 44.1699 1.35352 34.6285 1.35352 22.9199C1.35352 11.2113 11.2335 1.66992 23.4835 1.66992C35.7336 1.66992 45.6135 11.2113 45.6135 22.9199Z"
                   stroke="#0f6cbf" stroke-width="1.5"/>
             <path d="M15.537 29.0649L5.85146 29.0693C5.85146 29.0693 5.81752 24.665 7.99252 20.57C10.1675 16.4751 13.8224 14.1587 13.8224 14.1587L18.8316 22.3841C18.8316 22.3841 17.3079 23.6841 16.443 25.3726C15.5781 27.0611 15.537 29.0649 15.537 29.0649Z"
@@ -61,33 +61,31 @@
                   fill="#0f6cbf"/>
         </svg>
         <h1 class="editing-headline">{{title}}</h1>
-        <a class="dashboard-button block_disealytics-open-delete-modal-{{view_type}} block_disealytics-open-delete-modal"
-           data-toggle="modal"
-           data-target="#{{view_type}}-remove-modal">
+        <a class="dashboard-button block_disealytics_remove_modal_{{viewname}}">
             <i class="text-danger fa fa-times"></i>
         </a>
     </div>
 {{/editmode}}
 {{#viewmode}}
-    <div id="block_disealytics-panel-{{view_type}}"
-         class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
+    <div id="block_disealytics-panel-{{viewname}}"
+         class="block_disealytics panel panel-danger view block_disealytics-panel-{{viewname}}">
         <div class="panel-heading">
             <div class="flex-container">
                 <h1 id="title"><span class="show-when-expanded"><a
                         style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
+                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{viewname}}"
+                        data-action="block_disealytics/expand-{{viewname}}"
                         data-actiontype="block_disealytics/toggle-expansion"><i
                         style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
             </a></span>{{title}}</h1>
                 <div class="navigation-icons">
                     {{^isexpanded}}
-                        <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                        <a id="block_disealytics_{{viewname}}_info_btn" class="dashboard-button">
                             <i class="fa fa-question"></i>
                         </a>
                     {{/isexpanded}}
                     {{#isexpanded}}
-                        <a id="block_disealytics_{{view_type}}_info_btn_expanded" class="dashboard-button">
+                        <a id="block_disealytics_{{viewname}}_info_btn_expanded" class="dashboard-button">
                             <i class="fa fa-question"></i>
                         </a>
                     {{/isexpanded}}
@@ -136,8 +134,8 @@
                 <p>{{nodata}}</p>
             {{/nodata}}
 
-            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}"
-                 data-container="block_disealytics/expandable-{{view_type}}">
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}"
+                 data-container="block_disealytics/expandable-{{viewname}}">
                 {{#data}}
                     <p>{{#str}}study-progress_score_is, block_disealytics{{/str}}{{assignscore}}</p>
                     <hr>
@@ -196,8 +194,8 @@
                 <p>{{nodata}}</p>
             {{/nodata}}
 
-            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}"
-                 data-container="block_disealytics/expandable-{{view_type}}">
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}"
+                 data-container="block_disealytics/expandable-{{viewname}}">
                 {{#data}}
                     <p>{{#str}}study-progress_score_is, block_disealytics{{/str}}{{assignscore}}</p>
                     <hr>
@@ -256,8 +254,8 @@
                 <p>{{nodata}}</p>
             {{/nodata}}
 
-            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}"
-                 data-container="block_disealytics/expandable-{{view_type}}">
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}"
+                 data-container="block_disealytics/expandable-{{viewname}}">
                 {{#data}}
                     <p>{{#str}}study-progress_score_is, block_disealytics{{/str}}{{assignscore}}</p>
                     <hr>
@@ -282,6 +280,6 @@
 
 {{#js}}
     require(['block_disealytics/add_interaction'], function(addInteraction) {
-    addInteraction.init("{{view_type}}");
+    addInteraction.init("{{viewname}}");
     });
 {{/js}}

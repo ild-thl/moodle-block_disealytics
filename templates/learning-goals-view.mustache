@@ -26,19 +26,19 @@
     * none
 
     Context variables required for this template:
-    * view_type
+    * viewname
     * title
 
     Example context (json):
     {
-        "view_type": "learning-goals-view",
+        "viewname": "learning-goals-view",
         "title": "Learning Goals"
     }
 }}
 {{#editmode}}
-    <div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
-         data-container="block_disealytics/editing-{{view_type}}">
-        <svg id="{{view_type}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="block_disealytics-editing block_disealytics-editing-{{viewname}}"
+         data-container="block_disealytics/editing-{{viewname}}">
+        <svg id="{{viewname}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M45.6135 22.8398C45.6135 34.5484 35.7336 44.0898 23.4835 44.0898C11.2335 44.0898 1.35352 34.5484 1.35352 22.8398C1.35352 11.1312 11.2335 1.58984 23.4835 1.58984C35.7336 1.58984 45.6135 11.1312 45.6135 22.8398Z"
                   stroke="#0f6cbf" stroke-width="1.5"/>
             <path d="M28.8663 9.82178H16.3984V21.801H28.8663V9.82178Z" fill="#0f6cbf" stroke="#0f6cbf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -48,37 +48,35 @@
             <path d="M18.459 30.1864L22.4567 34.0275L30.7508 23.8115" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <h1 class="editing-headline">{{title}}</h1>
-        <a class="dashboard-button block_disealytics-open-delete-modal-{{view_type}} block_disealytics-open-delete-modal"
-           data-toggle="modal"
-           data-target="#{{view_type}}-remove-modal">
+        <a class="dashboard-button block_disealytics_remove_modal_{{viewname}}">
             <i class="text-danger fa fa-times"></i>
         </a>
     </div>
 {{/editmode}}
 {{#viewmode}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-danger view block_disealytics-panel-{{view_type}}">
+    <div id="block_disealytics-panel-{{viewname}}" class="block_disealytics panel panel-danger view block_disealytics-panel-{{viewname}}">
 
         <div class="panel-heading">
             <div class="flex-container">
                 <h1 id="title"><span class="show-when-expanded"><a
                         style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
+                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{viewname}}"
+                        data-action="block_disealytics/expand-{{viewname}}"
                         data-actiontype="block_disealytics/toggle-expansion"><i
                         style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
             </a></span>{{title}}</h1>
                 <div class="navigation-icons">
-                    <a id="edit-goals" class="edit-button-{{view_type}}">
+                    <a id="edit-goals" class="edit-button-{{viewname}}">
                         <i class="fa fa-pencil editing-off"></i>
                         <span class="hidden">{{#str}}goal_editing, block_disealytics{{/str}}</span>
                     </a>
                     {{^isexpanded}}
-                        <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                        <a id="block_disealytics_{{viewname}}_info_btn" class="dashboard-button">
                             <i class="fa fa-question"></i>
                         </a>
                     {{/isexpanded}}
                     {{#isexpanded}}
-                        <a id="block_disealytics_{{view_type}}_info_btn_expanded" class="dashboard-button">
+                        <a id="block_disealytics_{{viewname}}_info_btn_expanded" class="dashboard-button">
                             <i class="fa fa-question"></i>
                         </a>
                     {{/isexpanded}}
@@ -379,7 +377,7 @@
                 <div class="categories-container">
                     <div class="course-category-global">
                         {{#categories}}
-                            <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
+                            <button class="course-category-global-item-{{viewname}} course-category-global-item {{#selected}}selected{{/selected}}">
                                 {{name}}
                             </button>
                         {{/categories}}
@@ -530,7 +528,7 @@
                 {{/nodata}}
             </div>
         {{/viewmode_global}}
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
+        <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
         </div>
 
         {{> block_disealytics/bottom_navigation }}
@@ -540,7 +538,7 @@
 
 {{#js}}
     require(['block_disealytics/add_interaction'], function(addInteraction) {
-    addInteraction.init("{{view_type}}");
+    addInteraction.init("{{viewname}}");
     });
     require(['block_disealytics/learning_goals_functions'],
     function(learningGoals) {

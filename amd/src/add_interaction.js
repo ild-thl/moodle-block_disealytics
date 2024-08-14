@@ -22,6 +22,7 @@
 
 import Ajax from 'core/ajax';
 import ModalFactory from 'core/modal_factory';
+import ModalEvents from 'core/modal_events';
 import Templates from 'core/templates';
 import {get_string as getString} from 'core/str';
 import {
@@ -81,19 +82,11 @@ export const createModalsContainer = () => {
  * @returns {void}
  */
 export const moveModalsToBodyEnd = (viewname) => {
-    const infoModal = document.getElementById(`${viewname}-info-modal`);
-    const removeModal = document.getElementById(`${viewname}-remove-modal`);
     const configModals = document.querySelectorAll(`.${viewname}-config-modal`);
     const plannerModals = document.querySelectorAll('.block_disealytics-planner-event-modal');
     const modalsContainer = document.querySelector('.block_disealytics-modals');
 
     if (modalsContainer) {
-        if (infoModal) {
-            modalsContainer.appendChild(infoModal);
-        }
-        if (removeModal) {
-            modalsContainer.appendChild(removeModal);
-        }
         if (plannerModals && plannerModals.length > 0) {
             plannerModals.forEach((modal) => {
                 modalsContainer.appendChild(modal);
@@ -294,22 +287,36 @@ const getDragAfterElement = (container, y) => {
  * @returns {void}
  */
 const registerEventListener = (viewname) => {
-    // Returns every delete button.
-    const deleteButtons = document.querySelectorAll('.block_disealytics-delete-btn-' + viewname);
-    const addButton = document.querySelector('.block_disealytics-add-' + viewname);
-    const viewContainer = document.querySelector('#block_disealytics-' + viewname);
-    if (deleteButtons) {
-        [].forEach.call(deleteButtons, (deleteButton) => {
-            // Event to remove the view.
-            deleteButton.addEventListener("click", function() {
+    // Verify deletion modal.
+    const verifyDeletionButton = document.querySelector('.block_disealytics_remove_modal_' + viewname);
+    if (verifyDeletionButton) {
+        verifyDeletionButton.addEventListener("click", async function() {
+            // Fetch necessary strings.
+            const modalRemoveText1 = await getString('modal_remove_text_1', 'block_disealytics');
+            const modalRemoveView = await getString(viewname, 'block_disealytics');
+            const modalRemoveText2 = await getString('modal_remove_text_2', 'block_disealytics');
+
+            // Create the modal with the custom content.
+            const modal = await ModalFactory.create({
+                type: ModalFactory.types.SAVE_CANCEL,
+                title: await getString('modal_remove_title', 'block_disealytics'),
+                body: `${modalRemoveText1} <strong>${modalRemoveView}</strong> ${modalRemoveText2}`,
+                removeOnClose: true,
+            });
+            modal.setSaveButtonText(await getString('modal_remove_check', 'block_disealytics'));
+            modal.show();
+            modal.getRoot().on(ModalEvents.save, async () => {
+                const viewContainer = document.querySelector('#block_disealytics-' + viewname);
                 viewContainer.setAttribute('data-visible', 'false');
+                const addButton = document.querySelector('.block_disealytics-add-' + viewname);
                 addButton.classList.remove('hidden');
                 const updatedViewList = updateViewlist(viewname, 'delete');
-                updateSetting('write', 'views', JSON.stringify(updatedViewList));
-            }, false);
-        });
+                await updateSetting('write', 'views', JSON.stringify(updatedViewList));
+            });
+        }, false);
     }
-    // Returns every toggle button.
+
+    // Toggle expansion.
     const toggleExpansionButtons = document.querySelectorAll('.block_disealytics-toggle-expansion-btn-' + viewname);
     [].forEach.call(toggleExpansionButtons, (e) => {
         e.addEventListener("click", function() {

@@ -26,19 +26,19 @@
     * none
 
     Context variables required for this template:
-    * view_type
+    * viewname
     * title
 
     Example context (json):
     {
-        "view_type": "activity-view",
+        "viewname": "activity-view",
         "title": "Activity"
     }
 }}
 {{#editmode}}
-    <div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
-         data-container="block_disealytics/editing-{{view_type}}">
-        <svg id="{{view_type}}-editing-icon" class="editing-icon" width="47" height="44" viewBox="0 0 47 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="block_disealytics-editing block_disealytics-editing-{{viewname}}"
+         data-container="block_disealytics/editing-{{viewname}}">
+        <svg id="{{viewname}}-editing-icon" class="editing-icon" width="47" height="44" viewBox="0 0 47 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M45.6506 22C45.6506 33.7086 35.7707 43.25 23.5206 43.25C11.2706 43.25 1.39062 33.7086 1.39062 22C1.39062 10.2914 11.2706 0.75 23.5206 0.75C35.7707 0.75 45.6506 10.2914 45.6506 22Z"
                   stroke="#0f6cbf" stroke-width="1.5"/>
             <path d="M33.4807 21.9999H29.7184L26.8967 29.9796L21.253 14.02L18.4313 21.9999H14.6689" stroke="#0f6cbf" stroke-width="1.5" stroke-linecap="square"
@@ -46,33 +46,31 @@
             <path d="M35.6575 32.6539H11.4316V11.3447" stroke="#0f6cbf" stroke-width="2" stroke-linecap="round"/>
         </svg>
         <h1 class="editing-headline">{{title}}</h1>
-        <a class="dashboard-button block_disealytics-open-delete-modal-{{view_type}} block_disealytics-open-delete-modal"
-           data-toggle="modal"
-           data-target="#{{view_type}}-remove-modal">
+        <a class="dashboard-button block_disealytics_remove_modal_{{viewname}}">
             <i class="text-danger fa fa-times"></i>
         </a>
     </div>
 {{/editmode}}
 {{#viewmode}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{view_type}}">
+    <div id="block_disealytics-panel-{{viewname}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{viewname}}">
 
         <div class="panel-heading">
             <div class="flex-container">
                 <h1 id="title"><span class="show-when-expanded"><a
                         style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded hide-when-editing expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
+                        class="show-when-expanded hide-when-editing expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{viewname}}"
+                        data-action="block_disealytics/expand-{{viewname}}"
                         data-actiontype="block_disealytics/toggle-expansion"><i
                         style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
             </a></span>{{title}}</h1>
                 <div class="navigation-icons">
                     {{^isexpanded}}
-                    <a id="block_disealytics_{{view_type}}_info_btn" class="dashboard-button">
+                    <a id="block_disealytics_{{viewname}}_info_btn" class="dashboard-button">
                         <i class="fa fa-question"></i>
                     </a>
                     {{/isexpanded}}
                     {{#isexpanded}}
-                        <a id="block_disealytics_{{view_type}}_info_btn_expanded" class="dashboard-button">
+                        <a id="block_disealytics_{{viewname}}_info_btn_expanded" class="dashboard-button">
                             <i class="fa fa-question"></i>
                         </a>
                     {{/isexpanded}}
@@ -85,7 +83,7 @@
                 {{#maincharts}}  {{> core/chart }} {{/maincharts}}
             </div>
 
-            <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
                 {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
             </div>
         {{/viewmode_module}}
@@ -93,14 +91,14 @@
             {{^nodata}}
                 {{#outputs}}
                     <div class="panel-body">
-                        <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
+                        <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
                             <span id="title">{{coursename}}</span>
-                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
                         </div>
                         <p>{{datadate}}</p>
                         {{#maincharts}}  {{> core/chart }} {{/maincharts}}
                     </div>
-                    <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
+                    <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
                         {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
                     </div>
                 {{/outputs}}
@@ -114,7 +112,7 @@
                 <div class="categories-container">
                     <div class="course-category-global">
                         {{#categories}}
-                            <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
+                            <button class="course-category-global-item-{{viewname}} course-category-global-item {{#selected}}selected{{/selected}}">
                                 {{name}}
                             </button>
                         {{/categories}}
@@ -122,14 +120,14 @@
                 </div>
                 {{^nodata}}
                     {{#outputs}}
-                        <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
+                        <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
                             <span id="title">{{coursename}}</span>
-                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+                            <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
                         </div>
                         <p>{{datadate}}</p>
                         {{#maincharts}}  {{> core/chart }} {{/maincharts}}
 
-                        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
+                        <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
                             {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
                         </div>
                     {{/outputs}}
@@ -146,6 +144,6 @@
 
 {{#js}}
     require(['block_disealytics/add_interaction'], function(addInteraction) {
-    addInteraction.init("{{view_type}}");
+    addInteraction.init("{{viewname}}");
     });
 {{/js}}

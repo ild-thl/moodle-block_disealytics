@@ -198,10 +198,10 @@ $string['missing_points'] = "Points not reached";
 $string['title_detail_name'] = "Detail view";
 $string['modal_info_title'] = "Information about the card";
 $string['modal_remove_title'] = "Remove card from dashboard";
-$string['modal_remove_text_1'] = "Are you sure you would like to ";
-$string['modal_remove_text_2'] = " remove the card from the dashboard? You can add it back any time.";
+$string['modal_remove_text_1'] = "Are you sure you would like to remove the card ";
+$string['modal_remove_text_2'] = " from the dashboard? You can add it back to your Learner Dashboard any time.";
 $string['modal_remove_cancel'] = "Cancel";
-$string['modal_remove_check'] = "Remove from dashboard";
+$string['modal_remove_check'] = "Remove card from Learner Dashboard";
 
 $string['main_help_title'] = "Help page for the Learning Dashboard";
 $string['main_help_views_summary'] = "Classification of cards";

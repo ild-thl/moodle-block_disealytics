@@ -203,15 +203,40 @@ $string['modal_remove_text_2'] = " wirklich aus dem Dashboard entfernen? Sie kö
 $string['modal_remove_cancel'] = "Abbrechen";
 $string['modal_remove_check'] = "Aus dem Dashboard entfernen";
 
+// Main help modal.
 $string['main_help_title'] = "Hilfeseite zum Learner Dashboard";
-$string['main_help_views_summary'] = "Systematik Karten";
-$string['main_help_views_details'] = "Das Learner Dashboard (LD) beinhaltet Karten in denen verschiedene Informationen oder Funktionen inkludiert sind. Karten lassen sich dem LD hinzufügen und wieder löschen. Es gibt viele verschiedene Themen aus denen Sie Ihr persönliches LD zusammenstellen können. Informationen zu den verschiedenen Themen erhalten Sie jeweils über die Hilfefunktion in den einzelnen Karten.";
-$string['main_help_add_remove_summary'] = "Hinzufügen oder entfernen von Karten";
-$string['main_help_add_remove_details'] = "Zum hinzufügen oder entfernen von Karten klicken Sie in der Gesamtansichtsseite auf das Stift-Symbol. Danach können Sie einzelne Karten über das eingeblendete “x”-Symbol an der rechten oberen Ecke einer Karte entfernen. Unter Ihren gewählten Karten im LD haben Sie die Möglichkeit, weitere Karten dem LD hinzuzufügen.";
-$string['main_help_help_summary'] = "Wiederkehrende Funktionen innerhalb der Karten";
-$string['main_help_help_details'] = "Jede Karte und das Dashboard selbst enthält ein Hilfe-Symbol (“?”-Icon). Die Karten beinhalten ein Symbol zum Aufrufen einer Detailansicht einer Karte. Mit dem Hilfe-Symbol rufen Sie kontextbezogene Hilfe zum Inhalt einer Karte auf.";
-$string['main_help_edit_summary'] = "Bearbeitungsfunktion";
-$string['main_help_edit_details'] = "Ein Klick auf das Stift-Symbol startet die Bearbeitungsfunktion zum Hinzufügen oder Löschen von Karten im Dashboard (siehe Abbildung 1). Mit dieser Funktion können Sie sich Ihr Dashboard nach den eigenen Vorstellungen und mit den für Sie relevanten Karten zusammenstellen. Klicken Sie auf das rote X an der entsprechenden Karte, um diese zu entfernen. Eine neue Karte fügen Sie hinzu, wenn Sie den Button \"Karte hinzufügen\" wählen. Dieser Button öffnet einen neuen Dialog mit den zur Verfügung stehenden Karten.";
+
+$string['main_help_views_title'] = "Systematik Karten";
+$string['main_help_views_summary'] = 'Das Learner Dashboard (LD) enthält sogenannte <span style="color:var(--diseablue)">Karten</span> mit unterschiedlichen Informationen und Funktionen. Sie können dem LD Karten <span style="color:var(--diseablue)">hinzufügen</span> oder sie <span style="color:var(--diseablue)">entfernen</span>. Es stehen zahlreiche Themen zur Auswahl, um Ihr persönliches LD zusammenzustellen.<br><br>Weitere Informationen zu den einzelnen Themen erhalten Sie über die <span style="color:var(--diseablue)">Hilfefunktion</span> in den entsprechenden Karten.';
+
+$string['main_help_viewmodes_title'] = 'Verschiedene Ansichten';
+$string['main_help_viewmodes_summary'] = 'In dem Learner Dashboard können Sie sich alle Inhalte in einer <span style="color:var(--diseablue)">Modul-, Semester-</span> und <span style="color:var(--diseablue)">Gesamtansicht</span> anzeigen lassen.<br><br><strong>Modulansicht</strong><br>In der Modulansicht werden Ihnen die Inhalte spezifisch für das Modul angezeigt, in dem Sie sich gerade befinden. Sie erhalten einen detaillierten Überblick über alle Ressourcen und Aktivitäten, die zu diesem Modul gehören.<br><br><strong>Semesteransicht</strong><br>Die Semesteransicht präsentiert Ihnen sämtliche Inhalte der Module, die Sie im laufenden Semester belegen. Diese Ansicht ermöglicht es Ihnen, einen umfassenden Einblick in Ihr aktuellen Semester zu erhalten.<br><br><strong>Gesamtansicht</strong><br>In der Gesamtansicht können Sie auf alle Inhalte Ihres Studiums zugreifen. Diese umfasst sämtliche Module und Aktivitäten, die Sie während Ihres gesamten Studienverlaufs absolviert haben oder aktuell absolvieren.';
+
+$string['main_help_add_remove_title'] = "Hinzufügen oder Entfernen von Karten";
+$string['main_help_add_remove_summary'] = 'Für das Hinzufügen oder Entfernen von Karten im Learner Dashboard können Sie wie folgt vorgehen:<br>
+1. Klicken Sie auf das Stift-Symbol, um den Bearbeitungsmodus zu aktivieren.<br>
+2. Zum Entfernen einer Karte: Suchen Sie die gewünschte Karte und klicken Sie auf das X-Symbol in der rechten oberen Ecke der Karte.<br>
+3. Zum Hinzufügen neuer Karten: Scrollen Sie unterhalb Ihrer bereits ausgewählten Karten. Dort finden Sie die Option, zusätzliche Karten zum Dashboard hinzuzufügen. Wählen Sie die gewünschten Karten aus und fügen Sie sie Ihrem Dashboard hinzu.';
+
+$string['main_help_functionality_title'] = "Wiederkehrende Funktionen innerhalb der Karten";
+$string['main_help_functionality_summary'] = '<strong>Hilfe-Symbol auf dem Dashboard</strong><br>
+Auf dem gesamten Dashboard befindet sich ein Hilfe-Symbol, das durch ein <span style="color:var(--diseablue)">“?”-Icon</span> dargestellt wird. Dieses Icon bietet Nutzern schnellen Zugang zu kontextbezogener Unterstützung und Erklärungen zur Funktionsweise des Dashboards.
+<br><br><strong>Hilfe-Symbol auf den Karten</strong><br>
+Jede einzelne Karte im Dashboard ist ebenfalls mit einem Hilfe-Symbol ausgestattet. Durch Anklicken dieses Symbols auf einer bestimmten Karte öffnet sich eine Detailansicht. Diese Ansicht liefert detaillierte Informationen zum Inhalt der jeweiligen Karte.';
+
+$string['main_help_edit_title'] = "Bearbeitungsfunktion";
+$string['main_help_edit_summary'] = 'Ein Klick auf das Stift-Symbol startet die Bearbeitungsfunktion zum Hinzufügen oder Löschen von Karten im Dashboard. Mit dieser Funktion können Sie sich Ihr Dashboard nach den eigenen Vorstellungen und mit den für Sie relevanten Karten zusammenstellen. Klicken Sie auf das rote X an der entsprechenden Karte, um diese zu entfernen. Eine neue Karte fügen Sie hinzu, wenn Sie den Button "Karte hinzufügen" wählen. Dieser Button öffnet einen neuen Dialog mit den zur Verfügung stehenden Karten.';
+
+// Main help cards.
+$string['main_help_assignment-view'] = 'Die Karte <span style="color:var(--diseablue)">Aufgabenübersicht</span> listet alle Einsendeaufgaben auf, die Ihnen in den entsprechenden Modulen zur Verfügung stehen und zeigt einen aktuellen Status der Aufgabe.';
+$string['main_help_activity-view'] = 'Die Karte <span style="color:var(--diseablue)">Nutzungsaktivität</span> betrachtet Ihre Lernzeit auf einen Blick! Die farbigen Segmente repräsentieren unterschiedliche Aktivitäten und ihre Höhe zeigt die Dauer jeder Aktivität.';
+$string['main_help_learning-goals-view'] = 'In der Karte <span style="color:var(--diseablue)">Lernziele</span> können Sie jegliche Lernziele festhalten. Diese Funktion können Sie auch Semesterübergreifend verwenden.';
+$string['main_help_planner-view'] = 'Diese Karte <span style="color:var(--diseablue)">Planungsassistent</span> zeigt Ihnen einen Überblick über Ihre anstehenden Webkonferenz, Einsendeaufgaben oder andere Aktivitäten.';
+$string['main_help_progress-bar-view'] = 'In der Karte <span style="color:var(--diseablue)">Lesefortschrittsbalken</span> können Sie manuell Lernmaterialien hinzufügen und erhalten in Form eines Diagramms den aktuellen Lesefortschritt Ihrer aktuellen Lektüre.';
+$string['main_help_study-progress-view'] = 'Das Speedometer in der Karte <span style="color:var(--diseablue)">Lernfortschrittsanzeige</span> zeigt Ihnen Ihren Lernfortschritt an und stellt dar, wie weit Sie auf dem Weg zum Ziel sind. Die Grundlage der Berechnung sind die Bewertungen in den Aufgaben, die für Sie im Kurs zugeordnet sind.';
+$string['main_help_success-chance-view'] = 'In der Karte <span style="color:var(--diseablue)">PVL-Wahrscheinlichkeit</span> werden alle Einsendeaufgaben (inkl. Bewertungspunkte) dargestellt. Die jeweilige PVL-Wahrscheinlichkeit errechnet sich aus den Bewertungspunkten der einzelnen Abgaben und stellt diese als Prozentsatz dar.';
+
+
 $string['main_add_view_title'] = "Karten hinzufügen";
 $string['main_add_view_info_text'] = "Wählen Sie die gewünschten Karten aus, die Sie im DiSEA-Dashboard angezeigt haben möchten.";
 $string['main_add_view_info_text_empty'] = "Sie haben alle verfügbaren Karten hinzugefügt.";
@@ -221,7 +246,7 @@ $string['main_config_desc'] = "Hier können Sie die Konfiguration für das Learn
 $string['main_config_consent_title'] = "Datenverarbeitung";
 $string['main_config_consent_desc'] = "Sie haben der Datenverarbeitung zugestimmt.";
 $string['consent_config_title'] = "Datenverarbeitung";
-$string['consent_config_desc'] = "Möchten Sie die Einwilligung zur Datenverarbeitung widerrufen? Das Lernenden-Dashboard kann daraufhin nicht mehr genutzt werden und es werden folgende Daten gelöscht:";
+$string['consent_config_desc'] = "Möchten Sie die Einwilligung zur Datenverarbeitung widerrufen? Das Learner Dashboard kann daraufhin nicht mehr genutzt werden und es werden folgende Daten gelöscht:";
 $string['consent_config_list_item_1'] = "Selbstdefinierte Lernziele";
 $string['consent_config_list_item_2'] = "Einstellungen zum Lesefortschritt";
 $string['consent_config_list_item_3'] = "Termine des Planungsassistenten";

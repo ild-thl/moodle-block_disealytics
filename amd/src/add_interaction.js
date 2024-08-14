@@ -347,7 +347,9 @@ export const toggleInformationModal = (viewname) => {
                 title: viewname === 'main' ?
                     getString('main_help_title', 'block_disealytics') :
                     getString(viewname, 'block_disealytics'),
-                body: getString(viewname + '_help_info_text', 'block_disealytics'),
+                body: viewname === 'main' ?
+                    Templates.render('block_disealytics/help_modal', {id: 3}) :
+                    getString(viewname + '_help_info_text', 'block_disealytics'),
                 removeOnClose: true
             });
             modal.show();

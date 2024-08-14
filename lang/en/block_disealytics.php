@@ -203,15 +203,39 @@ $string['modal_remove_text_2'] = " from the dashboard? You can add it back to yo
 $string['modal_remove_cancel'] = "Cancel";
 $string['modal_remove_check'] = "Remove card from Learner Dashboard";
 
-$string['main_help_title'] = "Help page for the Learning Dashboard";
-$string['main_help_views_summary'] = "Classification of cards";
-$string['main_help_views_details'] = "The Learning Dashboard (LD) contains cards in which various information or functions are included. Cards can be added to the LD and deleted again. There are many different topics from which you can compile your personal LD. Information on the various topics is available via the help function in the individual cards.";
-$string['main_help_add_remove_summary'] = "Adding or removing cards";
-$string['main_help_add_remove_details'] = 'To add or remove cards, click on the pencil icon on the overall view page. You can then remove individual cards by clicking on the "x" symbol in the top right-hand corner of a card. Under your selected cards in the LD, you have the option of adding further cards to the LD.';
-$string['main_help_help_summary'] = "Recurring functions within the cards";
-$string['main_help_help_details'] = 'Each card and the dashboard itself contains a help icon ("?" icon). The cards contain an icon for calling up a detailed view of a card. Use the help icon to call up context-related help on the content of a card.';
-$string['main_help_edit_summary'] = "Editing mode";
-$string['main_help_edit_details'] = "Clicking on the pencil icon starts the editing mode for adding or deleting cards in the dashboard (see Figure 1). You can use this feature to customise your dashboard with the cards that are relevant to you. Click on the red X on the relevant card to remove it. You can add a new card by selecting the \"Add card\" button. This button opens a new dialogue with the available cards.";
+// Main help modal.
+$string['main_help_title'] = "Help page for the Learner Dashboard";
+
+$string['main_help_views_title'] = "Cards classification";
+$string['main_help_views_summary'] = 'The Learner Dashboard (LD) contains so-called <span style="color:var(--diseablue)">cards</span> with different information and functions. You can <span style="color:var(--diseablue)">add</span> or <span style="color:var(--diseablue)">remove</span> cards to/from your LD. There are numerous themes to choose from to put together your personal LD.<br><br>Further information on the individual topics can be obtained via the <span style="color:var(--diseablue)">help modals</span> in the corresponding cards.';
+
+$string['main_help_viewmodes_title'] = 'Different views';
+$string['main_help_viewmodes_summary'] = 'In the Learner Dashboard, you can view all content in the <span style="color:var(--diseablue)">module, semester</span> or <span style="color:var(--diseablue)">full view</span><br><br><strong>Module view</strong><br>In the module view, the content is displayed specifically for the module you are currently in. You receive a detailed overview of all resources and activities that belong to this module.<br><br><strong>Semester view</strong><br>The semester view shows you all the content of the modules you are taking in the current semester. This view allows you to gain a comprehensive insight into your current semester.<br><br><strong>Full view</strong><br>In the full view, you can access all the content of your degree programme. This includes all modules and activities that you have completed or are currently completing during your entire degree programme.';
+
+$string['main_help_add_remove_title'] = "Adding or removing cards";
+$string['main_help_add_remove_summary'] = 'To add or remove cards in the Learner Dashboard, you can proceed as follows:<br>
+1. Click on the pencil icon to activate the editing mode.<br>
+2. To remove a card: Find the desired card and click on the X symbol in the top right-hand corner of the card.<br>
+3. To add new cards: Scroll below your already selected cards. There, you will find the option to add additional cards to the dashboard. Select the desired cards and add them to your dashboard.';
+
+$string['main_help_functionality_title'] = "Recurring functions within the cards";
+$string['main_help_functionality_summary'] = '<strong>Help icon on the dashboard</strong><br>
+There is a help icon on the entire dashboard, which can be accessed via a <span style="color:var(--diseablue)">“?”-Icon</span>. This icon provides users with quick access to context-related support and explanations of how the dashboard works.
+<br><br><strong>Help symbol on the cards</strong><br>
+Each individual card in the dashboard also has a help symbol. Clicking on this icon on a specific card opens a detailed view. This view provides detailed information on the content of the respective card.';
+
+$string['main_help_edit_title'] = "Editing function";
+$string['main_help_edit_summary'] = 'Click on the pencil icon to start the editing function for adding or deleting cards in the dashboard. You can use this function to customise your dashboard with the cards that are relevant to you. Click on the red X on the relevant card to remove it. You can add a new card by selecting the ‘Add card’ button. This button opens a new dialogue with the available cards.';
+
+// Main help cards.
+$string['main_help_assignment-view'] = 'The card <span style="color:var(--diseablue)">Assignments</span> lists all submission tasks that are available to you in the corresponding modules and shows the current status of the task.';
+$string['main_help_activity-view'] = 'The card <span style="color:var(--diseablue)">Activity</span> views your learning time at a glance! The coloured segments represent different activities and their height shows the duration of each activity.';
+$string['main_help_learning-goals-view'] = 'In the card <span style="color:var(--diseablue)">Learning Goals</span> you can record any learning objectives. You can also use this function across semesters.';
+$string['main_help_planner-view'] = 'The card <span style="color:var(--diseablue)">Planning Assistent</span> shows you an overview of your upcoming web conference, submission tasks or other activities.';
+$string['main_help_progress-bar-view'] = 'In the card <span style="color:var(--diseablue)">Progressbar</span> you can add learning materials manually and receive the current reading progress of your current reading in the form of a diagram.';
+$string['main_help_study-progress-view'] = 'The speedometer on the card <span style="color:var(--diseablue)">Study Progress</span> shows you your learning progress and how far you are towards your goal. The calculation is based on the assessments in the tasks that are assigned to you in the course.';
+$string['main_help_success-chance-view'] = 'In the card <span style="color:var(--diseablue)">PVL-Probability</span> all submissions (including assessment points) are displayed. The respective PVL probability is calculated from the assessment points of the individual submissions and displayed as a percentage.';
+
 $string['main_add_view_title'] = "Add cards";
 $string['main_add_view_info_text'] = "Select the cards you would like to have displayed in the DiSEA dashboard.";
 $string['main_add_view_info_text_empty'] = "You have added all available cards.";

@@ -52,12 +52,11 @@ class planner_view extends base_view {
     /**
      * Constructor for the planner view
      *
-     * @param mixed $timeframe
      * @param learningdata $learningdata
      * @throws Exception
      */
-    public function __construct(mixed $timeframe, learningdata $learningdata) {
-        parent::__construct($timeframe);
+    public function __construct(learningdata $learningdata) {
+        parent::__construct();
         $this->learningdata = $learningdata;
     }
 

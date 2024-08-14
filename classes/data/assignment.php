@@ -16,6 +16,7 @@
 
 namespace block_disealytics\data;
 
+use cm_info;
 use coding_exception;
 use dml_exception;
 use html_writer;
@@ -103,17 +104,17 @@ class assignment {
      * The assignment object.
      * @var stdClass
      */
-    private mixed $assign;
+    private $assign;
     /**
      * The grade item of the assignment.
      * @var stdClass
      */
-    private mixed $gradeitem;
+    private $gradeitem;
     /**
      * The grade grade of the assignment.
      * @var stdClass
      */
-    private mixed $gradegrade;
+    private $gradegrade;
     /**
      * The hover text for the assignment.
      * @var string
@@ -133,7 +134,7 @@ class assignment {
      * The module information of the assignment.
      * @var stdClass
      */
-    private mixed $modinfo;
+    private $modinfo;
     /**
      * The attempts of the assignment.
      * @var array
@@ -143,11 +144,11 @@ class assignment {
     /**
      * Constructor for the assignment class.
      *
-     * @param mixed $moduleinfo The module information of the assignment
+     * @param cm_info $moduleinfo The module information of the assignment
      * @param int|null $courseid The ID of the course
      * @throws dml_exception
      */
-    public function __construct(mixed $moduleinfo, ?int $courseid = null) {
+    public function __construct(cm_info $moduleinfo, ?int $courseid = null) {
         global $DB, $USER, $COURSE;
         $this->modinfo = $moduleinfo;
         $this->id = $moduleinfo->instance;
@@ -240,9 +241,9 @@ class assignment {
 
     /**
      * Get the set due date of the assignment.
-     * @return mixed Returns the due date of the assignment.
+     * @return Returns the due date of the assignment.
      */
-    private function block_disealytics_get_duedate(): mixed {
+    private function block_disealytics_get_duedate() {
         return $this->assign->duedate;
     }
 
@@ -281,9 +282,9 @@ class assignment {
 
     /**
      * Get the grade type of assignment.
-     * @return mixed Returns the grade type of assignment.
+     * @return Returns the grade type of assignment.
      */
-    public function block_disealytics_get_gradetype(): mixed {
+    public function block_disealytics_get_gradetype() {
         return $this->gradeitem->gradetype;
     }
 
@@ -292,7 +293,7 @@ class assignment {
      * @return string|bool Returns the scale grade text if the grade type is scale, or false otherwise.
      * @throws dml_exception
      */
-    private function block_disealytics_get_scale_grade_text(): bool|string {
+    private function block_disealytics_get_scale_grade_text() {
         if ($this->gradeitem->gradetype !== self::GRADETYPE_SCALE) {
             return false;
         }
@@ -326,7 +327,7 @@ class assignment {
      * Get the maximum grade for the assignment.
      * @return float|int Returns the maximum grade for the assignment.
      */
-    public function block_disealytics_get_maxgrade(): float|int {
+    public function block_disealytics_get_maxgrade() {
         return $this->assign->grade;
     }
 
@@ -334,7 +335,7 @@ class assignment {
      * Get the grade for the assignment.
      * @return float|int|null Returns the grade for the assignment or null if it's not given.
      */
-    public function block_disealytics_get_grade(): float|int|null {
+    public function block_disealytics_get_grade() {
         // Check if gradegrade is set and not null.
         if ($this->gradegrade && property_exists($this->gradegrade, 'finalgrade')) {
             return $this->gradegrade->finalgrade;
@@ -348,7 +349,7 @@ class assignment {
      * Get the grade that is needed to pass the assignment.
      * @return float|int Returns the grade for the assignment.
      */
-    public function block_disealytics_get_gradepass(): float|int {
+    public function block_disealytics_get_gradepass() {
         return $this->gradeitem->gradepass;
     }
 

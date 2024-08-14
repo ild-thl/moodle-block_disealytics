@@ -444,3 +444,7 @@ $string['privacy:metadata:disea_consent:courseid'] = 'Die ID des Kurses des Benu
 $string['privacy:metadata:disea_consent:choice'] = 'Die Wahl, die der Benutzer f&uuml;r die DiSEA Einwilligungserkl&auml;rung getroffen hat.';
 
 $string['privacy:data'] = 'Daten des Nutzers f&uuml;r DiSEA Einwilligungserkl&auml;rung';
+
+$string['activity_view_axislabel_y'] = 'Y-Achse: Minuten';
+$string['activity_view_main_axislabel_x'] = 'X-Achse: Tage';
+$string['activity_view_detail_axislabel_x'] = 'X-Achse: Kalenderwochen';

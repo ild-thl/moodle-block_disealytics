@@ -102,13 +102,14 @@ class block_disealytics extends block_base {
             }
 
             // Check if there are settings for the views in the database.
-            $viewsinpref = json_decode(get_user_preferences('block_disealytics_views'), true);
+            $preference = get_user_preferences('block_disealytics_views');
 
             // If there are none, set them in the database.
-            if (is_null($viewsinpref)) {
+            if (is_null($preference)) {
                 set_user_preference('block_disealytics_views', json_encode($views));
                 $viewsinpref = json_decode(get_user_preferences('block_disealytics_views'), true);
             } else {
+                $viewsinpref = json_decode($preference, true);
                 // If there are, load them.
                 $viewsinpref = $this->loadviewsettings($viewsinpref);
 

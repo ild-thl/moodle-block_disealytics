@@ -22,7 +22,9 @@
 
 import Ajax from 'core/ajax';
 import ModalFactory from 'core/modal_factory';
+import ModalEvents from 'core/modal_events';
 import Templates from 'core/templates';
+import {get_string as getString} from 'core/str';
 import {
     getCourseId,
     getViewlist,
@@ -80,19 +82,11 @@ export const createModalsContainer = () => {
  * @returns {void}
  */
 export const moveModalsToBodyEnd = (viewname) => {
-    const infoModal = document.getElementById(`${viewname}-info-modal`);
-    const removeModal = document.getElementById(`${viewname}-remove-modal`);
     const configModals = document.querySelectorAll(`.${viewname}-config-modal`);
     const plannerModals = document.querySelectorAll('.block_disealytics-planner-event-modal');
     const modalsContainer = document.querySelector('.block_disealytics-modals');
 
     if (modalsContainer) {
-        if (infoModal) {
-            modalsContainer.appendChild(infoModal);
-        }
-        if (removeModal) {
-            modalsContainer.appendChild(removeModal);
-        }
         if (plannerModals && plannerModals.length > 0) {
             plannerModals.forEach((modal) => {
                 modalsContainer.appendChild(modal);
@@ -293,22 +287,36 @@ const getDragAfterElement = (container, y) => {
  * @returns {void}
  */
 const registerEventListener = (viewname) => {
-    // Returns every delete button.
-    const deleteButtons = document.querySelectorAll('.block_disealytics-delete-btn-' + viewname);
-    const addButton = document.querySelector('.block_disealytics-add-' + viewname);
-    const viewContainer = document.querySelector('#block_disealytics-' + viewname);
-    if (deleteButtons) {
-        [].forEach.call(deleteButtons, (deleteButton) => {
-            // Event to remove the view.
-            deleteButton.addEventListener("click", function() {
+    // Verify deletion modal.
+    const verifyDeletionButton = document.querySelector('.block_disealytics_remove_modal_' + viewname);
+    if (verifyDeletionButton) {
+        verifyDeletionButton.addEventListener("click", async function() {
+            // Fetch necessary strings.
+            const modalRemoveText1 = await getString('modal_remove_text_1', 'block_disealytics');
+            const modalRemoveView = await getString(viewname, 'block_disealytics');
+            const modalRemoveText2 = await getString('modal_remove_text_2', 'block_disealytics');
+
+            // Create the modal with the custom content.
+            const modal = await ModalFactory.create({
+                type: ModalFactory.types.SAVE_CANCEL,
+                title: await getString('modal_remove_title', 'block_disealytics'),
+                body: `${modalRemoveText1} <strong>${modalRemoveView}</strong> ${modalRemoveText2}`,
+                removeOnClose: true,
+            });
+            modal.setSaveButtonText(await getString('modal_remove_check', 'block_disealytics'));
+            modal.show();
+            modal.getRoot().on(ModalEvents.save, async () => {
+                const viewContainer = document.querySelector('#block_disealytics-' + viewname);
                 viewContainer.setAttribute('data-visible', 'false');
+                const addButton = document.querySelector('.block_disealytics-add-' + viewname);
                 addButton.classList.remove('hidden');
                 const updatedViewList = updateViewlist(viewname, 'delete');
-                updateSetting('write', 'views', JSON.stringify(updatedViewList));
-            }, false);
-        });
+                await updateSetting('write', 'views', JSON.stringify(updatedViewList));
+            });
+        }, false);
     }
-    // Returns every toggle button.
+
+    // Toggle expansion.
     const toggleExpansionButtons = document.querySelectorAll('.block_disealytics-toggle-expansion-btn-' + viewname);
     [].forEach.call(toggleExpansionButtons, (e) => {
         e.addEventListener("click", function() {
@@ -322,46 +330,100 @@ const registerEventListener = (viewname) => {
 };
 
 /**
- * Calculates the position for the information window.
+ * Generates the information modal.
  *
  * Is called in the javascript of the main.mustache template and in the registerEventListener function.
  *
- * @param {string} viewname - The viewname in the format of 'viewname-view'.
+ * @param {String} viewname - The button element that triggers the modal.
  * @returns {void}
  */
 export const toggleInformationModal = (viewname) => {
-    const informationButton = document.querySelector('.info-btn-' + viewname);
-    const outerWindow = document.querySelector('.outer-modal-' + viewname);
+    const btn = document.querySelector("#block_disealytics_" + viewname + "_info_btn");
+    const btnExpanded = document.querySelector("#block_disealytics_" + viewname + "_info_btn_expanded");
 
-    if (informationButton && outerWindow) {
-        informationButton.addEventListener("click", function() {
-            // Toggle the 'show' class to display or hide the popup.
-            outerWindow.classList.toggle('show');
+    if (btn) {
+        btn.addEventListener('click', async function() {
+            const modal = await ModalFactory.create({
+                title: viewname === 'main' ?
+                    getString('main_help_title', 'block_disealytics') :
+                    getString(viewname, 'block_disealytics'),
+                body: viewname === 'main' ?
+                    Templates.render('block_disealytics/help_modal', {id: 3}) :
+                    getString(viewname + '_help_info_text', 'block_disealytics'),
+                removeOnClose: true
+            });
+            modal.show();
+        });
+    }
+
+    if (btnExpanded) {
+        btnExpanded.addEventListener('click', async function() {
+            const modal = await ModalFactory.create({
+                title: getString(viewname, 'block_disealytics'),
+                body: getString(viewname + '_help_info_text_expanded', 'block_disealytics'),
+                removeOnClose: true
+            });
+            modal.show();
         });
     }
 };
 
-export const changeToggleIcon = () => {
-    const toggleLink = document.querySelector('#block_disealytics_config_consent_menu');
-    const toggleIcon = toggleLink.querySelector('i');
+/**
+ * Generates the main config modal.
+ *
+ * Is called in the javascript of the main.mustache template.
+ *
+ * @returns {void}
+ */
+export const toggleMainConfigModal = () => {
+    const mainConfigBtn = document.querySelector("#block_disealytics_config_menu");
+    if (mainConfigBtn) {
+        mainConfigBtn.addEventListener('click', async function() {
+            // Create the main config modal with custom content.
+            const modal = await ModalFactory.create({
+                title: await getString('main_config_title', 'block_disealytics'),
+                body: await Templates.render('block_disealytics/config_menu', {id: 1}),
+                removeOnClose: true
+            });
 
-    if (toggleLink && toggleIcon) {
-        toggleLink.addEventListener("click", function() {
-            toggleIcon.classList.remove('disea-green');
-            toggleIcon.classList.remove('fa-toggle-on');
-            toggleIcon.classList.add('disea-gray');
-            toggleIcon.classList.add('fa-toggle-off');
+            // Show the modal.
+            await modal.show();
 
-            // Set a timeout to change the classes back after 1 second.
-            setTimeout(function() {
-                toggleIcon.classList.remove('disea-gray');
-                toggleIcon.classList.remove('fa-toggle-off');
-                toggleIcon.classList.add('disea-green');
-                toggleIcon.classList.add('fa-toggle-on');
-            }, 1000);
+            // Wait until the modal content is fully shown.
+            if (modal.getRoot()) {
+                const mainConsentBtn = document.querySelector("#block_disealytics_config_consent_menu");
+                if (mainConsentBtn) {
+                    const toggleIcon = mainConsentBtn.querySelector('i');
+
+                    mainConsentBtn.addEventListener('click', async function() {
+                        // Toggle icon classes.
+                        toggleIcon.classList.remove('disea-green', 'fa-toggle-on');
+                        toggleIcon.classList.add('disea-gray', 'fa-toggle-off');
+
+                        // Set a timeout to change the classes back after 1 second.
+                        setTimeout(() => {
+                            toggleIcon.classList.remove('disea-gray', 'fa-toggle-off');
+                            toggleIcon.classList.add('disea-green', 'fa-toggle-on');
+                        }, 1000);
+
+                        // Create and show the consent modal.
+                        const consentModal = await ModalFactory.create({
+                            title: await getString('consent_config_title', 'block_disealytics'),
+                            body: await Templates.render('block_disealytics/config_menu_consent', {id: 2}),
+                            removeOnClose: true
+                        });
+
+                        await consentModal.show();
+
+                        // Initialize consent buttons after the consent modal is shown.
+                        enableConsentButtons(consentModal);
+                    });
+                }
+            }
         });
     }
 };
+
 
 /**
  * Toggles the visibility of an accordion content section and updates the toggle icon.
@@ -465,17 +527,20 @@ export const enableViewmodeDropdown = () => {
 /**
  * Adds an EventListener to the consent buttons.
  *
+ * @param {object} modal - The modal to enable the buttons for.
  * @returns {void}
  */
-export const enableConsentButtons = () => {
-    document.querySelector(".disea-delete-btn").addEventListener("click", function() {
+export const enableConsentButtons = (modal = null) => {
+    document.querySelector(".disea-delete-consent-btn").addEventListener("click", function() {
         updateSetting("revoke_consent", '', "delete");
     });
-    document.querySelector(".disea-save-btn").addEventListener("click", function() {
+    document.querySelector(".disea-save-consent-btn").addEventListener("click", function() {
         updateSetting("revoke_consent", '', '');
     });
+    document.querySelector(".disea-cancel-consent-btn").addEventListener("click", function() {
+        modal.destroy();
+    });
 };
-
 
 export const setCourseCategory = (viewname) => {
     const courseCategories = document.querySelectorAll(".course-category-global-item-" + viewname);

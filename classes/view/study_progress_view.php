@@ -235,8 +235,8 @@ class study_progress_view extends base_view {
 
         // Texts.
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('study-progress_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('study-progress_help_info_text_expanded', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('study-progress-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('study-progress-view_help_info_text_expanded', 'block_disealytics');
 
         // Lade je nach Score die passende Darstellung.
         if (isset($this->score)) {
@@ -275,12 +275,13 @@ class study_progress_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
+            $this->output["viewmode"] = true;
             $this->output["viewmode_halfyear"] = true;
         }
 
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('study-progress_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('study-progress_help_info_text_expanded', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('study-progress-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('study-progress-view_help_info_text_expanded', 'block_disealytics');
 
         $this->scorehalfyear = $this->compute_score('halfyear');
 
@@ -320,11 +321,12 @@ class study_progress_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
+            $this->output["viewmode"] = true;
             $this->output["viewmode_global"] = true;
         }
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('study-progress_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('study-progress_help_info_text_expanded', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('study-progress-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('study-progress-view_help_info_text_expanded', 'block_disealytics');
 
         $this->scoreglobal = $this->compute_score('global');
         if (isset($this->scoreglobal)) {

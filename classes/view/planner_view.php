@@ -184,6 +184,7 @@ class planner_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
+            $this->output["viewmode"] = true;
             // Build planner.
             $selecteddate = json_decode(get_user_preferences('block_disealytics_planner_currentdate', 0), true);
             $planner = planner::block_disealytics_create_planner($selecteddate);
@@ -195,9 +196,9 @@ class planner_view extends base_view {
         $this->output["title"] =
                 get_string(self::TITLE, 'block_disealytics');
         $this->output["help_info_text"] =
-                get_string('planner_help_info_text', 'block_disealytics');
+                get_string('planner-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] =
-                get_string('planner-view_help_info_text_expanded', 'block_disealytics');
+                get_string('planner-view-view_help_info_text_expanded', 'block_disealytics');
     }
 
     /**
@@ -217,6 +218,7 @@ class planner_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
+            $this->output["viewmode"] = true;
             // Build planner.
             $selecteddate = json_decode(get_user_preferences('block_disealytics_planner_currentdate', 0), true);
             $planner = planner::block_disealytics_create_planner($selecteddate);
@@ -234,9 +236,9 @@ class planner_view extends base_view {
         $this->output["title"] =
                 get_string(self::TITLE, 'block_disealytics');
         $this->output["help_info_text"] =
-                get_string('planner_help_info_text', 'block_disealytics');
+                get_string('planner-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] =
-                get_string('planner-view_help_info_text_expanded', 'block_disealytics');
+                get_string('planner-view-view_help_info_text_expanded', 'block_disealytics');
     }
 
     /**
@@ -255,6 +257,7 @@ class planner_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
+            $this->output["viewmode"] = true;
             // Build planner.
             $selecteddate = json_decode(get_user_preferences('block_disealytics_planner_currentdate', 0), true);
             $planner = planner::block_disealytics_create_planner($selecteddate);
@@ -291,8 +294,8 @@ class planner_view extends base_view {
         $this->output["title"] =
                 get_string(self::TITLE, 'block_disealytics');
         $this->output["help_info_text"] =
-                get_string('planner_help_info_text', 'block_disealytics');
+                get_string('planner-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] =
-                get_string('planner-view_help_info_text_expanded', 'block_disealytics');
+                get_string('planner-view-view_help_info_text_expanded', 'block_disealytics');
     }
 }

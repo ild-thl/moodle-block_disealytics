@@ -111,7 +111,7 @@ class refresh_view extends external_api {
                         str_replace('-', '_', $viewname)))->newInstance($learningdata);
                 $response[$viewname]["template_path"] = "block_disealytics/" . $viewname;
                 $response[$viewname]["data"] = [];
-                $response[$viewname]["data"]["view_type"] = $viewname;
+                $response[$viewname]["data"]["viewname"] = $viewname;
                 $output = $view->get_output();
                 foreach (array_keys($output) as $field) {
                     $response[$viewname]["data"][$field] = $output[$field];

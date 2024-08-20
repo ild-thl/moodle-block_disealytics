@@ -26,21 +26,20 @@
     * none
 
     Context variables required for this template:
-    * view_type
+    * viewname
     * title
 
     Example context (json):
     {
-        "view_type": "progress-bar-view",
+        "viewname": "progress-bar-view",
         "title": "Progress Bar"
     }
 }}
-{{> block_disealytics/view_modal}}
 {{> block_disealytics/progress-bar_config_menu}}
 {{#editmode}}
-    <div class="block_disealytics-editing block_disealytics-editing-{{view_type}}"
-         data-container="block_disealytics/editing-{{view_type}}">
-        <svg id="{{view_type}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="block_disealytics-editing block_disealytics-editing-{{viewname}}"
+         data-container="block_disealytics/editing-{{viewname}}">
+        <svg id="{{viewname}}-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M45.6096 22.9199C45.6096 34.6285 35.7297 44.1699 23.4796 44.1699C11.2296 44.1699 1.34961 34.6285 1.34961 22.9199C1.34961 11.2113 11.2296 1.66992 23.4796 1.66992C35.7297 1.66992 45.6096 11.2113 45.6096 22.9199Z"
                   stroke="#0f6cbf" stroke-width="1.5"/>
             <path d="M37.7124 15.9961H10.2706C10.1384 15.9961 10.0312 16.0981 10.0312 16.2239V21.2366C10.0312 21.3624 10.1384 21.4644 10.2706 21.4644H37.7124C37.8446 21.4644 37.9517 21.3624 37.9517 21.2366V16.2239C37.9517 16.0981 37.8446 15.9961 37.7124 15.9961Z"
@@ -53,242 +52,187 @@
                   fill="#0f6cbf"/>
         </svg>
         <h1 class="editing-headline">{{title}}</h1>
-        <a class="dashboard-button block_disealytics-open-delete-modal-{{view_type}} block_disealytics-open-delete-modal"
-           data-toggle="modal"
-           data-target="#{{view_type}}-remove-modal">
+        <a class="dashboard-button block_disealytics_remove_modal_{{viewname}}">
             <i class="text-danger fa fa-times"></i>
         </a>
     </div>
 {{/editmode}}
-{{#viewmode_module}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{view_type}}">
+{{#viewmode}}
+    <div id="block_disealytics-panel-{{viewname}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{viewname}}">
 
         <div class="panel-heading">
             <div class="flex-container">
                 <h1 id="title"><span class="show-when-expanded"><a
                         style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
+                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{viewname}}"
+                        data-action="block_disealytics/expand-{{viewname}}"
                         data-actiontype="block_disealytics/toggle-expansion"><i
                         style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
             </a></span>{{title}}</h1>
-                    <div class="navigation-icons">
-                        {{^nodata}}
+                <div class="navigation-icons">
+                    {{^nodata}}
                         <a id="block_disealytics_progress_config_menu"
                            class="dashboard-button"
                            data-toggle="modal"
                            data-target="#progressConfigModal">
                             <i class="fa fa-pencil"></i>
                         </a>
-                        {{/nodata}}
-                        <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                           data-toggle="modal"
-                           data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                                class="fa fa-question"></i>
+                    {{/nodata}}
+                    {{^isexpanded}}
+                        <a id="block_disealytics_{{viewname}}_info_btn" class="dashboard-button">
+                            <i class="fa fa-question"></i>
                         </a>
-                    </div>
+                    {{/isexpanded}}
+                    {{#isexpanded}}
+                        <a id="block_disealytics_{{viewname}}_info_btn_expanded" class="dashboard-button">
+                            <i class="fa fa-question"></i>
+                        </a>
+                    {{/isexpanded}}
+                </div>
 
             </div>
         </div>
-        <div class="panel-body">
-            <div class="panel-body hide-when-expanded">
+        {{#viewmode_module}}
+            <div class="panel-body">
+                <div class="panel-body hide-when-expanded">
+                    {{#course}}
+                        {{#charts_preview}}
+                            {{> core/chart }}
+                            {{#show_dots}}
+                                <div class="progress-bar-dots">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
+                                        <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
+                                        <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
+                                        <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
+                                    </svg>
+                                </div>
+                            {{/show_dots}}
+                        {{/charts_preview}}
+                    {{/course}}
+                </div>
+
+                {{#nodata}}
+                    <p>{{#str}} nodata, block_disealytics {{/str}}</p>
+                    {{#files_left}}
+                        <button id="block_disealytics_progress_config_menu"
+                                class="dashboard-button progress-bar-btn btn btn-primary"
+                                data-toggle="modal"
+                                data-target="#progressConfigModal">
+                            {{#str}} optional-inputs-view, block_disealytics {{/str}}
+                        </button>
+                    {{/files_left}}
+                {{/nodata}}
+
+            </div>
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
                 {{#course}}
-                    {{#charts_preview}}
+                    {{#charts}}
                         {{> core/chart }}
-                        {{#show_dots}}
-                            <div class="progress-bar-dots">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
-                                    <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
-                                    <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
-                                    <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
-                                </svg>
-                            </div>
-                        {{/show_dots}}
-                    {{/charts_preview}}
+                    {{/charts}}
                 {{/course}}
             </div>
+            {{> block_disealytics/bottom_navigation }}
+        {{/viewmode_module}}
+        {{#viewmode_halfyear}}
+            <div class="panel-body">
+                {{#course}}
+                    <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
+                        <span id="title">{{coursename}}</span>
+                        <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
+                    </div>
+                    <div class="panel-body">
+                        {{#charts_preview}}
+                            {{> core/chart }}
+                            {{#show_dots}}
+                                <div class="progress-bar-dots">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
+                                        <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
+                                        <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
+                                        <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
+                                    </svg>
+                                </div>
+                            {{/show_dots}}
+                        {{/charts_preview}}
 
-            {{#nodata}}
-                <p>{{#str}} nodata, block_disealytics {{/str}}</p>
-                {{#files_left}}
-                    <button id="block_disealytics_progress_config_menu"
-                            class="dashboard-button progress-bar-btn btn btn-primary"
-                            data-toggle="modal"
-                            data-target="#progressConfigModal">
-                        {{#str}} optional-inputs-view, block_disealytics {{/str}}
-                    </button>
-                {{/files_left}}
-            {{/nodata}}
-
-        </div>
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{view_type}}" data-container="block_disealytics/expandable-{{view_type}}">
-            {{#course}}
-                {{#charts}}
-                    {{> core/chart }}
-                {{/charts}}
-            {{/course}}
-        </div>
-
-        {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
-
-    </div>
-{{/viewmode_module}}
-{{#viewmode_halfyear}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{view_type}}">
-        <div class="panel-heading">
-            <div class="flex-container">
-                <h1 id="title"><span class="show-when-expanded"><a
-                        style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
-                        data-actiontype="block_disealytics/toggle-expansion"><i
-                        style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-            </a></span>{{title}}</h1>
-                <div class="navigation-icons">
-                    <a id="block_disealytics_progress_config_menu"
-                       class="dashboard-button"
-                       data-toggle="modal"
-                       data-target="#progressConfigModal">
-                        <i class="fa fa-pencil"></i>
-                    </a>
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="panel-body">
-            {{#course}}
-                <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
-                    <span id="title">{{coursename}}</span>
-                    <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
-                </div>
-                <div class="panel-body">
-                    {{#charts_preview}}
-                        {{> core/chart }}
-                        {{#show_dots}}
-                            <div class="progress-bar-dots">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
-                                    <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
-                                    <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
-                                    <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
-                                </svg>
-                            </div>
-                        {{/show_dots}}
-                    {{/charts_preview}}
-
-                </div>
-            {{/course}}
-            {{#nodata}}
-                <p>{{#str}} nodata, block_disealytics {{/str}}</p>
-                {{#files_left}}
-                    <button id="block_disealytics_progress_config_menu"
-                            class="dashboard-button progress-bar-btn btn btn-primary"
-                            data-toggle="modal"
-                            data-target="#progressConfigModal">
-                        {{#str}} optional-inputs-view, block_disealytics {{/str}}
-                    </button>
-                {{/files_left}}
-            {{/nodata}}
-        </div>
-
-        {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
-    </div>
-{{/viewmode_halfyear}}
-{{#viewmode_global}}
-    <div id="block_disealytics-panel-{{view_type}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{view_type}}">
-        <div class="panel-heading">
-            <div class="flex-container">
-                <h1 id="title"><span class="show-when-expanded"><a
-                        style="cursor: pointer; text-decoration: none"
-                        class="show-when-expanded expandable block_disealytics-toggle-expansion-btn block_disealytics-toggle-expansion-btn-{{view_type}}"
-                        data-action="block_disealytics/expand-{{view_type}}"
-                        data-actiontype="block_disealytics/toggle-expansion"><i
-                        style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
-            </a></span>{{title}}</h1>
-                <div class="navigation-icons">
-                    <a id="block_disealytics_progress_config_menu"
-                       class="dashboard-button"
-                       data-toggle="modal"
-                       data-target="#progressConfigModal">
-                        <i class="fa fa-pencil"></i>
-                    </a>
-                    <a class="dashboard-button block_disealytics-container-{{view_type}} info-btn-{{view_type}}"
-                       data-toggle="modal"
-                       data-target="[data-container='block_disealytics/{{view_type}}-modal']"><i
-                            class="fa fa-question"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="panel-body">
-            <div class="categories-container">
-                <div class="course-category-global">
-                    {{#categories}}
-                        <button class="course-category-global-item-{{view_type}} course-category-global-item {{#selected}}selected{{/selected}}">
-                            {{name}}
+                    </div>
+                {{/course}}
+                {{#nodata}}
+                    <p>{{#str}} nodata, block_disealytics {{/str}}</p>
+                    {{#files_left}}
+                        <button id="block_disealytics_progress_config_menu"
+                                class="dashboard-button progress-bar-btn btn btn-primary"
+                                data-toggle="modal"
+                                data-target="#progressConfigModal">
+                            {{#str}} optional-inputs-view, block_disealytics {{/str}}
                         </button>
-                    {{/categories}}
-                </div>
+                    {{/files_left}}
+                {{/nodata}}
             </div>
-            {{#course}}
-                <div class="course-category-header-container accordion-head-course-category-{{view_type}} flex-container">
-                    <span id="title">{{coursename}}</span>
-                    <i class="fa fa-chevron-up course-category-icon course-category-icon-{{view_type}}" data-coursename="{{coursename}}"></i>
+            {{> block_disealytics/bottom_navigation }}
+        {{/viewmode_halfyear}}
+        {{#viewmode_global}}
+            <div class="panel-body">
+                <div class="categories-container">
+                    <div class="course-category-global">
+                        {{#categories}}
+                            <button class="course-category-global-item-{{viewname}} course-category-global-item {{#selected}}selected{{/selected}}">
+                                {{name}}
+                            </button>
+                        {{/categories}}
+                    </div>
                 </div>
-                <div class="panel-body">
-                    {{#charts_preview}}
-                        {{> core/chart }}
-                        {{#show_dots}}
-                            <div class="progress-bar-dots">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
-                                    <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
-                                    <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
-                                    <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
-                                </svg>
-                            </div>
-                        {{/show_dots}}
-                    {{/charts_preview}}
-                </div>
-            {{/course}}
-            {{#nodata}}
-                <p>{{#str}} nodata, block_disealytics {{/str}}</p>
-                {{#files_left}}
-                    <button id="block_disealytics_progress_config_menu"
-                            class="dashboard-button progress-bar-btn btn btn-primary"
-                            data-toggle="modal"
-                            data-target="#progressConfigModal">
-                        {{#str}} optional-inputs-view, block_disealytics {{/str}}
-                    </button>
-                {{/files_left}}
-            {{/nodata}}
-        </div>
-
-        {{> block_disealytics/bottom_navigation }}
-        {{> block_disealytics/panel_editing_footer }}
-
+                {{#course}}
+                    <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
+                        <span id="title">{{coursename}}</span>
+                        <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
+                    </div>
+                    <div class="panel-body">
+                        {{#charts_preview}}
+                            {{> core/chart }}
+                            {{#show_dots}}
+                                <div class="progress-bar-dots">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
+                                        <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
+                                        <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5" fill="none">
+                                        <circle cx="3" cy="2.5" r="2.5" fill="#787880" fill-opacity="0.5"/>
+                                    </svg>
+                                </div>
+                            {{/show_dots}}
+                        {{/charts_preview}}
+                    </div>
+                {{/course}}
+                {{#nodata}}
+                    <p>{{#str}} nodata, block_disealytics {{/str}}</p>
+                    {{#files_left}}
+                        <button id="block_disealytics_progress_config_menu"
+                                class="dashboard-button progress-bar-btn btn btn-primary"
+                                data-toggle="modal"
+                                data-target="#progressConfigModal">
+                            {{#str}} optional-inputs-view, block_disealytics {{/str}}
+                        </button>
+                    {{/files_left}}
+                {{/nodata}}
+            </div>
+            {{> block_disealytics/bottom_navigation }}
+        {{/viewmode_global}}
     </div>
-{{/viewmode_global}}
+{{/viewmode}}
 
 {{#js}}
     require(['block_disealytics/add_interaction'], function(addInteraction) {
-    addInteraction.init("{{view_type}}");
+    addInteraction.init("{{viewname}}");
     });
     require(['block_disealytics/progress_bar_functions'],
     function(progressBar) {

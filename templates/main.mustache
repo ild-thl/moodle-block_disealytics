@@ -42,16 +42,11 @@
                data-action="block_disealytics/toggle-editing">
                 <i class="fa fa-pencil"></i>
             </a>
-            <a class="dashboard-button block_disealytics-container-{{view_type}} expanded-info-btn-{{view_type}}"
-               id="block_disealytics_main_info_button"
-               data-toggle="modal"
-               data-target="#infoMainModal">
+            <a class="dashboard-button"
+               id="block_disealytics_main_info_btn">
                 <i class="fa fa-question"></i>
             </a>
-            <a id="block_disealytics_config_menu"
-               class="dashboard-button"
-               data-toggle="modal"
-               data-target="#configMainModal">
+            <a id="block_disealytics_config_menu">
                 <svg style="margin-left: 12px;" width="4" height="14" viewBox="0 0 4 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.00065 13.6668C1.54232 13.6668 1.14996 13.5036 0.823568 13.1772C0.497179 12.8509 0.333984 12.4585 0.333984 12.0002C0.333984 11.5418 0.497179 11.1495 0.823568 10.8231C1.14996 10.4967 1.54232 10.3335 2.00065 10.3335C2.45898 10.3335 2.85135 10.4967 3.17773 10.8231C3.50412 11.1495 3.66732 11.5418 3.66732 12.0002C3.66732 12.4585 3.50412 12.8509 3.17773 13.1772C2.85135 13.5036 2.45898 13.6668 2.00065 13.6668ZM2.00065 8.66683C1.54232 8.66683 1.14996 8.50363 0.823568 8.17725C0.497179 7.85086 0.333984 7.4585 0.333984 7.00016C0.333984 6.54183 0.497179 6.14947 0.823568 5.82308C1.14996 5.49669 1.54232 5.3335 2.00065 5.3335C2.45898 5.3335 2.85135 5.49669 3.17773 5.82308C3.50412 6.14947 3.66732 6.54183 3.66732 7.00016C3.66732 7.4585 3.50412 7.85086 3.17773 8.17725C2.85135 8.50363 2.45898 8.66683 2.00065 8.66683ZM2.00065 3.66683C1.54232 3.66683 1.14996 3.50363 0.823568 3.17725C0.497179 2.85086 0.333984 2.4585 0.333984 2.00016C0.333984 1.54183 0.497179 1.14947 0.823568 0.823079C1.14996 0.496691 1.54232 0.333496 2.00065 0.333496C2.45898 0.333496 2.85135 0.496691 3.17773 0.823079C3.50412 1.14947 3.66732 1.54183 3.66732 2.00016C3.66732 2.4585 3.50412 2.85086 3.17773 3.17725C2.85135 3.50363 2.45898 3.66683 2.00065 3.66683Z"
                           fill="#0f6cbf"/>
@@ -77,40 +72,6 @@
             <span class="show-when-editing main-viewmode-label">{{#str}} exit_editing_mode, block_disealytics{{/str}}</span>
         </a>
     </div>
-    <div class="modal fade block_disealytics-main-modal" id="infoMainModal">
-        <div class="modal-dialog">
-            <div class="modal-content content-modal-main">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{#str}} main_help_title, block_disealytics {{/str}}</h5>
-                    <a class="block_disealytics-close-modal-btn" data-dismiss="modal">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-
-                <div class="modal-body">
-                    <details>
-                        <summary><strong>{{#str}} main_help_views_summary, block_disealytics {{/str}}</strong></summary>
-                        <p>{{#str}} main_help_views_details, block_disealytics {{/str}}</p>
-                    </details>
-                    <details>
-                        <summary><strong>{{#str}} main_help_add_remove_summary, block_disealytics {{/str}}</strong></summary>
-                        <p>{{#str}} main_help_add_remove_details, block_disealytics {{/str}}</p>
-                    </details>
-                    <details>
-                        <summary><strong>{{#str}} main_help_help_summary, block_disealytics {{/str}}</strong></summary>
-                        <p>{{#str}} main_help_help_details, block_disealytics {{/str}}</p>
-                    </details>
-                    <details>
-                        <summary><strong>{{#str}} main_help_edit_summary, block_disealytics {{/str}}</strong></summary>
-                        <p>{{#str}} main_help_edit_details, block_disealytics {{/str}}</p>
-                    </details>
-                </div>
-                <div class="modal-footer">DiSEA Learner Dashboard 2024 - Version 0.2.4 2024080800</div>
-            </div>
-
-        </div>
-    </div>
-    {{> block_disealytics/config_menu}}
     <p class="show-when-no-view-exists hidden">{{#str}} no-view-exists, block_disealytics {{/str}}</p>
     <div class="block_disealytics-all-views-container block_disealytics-drop-container">
         {{#viewtypes}}
@@ -258,8 +219,8 @@
     require(['block_disealytics/add_interaction'], function(addInteraction) {
     addInteraction.setEditingMode();
     addInteraction.toggleInformationModal('main');
+    addInteraction.toggleMainConfigModal();
     addInteraction.enableViewmodeDropdown();
-    addInteraction.enableConsentButtons();
     addInteraction.createModalsContainer();
     });
 {{/js}}

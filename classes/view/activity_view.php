@@ -83,8 +83,8 @@ class activity_view extends base_view {
 
         // Texts.
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('activity_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('activity_help_info_text_expanded', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('activity-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('activity-view_help_info_text_expanded', 'block_disealytics');
 
         global $COURSE;
         $COURSE->coursename = $COURSE->fullname;
@@ -210,8 +210,8 @@ class activity_view extends base_view {
         }
         $this->output["viewmode_halfyear"] = true;
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('activity_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('activity_help_info_text_expanded', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('activity-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('activity-view_help_info_text_expanded', 'block_disealytics');
 
         $outputs = [];
         $allcoursesofusercurrentsemester = course::get_all_courses_of_user_current_semester($USER->id);
@@ -248,8 +248,8 @@ class activity_view extends base_view {
         }
         $this->output["viewmode_global"] = true;
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('activity_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('activity_help_info_text_expanded', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('activity-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('activity-view_help_info_text_expanded', 'block_disealytics');
 
         $outputs = [];
         $this->output["categories"] = [];

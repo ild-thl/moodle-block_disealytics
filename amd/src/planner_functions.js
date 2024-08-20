@@ -124,7 +124,7 @@ export function initButtonsInPlannerForm() {
 
     if (plannerRepetitions) {
         plannerRepetitions.addEventListener('change', () => {
-            document.getElementById('planner-event-repetitions-input').disabled = !this.checked;
+            document.getElementById('planner-event-repetitions-input').disabled = !plannerRepetitions.checked;
         });
     }
 }

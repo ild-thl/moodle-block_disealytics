@@ -64,8 +64,8 @@ class success_chance_view extends base_view {
         // Texts.
         global $COURSE;
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('success-chance_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('success-chance_help_info_text_expanded', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('success-chance-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('success-chance-view_help_info_text_expanded', 'block_disealytics');
 
         if ($COURSE->id != 1) {
             $allassignments = assignment::block_disealytics_get_course_assignments($COURSE->id);
@@ -256,12 +256,13 @@ class success_chance_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
+            $this->output["viewmode"] = true;
             $this->output["viewmode_halfyear"] = true;
         }
 
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('success-chance_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('success-chance_help_info_text_expanded', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('success-chance-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('success-chance-view_help_info_text_expanded', 'block_disealytics');
 
         $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
         $assignments = [];
@@ -360,12 +361,13 @@ class success_chance_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
+            $this->output["viewmode"] = true;
             $this->output["viewmode_global"] = true;
         }
 
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('success-chance_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('success-chance_help_info_text_expanded', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('success-chance-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('success-chance-view_help_info_text_expanded', 'block_disealytics');
 
         $this->output["categories"] = [];
         $allusercourses = course::get_all_courses_of_user($USER->id);

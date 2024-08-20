@@ -225,9 +225,9 @@ class progress_bar_view extends base_view {
         global $COURSE;
         // Texts.
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('progress-bar_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('progress-bar_help_info_text', 'block_disealytics');
-        $this->output["optional_input_help_info_text"] = get_string('optional_inputs_help_info_text', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
+        $this->output["optional_input-view_help_info_text"] = get_string('optional_inputs-view_help_info_text', 'block_disealytics');
         // Viewmode settings.
         $iseditmode = get_user_preferences("block_disealytics_editing", "0");
         $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
@@ -235,7 +235,7 @@ class progress_bar_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
-            $this->output["viewmode_module"] = [];
+            $this->output["viewmode"] = true;
 
             // Data for optional input modal.
             try {
@@ -276,9 +276,9 @@ class progress_bar_view extends base_view {
         global $USER;
         // Texts.
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('progress-bar_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('progress-bar_help_info_text', 'block_disealytics');
-        $this->output["optional_input_help_info_text"] = get_string('optional_inputs_help_info_text', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
+        $this->output["optional_input-view_help_info_text"] = get_string('optional_inputs-view_help_info_text', 'block_disealytics');
         // Viewmode settings.
         $iseditmode = get_user_preferences("block_disealytics_editing", "0");
         $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
@@ -286,6 +286,7 @@ class progress_bar_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
+            $this->output["viewmode"] = true;
             $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
 
             foreach ($allusercourses as $course) {
@@ -328,8 +329,8 @@ class progress_bar_view extends base_view {
         global $USER;
         // Texts.
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('progress-bar_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('progress-bar_help_info_text', 'block_disealytics');
+        $this->output["help_info_text"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
         // Viewmode settings.
         $iseditmode = get_user_preferences("block_disealytics_editing", "0");
         $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
@@ -337,6 +338,7 @@ class progress_bar_view extends base_view {
         if ($iseditmode == 1) {
             $this->output["editmode"] = true;
         } else {
+            $this->output["viewmode"] = true;
             $allusercourses = course::get_all_courses_of_user($USER->id);
             $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->categoryname);
             $this->output["viewmode_global"]['course'] = [];

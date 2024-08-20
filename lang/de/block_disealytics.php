@@ -27,9 +27,11 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024082002';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Füge einen neuen Learner Dashboard Block hinzu.';
 $string['disealytics:myaddinstance'] = 'Füge einen neuen Learner Dashboard Block zu meinem Dashboard hinzu.';
+$string['disealytics:editlearningdashboard'] = 'Bearbeite den Learner Dashboard.';
 $string['languagesetting'] = 'de';
 $string['login_alert'] = 'Bitte melden Sie sich an, um das Learner Dashboard benutzten zu können.';
 $string['course_alert'] = 'Das Learner Dashboard kann nur auf der Kurshauptseite angezeigt werden.';

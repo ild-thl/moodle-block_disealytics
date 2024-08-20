@@ -343,18 +343,25 @@ export const toggleInformationModal = (viewname) => {
 
     if (btn) {
         btn.addEventListener('click', async function() {
+            const footerContent = viewname === 'main' ?
+                '<div>' + await getString('plugin-version-details', 'block_disealytics') + '</div>' :
+                '';
+
             const modal = await ModalFactory.create({
                 title: viewname === 'main' ?
-                    getString('main_help_title', 'block_disealytics') :
-                    getString(viewname, 'block_disealytics'),
+                    await getString('main_help_title', 'block_disealytics') :
+                    await getString(viewname, 'block_disealytics'),
                 body: viewname === 'main' ?
-                    Templates.render('block_disealytics/help_modal', {id: 3}) :
-                    getString(viewname + '_help_info_text', 'block_disealytics'),
+                    await Templates.render('block_disealytics/help_modal', {id: 3}) :
+                    await getString(viewname + '_help_info_text', 'block_disealytics'),
+                footer: footerContent,
                 removeOnClose: true
             });
+
             modal.show();
         });
     }
+
 
     if (btnExpanded) {
         btnExpanded.addEventListener('click', async function() {

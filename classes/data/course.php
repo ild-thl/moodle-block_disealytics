@@ -52,7 +52,7 @@ class course {
         ];
         $data = $DB->get_records_sql($sql, $params);
         return array_filter($data, function($item) use ($now) {
-            if ($item->enddate && $item->enddate == 0) {
+            if ($item->enddate == 0) {
                 return true;
             }
             $end = DateTime::createFromFormat("U", $item->enddate)->add(new DateInterval("P1M"));

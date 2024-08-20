@@ -25,19 +25,21 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'DiSEA Dashboard';
-$string['plugin-title'] = 'Learning Dashboard';
-$string['disea'] = 'DiSEA Learning Dashboard';
-$string['disealytics:addinstance'] = 'Füge einen neuen DiSEA Dashboard Block hinzu.';
-$string['disealytics:myaddinstance'] = 'Füge einen neuen DiSEA Dashboard Block zu meinem Dashboard hinzu.';
+$string['pluginname'] = 'Learner Dashboard';
+$string['plugin-title'] = 'Learner Dashboard';
+$string['disea'] = 'Learner Dashboard';
+$string['disealytics:addinstance'] = 'Füge einen neuen Learner Dashboard Block hinzu.';
+$string['disealytics:myaddinstance'] = 'Füge einen neuen Learner Dashboard Block zu meinem Dashboard hinzu.';
 $string['languagesetting'] = 'de';
+$string['login_alert'] = 'Bitte melden Sie sich an, um das Learner Dashboard benutzten zu können.';
+$string['course_alert'] = 'Das Learner Dashboard kann nur auf der Kurshauptseite angezeigt werden.';
 $string['consent_start_msg'] = 'Um das Plugin nutzen zu können, müssen Sie der Datenverarbeitung zustimmen.';
 $string['consent_start_btn'] = 'Einwilligen und Dashboard nutzen';
 $string['change-to-expandable-view'] = 'Zur Detailansicht ...';
 
 $string['nouserconsent'] = 'Einwilligung für die Datenverarbeitung erforderlich.';
 
-$string['diseasettings'] = 'DiSEA Learningdashboard Einstellungen';
+$string['diseasettings'] = 'Learner Dashboard Einstellungen';
 $string['activityviewsetting'] = 'Aktivitätsübersicht anzeigen';
 $string['assignmentviewsetting'] = 'Aufgabenübersicht anzeigen';
 $string['editing_mode_setting'] = 'Aktiviere den Editiermodus';
@@ -85,7 +87,7 @@ $string['Dec'] = 'Dezember';
 $string['calendarweeks'] = 'Kalenderwochen';
 
 $string['testcontent'] = 'Dies ist etwas Test-Inhalt';
-$string['testfooter'] = 'Das DiSEA Dashboard wird geladen.';
+$string['testfooter'] = 'Das Learner Dashboard wird geladen.';
 
 // Selection Form.
 $string['select_view'] = 'Ansichtauswahl';
@@ -108,6 +110,8 @@ $string['assignment_view_hover_incomplete'] = 'Aufgabe unvollständig, nach Fäl
 $string['assignment_view_hover_selfcheck'] = 'Aufgabe wurde als erledigt markiert, ist ggf. aber noch vom Lehrenden zu prüfen';
 $string['assignment_view_hover_neutral'] = 'Neutraler Status. Es besteht kein Handlungsbedarf';
 $string['assignment_view_load-less-assignments'] = 'Weniger anzeigen';
+$string['assignment_view_specific_scale'] = 'nicht bestanden, Nacharbeit, bestanden';
+$string['assignment_view_no_assignments_available'] = 'Sie sind in keinem Kurs des ausgewählten Semesters eingeschrieben, der Aufgaben enthält.';
 
 // Learninggoals view.
 $string['learning-goals-view'] = 'Lernziele';
@@ -167,7 +171,6 @@ $string['progress_bar_manage_optional_input'] = 'Lernmaterialien des Kurses verw
 $string['progress_bar_modal_intro'] = 'Sie können hier Dokumente, Videos oder Links, die im aufgerufenen Kurs hochgeladen sind, als Lernmaterialien hinzufügen oder die vorhandenen Lernmaterialien des aufgerufenen Kurses bearbeiten.';
 $string['add-optional-input'] = 'Lernmaterial aus dem Kurs hinzufügen';
 $string['optional_input_no_selection'] = 'Keine Auswahl';
-$string['optional_input_no_optional_input_exists'] = 'Keine Inhalte vorhanden. Um welche hinzuzufügen, klicken Sie auf "Lernmaterialien hinzufügen" und wählen das gewünschte Dokument aus.';
 $string['optional_input_all_inputs_set'] = 'Sie haben alle verfügbaren Lernmaterialien des Kurses hinzugefügt.';
 $string['optional_input_document'] = 'Dokument auswählen';
 $string['optional_input_pages'] = 'Gelesene Seiten';
@@ -200,9 +203,9 @@ $string['modal_remove_text_2'] = " wirklich aus dem Dashboard entfernen? Sie kö
 $string['modal_remove_cancel'] = "Abbrechen";
 $string['modal_remove_check'] = "Aus dem Dashboard entfernen";
 
-$string['main_help_title'] = "Hilfeseite zum Learning Dashboard";
+$string['main_help_title'] = "Hilfeseite zum Learner Dashboard";
 $string['main_help_views_summary'] = "Systematik Karten";
-$string['main_help_views_details'] = "Das Learning Dashboard (LD) beinhaltet Karten in denen verschiedene Informationen oder Funktionen inkludiert sind. Karten lassen sich dem LD hinzufügen und wieder löschen. Es gibt viele verschiedene Themen aus denen Sie Ihr persönliches LD zusammenstellen können. Informationen zu den verschiedenen Themen erhalten Sie jeweils über die Hilfefunktion in den einzelnen Karten.";
+$string['main_help_views_details'] = "Das Learner Dashboard (LD) beinhaltet Karten in denen verschiedene Informationen oder Funktionen inkludiert sind. Karten lassen sich dem LD hinzufügen und wieder löschen. Es gibt viele verschiedene Themen aus denen Sie Ihr persönliches LD zusammenstellen können. Informationen zu den verschiedenen Themen erhalten Sie jeweils über die Hilfefunktion in den einzelnen Karten.";
 $string['main_help_add_remove_summary'] = "Hinzufügen oder entfernen von Karten";
 $string['main_help_add_remove_details'] = "Zum hinzufügen oder entfernen von Karten klicken Sie in der Gesamtansichtsseite auf das Stift-Symbol. Danach können Sie einzelne Karten über das eingeblendete “x”-Symbol an der rechten oberen Ecke einer Karte entfernen. Unter Ihren gewählten Karten im LD haben Sie die Möglichkeit, weitere Karten dem LD hinzuzufügen.";
 $string['main_help_help_summary'] = "Wiederkehrende Funktionen innerhalb der Karten";
@@ -214,7 +217,7 @@ $string['main_add_view_info_text'] = "Wählen Sie die gewünschten Karten aus, d
 $string['main_add_view_info_text_empty'] = "Sie haben alle verfügbaren Karten hinzugefügt.";
 
 $string['main_config_title'] = "Konfiguration";
-$string['main_config_desc'] = "Hier können Sie die Konfiguration für das Learning Dashboard vornehmen.";
+$string['main_config_desc'] = "Hier können Sie die Konfiguration für das Learner Dashboard vornehmen.";
 $string['main_config_consent_title'] = "Datenverarbeitung";
 $string['main_config_consent_desc'] = "Sie haben der Datenverarbeitung zugestimmt.";
 $string['consent_config_title'] = "Datenverarbeitung";
@@ -260,7 +263,6 @@ $string['success-chance_help_info_text_expanded'] = 'In der Detailansicht der "P
 $string['success-chance_info_text'] = 'Betrachten Sie die PVL-Wahrscheinlichkeit: Die PVL-Wahrscheinlichkeit zeigt Ihnen, wie viele Bewertungspunkte Sie erhalten haben.';
 $string['success-chance_info_text_expanded'] = 'Die PVL-Wahrscheinlichkeit zeigt Ihnen den Status der Einsendeaufgaben an.';
 $string['pvl_success-chance-chart-text'] = 'PVL-Wahrscheinlichkeit';
-$string['success-chance-no-data'] = 'Keine Daten zur Anzeige der Erfolgschance in diesem Kurs vohanden.';
 $string['success-chance-label-failed'] = 'PVL-Wahrscheinlichkeit';
 
 $string['pvl_assignment_info_text_summary_modul'] = 'Im laufenden Modul sieht Ihre Bilanz wie folgt aus:';
@@ -288,7 +290,7 @@ $string['progress-bar_nodata'] = 'Es sind derzeit keine Lesefortschritte festgeh
 $string['activity_view_expanded_subtitle'] = "Anmeldungen im Monat";
 $string['study-progress_expanded_info_text'] = 'Die "Aufgabengewichtung" wird anhand der bereitgestellten Aufgaben in diesem Kurs berechnet. Jeder Aufgabe wird ein Wert zugewiesen, der sich nach dem Status richtet: "negativ (rotes X)", "neutral (grauer Kreis oder gelbes Dreieck)" oder "positiv (grünes Häkchen)".';
 
-$string['nodata'] = 'Keine Daten vorhanden';
+$string['nodata'] = 'Es sind keine Daten vorhanden.';
 $string['activity_view_refresh'] = "Letzte Aktualisierung";
 
 $string['task_tasktransform'] = 'Tasktransformation';
@@ -398,8 +400,6 @@ $string['privacy:metadata:user_n_events'] = 'user_n_events';
 $string['privacy:metadata:user_duration'] = 'user_duration';
 $string['privacy:metadata:user_timecreated'] = 'user_timecreated';
 
-$string['block_my_consent_block'] = 'DiSEA Einwilligungsblock';
-
 $string['config_title'] = 'Kurs f&uuml;r Logdaten';
 $string['config_text'] = 'Bitte geben Sie hier die Kurs ID f&uuml;r den Kurs ein, in dem die Logdaten gespeichert werden sollen.';
 
@@ -430,11 +430,8 @@ $string['edit'] = 'Bearbeiten';
 $string['choice_no'] = 'Sie haben die Einwilligung abgelehnt';
 $string['choice_yes'] = 'Sie haben die Einwilligung angenommen';
 
-$string['log_task_name'] = 'Disea Log Task';
-$string['decline_task_name'] = 'Disea decline Task';
-
-$string['messageprovider'] = 'Disea Message Provider';
-$string['messageprovider:logdata_disea'] = 'Disea Message Provider';
+$string['messageprovider'] = 'DiSEA Message Provider';
+$string['messageprovider:logdata_disea'] = 'DiSEA Message Provider';
 
 $string['download'] = 'Herunterladen';
 $string['back'] = 'Zur&uuml;ck';
@@ -447,3 +444,7 @@ $string['privacy:metadata:disea_consent:courseid'] = 'Die ID des Kurses des Benu
 $string['privacy:metadata:disea_consent:choice'] = 'Die Wahl, die der Benutzer f&uuml;r die DiSEA Einwilligungserkl&auml;rung getroffen hat.';
 
 $string['privacy:data'] = 'Daten des Nutzers f&uuml;r DiSEA Einwilligungserkl&auml;rung';
+
+$string['activity_view_axislabel_y'] = 'Y-Achse: Minuten';
+$string['activity_view_main_axislabel_x'] = 'X-Achse: Tage';
+$string['activity_view_detail_axislabel_x'] = 'X-Achse: Kalenderwochen';

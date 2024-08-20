@@ -51,7 +51,7 @@ class delete_learning_goal extends external_api {
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
             'goalid' => new external_value(
-                PARAM_RAW,
+                PARAM_INT,
                 'Goal id',
                 VALUE_REQUIRED
             ),
@@ -63,13 +63,13 @@ class delete_learning_goal extends external_api {
      *
      *
      * @param string $goalid the goal ID
-     * @return string $result
+     * @return bool $result
      * @throws invalid_parameter_exception|dml_exception
      * @throws restricted_context_exception
      * @throws required_capability_exception
      */
-    public static function execute(string $goalid): string {
-        global $CFG, $COURSE;
+    public static function execute(string $goalid): bool {
+        global $CFG;
         self::validate_parameters(self::execute_parameters(), ['goalid' => $goalid]);
         require_once($CFG->dirroot . '/blocks/disealytics/classes/learningdata.php');
 
@@ -79,7 +79,7 @@ class delete_learning_goal extends external_api {
         require_capability('block/disealytics:editlearningdashboard', $context);
 
         learningdata::delete_goal($goalid);
-        return 'Goal ID: ' . $goalid . ' deleted.';
+        return true;
     }
 
     /**
@@ -88,6 +88,6 @@ class delete_learning_goal extends external_api {
      * @return external_value jsonobj
      */
     public static function execute_returns(): external_value {
-        return new external_value(PARAM_RAW);
+        return new external_value(PARAM_BOOL);
     }
 }

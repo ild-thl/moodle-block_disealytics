@@ -51,12 +51,12 @@ class add_learning_goal extends external_api {
 
         return new external_function_parameters([
                 'courseid' => new external_value(
-                    PARAM_RAW,
+                    PARAM_INT,
                     'course id',
                     VALUE_REQUIRED
                 ),
                 'duedate' => new external_value(
-                    PARAM_RAW,
+                    PARAM_INT,
                     'A date, that shows the deadline of the goal',
                     VALUE_REQUIRED
                 ),
@@ -74,11 +74,11 @@ class add_learning_goal extends external_api {
      * @param int    $courseid         The ID of the course in which the goal is being created.
      * @param int    $duedate          The due date timestamp for the goal.
      * @param string $goalname          The description of the new goal.
-     * @return string                  A message indicating the success of creating the new goal.
+     * @return bool                   Indicating the success of creating the new goal.
      * @throws moodle_exception       If the parameters or data validation fails.
      * @throws dml_exception          If there are database-related errors.
      */
-    public static function execute(int $courseid, int $duedate, string $goalname): string {
+    public static function execute(int $courseid, int $duedate, string $goalname): bool {
         global $DB, $PAGE, $CFG, $USER;
 
         self::validate_parameters(self::execute_parameters(), [
@@ -100,7 +100,7 @@ class add_learning_goal extends external_api {
         $goal->finished = 0;
         learningdata::add_goal_to_database($goal);
 
-        return 'New goal successfully created.';
+        return true;
     }
 
     /**
@@ -109,6 +109,6 @@ class add_learning_goal extends external_api {
      * @return external_value jsonobj
      */
     public static function execute_returns(): external_value {
-        return new external_value(PARAM_RAW);
+        return new external_value(PARAM_BOOL);
     }
 }

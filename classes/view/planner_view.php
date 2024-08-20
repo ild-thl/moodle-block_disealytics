@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+
 namespace block_disealytics\view;
 
 use block_disealytics\data\course;
@@ -51,12 +52,11 @@ class planner_view extends base_view {
     /**
      * Constructor for the planner view
      *
-     * @param mixed $timeframe
      * @param learningdata $learningdata
      * @throws Exception
      */
-    public function __construct(mixed $timeframe, learningdata $learningdata) {
-        parent::__construct($timeframe);
+    public function __construct(learningdata $learningdata) {
+        parent::__construct();
         $this->learningdata = $learningdata;
     }
 

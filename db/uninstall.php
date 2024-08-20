@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Settings for block_disealytics database uninstalls.
  *
@@ -29,7 +30,7 @@
  */
 function xmldb_block_disealytics_uninstall(): void {
     global $DB;
-    $prefs = $DB->get_records_sql("SELECT id, name, userid FROM mdl_user_preferences WHERE name LIKE '%block_disealytics%'");
+    $prefs = $DB->get_records_sql("SELECT id, name, userid FROM {user_preferences} WHERE name LIKE '%block_disealytics%'");
     foreach ($prefs as $pref) {
         unset_user_preference($pref->name, $pref->userid);
     }

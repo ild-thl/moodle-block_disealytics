@@ -52,11 +52,11 @@ class change_planner_view extends external_api {
      */
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
-                'courseid' => new external_value(PARAM_RAW, 'course id', VALUE_REQUIRED),
-                'day' => new external_value(PARAM_RAW, 'The selected day', VALUE_REQUIRED),
-                'month' => new external_value(PARAM_RAW, 'The selected month', VALUE_REQUIRED),
-                'year' => new external_value(PARAM_RAW, 'The selected year', VALUE_REQUIRED),
-                'direction' => new external_value(PARAM_RAW, 'The direction of the view change', VALUE_REQUIRED),
+                'courseid' => new external_value(PARAM_INT, 'course id', VALUE_REQUIRED),
+                'day' => new external_value(PARAM_INT, 'The selected day', VALUE_REQUIRED),
+                'month' => new external_value(PARAM_INT, 'The selected month', VALUE_REQUIRED),
+                'year' => new external_value(PARAM_INT, 'The selected year', VALUE_REQUIRED),
+                'direction' => new external_value(PARAM_TEXT, 'The direction of the view change', VALUE_REQUIRED),
         ]);
     }
 
@@ -68,13 +68,13 @@ class change_planner_view extends external_api {
      * @param int $month
      * @param int $year
      * @param string $direction
-     * @return string
+     * @return bool
      * @throws coding_exception
      * @throws dml_exception
      * @throws invalid_parameter_exception
      * @throws Exception
      */
-    public static function execute(int $courseid, int $day, int $month, int $year, string $direction): string {
+    public static function execute(int $courseid, int $day, int $month, int $year, string $direction): bool {
         global $DB, $PAGE, $CFG;
 
         self::validate_parameters(self::execute_parameters(), [
@@ -111,7 +111,7 @@ class change_planner_view extends external_api {
 
         planner::block_disealytics_change_month_display_in_database($day, $month, $year);
 
-        return 'Date changed.';
+        return true;
     }
 
     /**
@@ -120,6 +120,6 @@ class change_planner_view extends external_api {
      * @return external_value jsonobj
      */
     public static function execute_returns(): external_value {
-        return new external_value(PARAM_RAW);
+        return new external_value(PARAM_BOOL);
     }
 }

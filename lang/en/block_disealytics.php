@@ -25,32 +25,34 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'DiSEA Dashboard';
-$string['plugin-title'] = 'Learning Dashboard';
-$string['disea'] = 'DiSEA Learning Dashboard';
-$string['disealytics:addinstance'] = 'Add a new DiSEA Dashboard block.';
-$string['disealytics:myaddinstance'] = 'Add a new DiSEA Dashboard block to my Dashboard.';
-$string['disealytics:editlearningdashboard'] = 'Edit the Learning Dashboard.';
+$string['pluginname'] = 'Learner Dashboard';
+$string['plugin-title'] = 'Learner Dashboard';
+$string['disea'] = 'Learner Dashboard';
+$string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
+$string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
+$string['disealytics:editlearningdashboard'] = 'Edit the Learner Dashboard.';
 $string['languagesetting'] = 'en';
+$string['login_alert'] = 'Please log in to use the Learner Dashboard.';
+$string['course_alert'] = 'The Learner Dashboard can only be displayed on the main course page.';
 $string['consent_start_msg'] = 'Please consent to data processing in order to use the plugin.';
 $string['consent_start_btn'] = 'Consent and use plugin';
 $string['change-to-expandable-view'] = 'Go to the detail view ...';
 
 $string['nouserconsent'] = 'Consent to required data processing.';
 
-$string['diseasettings'] = 'DiSEA Learning Dashboard settings';
-$string['activityviewsetting'] = 'Show Activity Overview';
-$string['assignmentviewsetting'] = 'Show Assignment Overview';
+$string['diseasettings'] = 'Learner Dashboard settings';
+$string['activityviewsetting'] = 'Show activity overview';
+$string['assignmentviewsetting'] = 'Show assignment overview';
 $string['editing_mode_setting'] = 'Activate editing mode';
 $string['exit_editing_mode'] = 'Exit editing mode';
-$string['study_progress_setting'] = 'Show Study Progress overview';
+$string['study_progress_setting'] = 'Show study progress overview';
 
 $string['assignment'] = 'Assignment';
 $string['due'] = 'Due until';
 $string['submitted'] = 'Submitted';
 $string['grade'] = 'Grade';
 
-$string['activityview'] = 'Activity Overview';
+$string['activityview'] = 'Activity overview';
 $string['loginspermonth'] = 'Logins per month';
 $string['loginsperweek'] = 'Logins per week';
 $string['logins'] = 'Logins';
@@ -86,7 +88,7 @@ $string['Dec'] = 'December';
 $string['calendarweeks'] = 'calendar weeks';
 
 $string['testcontent'] = 'This is test content.';
-$string['testfooter'] = 'The DiSEA Dashboard is loading.';
+$string['testfooter'] = 'The Learner Dashboard is loading.';
 
 // Selection Form.
 $string['select_view'] = 'Select view';
@@ -98,8 +100,8 @@ $string['activity_help_info_text_expanded'] = "In the activity card’s detail v
 
 // Assignment view.
 $string['assignment-view'] = 'Assignments';
-$string['assignment_help_info_text'] = "The \'Assignments\' card lists all the assignments of the course available to you and shows the current status of the assignment. When you click on the link of an assignment, you will be forwarded to the page with the details of that assignment. <h4><span style='color: var(--diseablue)'>Symbol meanings:</span></h4> <p> <span style='color: var(--diseablue)'>Neutral status (grey circle):</span> The grey circle represents the neutral status of the assignment. No action is required. <p> <span style='color: var(--diseablue)'>Not passed (red \'X\'):</span> The red \'X\' indicates that the respective assignment has been assessed but not passed. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Not yet attempted (grey \'X\'):</span> The grey \'X\' indicates that the respective assignment has not yet been submitted / attempted. For more details, please click on the assignment link. <p><span style='color: var(--diseablue)'>Incomplete (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p><span style='color: var(--diseablue)'>Submitted on time (grey check mark):</span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Incomplete/Warning (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p> <span style='color: var(--diseablue)'>Submitted on time (Grey check mark): </span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Marked as completed by yourself (Yellow check mark): </span> The yellow check mark indicates that the assignment has been self-marked as complete by the student, but may still need to be reviewed by the instructor. For more details, please click on the assignment link. <p><span style='color: var(--diseablue)'>Passed (Green check mark): </span> The green check mark indicates that the assignment was passed. For more details, please click on the assignment link.";
-$string['assignment_help_info_text_expanded'] = "The \'Assignments\' card lists all the assignments of the course available to you and shows the current status of the assignment. When you click on the link of an assignment, you will be forwarded to the page with the details of that assignment. <h4><span style='color: var(--diseablue)'>Symbol meanings:</span></h4> <p> <span style='color: var(--diseablue)'>Neutral status (grey circle):</span> The grey circle represents the neutral status of the assignment. No action is required. <p> <span style='color: var(--diseablue)'>Not passed (red \'X\'):</span> The red \'X\' indicates that the respective assignment has been assessed but not passed. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Not yet attempted (grey \'X\'):</span> The grey \'X\' indicates that the respective assignment has not yet been submitted / attempted. For more details, please click on the assignment link. <p><span style='color: var(--diseablue)'>Incomplete (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p><span style='color: var(--diseablue)'>Submitted on time (grey check mark):</span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Incomplete/Warning (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p> <span style='color: var(--diseablue)'>Submitted on time (Grey check mark): </span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Marked as completed by yourself (Yellow check mark): </span> The yellow check mark indicates that the assignment has been self-marked as complete by the student, but may still need to be reviewed by the instructor. For more details, please click on the assignment link. <p><span style='color: var(--diseablue)'>Passed (Green check mark): </span> The green check mark indicates that the assignment was passed. For more details, please click on the assignment link.";
+$string['assignment_help_info_text'] = "The 'Assignments' card lists all the assignments of the course available to you and shows the current status of the assignment. When you click on the link of an assignment, you will be forwarded to the page with the details of that assignment. <h4><span style='color: var(--diseablue)'>Symbol meanings:</span></h4> <p> <span style='color: var(--diseablue)'>Neutral status (grey circle):</span> The grey circle represents the neutral status of the assignment. No action is required. <p> <span style='color: var(--diseablue)'>Not passed (red 'X'):</span> The red 'X' indicates that the respective assignment has been assessed but not passed. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Not yet attempted (grey \'X\'):</span> The grey \'X\' indicates that the respective assignment has not yet been submitted / attempted. For more details, please click on the assignment link. <p><span style='color: var(--diseablue)'>Incomplete (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p><span style='color: var(--diseablue)'>Submitted on time (grey check mark):</span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Incomplete/Warning (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p> <span style='color: var(--diseablue)'>Submitted on time (Grey check mark): </span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Marked as completed by yourself (Yellow check mark): </span> The yellow check mark indicates that the assignment has been self-marked as complete by the student, but may still need to be reviewed by the instructor. For more details, please click on the assignment link. <p><span style='color: var(--diseablue)'>Passed (Green check mark): </span> The green check mark indicates that the assignment was passed. For more details, please click on the assignment link.";
+$string['assignment_help_info_text_expanded'] = "The 'Assignments' card lists all the assignments of the course available to you and shows the current status of the assignment. When you click on the link of an assignment, you will be forwarded to the page with the details of that assignment. <h4><span style='color: var(--diseablue)'>Symbol meanings:</span></h4> <p> <span style='color: var(--diseablue)'>Neutral status (grey circle):</span> The grey circle represents the neutral status of the assignment. No action is required. <p> <span style='color: var(--diseablue)'>Not passed (red 'X'):</span> The red 'X' indicates that the respective assignment has been assessed but not passed. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Not yet attempted (grey \'X\'):</span> The grey \'X\' indicates that the respective assignment has not yet been submitted / attempted. For more details, please click on the assignment link. <p><span style='color: var(--diseablue)'>Incomplete (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p><span style='color: var(--diseablue)'>Submitted on time (grey check mark):</span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Incomplete/Warning (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p> <span style='color: var(--diseablue)'>Submitted on time (Grey check mark): </span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--diseablue)'>Marked as completed by yourself (Yellow check mark): </span> The yellow check mark indicates that the assignment has been self-marked as complete by the student, but may still need to be reviewed by the instructor. For more details, please click on the assignment link. <p><span style='color: var(--diseablue)'>Passed (Green check mark): </span> The green check mark indicates that the assignment was passed. For more details, please click on the assignment link.";
 $string['assignment_info_text'] = "Here you can see the status of the assignments available in the course.";
 $string['assignment_view_hover_failed'] = 'Assignment failed';
 $string['assignment_view_hover_okay'] = 'Assignment passed';
@@ -109,12 +111,14 @@ $string['assignment_view_hover_incomplete'] = 'Assignment incomplete, submitted 
 $string['assignment_view_hover_selfcheck'] = 'Assignment has been self-marked as completed, but may still need to be reviewed by the instructor';
 $string['assignment_view_hover_neutral'] = 'Neutral status. No action is required';
 $string['assignment_view_load-less-assignments'] = 'Show less';
+$string['assignment_view_specific_scale'] = 'failed, rework, passed';
+$string['assignment_view_no_assignments_available'] = 'You are not enrolled in any course in the selected semester that contains assignments.';
 
 // Learninggoals view.
 $string['learning-goals-view'] = 'Learning Goals';
 $string['learning-goals_info_text'] = 'Set individual learning goals that you want to achieve by a fixed date.';
-$string['learning-goals_help_info_text'] = "The card \"Learning goals\" shows you the individual goals for your studies. By pressing the button \"New learning goal\" in the upper area you can enter a short description for the goal and set an individual date, by which you want to reach the goal. Once you have reached the goal, you can mark it as complete using the checkbox. The goals can be found chronologically in the tabs \"Today\", \"Tomorrow\", \"This week\", \"This month\" and \"In the future\". In the tab \"Achieved\" you will find all the goals that are already checked and can delete them from the list.";
-$string['learning-goals_help_info_text_expanded'] = "The card \"Learning goals\" shows you the individual goals for your studies. By pressing the button \"New learning goal\" in the upper area you can enter a short description of the goal and set an individual date by which you want to reach the goal. Once you have reached the goal, you can mark it as completed using the checkbox. The goals can be found chronologically in the tabs \"Today\", \"Tomorrow\", \"This week\", \"This month\" and \"In the future\". In the tab \"Achieved\" you will find all the goals that are already checked and can delete them from the list.";
+$string['learning-goals_help_info_text'] = "The card 'Learning Goals' shows you the individual goals for your studies. By pressing the button 'New learning goal' in the upper area you can enter a short description for the goal and set an individual date, by which you want to reach the goal. Once you have reached the goal, you can mark it as complete using the checkbox. The goals can be found chronologically in the tabs 'Today', 'Tomorrow', 'This week', 'This month' and 'In the future'. In the tab 'Achieved' you will find all the goals that are already checked and can delete them from the list.";
+$string['learning-goals_help_info_text_expanded'] = "The card 'Learning Goals' shows you the individual goals for your studies. By pressing the button 'New learning goal' in the upper area you can enter a short description of the goal and set an individual date by which you want to reach the goal. Once you have reached the goal, you can mark it as completed using the checkbox. The goals can be found chronologically in the tabs 'Today', 'Tomorrow', 'This week', 'This month' and 'In the future'. In the tab 'Achieved' you will find all the goals that are already checked and can delete them from the list.";
 $string['goal_editing'] = 'Turn editing off';
 // Goal input fields.
 $string['goal_date_input'] = 'Date';
@@ -141,22 +145,22 @@ $string['goal_date_missing'] = 'Please enter a due date for the learning goal.';
 $string['progress-bar-view'] = 'Progressbar';
 $string['progress_config_title'] = 'Progressbar';
 $string['progress_config_help_title'] = 'Reading Progressbar: Add learning material';
-$string['progress-bar_help_info_text'] = 'The Progressbar shows you the reading progress of your current book.<p><strong>Add Learning Material</strong></p><p>By default, the card is empty. You can add the progress of learning materials belonging to this course to the card through the gear icon at the top right corner.</p><p><strong>Viewing Graphic Data</strong></p><p>This will show you a detailed table of the learning materials you have submitted.';
+$string['progress-bar_help_info_text'] = "The 'Progressbar' card shows you the reading progress of your current learning material.<p><strong>Add learning material</strong></p><p>By default, the card is empty. You can add the progress of learning materials belonging to this course to the card through the gear icon at the top right corner.</p><p><strong>Viewing graphic data</strong></p><p>This will show you a detailed table of the learning materials you have submitted.";
 
 $string['study-progress-view'] = "Study Progress";
 $string['data_entry_view'] = "Data entry";
 $string['assignment_view'] = "Assignments";
 
 $string['add_view_button'] = 'Add card';
-$string['add_activity_view'] = 'Add "Activity"';
-$string['add_study_progress_view'] = 'Add "Study Progress"';
-$string['add_learning_goals_view'] = 'Add "Learning Goals"';
-$string['add_assignment_view'] = 'Add "Assignments"';
-$string['add_progress_bar_view'] = 'Add "Progressbar"';
-$string['add_success_chance_view'] = 'Add "PVL-Probability"';
-$string['add_planner_view'] = 'Add "Planning Assistent"';
+$string['add_activity_view'] = "Add 'Activity'";
+$string['add_study_progress_view'] = "Add 'Study Progress'";
+$string['add_learning_goals_view'] = "Add 'Learning Goals'";
+$string['add_assignment_view'] = "Add 'Assignments'";
+$string['add_progress_bar_view'] = "Add 'Progressbar'";
+$string['add_success_chance_view'] = "Add 'PVL-Probability'";
+$string['add_planner_view'] = "Add 'Planning Assistent'";
 
-$string['optional-inputs-view'] = 'Add learning material';
+$string['optional-inputs-view'] = "Add learning material";
 
 $string['select_timeframe'] = 'Time period selection';
 $string['total_study_period'] = 'Entire study program';
@@ -168,7 +172,6 @@ $string['progress_bar_manage_optional_input'] = 'Manage course learning material
 $string['progress_bar_modal_intro'] = 'Here you can add documents, videos or links that have been uploaded in the selected course as learning material.';
 $string['add-optional-input'] = 'Add course learning material';
 $string['optional_input_no_selection'] = 'No selection';
-$string['optional_input_no_optional_input_exists'] = 'No content available. To add some, click on the pencil within the card and select the desired document.';
 $string['optional_input_all_inputs_set'] = 'You added all available learning materials of the course.';
 $string['optional_input_document'] = 'Select document';
 $string['optional_input_pages'] = 'Pages read';
@@ -201,9 +204,9 @@ $string['modal_remove_text_2'] = " remove the card from the dashboard? You can a
 $string['modal_remove_cancel'] = "Cancel";
 $string['modal_remove_check'] = "Remove from dashboard";
 
-$string['main_help_title'] = "Help page for the Learning Dashboard";
+$string['main_help_title'] = "Help page for the Learner Dashboard";
 $string['main_help_views_summary'] = "Classification of cards";
-$string['main_help_views_details'] = "The Learning Dashboard (LD) contains cards in which various information or functions are included. Cards can be added to the LD and deleted again. There are many different topics from which you can compile your personal LD. Information on the various topics is available via the help function in the individual cards.";
+$string['main_help_views_details'] = "The Learner Dashboard (LD) contains cards in which various information or functions are included. Cards can be added to the LD and deleted again. There are many different topics from which you can compile your personal LD. Information on the various topics is available via the help function in the individual cards.";
 $string['main_help_add_remove_summary'] = "Adding or removing cards";
 $string['main_help_add_remove_details'] = 'To add or remove cards, click on the pencil icon on the overall view page. You can then remove individual cards by clicking on the "x" symbol in the top right-hand corner of a card. Under your selected cards in the LD, you have the option of adding further cards to the LD.';
 $string['main_help_help_summary'] = "Recurring functions within the cards";
@@ -211,18 +214,18 @@ $string['main_help_help_details'] = 'Each card and the dashboard itself contains
 $string['main_help_edit_summary'] = "Editing mode";
 $string['main_help_edit_details'] = "Clicking on the pencil icon starts the editing mode for adding or deleting cards in the dashboard (see Figure 1). You can use this feature to customise your dashboard with the cards that are relevant to you. Click on the red X on the relevant card to remove it. You can add a new card by selecting the \"Add card\" button. This button opens a new dialogue with the available cards.";
 $string['main_add_view_title'] = "Add cards";
-$string['main_add_view_info_text'] = "Select the cards you would like to have displayed in the DiSEA dashboard.";
+$string['main_add_view_info_text'] = "Select the cards you would like to have displayed in the Learner Dashboard.";
 $string['main_add_view_info_text_empty'] = "You have added all available cards.";
 
 $string['main_config_title'] = "Configuration";
-$string['main_config_desc'] = "You can configure the Learning Dashboard here.";
+$string['main_config_desc'] = "You can configure the Learner Dashboard here.";
 $string['main_config_consent_title'] = "Data processing";
 $string['main_config_consent_desc'] = "You have consented to the data processing.";
 $string['consent_config_title'] = "Data processing";
-$string['consent_config_desc'] = "Would you like to withdraw your consent to data processing? The learning dashboard can then no longer be used and the following data will be deleted:";
+$string['consent_config_desc'] = "Would you like to withdraw your consent to data processing? The Learner Dashboard can then no longer be used and the following data will be deleted:";
 $string['consent_config_list_item_1'] = "Self-defined learning goals";
 $string['consent_config_list_item_2'] = "Settings of the progress bar (input learning materials)";
-$string['consent_config_list_item_3'] = "Dates of the planning assistant";
+$string['consent_config_list_item_3'] = "Dates of the 'Planning Assistant'";
 $string['consent_config_link'] = "Read privacy policy";
 $string['consent_config_btn_cancel'] = "Cancel";
 $string['consent_config_btn_delete'] = "Delete data and revoke consent";
@@ -236,7 +239,7 @@ $string['optional_inputs_help_info_text'] = 'Stay up to date with your learning 
 
 
 // Study progress view.
-$string['study-progress-view'] = "Study-Progress";
+$string['study-progress-view'] = "Study Progress";
 $string['study-progress_infotext_bad'] = "The study progress is not optimal at the moment.";
 $string['study-progress_infotext_average'] = 'The study progress is currently <span style="colour: var(--diseablue)">average</span>.';
 $string['study-progress_infotext_good'] = "The study progress is currently very good.";
@@ -244,10 +247,10 @@ $string['study-progress_help_info_text'] = "The speedometer shows you your progr
 $string['study-progress_help_info_text_expanded'] = "The speedometer shows you your progress of studies and how far you are towards your goal. The calculation is based on the assessments in the tasks assigned to you in the course. Below the speedometer you will find a list on which this calculation is based.";
 $string['study-progress_expanded_title'] = "Evaluation of the influencing factors";
 $string['study-progress_expanded_desc'] = "The overall assessment for the current semester is based on various values and is weighted differently:";
-$string['study-progress_activity_weight'] = "% Moodle-Activities";
-$string['study-progress_doc_weight'] = "% Progress in learning materials";
-$string['study-progress_assign_weight'] = "% Progress in assignments";
-$string['study-progress_activity'] = "Moodle-Activities";
+$string['study-progress_activity_weight'] = "% moodle activities";
+$string['study-progress_doc_weight'] = "% progress in learning materials";
+$string['study-progress_assign_weight'] = "% progress in assignments";
+$string['study-progress_activity'] = "moodle activities";
 $string['study-progress_doc'] = "learning materials";
 $string['study-progress_assign'] = "assignments";
 $string['study-progress_score_is'] = "The score is ";
@@ -257,12 +260,11 @@ $string['study-progress_eval_global'] = "Evaluation for your studies";
 
 // Success chance view.
 $string['success-chance-view'] = 'PVL-Probability';
-$string['success-chance_help_info_text'] = 'All submitted assignments (including assessment points) are displayed in full on the "PVL-Probability" card. The respective PVL-Probability is calculated from the status of the individual submissions and represents this as a percentage. <p><span style="color: var(--diseablue)">NOTE</span><br> Please note, that the value of the "PVL-Probability" is only calculated based on the past assignments submitted. It is important to understand that a high PVL-Probability does not therefore mean a guarantee of success and that there is some uncertainty. Ultimately, your success depends on many factors, including your efforts and circumstances beyond our control. Use the PVL-Probability as a guide, but do not be discouraged if your actual results differ.';
-$string['success-chance_help_info_text_expanded'] = 'In the detailed view of the "PVL-Probability", you will find a complete list of the submission assignments and their status, which contribute to the calculation of the PVL-Probability.';
+$string['success-chance_help_info_text'] = "All submitted assignments (including assessment points) are displayed in full on the 'PVL-Probability' card. The respective PVL-Probability is calculated from the status of the individual submissions and represents this as a percentage. <p><span style=\"color: var(--diseablue)\">NOTE</span><br> Please note, that the value of the PVL-Probability is only calculated based on the past assignments submitted. It is important to understand that a high PVL-Probability does not therefore mean a guarantee of success and that there is some uncertainty. Ultimately, your success depends on many factors, including your efforts and circumstances beyond our control. Use the PVL-Probability as a guide, but do not be discouraged if your actual results differ.";
+$string['success-chance_help_info_text_expanded'] = "In the detailed view of the card 'PVL-Probability', you will find a complete list of the submission assignments and their status, which contribute to the calculation of the PVL-Probability.";
 $string['success-chance_info_text'] = 'Look at the PVL-Probability: The PVL-Probability shows you how many assessment points you have received.';
 $string['success-chance_info_text_expanded'] = 'The PVL-Probability shows you the status of the submitted assignments.';
 $string['pvl_success-chance-chart-text'] = 'PVL-Probability';
-$string['success-chance-no-data'] = 'No data available to indicate the chance of success in this course.';
 $string['success-chance-label-failed'] = 'PVL-Probability';
 
 $string['pvl_assignment_info_text_summary_modul'] = 'Your PVL-Probability for the current module is as follows:';
@@ -289,9 +291,9 @@ $string['success-chance-selfcheck-text'] = 'is marked as completed, may still ne
 $string['assignmentscore'] = 'Assignment rating';
 $string['progress-bar_nodata'] = 'No reading progress is currently recorded. Add the reading progress of your learning material now.';
 $string['activity_view_expanded_subtitle'] = "Monthly logins";
-$string['study-progress_expanded_info_text'] = 'The " assignment rating" is calculated based on the assignments provided in this course. Each assignment is given a value depending on its status: "negative (red X)", "neutral (grey circle or yellow triangle)" or "positive (green checkmark)".';
+$string['study-progress_expanded_info_text'] = "The 'assignment rating' is calculated based on the assignments provided in this course. Each assignment is given a value depending on its status: 'negative (red X)', 'neutral (grey circle or yellow triangle)' or 'positive (green checkmark)'.";
 
-$string['nodata'] = 'No data available';
+$string['nodata'] = 'There is no data available.';
 $string['activity_view_refresh'] = "Last update";
 
 $string['task_tasktransform'] = 'Task transformation';
@@ -300,13 +302,13 @@ $string['task_tasktransform'] = 'Task transformation';
 $string['planner-view'] = 'Planning Assistant';
 $string['planner_help_info_text'] = "This card gives you an overview of your upcoming web conferences, assignments or other activities. You can add further appointments by simply clicking on a day of your choice. You can view all appointments in the detailed view.";
 $string['planner_help_info_text_expanded'] = "This card gives you an overview of your upcoming web conferences, assignments or other activities. You can add further appointments by simply clicking on a day of your choice. You can view all appointments in the detailed view.";
-$string['planner-view_monday_short'] = "Mon";
-$string['planner-view_tuesday_short'] = "Tue";
-$string['planner-view_wednesday_short'] = "Wed";
-$string['planner-view_thursday_short'] = "Thu";
-$string['planner-view_friday_short'] = "Fri";
-$string['planner-view_saturday_short'] = "Sat";
-$string['planner-view_sunday_short'] = "Sun";
+$string['planner-view_monday_short'] = "Mo";
+$string['planner-view_tuesday_short'] = "Tu";
+$string['planner-view_wednesday_short'] = "We";
+$string['planner-view_thursday_short'] = "Th";
+$string['planner-view_friday_short'] = "Fr";
+$string['planner-view_saturday_short'] = "Sa";
+$string['planner-view_sunday_short'] = "Su";
 $string['planner-view_today_label'] = "Today";
 $string['planner-view_global_label'] = "Dates in the month";
 $string['planner-view_tomorrow_label'] = "Tomorrow";
@@ -348,10 +350,25 @@ $string['viewmode_module'] = 'Module view';
 $string['viewmode_global'] = 'Full view';
 $string['viewmode_halfyear'] = 'Semester view';
 
-// Privacy API
+// Privacy API.
+$string['privacy:metadata:block_disealytics_user'] = 'Description of the block_disealytics_user';
+// For: block_disealytics_user_dates.
+$string['privacy:metadata:block_disealytics_user_dates'] = 'The block_disealytics_user_dates table contains the user dates.';
+$string['privacy:metadata:user_dates_id'] = 'date_id';
+$string['privacy:metadata:user_dates_name'] = 'date_name';
+$string['privacy:metadata:user_dates_usermodified'] = 'date_usermodified';
+$string['privacy:metadata:user_dates_courseid'] = 'date_courseid';
+$string['privacy:metadata:user_dates_userid'] = 'date_userid';
+$string['privacy:metadata:user_dates_timecreated'] = 'date_timecreated';
+$string['privacy:metadata:user_dates_timemodified'] = 'date_timemodified';
+$string['privacy:metadata:user_dates_timestart'] = 'date_timestart';
+$string['privacy:metadata:user_dates_timeduration'] = 'date_timeduration';
+$string['privacy:metadata:user_dates_location'] = 'date_location';
+$string['privacy:metadata:user_dates_eventtype'] = 'date_eventtype';
+$string['privacy:metadata:user_dates_repeatid'] = 'date_repeatid';
+
 // For: block_disealytics_user_goals.
-$string['privacy:metadata:block_diseanalytics_user'] = 'Description of the  block_diseanalytics_user';
-$string['privacy:metadata:block_disealytics_user_goals'] = 'The block_diseanalytics_user_goals table contains the user goals.';
+$string['privacy:metadata:block_disealytics_user_goals'] = 'The block_disealytics_user_goals table contains the user goals.';
 $string['privacy:metadata:user_goal_id'] = 'goal_id';
 $string['privacy:metadata:user_goal_usermodified'] = 'usermodified';
 $string['privacy:metadata:user_goal_courseid'] = 'goal_courseid';
@@ -364,7 +381,7 @@ $string['privacy:metadata:user_goal_description'] = 'goal_description';
 $string['privacy:metadata:user_goal_finished'] = 'goal_finished';
 
 // For: block_disealytics_opin.
-$string['privacy:metadata:block_disealytics_user_pages'] = 'User pages of the learning dashboard';
+$string['privacy:metadata:block_disealytics_user_pages'] = 'User pages of the Learner Dashboard';
 $string['privacy:metadata:user_pages_id'] = 'user_pages_id';
 $string['privacy:metadata:user_pages_usermodified'] = 'user_pages_usermodified';
 $string['privacy:metadata:user_pages_courseid'] = 'user_pages_courseid';
@@ -400,8 +417,6 @@ $string['privacy:metadata:user_n_events'] = 'user_n_events';
 $string['privacy:metadata:user_duration'] = 'user_duration';
 $string['privacy:metadata:user_timecreated'] = 'user_timecreated';
 
-$string['block_my_consent_block'] = 'DiSEA consent block';
-
 $string['config_title'] = 'Course for log data';
 $string['config_text'] = 'Please enter the course ID for the course in which the log data is to be saved.';
 
@@ -432,11 +447,8 @@ $string['edit'] = 'Edit';
 $string['choice_no'] = 'You have declined consent';
 $string['choice_yes'] = 'You have accepted consent';
 
-$string['log_task_name'] = 'Disea Log Task';
-$string['decline_task_name'] = 'Disea decline Task';
-
-$string['messageprovider'] = 'Disea Message Provider';
-$string['messageprovider:logdata_disea'] = 'Disea Message Provider';
+$string['messageprovider'] = 'DiSEA message provider';
+$string['messageprovider:logdata_disea'] = 'DiSEA message provider';
 
 $string['download'] = 'Download';
 $string['back'] = 'Back';
@@ -448,3 +460,7 @@ $string['privacy:metadata:disea_consent:userid'] = 'The ID of the user';
 $string['privacy:metadata:disea_consent:courseid'] = "The ID of the user's course";
 $string['privacy:metadata:disea_consent:choice'] = 'The choice made by the user for the DiSEA declaration of consent.';
 $string['privacy:data'] = 'Data of the user for the DiSEA declaration of consent';
+
+$string['activity_view_axislabel_y'] = 'y-axis: minutes';
+$string['activity_view_main_axislabel_x'] = 'x-axis: days';
+$string['activity_view_detail_axislabel_x'] = 'x-axis: calendarweeks';

@@ -63,6 +63,6 @@ There are two complex functions to generate the status of an assignment:
   * `block_disealytics_get_scale_grade_text()` returns the text of the scale value.
   * `block_disealytics_has_tries_left()` returns true if there are still tries remaining to answer the assignment.
 
-Finally, to display the status on the learning dashboard, the following two functions will generate the assignment link and the representing HTML. Both functions are used in the assignment_view.php file.
+Finally, to display the status on the Learner Dashboard, the following two functions will generate the assignment link and the representing HTML. Both functions are used in the assignment_view.php file.
 * `block_disealytics_build_name_link()` will build a link for the assignment.
 * `block_disealytics_gen_status_html()` will generate the HTML representation of the assignment status.

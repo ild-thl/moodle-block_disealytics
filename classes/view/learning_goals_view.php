@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+
 namespace block_disealytics\view;
 
 use block_disealytics\data\course;
@@ -47,12 +48,11 @@ class learning_goals_view extends base_view {
     /**
      * learning_goals_view constructor.
      *
-     * @param mixed $timeframe
      * @param learningdata $learningdata
      * @throws Exception
      */
-    public function __construct(mixed $timeframe, learningdata $learningdata) {
-        parent::__construct($timeframe);
+    public function __construct(learningdata $learningdata) {
+        parent::__construct();
         $this->learningdata = $learningdata;
     }
 
@@ -86,6 +86,10 @@ class learning_goals_view extends base_view {
         $goals = $this->learningdata->get_goals();
         $finishedgoals = $this->learningdata->get_finished_goals();
         $this->set_learning_goals($goals, $finishedgoals);
+
+        if (count($goals) === 0) {
+            $this->output["nodata"] = true;
+        }
     }
 
     /**
@@ -163,6 +167,10 @@ class learning_goals_view extends base_view {
         $goalsarray = $this->learningdata->get_goals_semester();
         $finishedgoalsarray = $this->learningdata->get_finished_goals_semester();
         $this->set_learning_goals($goalsarray, $finishedgoalsarray);
+
+        if (count($goalsarray) === 0) {
+            $this->output["nodata"] = true;
+        }
     }
 
     /**
@@ -216,5 +224,9 @@ class learning_goals_view extends base_view {
         $goalsarray = $this->learningdata->get_goals_global($goalsforselectedsemester);
         $finishedgoalsarray = $this->learningdata->get_finished_goals_global($goalsforselectedsemester);
         $this->set_learning_goals($goalsarray, $finishedgoalsarray);
+
+        if (count($goalsarray) === 0) {
+            $this->output["nodata"] = true;
+        }
     }
 }

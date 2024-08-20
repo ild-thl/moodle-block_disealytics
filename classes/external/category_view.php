@@ -41,14 +41,14 @@ class category_view extends external_api {
     /**
      * Executes the service.
      *
-     * @param mixed $selectedcategory
+     * @param string $selectedcategory
      * @return false|string $result
      * @throws dml_exception|invalid_parameter_exception
      * @throws restricted_context_exception
      * @throws required_capability_exception
      */
-    public static function execute(mixed $selectedcategory): bool|string {
-        global $USER, $COURSE;
+    public static function execute(string $selectedcategory) {
+        global $USER;
         self::validate_parameters(self::execute_parameters(), [
                 'selectedcategory' => $selectedcategory,
         ]);

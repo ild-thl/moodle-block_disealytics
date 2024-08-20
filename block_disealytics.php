@@ -57,12 +57,12 @@ class block_disealytics extends block_base {
 
         // TODO: Rework this? Workaround to errors happening when index.php is viewed without being logged in.
         if (!isloggedin()) {
-            $this->content->text = 'Bitte melden Sie sich an, um das DiSEA Dashboard benutzten zu können.';
+            $this->content->text = get_string('login_alert', 'block_disealytics');
             return $this->content;
         }
 
-        if (!str_contains($this->page->pagetype, 'course-view-')) {
-            $this->content->text = 'Das DiSEA Dashboard kann nur auf der Kurshauptseite angezeigt werden.';
+        if (strpos($this->page->pagetype, 'course-view-') === false) {
+            $this->content->text = get_string('course_alert', 'block_disealytics');
             return $this->content;
         }
 
@@ -102,13 +102,14 @@ class block_disealytics extends block_base {
             }
 
             // Check if there are settings for the views in the database.
-            $viewsinpref = json_decode(get_user_preferences('block_disealytics_views'), true);
+            $preference = get_user_preferences('block_disealytics_views');
 
             // If there are none, set them in the database.
-            if (is_null($viewsinpref)) {
+            if (is_null($preference)) {
                 set_user_preference('block_disealytics_views', json_encode($views));
                 $viewsinpref = json_decode(get_user_preferences('block_disealytics_views'), true);
             } else {
+                $viewsinpref = json_decode($preference, true);
                 // If there are, load them.
                 $viewsinpref = $this->loadviewsettings($viewsinpref);
 
@@ -171,7 +172,7 @@ class block_disealytics extends block_base {
     }
 
     /**
-     * Checks if the user has given consent to use the DiSEA Dashboard.
+     * Checks if the user has given consent to use the Learner Dashboard.
      * @throws dml_exception
      */
     private function getuserconsent(): bool {

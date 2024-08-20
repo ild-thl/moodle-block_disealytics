@@ -419,7 +419,6 @@ export const updateSetting = (updatetype, setting, val = undefined) => {
         methodname: 'block_disealytics_write_user_preference',
         args,
     }
-        // eslint-disable-next-line no-unused-vars
     ])[0].done(async function(response) {
         // Remove contents of the modal container.
         await deleteModalsContainer();
@@ -458,7 +457,6 @@ export const enableViewmodeDropdown = () => {
         let select = document.querySelector(".main-viewmode-selection");
         const viewmodeLabel = document.querySelector(".main-viewmode-label");
         if (viewmodeLabel) {
-            // viewmodeLabel.innerHTML = select.options[select.selectedIndex].innerHTML;
             updateSetting("write", 'viewmode', select.value);
         }
     });

@@ -37,7 +37,7 @@ class tasktransform extends scheduled_task {
      * Get the name of the task.
      * @throws coding_exception
      */
-    public function get_name(): lang_string|string {
+    public function get_name() {
         return get_string('task_tasktransform', 'block_disealytics');
     }
 
@@ -52,20 +52,12 @@ class tasktransform extends scheduled_task {
 
         // Time as unix timestamp. Returns 0 on first run.
         $time = $this->get_last_run_time();
-        // When $time is == 0 this task never ran, so we use the last log_task time if it exists.
-        if ($time == 0) {
-            $sqlt = "SELECT MAX(timestart) as timestart FROM {task_log} WHERE classname = 'block_my_consent_block\\\\task\\\\log_task'";
-            $logtasktime = $DB->get_record_sql($sqlt)->timestart;
-            if ($logtasktime != null) {
-                $time = $logtasktime;
-            }
-        }
 
         $selectstring =
                 'l.id, l.component, l.action, l.target, ' . 'l.userid, c.id as courseid, l.relateduserid, l.timecreated ';
 
         // SQL Query to get logdata in interval of one week.
-        $query1 = 'SELECT ' . $selectstring . ' FROM {logstore_standard_log} l ' . 'LEFT JOIN {course} c ' .
+        $query1 = '(SELECT ' . $selectstring . ' FROM {logstore_standard_log} l ' . 'LEFT JOIN {course} c ' .
                 'ON l.courseid = c.id ' .
                 'WHERE (l.relateduserid IN (SELECT DISTINCT userid FROM {block_disealytics_consent} disea2 ' .
                 'WHERE disea2.choice = 1 AND disea2.timecreated < ' . $time . ')' .
@@ -78,7 +70,7 @@ class tasktransform extends scheduled_task {
                 'WHERE l.relateduserid IN (SELECT DISTINCT userid FROM {block_disealytics_consent} disea2 ' .
                 'WHERE disea2.choice = 1 AND disea2.timemodified >' . $time . ') ' .
                 'OR l.userid IN (SELECT DISTINCT userid FROM {block_disealytics_consent} disea2 ' .
-                'WHERE disea2.choice = 1 AND disea2.timemodified >' . $time . ') ';
+                'WHERE disea2.choice = 1 AND disea2.timemodified >' . $time . ')) ORDER BY id';
 
         // Get Logdata from database.
         $data = array_values($DB->get_records_sql($query1));
@@ -257,7 +249,7 @@ class tasktransform extends scheduled_task {
      * @param string $componentfilename
      * @return array|bool
      */
-    private static function redefinecomponents(array $data, string $componentfilename): bool|array {
+    private static function redefinecomponents(array $data, string $componentfilename) {
 
         $filecontent = self::readcsvfile($componentfilename, '20');
 
@@ -270,6 +262,11 @@ class tasktransform extends scheduled_task {
         // Group data by userid.
         foreach ($data as $log) {
             $databyuserid[$log->userid][] = $log;
+        }
+        foreach ($databyuserid as $bucket) {
+            $bucket = usort($bucket, function($a, $b) {
+                return $a->timecreated <=> $b->timecreated;
+            });
         }
         foreach ($databyuserid as $bucket) {
             $iterator = new ArrayIterator($bucket);
@@ -348,7 +345,7 @@ class tasktransform extends scheduled_task {
      * @param string $str
      * @return float|int
      */
-    private static function secondsfrom(string $str): float|int {
+    private static function secondsfrom(string $str) {
         $seconds = 0;
         $str = explode(" ", $str);
         $seconds *= $str[0];

@@ -66,7 +66,7 @@ class modid_to_courseid extends external_api {
      * @throws restricted_context_exception
      * @throws required_capability_exception
      */
-    public static function execute(int $modid): bool|int {
+    public static function execute(int $modid) {
 
         self::validate_parameters(self::execute_parameters(), [
                 'modid' => $modid,

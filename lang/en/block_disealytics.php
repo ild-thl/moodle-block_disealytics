@@ -30,6 +30,7 @@ $string['plugin-title'] = 'Learner Dashboard';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
+$string['disealytics:editlearningdashboard'] = 'Edit the Learner Dashboard.';
 $string['languagesetting'] = 'en';
 $string['login_alert'] = 'Please log in to use the Learner Dashboard.';
 $string['course_alert'] = 'The Learner Dashboard can only be displayed on the main course page.';

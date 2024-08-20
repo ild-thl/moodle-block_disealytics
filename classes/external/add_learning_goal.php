@@ -87,10 +87,10 @@ class add_learning_goal extends external_api {
                 'goalname' => $goalname]);
         require_once($CFG->dirroot . '/blocks/disealytics/classes/learningdata.php');
 
+        // Security checks.
         $context = context_course::instance($courseid);
-        $PAGE->set_context($context);
-        $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
-        $PAGE->set_course($course);
+        self::validate_context($context);
+        require_capability('block/disealytics:editlearningdashboard', $context);
 
         $goal = new stdClass();
         $goal->userid = $USER->id;

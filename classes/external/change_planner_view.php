@@ -86,10 +86,10 @@ class change_planner_view extends external_api {
         ]);
         require_once($CFG->dirroot . '/blocks/disealytics/classes/data/planner.php');
 
+        // Security checks.
         $context = context_course::instance($courseid);
-        $PAGE->set_context($context);
-        $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
-        $PAGE->set_course($course);
+        self::validate_context($context);
+        require_capability('block/disealytics:editlearningdashboard', $context);
 
         $now = new DateTime("now", core_date::get_user_timezone_object());
 

@@ -29,11 +29,14 @@ global $CFG;
 require_once($CFG->libdir . '/externallib.php');
 
 use block_disealytics\data\planner;
+use context_course;
 use dml_exception;
 use external_api;
 use external_function_parameters;
 use external_value;
 use invalid_parameter_exception;
+use required_capability_exception;
+use restricted_context_exception;
 use stdClass;
 
 /**
@@ -110,6 +113,8 @@ class update_planner_event extends external_api {
      * @return bool
      * @throws dml_exception
      * @throws invalid_parameter_exception
+     * @throws restricted_context_exception
+     * @throws required_capability_exception
      */
     public static function execute(
         string $updatetype,
@@ -135,6 +140,11 @@ class update_planner_event extends external_api {
                 'eventtype' => $eventtype,
                 'repetitions' => $repetitions,
         ]);
+
+        // Security checks.
+        $context = context_course::instance($courseid);
+        self::validate_context($context);
+        require_capability('block/disealytics:editlearningdashboard', $context);
 
         if ($updatetype == 'add') {
             if ($repetitions > 0) {

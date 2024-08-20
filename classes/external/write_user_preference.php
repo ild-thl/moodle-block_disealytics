@@ -30,12 +30,15 @@ global $CFG;
 require_once($CFG->libdir . '/externallib.php');
 
 use coding_exception;
+use context_course;
 use dml_exception;
 use external_api;
 use external_function_parameters;
 use external_single_structure;
 use external_value;
 use invalid_parameter_exception;
+use required_capability_exception;
+use restricted_context_exception;
 
 /**
  * Class write_user_preference
@@ -63,11 +66,19 @@ class write_user_preference extends external_api {
      * @return string $result
      * @throws invalid_parameter_exception
      * @throws coding_exception|dml_exception
+     * @throws required_capability_exception
+     * @throws restricted_context_exception
      */
     public static function execute(array $info): string {
+        global $COURSE;
         self::validate_parameters(self::execute_parameters(), [
                 'info' => $info,
         ]);
+
+        // Security checks.
+        $context = context_course::instance($COURSE->id);
+        self::validate_context($context);
+        require_capability('block/disealytics:editlearningdashboard', $context);
 
         switch ($info['action']) {
             case "write":

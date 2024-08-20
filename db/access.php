@@ -45,4 +45,12 @@ $capabilities = [
                 ],
                 'clonepermissionsfrom' => 'moodle/site:manageblocks',
         ],
+
+        'block/disealytics:editlearningdashboard' => [
+                'captype' => 'write',
+                'contextlevel' => CONTEXT_BLOCK,
+                'archetypes' => [
+                        'user' => CAP_ALLOW,
+                ],
+        ],
 ];

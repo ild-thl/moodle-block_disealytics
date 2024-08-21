@@ -775,8 +775,10 @@
 
 .block_disealytics .progress-bar-btn {
     background: var(--diseablue);
-    width: -moz-available; /* stylelint-disable-line csstree/validator */
-    width: -webkit-fill-available; /* stylelint-disable-line csstree/validator *//* stylelint-disable-line declaration-block-no-duplicate-properties  */
+    /* stylelint-disable csstree/validator, declaration-block-no-duplicate-properties */
+    width: -moz-available;
+    width: -webkit-fill-available;
+    /* stylelint-enable csstree/validator, declaration-block-no-duplicate-properties */
     border: none;
 }
 

@@ -227,7 +227,8 @@ class progress_bar_view extends base_view {
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
         $this->output["help_info_text"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
-        $this->output["optional_input-view_help_info_text"] = get_string('optional_inputs-view_help_info_text', 'block_disealytics');
+        $this->output["optional_input-view_help_info_text"] =
+                get_string('optional_inputs-view_help_info_text', 'block_disealytics');
         // Viewmode settings.
         $iseditmode = get_user_preferences("block_disealytics_editing", "0");
         $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
@@ -278,7 +279,8 @@ class progress_bar_view extends base_view {
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
         $this->output["help_info_text"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
-        $this->output["optional_input-view_help_info_text"] = get_string('optional_inputs-view_help_info_text', 'block_disealytics');
+        $this->output["optional_input-view_help_info_text"] =
+                get_string('optional_inputs-view_help_info_text', 'block_disealytics');
         // Viewmode settings.
         $iseditmode = get_user_preferences("block_disealytics_editing", "0");
         $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;

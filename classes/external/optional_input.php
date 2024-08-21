@@ -120,13 +120,10 @@ class optional_input extends external_api {
                 'currentpage' => $currentpage, 'lastpage' => $lastpage, 'courseid' => $courseid,
                 'expenditureoftime' => $expenditureoftime]);
         require_once($CFG->dirroot . '/blocks/disealytics/classes/learningdata.php');
-
         // Security checks.
         $context = context_course::instance($courseid);
         self::validate_context($context);
         require_capability('block/disealytics:editlearningdashboard', $context);
-
-
         $data = new stdClass();
         if ($id !== -1) {
             $data->id = $id;

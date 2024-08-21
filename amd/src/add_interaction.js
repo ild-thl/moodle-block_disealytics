@@ -305,7 +305,7 @@ const registerEventListener = (viewname) => {
             });
             modal.setSaveButtonText(await getString('modal_remove_check', 'block_disealytics'));
             modal.show();
-            modal.getRoot().on(ModalEvents.save, async () => {
+            modal.getRoot().on(ModalEvents.save, async function() {
                 const viewContainer = document.querySelector('#block_disealytics-' + viewname);
                 viewContainer.setAttribute('data-visible', 'false');
                 const addButton = document.querySelector('.block_disealytics-add-' + viewname);

@@ -67,18 +67,14 @@ class modid_to_courseid extends external_api {
      * @throws required_capability_exception
      */
     public static function execute(int $modid) {
-
         self::validate_parameters(self::execute_parameters(), [
                 'modid' => $modid,
         ]);
         global $DB, $COURSE;
-
         // Security checks.
         $context = context_course::instance($COURSE->id);
         self::validate_context($context);
         require_capability('block/disealytics:editlearningdashboard', $context);
-
-
         $coursemod = $DB->get_record('course_modules', ['id' => $modid], 'id, course');
         return $coursemod->course;
     }

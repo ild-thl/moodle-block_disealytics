@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024082002';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024082100';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -266,7 +266,7 @@ $string['optional_inputs-view_help_info_text'] = 'Stay up to date with your lear
 // Study progress view.
 $string['study-progress-view'] = "Study Progress";
 $string['study-progress_infotext_bad'] = "The study progress is not optimal at the moment.";
-$string['study-progress_infotext_average'] = 'The study progress is currently <span style="colour: var(--diseablue)">average</span>.';
+$string['study-progress_infotext_average'] = 'The study progress is currently <span style="color: var(--diseablue)">average</span>.';
 $string['study-progress_infotext_good'] = "The study progress is currently very good.";
 $string['study-progress-view_help_info_text'] = "The speedometer shows you your progress of studies and how far you are towards your goal. The calculation is based on the assessments in the tasks assigned to you in the course.";
 $string['study-progress-view_help_info_text_expanded'] = "The speedometer shows you your progress of studies and how far you are towards your goal. The calculation is based on the assessments in the tasks assigned to you in the course. Below the speedometer you will find a list on which this calculation is based.";

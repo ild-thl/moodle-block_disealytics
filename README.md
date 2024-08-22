@@ -28,6 +28,13 @@ The PHP code is object-oriented and follows the Moodle coding standards.
 
 JavaScript are used for client-side scripting. They handle user interactions and update the user interface in real-time.
 
+## Requirements
+
+The plugin is developed to support **Moodle 4.1**, using the plugin with other Moodle versions may cause unexpected issues.
+As such the plugin has been has been tested specifically with the following configurations:
+* Database: MariaDB, PostgreSQL
+* PHP: 7.4, 8.0, 8.1
+
 ## Installation
 
 ### Cloning

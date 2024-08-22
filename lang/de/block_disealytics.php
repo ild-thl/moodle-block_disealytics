@@ -45,7 +45,7 @@ $string['diseasettings'] = 'Learner Dashboard Einstellungen';
 $string['activityviewsetting'] = 'Aktivitätsübersicht anzeigen';
 $string['assignmentviewsetting'] = 'Aufgabenübersicht anzeigen';
 $string['editing_mode_setting'] = 'Aktiviere den Editiermodus';
-$string['exit_editing_mode'] = 'Beenden';
+$string['exit_editing_mode'] = 'Bearbeitungsmodus beenden';
 $string['study_progress_setting'] = 'Lernfortschrittübersicht anzeigen';
 
 $string['assignment'] = 'Aufgabe';

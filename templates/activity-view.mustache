@@ -53,7 +53,6 @@
 {{/editmode}}
 {{#viewmode}}
     <div id="block_disealytics-panel-{{viewname}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{viewname}}">
-
         <div class="panel-heading">
             <div class="flex-container">
                 <h1 id="title"><span class="show-when-expanded"><a
@@ -77,30 +76,28 @@
                 </div>
             </div>
         </div>
-    {{#viewmode_module}}
-        <div class="panel-body">
-        {{^nodata}}
-                <p>{{datadate}}</p>
-                <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
-                <p>{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}
-                    {{#maincharts}}  {{> core/chart }} {{/maincharts}}
-            </div>
+        {{#viewmode_module}}
+            {{^nodata}}
+                <div class="panel-body">
+                    <p>{{datadate}}</p>
+                    <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
+                    <p>{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}
+                        {{#maincharts}}  {{> core/chart }} {{/maincharts}}
+                </div>
 
                 <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
                     <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
                     <p>{{#str}}activity_view_detail_axislabel_x, block_disealytics{{/str}}
                         {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
                 </div>
-        {{/nodata}}
-        {{#nodata}}
+            {{/nodata}}
+            {{#nodata}}
                 <p>{{#str}}nodata, block_disealytics{{/str}}</p>
-        {{/nodata}}
-        </div>
-    {{/viewmode_module}}
-    {{#viewmode_halfyear}}
-        <div id="block_disealytics-panel-{{viewname}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{viewname}}">
-        {{^nodata}}
-            {{#outputs}}
+            {{/nodata}}
+        {{/viewmode_module}}
+        {{#viewmode_halfyear}}
+            {{^nodata}}
+                {{#outputs}}
                     <div class="panel-body">
                         <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
                             <span id="title">{{coursename}}</span>
@@ -116,13 +113,13 @@
                         <p>{{#str}}activity_view_detail_axislabel_x, block_disealytics{{/str}}
                             {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
                     </div>
-            {{/outputs}}
-        {{/nodata}}
-        {{#nodata}}
+                {{/outputs}}
+            {{/nodata}}
+            {{#nodata}}
                 <p>{{#str}}nodata, block_disealytics{{/str}}</p>
-        {{/nodata}}
-    {{/viewmode_halfyear}}
-    {{#viewmode_global}}
+            {{/nodata}}
+        {{/viewmode_halfyear}}
+        {{#viewmode_global}}
             <div class="panel-body">
                 <div class="categories-container">
                     <div class="course-category-global">
@@ -155,9 +152,8 @@
                     <p>{{#str}}nodata, block_disealytics{{/str}}</p>
                 {{/nodata}}
             </div>
-    {{/viewmode_global}}
-
-    {{> block_disealytics/bottom_navigation }}
+        {{/viewmode_global}}
+        {{> block_disealytics/bottom_navigation }}
     </div>
 {{/viewmode}}
 

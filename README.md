@@ -1,11 +1,10 @@
 # DiSEA Learner Dashboard
 
-The Learner Dashboard is a Moodle Block Plugin and offers a visual representation of the student's learning progress based on various factors and the opportunity for self-reflection. It is designed especially for online students.
+The Learner Dashboard is a Moodle Block Plugin and offers a visual representation of the student's learning progress based on various factors and the opportunity for self-reflection. The main target group are online students.
 
 ## Features
 
 The Learner Dashboard provides the following features:
-- **Learning Analytics**: The Learner Dashboard provides a visual representation of the student's learning progress.
 - **Personalization**: The Learner Dashboard can be personalized by adding or removing cards.
 - **Cards**: The Learner Dashboard (LD) contains cards in which various information or functions are included. Cards can be added to the LD and deleted again. There are the following different cards from which the students can compile their personal LD.
   * **Activity**: The Activity card shows the student's activity in the course/semester/studies.

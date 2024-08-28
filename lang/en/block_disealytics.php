@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024090402';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024091000';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -322,6 +322,7 @@ $string['nodata'] = 'There is no data available.';
 $string['activity_view_refresh'] = "Last update";
 
 $string['task_tasktransform'] = 'Task transformation';
+$string['task_statistics'] = 'Task usage statistics';
 
 // Planner view.
 $string['planner-view'] = 'Planning Assistant';
@@ -375,78 +376,6 @@ $string['viewmode_module'] = 'Module view';
 $string['viewmode_global'] = 'Full view';
 $string['viewmode_halfyear'] = 'Semester view';
 
-// Privacy API.
-$string['privacy:metadata:block_disealytics_user'] = 'Description of the block_disealytics_user';
-// For: block_disealytics_user_dates.
-$string['privacy:metadata:block_disealytics_user_dates'] = 'The block_disealytics_user_dates table contains the user dates.';
-$string['privacy:metadata:user_dates_id'] = 'date_id';
-$string['privacy:metadata:user_dates_name'] = 'date_name';
-$string['privacy:metadata:user_dates_usermodified'] = 'date_usermodified';
-$string['privacy:metadata:user_dates_courseid'] = 'date_courseid';
-$string['privacy:metadata:user_dates_userid'] = 'date_userid';
-$string['privacy:metadata:user_dates_timecreated'] = 'date_timecreated';
-$string['privacy:metadata:user_dates_timemodified'] = 'date_timemodified';
-$string['privacy:metadata:user_dates_timestart'] = 'date_timestart';
-$string['privacy:metadata:user_dates_timeduration'] = 'date_timeduration';
-$string['privacy:metadata:user_dates_location'] = 'date_location';
-$string['privacy:metadata:user_dates_eventtype'] = 'date_eventtype';
-$string['privacy:metadata:user_dates_repeatid'] = 'date_repeatid';
-
-// For: block_disealytics_user_goals.
-$string['privacy:metadata:block_disealytics_user_goals'] = 'The block_disealytics_user_goals table contains the user goals.';
-$string['privacy:metadata:user_goal_id'] = 'goal_id';
-$string['privacy:metadata:user_goal_usermodified'] = 'usermodified';
-$string['privacy:metadata:user_goal_courseid'] = 'goal_courseid';
-$string['privacy:metadata:user_goal_userid'] = 'goal_userid';
-$string['privacy:metadata:user_goal_timecreated'] = 'goal_timecreated';
-$string['privacy:metadata:user_goal_timemodified'] = 'goal_timemodified';
-$string['privacy:metadata:user_goal_timecompleted'] = 'goal_timecompleted';
-$string['privacy:metadata:user_goal_duedate'] = 'goal_duedate';
-$string['privacy:metadata:user_goal_description'] = 'goal_description';
-$string['privacy:metadata:user_goal_finished'] = 'goal_finished';
-
-// For: block_disealytics_opin.
-$string['privacy:metadata:block_disealytics_user_pages'] = 'User pages of the Learner Dashboard';
-$string['privacy:metadata:user_pages_id'] = 'user_pages_id';
-$string['privacy:metadata:user_pages_usermodified'] = 'user_pages_usermodified';
-$string['privacy:metadata:user_pages_courseid'] = 'user_pages_courseid';
-$string['privacy:metadata:user_pages_userid'] = 'user_pages_userid';
-$string['privacy:metadata:user_pages_timecreated'] = 'user_pages_timecreated';
-$string['privacy:metadata:user_pages_timemodified'] = 'user_pages_timemodified';
-$string['privacy:metadata:user_pages_timecompleted'] = 'user_pages_timecompleted';
-$string['privacy:metadata:user_pages_name'] = 'user_pages_name';
-$string['privacy:metadata:user_pages_currentpage'] = 'user_pages_currentpage';
-$string['privacy:metadata:user_pages_lastpage'] = 'user_pages_lastpage';
-$string['privacy:metadata:user_pages_expenditureoftime'] = 'user_pages_expenditureoftime';
-
-// For: block_disealytics_consent.
-$string['privacy:metadata:block_disealytics_consent'] = 'Agreement to the privacy policy';
-$string['privacy:metadata:consent_id'] = 'consent_id';
-$string['privacy:metadata:consent_userid'] = 'consent_userid';
-$string['privacy:metadata:consent_counter'] = 'consent_counter';
-$string['privacy:metadata:consent_choice'] = 'consent_choice';
-$string['privacy:metadata:consent_timecreated'] = 'consent_timecreated';
-$string['privacy:metadata:consent_timemodified'] = 'consent_timemodified';
-
-// For: block_disealytics_user_tasks.
-$string['privacy:metadata:block_disealytics_user_tasks'] = 'User tasks';
-$string['privacy:metadata:user_id'] = 'user_id';
-$string['privacy:metadata:user_component'] = 'user_component';
-$string['privacy:metadata:user_target'] = 'user_target';
-$string['privacy:metadata:user_action'] = 'user_action';
-$string['privacy:metadata:user_eventname'] = 'user_timecreated';
-$string['privacy:metadata:user_courseid'] = 'user_timecreated';
-$string['privacy:metadata:user_userid'] = 'user_id';
-$string['privacy:metadata:user_timestart'] = 'user_timestart';
-$string['privacy:metadata:user_n_events'] = 'user_n_events';
-$string['privacy:metadata:user_duration'] = 'user_duration';
-$string['privacy:metadata:user_timecreated'] = 'user_timecreated';
-
-$string['config_title'] = 'Course for log data';
-$string['config_text'] = 'Please enter the course ID for the course in which the log data is to be saved.';
-
-$string['config_key_title'] = 'Public key for encrypting the data';
-$string['config_key_text'] = 'Please enter the public key here.';
 
 $string['config_consent_text'] = 'Your declaration of consent';
 $string['config_consent_description'] = 'Please enter your declaration of consent here as HTML formatted text.';
@@ -479,22 +408,80 @@ $string['download'] = 'Download';
 $string['back'] = 'Back';
 $string['delete'] = 'Delete';
 
-// Privacy API.
-$string['privacy:metadata:disea_consent'] = "Information about the user's choice in various courses and the use of the data for scientific research.";
-$string['privacy:metadata:disea_consent:userid'] = 'The ID of the user';
-$string['privacy:metadata:disea_consent:courseid'] = "The ID of the user's course";
-$string['privacy:metadata:disea_consent:choice'] = 'The choice made by the user for the DiSEA declaration of consent.';
-$string['privacy:data'] = 'Data of the user for the DiSEA declaration of consent';
-
 $string['activity_view_axislabel_y'] = 'y-axis: minutes';
 $string['activity_view_main_axislabel_x'] = 'x-axis: days';
 $string['activity_view_detail_axislabel_x'] = 'x-axis: calendarweeks';
+// Privacy API.
+// For: block_disealytics_consent.
+$string['privacy:metadata:block_disealytics_consent'] = 'Agreement to the privacy policy.';
+$string['privacy:metadata:consent_userid'] = 'The ID of the user with this consent information.';
+$string['privacy:metadata:consent_counter'] = 'A counter to keep track of when to reset the consent information.';
+$string['privacy:metadata:consent_choice'] = 'The choice of the user, 0 for declined 1 for agreed.';
+$string['privacy:metadata:consent_timecreated'] = 'The time this consent record was created at.';
+$string['privacy:metadata:consent_timemodified'] = 'The last time this consent record was modified.';
+
+// For: block_disealytics_user_goals.
+$string['privacy:metadata:block_disealytics_user_goals'] = 'Learning goals created by the users of the Learner Dashboard.';
+$string['privacy:metadata:user_goal_usermodified'] = 'The ID of the user that modified the goal record.';
+$string['privacy:metadata:user_goal_courseid'] = 'The ID of the course the goal record was created in.';
+$string['privacy:metadata:user_goal_userid'] = 'The ID of the user with this goal information.';
+$string['privacy:metadata:user_goal_timecreated'] = 'The time this goal record was created at.';
+$string['privacy:metadata:user_goal_timemodified'] = 'The last time this goal record was modified.';
+$string['privacy:metadata:user_goal_timecompleted'] = 'The time the user marked this goal as completed.';
+$string['privacy:metadata:user_goal_duedate'] = 'The time completion of this goal is due.';
+$string['privacy:metadata:user_goal_description'] = 'A description of the goal.';
+$string['privacy:metadata:user_goal_finished'] = 'Indicates if the goal is finished.';
+
+// For: block_disealytics_pages.
+$string['privacy:metadata:block_disealytics_user_pages'] = 'Information about read document pages, crated by the users of the Learner Dashboard.';
+$string['privacy:metadata:user_pages_usermodified'] = 'The ID of the user that modified the pages record.';
+$string['privacy:metadata:user_pages_courseid'] = 'The ID of the course the pages record was created in.';
+$string['privacy:metadata:user_pages_userid'] = 'The ID of the user with this page information.';
+$string['privacy:metadata:user_pages_timecreated'] = 'The time this pages record was created at.';
+$string['privacy:metadata:user_pages_timemodified'] = 'The last time this pages record was modified.';
+$string['privacy:metadata:user_pages_timecompleted'] = 'The time the user marked this pages entry as completed.';
+$string['privacy:metadata:user_pages_name'] = 'The name of the document the user read.';
+$string['privacy:metadata:user_pages_currentpage'] = 'The number of the pages the user read.';
+$string['privacy:metadata:user_pages_lastpage'] = 'The total number of pages the document has.';
+$string['privacy:metadata:user_pages_expenditureoftime'] = 'The amount of time the user spent reading the document.';
+
+// For: block_disealytics_user_tasks.
+$string['privacy:metadata:block_disealytics_user_tasks'] = 'Task information created by the tasktransform task, grouping activities in log data.';
+$string['privacy:metadata:user_tasks_component'] = 'The component, taken from the logs.';
+$string['privacy:metadata:user_tasks_target'] = 'The target, taken from the logs.';
+$string['privacy:metadata:user_tasks_action'] = 'The action, taken from the logs.';
+$string['privacy:metadata:user_tasks_eventname'] = 'The name of the event, combines component, target and action names.';
+$string['privacy:metadata:user_tasks_courseid'] = 'The ID of the course the tasks record was created in.';
+$string['privacy:metadata:user_tasks_userid'] = 'The ID of the user with this task information.';
+$string['privacy:metadata:user_tasks_timestart'] = 'The time the first event of the task happened.';
+$string['privacy:metadata:user_tasks_n_events'] = 'The number of events grouped into the task.';
+$string['privacy:metadata:user_tasks_duration'] = 'The duration of the task in seconds.';
+$string['privacy:metadata:user_tasks_timecreated'] = 'The time this tasks record was created at.';
+
+// For: block_disealytics_user_dates.
+$string['privacy:metadata:block_disealytics_user_dates'] = 'User created events for the planning assistant.';
+$string['privacy:metadata:user_dates_name'] = 'The name of the entry.';
+$string['privacy:metadata:user_dates_usermodified'] = 'The ID of the user that modified the dates record.';
+$string['privacy:metadata:user_dates_courseid'] = 'The ID of the course the dates record was created in.';
+$string['privacy:metadata:user_dates_userid'] = 'The ID of the user with this planner date information.';
+$string['privacy:metadata:user_dates_timecreated'] = 'The time this dates record was created at.';
+$string['privacy:metadata:user_dates_timemodified'] = 'The last time this dates record was modified.';
+$string['privacy:metadata:user_dates_timestart'] = 'The time the event starts at.';
+$string['privacy:metadata:user_dates_timeduration'] = 'The duration of the event.';
+$string['privacy:metadata:user_dates_location'] = 'The location of the event.';
+$string['privacy:metadata:user_dates_eventtype'] = 'The type of event.';
+$string['privacy:metadata:user_dates_repeatid'] = 'The ID used to keep track of periodically repeating events.';
+
+// For: block_disealytics_statistics.
+$string['privacy:metadata:block_disealytics_statistics']  = "Usage Statistics generated by statistics task.";
 
 $string['privacy:metadata:preference:block_disealytics_editing'] = "Indicates if the user activated the edititing mode in the Learner Dashboard.";
-$string['privacy:metadata:preference:block_disealytics_planner_currentdate'] = "The date the planner view uses to select the displayed month.";
 $string['privacy:metadata:preference:block_disealytics_expanded_view'] = "The view that the user views details of in the Learner Dashboard.";
+$string['privacy:metadata:preference:block_disealytics_planner_currentdate'] = "The date the planner view uses to select the displayed month.";
 $string['privacy:metadata:preference:block_disealytics_views'] = "Stores which views are active in the Learner Dashboard.";
 $string['privacy:metadata:preference:block_disealytics_viewmode'] = "Stores the viewmode the user selected in the viewmode dropdown.";
+
+$string['privacy:metadata:preference:block_disealytics_viewsdescription'] = "Serialised data that describes which view are displayed in the Learner Dashboard. Stored as objects containing the view name and if that view is enabled ('1') or disabled ('0').";
 
 $string['editingno'] = "Editing mode in Learner Dashboard turned off.";
 $string['editingyes'] = "Editing mode in Learner Dashboard turned on.";
@@ -502,5 +489,3 @@ $string['editingyes'] = "Editing mode in Learner Dashboard turned on.";
 $string['expandedno'] = "No view in Learner Dashboard is expanded.";
 $string['plannerdateno'] = "The default value of the planning assistant, now.";
 $string['viewmode_selected'] = "is the currently selected viewmode of the Learner Dashboard.";
-
-$string['privacy:metadata:preference:block_disealytics_viewsdescription'] = "Serialised data that describes which view are displayed in the Learner Dashboard. Stored as objects containing the view name and if that view is enabled ('1') or disabled ('0').";

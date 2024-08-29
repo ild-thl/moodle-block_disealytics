@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024082101';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024082900';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -489,3 +489,18 @@ $string['privacy:data'] = 'Data of the user for the DiSEA declaration of consent
 $string['activity_view_axislabel_y'] = 'y-axis: minutes';
 $string['activity_view_main_axislabel_x'] = 'x-axis: days';
 $string['activity_view_detail_axislabel_x'] = 'x-axis: calendarweeks';
+
+$string['privacy:metadata:preference:block_disealytics_editing'] = "Indicates if the user activated the edititing mode in the Learner Dashboard.";
+$string['privacy:metadata:preference:block_disealytics_planner_currentdate'] = "The date the planner view uses to select the displayed month.";
+$string['privacy:metadata:preference:block_disealytics_expanded_view'] = "The view that the user views details of in the Learner Dashboard.";
+$string['privacy:metadata:preference:block_disealytics_views'] = "Stores which views are active in the Learner Dashboard.";
+$string['privacy:metadata:preference:block_disealytics_viewmode'] = "Stores the viewmode the user selected in the viewmode dropdown.";
+
+$string['editingno'] = "Editing mode in Learner Dashboard turned off.";
+$string['editingyes'] = "Editing mode in Learner Dashboard turned on.";
+
+$string['expandedno'] = "No view in Learner Dashboard is expanded.";
+$string['plannerdateno'] = "The default value of the planning assistant, now.";
+$string['viewmode_selected'] = "is the currently selected viewmode of the Learner Dashboard.";
+
+$string['privacy:metadata:preference:block_disealytics_viewsdescription'] = "Serialised data that describes which view are displayed in the Learner Dashboard. Stored as objects containing the view name and if that view is enabled ('1') or disabled ('0').";

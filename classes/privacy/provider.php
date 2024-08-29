@@ -25,7 +25,6 @@ use core_privacy\local\request\contextlist;
 use core_privacy\local\request\core_userlist_provider;
 use core_privacy\local\request\userlist;
 use core_privacy\local\request\writer;
-use core_table\external\dynamic\get;
 use dml_exception;
 
 /**

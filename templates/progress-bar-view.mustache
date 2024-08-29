@@ -140,11 +140,11 @@
         {{#viewmode_halfyear}}
             <div class="panel-body">
                 {{#course}}
-                    <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
+                    <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
                         <span id="title">{{coursename}}</span>
-                        <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
-                    </div>
-                    <div class="panel-body">
+                        <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
+                    </button>
+                    <div class="panel-body hidden">
                         {{#charts_preview}}
                             {{> core/chart }}
                             {{#show_dots}}
@@ -161,7 +161,6 @@
                                 </div>
                             {{/show_dots}}
                         {{/charts_preview}}
-
                     </div>
                 {{/course}}
                 {{#nodata}}
@@ -190,11 +189,11 @@
                     </div>
                 </div>
                 {{#course}}
-                    <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
+                    <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
                         <span id="title">{{coursename}}</span>
-                        <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
-                    </div>
-                    <div class="panel-body">
+                        <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
+                    </button>
+                    <div class="panel-body hidden">
                         {{#charts_preview}}
                             {{> core/chart }}
                             {{#show_dots}}

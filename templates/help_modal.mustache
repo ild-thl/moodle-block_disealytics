@@ -123,13 +123,6 @@
 
 {{#js}}
     require(['block_disealytics/add_interaction'], function(addInteraction) {
-    // Attach click event to each accordion head.
-    const accordion = document.getElementById('block_disealytics_info-modal-accordion');
-    const accordionHeads = document.querySelectorAll('#block_disealytics_info-modal-accordion .accordion-head');
-    accordionHeads.forEach((head, index) => {
-    head.addEventListener('click', () => {
-    addInteraction.toggleAccordion(accordion, index + 1);
-    });
-    });
+        addInteraction.initHelpModalAccordion();
     });
 {{/js}}

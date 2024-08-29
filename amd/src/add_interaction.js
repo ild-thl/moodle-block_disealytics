@@ -352,16 +352,19 @@ export const toggleInformationModal = (viewname) => {
                     await getString('main_help_title', 'block_disealytics') :
                     await getString(viewname, 'block_disealytics'),
                 body: viewname === 'main' ?
-                    await Templates.render('block_disealytics/help_modal', {id: 3}) :
+                    await Templates.render('block_disealytics/help_modal', {id: 5}) :
                     await getString(viewname + '_help_info_text', 'block_disealytics'),
                 footer: footerContent,
                 removeOnClose: true
             });
 
-            modal.show();
+            await modal.show();
+
+            if (viewname === 'main') {
+                initHelpModalAccordion();
+            }
         });
     }
-
 
     if (btnExpanded) {
         btnExpanded.addEventListener('click', async function() {
@@ -431,6 +434,16 @@ export const toggleMainConfigModal = () => {
     }
 };
 
+export const initHelpModalAccordion = () => {
+    // Attach click event to each accordion head.
+    const accordion = document.getElementById('block_disealytics_info-modal-accordion');
+    const accordionHeads = document.querySelectorAll('#block_disealytics_info-modal-accordion .accordion-head');
+    accordionHeads.forEach((head, index) => {
+        head.addEventListener('click', () => {
+            toggleAccordion(accordion, index + 1);
+        });
+    });
+};
 
 /**
  * Toggles the visibility of an accordion content section and updates the toggle icon.
@@ -439,7 +452,7 @@ export const toggleMainConfigModal = () => {
  * @param {number} index - The index of the accordion section to toggle.
  * @returns {void}
  */
-export function toggleAccordion(element, index) {
+export const toggleAccordion = (element, index) => {
     const content = element.querySelector(`#content-${index}`);
     const icon = element.querySelector(`#icon-${index}`);
 
@@ -452,7 +465,7 @@ export function toggleAccordion(element, index) {
         content.classList.add('active');
         icon.className = "fa fa-chevron-up accordion-icon";
     }
-}
+};
 
 /**
  * Retrieves the trimmed value of an HTML element by its ID.
@@ -587,22 +600,3 @@ export const toggleViewmodeAccordion = (viewname) => {
         }
     });
 };
-
-export const toggleAccordionAV = (icon) => {
-    const coursename = icon.dataset.coursename;
-    const table = document.querySelector(`.table-of-assignments[data-coursename="${coursename}"]`);
-
-
-    if (icon.classList.contains('active')) {
-        // Fold the content if it's open.
-        icon.classList.remove('active');
-        icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
-        table.classList.remove('hidden');
-    } else {
-        // Unfold the content if it's closed.
-        icon.classList.add('active');
-        icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
-        table.classList.add('hidden');
-    }
-};
-

@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024082101';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024082900';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Füge einen neuen Learner Dashboard Block hinzu.';
 $string['disealytics:myaddinstance'] = 'Füge einen neuen Learner Dashboard Block zu meinem Dashboard hinzu.';
@@ -475,3 +475,18 @@ $string['privacy:data'] = 'Daten des Nutzers f&uuml;r DiSEA Einwilligungserkl&au
 $string['activity_view_axislabel_y'] = 'Y-Achse: Minuten';
 $string['activity_view_main_axislabel_x'] = 'X-Achse: Tage';
 $string['activity_view_detail_axislabel_x'] = 'X-Achse: Kalenderwochen';
+
+$string['privacy:metadata:preference:block_disealytics_editing'] = "Speichert, ob der Bearbeitungsmodus aktiv ist.";
+$string['privacy:metadata:preference:block_disealytics_planner_currentdate'] = "Das Datum, was der Planungsassistent nutzt, um den Monat anzuzeigen.";
+$string['privacy:metadata:preference:block_disealytics_expanded_view'] = "Die Karte, deren Detailansicht angezeigt wird.";
+$string['privacy:metadata:preference:block_disealytics_views'] = "Speichert welche Karten im Learner Dashboard angezeigt werden.";
+$string['privacy:metadata:preference:block_disealytics_viewmode'] = "Speichert welche Ansicht (Modul-, Semester-, Gesamtansicht) angezeigt wird.";
+
+$string['editingno'] = "Bearbeitungsmodus im Learner Dashboard deaktiviert";
+$string['editingyes'] = "Bearbeitungsmodus im Learner Dashboard aktiviert";
+
+$string['expandedno'] = "Keine Detailansicht im Learner Dashboard ist aktiviert.";
+$string['plannerdateno'] = "Der Standardwert für das Datum im Planungsassistenten, beschreibt 'jetzt'.";
+$string['viewmode_selected'] = "ist die angezeigte Ansicht des Learner Dashboard.";
+
+$string['privacy:metadata:preference:block_disealytics_viewsdescription'] = "Serialisierte Daten, die beschreiben welche Karten im Learner Dashboard angezeigt werden. Gespeichert als Objekte mit Kartennamen und ob die Karte aktiviert (enabled: 1) oder deaktiviert  (enabled: 0) ist.";

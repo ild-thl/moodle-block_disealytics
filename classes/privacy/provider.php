@@ -25,6 +25,7 @@ use core_privacy\local\request\contextlist;
 use core_privacy\local\request\core_userlist_provider;
 use core_privacy\local\request\userlist;
 use core_privacy\local\request\writer;
+use core_table\external\dynamic\get;
 use dml_exception;
 
 /**
@@ -37,7 +38,8 @@ use dml_exception;
  */
 class provider implements core_userlist_provider,
         \core_privacy\local\metadata\provider,
-        \core_privacy\local\request\plugin\provider {
+        \core_privacy\local\request\plugin\provider,
+        \core_privacy\local\request\user_preference_provider {
     /**
      * Get the list of metadata.
      *
@@ -125,6 +127,13 @@ class provider implements core_userlist_provider,
                 ],
             'privacy:metadata:block_disealytics_user_tasks'
         );
+        $collection->add_user_preference("block_disealytics_editing", "privacy:metadata:preference:block_disealytics_editing");
+        $collection->add_user_preference("block_disealytics_expanded_view",
+                "privacy:metadata:preference:block_disealytics_expanded_view");
+        $collection->add_user_preference("block_disealytics_planner_currentdate",
+                "privacy:metadata:preference:block_disealytics_planner_currentdate");
+        $collection->add_user_preference("block_disealytics_views", "privacy:metadata:preference:block_disealytics_views");
+        $collection->add_user_preference("block_disealytics_viewmode", "privacy:metadata:preference:block_disealytics_viewmode");
 
         return $collection;
     }
@@ -287,6 +296,68 @@ class provider implements core_userlist_provider,
 
                 echo "Data for user deleted successfully.";
             }
+        }
+    }
+
+    /**
+     * Export all user preferences for the plugin.
+     *
+     * @param int $userid The userid of the user whose data is to be exported.
+     */
+    public static function export_user_preferences(int $userid) {
+        $editing = get_user_preferences('block_disealytics_editing', null, $userid);
+        if (null !== $editing) {
+            switch ($editing) {
+                case '0':
+                    $editingdescription = get_string('editingno', 'block_disealytics');
+                    break;
+                case '1':
+                default:
+                    $editingdescription = get_string('editingyes', 'block_disealytics');
+                    break;
+            }
+            writer::export_user_preference('block_disealytics', 'block_disealytics_editing', $editing,
+                    $editingdescription);
+        }
+        $expanded = get_user_preferences('block_disealytics_expanded_view', null, $userid);
+        if (null !== $expanded) {
+            switch ($expanded) {
+                case 'none':
+                    $expandeddescription = get_string('expandedno', 'block_disealytics');
+                    break;
+                default:
+                    $expandeddescription = get_string('privacy:metadata:preference:block_disealytics_expanded_view',
+                            'block_disealytics');
+                    break;
+            }
+            writer::export_user_preference('block_disealytics', 'block_disealytics_expanded_view', $expanded,
+                    $expandeddescription);
+        }
+        $date = get_user_preferences('block_disealytics_planner_currentdate', null, $userid);
+        if (null !== $date) {
+            switch ($date) {
+                case '0':
+                    $datedescription = get_string('plannerdateno', 'block_disealytics');
+                    break;
+                default:
+                    $datedescription = get_string('privacy:metadata:preference:block_disealytics_planner_currentdate',
+                           'block_disealytics');
+                   break;
+            }
+            writer::export_user_preference('block_disealytics', 'block_disealytics_planner_currentdate', $date,
+                    $datedescription);
+        }
+        $views = get_user_preferences('block_disealytics_views', null, $userid);
+        if (null !== $views) {
+            $viewsdescription = get_string('privacy:metadata:preference:block_disealytics_viewsdescription', 'block_disealytics');
+            writer::export_user_preference('block_disealytics', 'block_disealytics_views', $views, $viewsdescription);
+        }
+        $viewmode = get_user_preferences('block_disealytics_viewmode', null, $userid);
+        if (null !== $viewmode) {
+            $viewmodedescription = get_string($viewmode, 'block_disealytics')
+                    . " "
+                    . get_string('viewmode_selected', 'block_disealytics');
+            writer::export_user_preference('block_disealytics', 'block_disealytics_viewmode', $viewmode, $viewmodedescription);
         }
     }
 }

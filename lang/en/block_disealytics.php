@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024082900';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024083000';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -454,8 +454,8 @@ $string['config_consent_description'] = 'Please enter your declaration of consen
 $string['config_counter_title'] = 'Counter for displaying the declaration of consent';
 $string['config_counter_text'] = 'This counter can be used to control when the declaration of consent should be displayed again for the students.';
 
-$string['config_eventblacklist_title'] = 'Blacklist-CSV for event filtering';
-$string['config_eventblacklist_text'] = 'This setting allows you to upload a CSV file with event, target and action names to be filtered.';
+$string['config_filterfile_title'] = 'csv file for event filtering';
+$string['config_filterfile_text'] = 'This setting allows you to upload a CSV file with event, target and action names to be filtered.';
 
 $string['config_componentlist_title'] = 'Component CSV for component redefinition';
 $string['config_componentlist_text'] = 'This setting allows you to upload a CSV file with component names to be replaced.';

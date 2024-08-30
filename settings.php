@@ -45,9 +45,9 @@ if ($ADMIN->fulltree) {
     ));
 
     $settings->add(new admin_setting_configstoredfile(
-        'block_disealytics/filterblacklist',
-        get_string('config_eventblacklist_title', 'block_disealytics'),
-        get_string('config_eventblacklist_text', 'block_disealytics'),
+        'block_disealytics/filterfile',
+        get_string('config_filterfile_title', 'block_disealytics'),
+        get_string('config_filterfile_text', 'block_disealytics'),
         'disea',
         10
     ));

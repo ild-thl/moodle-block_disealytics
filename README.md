@@ -48,5 +48,5 @@ git clone https://github.com/ild-thl/moodle-block_disealytics.git disealytics
 
 When moodle asks you to configure the new settings for the plugin, upload the provided CSV-files:
  
-- `block_disealytics | filterblacklist` -> upload event_filter_yymmdd.csv
+- `block_disealytics | filterfile` -> upload event_filter_yymmdd.csv
 - `block_disealytics | components` -> upload comp_map_yymmdd.csv

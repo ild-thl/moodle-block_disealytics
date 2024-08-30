@@ -320,10 +320,11 @@
 /* make view containers draggable */
 
 .block_disealytics .draggable {
-    cursor: move;
+    cursor: grab;
 }
 
 .block_disealytics .dragging {
+    cursor: grabbing;
     transform: rotate(3deg);
     background: #f2f2f2;
 }

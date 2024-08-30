@@ -304,6 +304,10 @@ const registerEventListener = (viewname) => {
                 removeOnClose: true,
             });
             modal.setSaveButtonText(await getString('modal_remove_check', 'block_disealytics'));
+            const cancelBtn = modal.getFooter().find(modal.getActionSelector('cancel'));
+            if (cancelBtn) {
+                cancelBtn.css('display', 'none');
+            }
             modal.show();
             modal.getRoot().on(ModalEvents.save, async function() {
                 const viewContainer = document.querySelector('#block_disealytics-' + viewname);

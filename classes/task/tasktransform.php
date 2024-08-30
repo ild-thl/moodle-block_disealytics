@@ -167,22 +167,22 @@ class tasktransform extends scheduled_task {
      */
     private static function filterdata(array $data): array {
 
-        $blacklistfilename = get_config('block_disealytics', 'filterblacklist');
-        if (!$blacklistfilename) {
-            mtrace("Blacklistfile not found, not filtering!");
+        $filterfilename = get_config('block_disealytics', 'filterfile');
+        if (!$filterfilename) {
+            mtrace("filterfile not found, not filtering!");
             return $data;
         }
-        mtrace("Filterfile is: " . $blacklistfilename);
+        mtrace("Filterfile is: " . $filterfilename);
 
-        $filecontent = self::readcsvfile($blacklistfilename, '10');
+        $filecontent = self::readcsvfile($filterfilename, '10');
         if ($filecontent == null) {
-            mtrace("Blacklistfile not found, not filtering!");
+            mtrace("filterfile not found, not filtering!");
             return $data;
         }
         mtrace("Filtering data!");
         return array_filter($data, function ($logrow) use ($filecontent) {
-            foreach ($filecontent as $blacklistline) {
-                if (self::findrowmatch($logrow, $blacklistline)) {
+            foreach ($filecontent as $fileline) {
+                if (self::findrowmatch($logrow, $fileline)) {
                     return false;
                 }
             }
@@ -230,11 +230,11 @@ class tasktransform extends scheduled_task {
      * Find a row match.
      *
      * @param stdClass $logrow
-     * @param array $blacklistline
+     * @param array $fileline
      * @return bool
      */
-    private static function findrowmatch(stdClass $logrow, array $blacklistline): bool {
-        foreach ($blacklistline as $property => $value) {
+    private static function findrowmatch(stdClass $logrow, array $fileline): bool {
+        foreach ($fileline as $property => $value) {
             if (strtolower($logrow->$property) != strtolower($value)) {
                 return false;
             }

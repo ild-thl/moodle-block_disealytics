@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024082900';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024083000';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Füge einen neuen Learner Dashboard Block hinzu.';
 $string['disealytics:myaddinstance'] = 'Füge einen neuen Learner Dashboard Block zu meinem Dashboard hinzu.';
@@ -439,8 +439,8 @@ $string['config_consent_description'] = 'Bitte geben Sie hier ihre Einwilligungs
 $string['config_counter_title'] = 'Counter f&uuml;r Anzeige der Einwilligungserkl&auml;rung';
 $string['config_counter_text'] = '&Uuml;ber diesen Counter kann gesteuert werden, wann die Einwilligungserkl&auml;rung erneut f&uuml;r die Studierenden angezeigt werden soll.';
 
-$string['config_eventblacklist_title'] = 'Blacklist-CSV f&uuml;r Eventfilterung';
-$string['config_eventblacklist_text'] = 'Diese Einstellung erm&ouml;glicht eine CSV-Datei mit zu filternden event-, target- und action-Namen hochzuladen.';
+$string['config_filterfile_title'] = 'CSV-Datei f&uuml;r Eventfilterung';
+$string['config_filterfile_text'] = 'Diese Einstellung erm&ouml;glicht eine CSV-Datei mit zu filternden event-, target- und action-Namen hochzuladen.';
 
 $string['config_componentlist_title'] = 'Component-CSV f&uuml;r Component Redefinition';
 $string['config_componentlist_text'] = 'Diese Einstellung erm&ouml;glicht eine CSV-Datei mit zu ersetzenden component-Namen hochzuladen.';

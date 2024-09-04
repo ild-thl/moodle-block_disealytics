@@ -279,7 +279,8 @@
 /* edit view hover */
 
 .block_disealytics .block_disealytics-editing:hover {
-    background: var(--diseablue);
+    /* stylelint-disable-line declaration-no-important */
+    background: var(--diseablue) !important;
 }
 
 .block_disealytics .block_disealytics-editing:hover .editing-headline {

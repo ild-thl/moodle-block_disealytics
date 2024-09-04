@@ -1,0 +1,91 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_disealytics/progress_bar_modal
+
+    Template purpose and description.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * none
+
+    Example context (json):
+    {
+
+    }
+}}
+
+{{< core/modal }}
+    {{$title}}
+        {{#str}} progress_config_title, block_disealytics {{/str}}
+    {{/title}}
+    {{$body}}
+        <div class="block_disealytics">
+            <a id="block_disealytics_open-progress-bar-help-modal"
+               class="dashboard-button"
+               style="margin-right: 8px;">
+                <i class="fa fa-question"></i>
+            </a>
+
+
+            <p>{{#str}}progress_bar_modal_intro, block_disealytics{{/str}}</p>
+            <div id="progress-bar-accordion">
+                <div class="accordion-head flex-container">
+                    <h5>{{#str}}progress_bar_add_optional_input, block_disealytics{{/str}}</h5>
+                    <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content" id="content-1">
+                    <div id="block_disealytics-add-optional-inputs">
+                        {{> block_disealytics/optional-inputs_add_inputs}}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="accordion-head flex-container">
+                    <h5>{{#str}}progress_bar_manage_optional_input, block_disealytics{{/str}}</h5>
+                    <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content" id="content-2">
+                    <div id="block_disealytics-manage-optional-inputs">
+                        <div id="optional-inputs-container">
+                            {{#optional_inputs}}
+                                {{#data}}
+                                    {{> block_disealytics/optional_input}}
+                                {{/data}}
+                            {{/optional_inputs}}
+                            {{#viewmode_module}}
+                                {{#nodata}}
+                                    <p class="show-when-no-optional-inputs-exist">{{#str}}nodata, block_disealytics {{/str}}</p>
+                                {{/nodata}}
+                            {{/viewmode_module}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/body}}
+    {{$footer}}
+        <button type="button" class="btn btn-primary" data-action="login">{{#str}} confirm {{/str}}</button>
+        <button type="button" class="btn btn-secondary" data-action="cancel">{{#str}} cancel {{/str}}</button>
+    {{/footer}}
+{{/ core/modal }}

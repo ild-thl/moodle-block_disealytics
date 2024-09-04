@@ -15,13 +15,36 @@
 
 import {toggleAccordion} from "./add_interaction";
 import Ajax from 'core/ajax';
+import ModalFactory from 'core/modal_factory';
 import {getCourseId} from "./view_selection";
 import {updateView} from "./update_view";
+import ProgressBarModal from "./progress_bar_modal";
 
 /**
  * Initialize the progress bar interface.
  */
 export const init = () => {
+    const openProgressBarModalBtn = document.getElementById('block_disealytics_open-progress-bar-modal');
+
+    if (openProgressBarModalBtn) {
+        openProgressBarModalBtn.addEventListener('click', async() => {
+            const modal = await ModalFactory.create({
+                type: ProgressBarModal.TYPE,
+                removeOnClose: true,
+            });
+
+            modal.show();
+
+            initProgressBarModalAccordion();
+            initButtonsInOptionalInputModal();
+        });
+    }
+};
+
+/**
+ * Initializes the progress bar modal accordion.
+ */
+function initProgressBarModalAccordion() {
     // Attach click event to each accordion head.
     const accordion = document.getElementById('progress-bar-accordion');
     const accordionHeads = accordion.querySelectorAll('.accordion-head');
@@ -30,8 +53,7 @@ export const init = () => {
             toggleAccordion(accordion, index + 1);
         });
     });
-    initButtonsInOptionalInputModal();
-};
+}
 
 /**
  * Initializes event listeners for buttons in the optional input modal.

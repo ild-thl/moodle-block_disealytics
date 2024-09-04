@@ -261,6 +261,7 @@
     border: 2px solid var(--diseablue);
     position: relative;
     border-radius: 8px;
+    background: #fff !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .block_disealytics .editing-headline {
@@ -375,7 +376,7 @@
     cursor: pointer;
 }
 
-.block_disealytics .add-view-btn {
+.block_disealytics #block_disealytics-open-add-modal {
     background: transparent;
     color: var(--diseablue);
     border: 2px solid var(--diseablue);
@@ -389,7 +390,7 @@
     border-radius: 8px;
 }
 
-.block_disealytics .add-view-btn:hover {
+.block_disealytics #block_disealytics-open-add-modal:hover {
     background: var(--diseablue);
     color: #fff;
 }

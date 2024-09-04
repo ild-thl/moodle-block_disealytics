@@ -26,6 +26,8 @@ import ModalEvents from 'core/modal_events';
 import Templates from 'core/templates';
 import {get_string as getString} from 'core/str';
 import {
+    allViewsEnabled,
+    anyViewsEnabled,
     getCourseId,
     getViewlist,
     setScrollTo,
@@ -33,7 +35,7 @@ import {
     setViewlist,
     updateViewlist
 } from 'block_disealytics/view_selection';
-import {anyViewsEnabled, updateView} from 'block_disealytics/update_view';
+import {updateView} from 'block_disealytics/update_view';
 
 /**
  * Initializes the view functionality with the specified viewname.
@@ -45,7 +47,7 @@ import {anyViewsEnabled, updateView} from 'block_disealytics/update_view';
 export const init = (viewname) => {
     registerEventListener(viewname);
     if (!anyViewsEnabled()) {
-        const infoOnViews = document.querySelector('.show-when-no-view-exists');
+        const infoOnViews = document.querySelector('.show-when-no-view-enabled');
         if (infoOnViews) {
             // Remove the 'hidden' class to show the message.
             infoOnViews.classList.remove('hidden');
@@ -140,16 +142,6 @@ export const showDiseaModal = async(modal) => {
 };
 
 /**
- * Hide a modal.
- *
- * @param {object} modal - The modal to hide.
- */
-export const hideDiseaModal = async(modal) => {
-    const modalObj = await modal;
-    modalObj.hide();
-};
-
-/**
  * Sets up the editing mode functionality.
  * Adds event listeners to the toggle button, drag and drop functionality,
  * and add view buttons for each view in the editing mode.
@@ -172,7 +164,12 @@ export const setEditingMode = () => {
     const toggleButton = document.querySelector('.block_disealytics-toggle-editing');
     if (toggleButton) {
         toggleButton.addEventListener("click", function() {
+            const noViewsParagraph = document.querySelector('.show-when-no-view-enabled');
+            if (!(noViewsParagraph.classList.contains('hidden'))) {
+                noViewsParagraph.classList.add('hidden');
+            }
             updateSetting('toggle', 'editing');
+            // Drag and Drop.
             const dropContainer = document.querySelector(".block_disealytics-drop-container");
             getViewlist().forEach(({viewname}) => {
                 const viewContainer = document.querySelector('#block_disealytics-' + viewname);
@@ -218,39 +215,65 @@ export const setEditingMode = () => {
                     dropContainer.insertBefore(draggable, afterElement);
                 }
             });
-            if (!anyViewsEnabled()) {
-                const infoOnViews = document.querySelector('.show-when-no-view-exists');
-                if (infoOnViews) {
-                    // Remove the 'hidden' class to show the message.
-                    infoOnViews.classList.remove('hidden');
-                }
-            }
 
+            // Add view button.
+            const addViewButton = document.querySelector('#block_disealytics-open-add-modal');
+            if (addViewButton) {
+                addViewButton.addEventListener("click", async function() {
+                    try {
+                        const modal = await ModalFactory.create({
+                            title: await getString('main_add_view_title', 'block_disealytics'),
+                            body: await Templates.render('block_disealytics/addview_modal', {id: 6}),
+                            footer: await getString('plugin-version-details', 'block_disealytics'),
+                            removeOnClose: true
+                        });
+                        await modal.show();
+
+                        const allViews = document.querySelector('.show-when-all-views-enabled');
+                        const anyViewSelectable = document.querySelector('.show-when-any-view-selectable');
+
+                        if (!allViewsEnabled()) {
+                            anyViewSelectable.classList.remove('hidden');
+                            allViews.classList.add('hidden');
+                        } else {
+                            anyViewSelectable.classList.add('hidden');
+                            allViews.classList.remove('hidden');
+                        }
+
+                        // Add EventListeners to the Buttons.
+                        getViewlist().forEach(({viewname, enabled}) => {
+                            const addButton = document.querySelector('.block_disealytics-add-' + viewname);
+                            const viewContainer = document.querySelector('#block_disealytics-' + viewname);
+                            if (addButton) {
+                                if (!enabled) {
+                                    addButton.classList.remove('hidden');
+                                }
+                                addButton.addEventListener("click", async function() {
+                                    addButton.classList.add('hidden');
+                                    viewContainer.parentElement.append(viewContainer);
+                                    viewContainer.setAttribute('data-visible', 'true');
+                                    setScrollToElement('block_disealytics-' + viewname);
+                                    setScrollTo(true);
+                                    const updatedViewList = updateViewlist(viewname, 'add');
+                                    await updateSetting('write', 'views', JSON.stringify(updatedViewList));
+                                    // This handles the information given to the user, when all views are used or not.
+                                    if (allViewsEnabled) {
+                                        allViews.classList.remove('hidden');
+                                        anyViewSelectable.classList.add('hidden');
+                                    } else {
+                                        allViews.classList.add('hidden');
+                                        anyViewSelectable.classList.remove('hidden');
+                                    }
+                                }, true);
+                            }
+                        });
+                    } catch (error) {
+                        window.console.error("Failed to open the add view modal:", error);
+                    }
+                });
+            }
         }, true);
     }
-
-    // Add EventListeners to the Buttons.
-    getViewlist().forEach(({viewname, enabled}) => {
-        // Check if the view is disabled
-        // Add view button.
-        const addButton = document.querySelector('.block_disealytics-add-' + viewname);
-        const viewContainer = document.querySelector('#block_disealytics-' + viewname);
-        if (addButton) {
-            if (enabled === 1) {
-                addButton.classList.add('hidden');
-            }
-            addButton.addEventListener("click", function() {
-                document.querySelector('.show-when-no-view-exists').classList.add('hidden');
-                addButton.classList.add('hidden');
-                viewContainer.parentElement.append(viewContainer);
-                viewContainer.setAttribute('data-visible', 'true');
-                setScrollToElement('block_disealytics-' + viewname);
-                setScrollTo(true);
-                const updatedViewList = updateViewlist(viewname, 'add');
-                updateSetting('write', 'views', JSON.stringify(updatedViewList));
-            }, true);
-        }
-    });
 };
 
 /**
@@ -312,8 +335,6 @@ const registerEventListener = (viewname) => {
             modal.getRoot().on(ModalEvents.save, async function() {
                 const viewContainer = document.querySelector('#block_disealytics-' + viewname);
                 viewContainer.setAttribute('data-visible', 'false');
-                const addButton = document.querySelector('.block_disealytics-add-' + viewname);
-                addButton.classList.remove('hidden');
                 const updatedViewList = updateViewlist(viewname, 'delete');
                 await updateSetting('write', 'views', JSON.stringify(updatedViewList));
             });

@@ -43,21 +43,6 @@ import {
 import {
     initGoalEventListeners
 } from "./learning_goals_functions";
-export const anyViewsEnabled = () => {
-    // Initialize anyViewsEnabled to false.
-    let anyViewsEnabled = false;
-
-    // Check if any views are enabled.
-    const viewList = getViewlist();
-    for (const {enabled} of viewList) {
-        if (enabled === 1) {
-            anyViewsEnabled = true;
-            // Exit the loop as soon as an enabled view is found.
-            break;
-        }
-    }
-    return anyViewsEnabled;
-};
 
 /**
  * Initializes the plugin when it first loads by rendering the main template.
@@ -218,8 +203,6 @@ const renderEditingMode = (isEnabled) => {
         // Editbutton design settings.
         if (editButton) {
             editButton.classList.add("text-danger");
-            // ToggleButton.classList.remove("fa-toggle-off");
-            // toggleButton.classList.add("fa-toggle-on");
         }
         if (thingsToHide) {
             [].forEach.call(thingsToHide, (e) => {
@@ -231,24 +214,11 @@ const renderEditingMode = (isEnabled) => {
                 e.classList.remove("hidden");
             });
         }
-        // Checks if every view is used to give the user information that there is nothing to add when trying to add another one.
-        let allViewTypesUsed = true;
-        getViewlist().forEach(({viewname, enabled}) => {
+        getViewlist().forEach(({viewname}) => {
             const viewContainer = document.querySelector('#block_disealytics-' + viewname);
             viewContainer.setAttribute('draggable', 'true');
             viewContainer.classList.add('draggable');
-            if (enabled === 0) {
-                allViewTypesUsed = false;
-            }
             });
-        // This handles the information given to the user, when all views are used or not.
-        if (allViewTypesUsed) {
-            document.querySelector('.show-when-viewtype-selectable').classList.add('hidden');
-            document.querySelector('.show-when-all-viewtypes-used').classList.remove('hidden');
-        } else {
-            document.querySelector('.show-when-viewtype-selectable').classList.remove('hidden');
-            document.querySelector('.show-when-all-viewtypes-used').classList.add('hidden');
-        }
     }
 };
 

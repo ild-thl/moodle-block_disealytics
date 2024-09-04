@@ -46,6 +46,23 @@ export const getViewlist = () => {
 };
 
 /**
+ * Checks if all views are enabled.
+ * @returns {true | false} True if all views are enabled, false if not.
+ */
+export const allViewsEnabled = () => {
+    return getViewlist().every(({enabled}) => enabled !== 0);
+};
+
+/**
+ * Checks if any views are enabled.
+ * @returns {true | false} True if any views are enabled, false if not.
+ */
+export const anyViewsEnabled = () => {
+    return getViewlist().some(({enabled}) => enabled === 1);
+};
+
+
+/**
  * Update the view order and which views are visible in the DOM by modifying the viewtypes array.
  *
  * @param {string} modifiedView - The view to be modified.

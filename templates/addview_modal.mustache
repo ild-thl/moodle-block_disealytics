@@ -1,0 +1,149 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_disealytics/addview_modal
+
+    Template purpose and description.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * none
+
+    Example context (json):
+    {
+
+    }
+}}
+<div class="block_disealytics">
+    <p class="show-when-any-view-selectable hidden">{{#str}} main_add_view_info_text , block_disealytics {{/str}}</p>
+    <p class="show-when-all-views-enabled">{{#str}} main_add_view_info_text_empty , block_disealytics {{/str}}</p>
+    <div class="add-view-buttons">
+        <button class="add-view-btn block_disealytics_add_view_btn block_disealytics-add-activity-view block_disealytics-editing hidden"
+                data-action="block_disealytics/add-activity-view">
+            <svg id="activity-view-editing-icon" class="editing-icon" width="47" height="44" viewBox="0 0 47 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M45.6506 22C45.6506 33.7086 35.7707 43.25 23.5206 43.25C11.2706 43.25 1.39062 33.7086 1.39062 22C1.39062 10.2914 11.2706 0.75 23.5206 0.75C35.7707 0.75 45.6506 10.2914 45.6506 22Z"
+                      stroke="#0f6cbf" stroke-width="1.5"/>
+                <path d="M33.4807 21.9999H29.7184L26.8967 29.9796L21.253 14.02L18.4313 21.9999H14.6689" stroke="#0f6cbf" stroke-width="1.5"
+                      stroke-linecap="square"
+                      stroke-linejoin="round"/>
+                <path d="M35.6575 32.6539H11.4316V11.3447" stroke="#0f6cbf" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="editing-headline">{{#str}} add_activity_view, block_disealytics {{/str}}</span>
+        </button>
+        <button class="add-view-btn block_disealytics_add_view_btn block_disealytics-add-assignment-view block_disealytics-editing hidden"
+                data-action="block_disealytics/add-assignment-view">
+            <svg id="assignment-view-editing-icon" class="editing-icon" width="47" height="44" viewBox="0 0 47 44" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M45.6135 22C45.6135 33.7086 35.7336 43.25 23.4835 43.25C11.2335 43.25 1.35352 33.7086 1.35352 22C1.35352 10.2914 11.2335 0.75 23.4835 0.75C35.7336 0.75 45.6135 10.2914 45.6135 22Z"
+                      stroke="#0f6cbf" stroke-width="1.5"/>
+                <rect x="11.0029" y="9" width="26" height="25" fill="#0f6cbf"/>
+                <path d="M14.1211 21.5H30.1357" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <path d="M14.1211 13.8076H30.1357" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <path d="M33.8828 13.8076H34.9228" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M33.8828 21.5H34.9228" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M33.8828 29.1924H34.9228" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M14.1211 29.1924H30.1357" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="editing-headline">{{#str}} add_assignment_view, block_disealytics {{/str}}</span>
+        </button>
+        <button class="add-view-btn block_disealytics_add_view_btn block_disealytics-add-study-progress-view block_disealytics-editing hidden"
+                data-action="block_disealytics/add-study-progress-view">
+            <svg id="study-progress-view-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M45.6135 22.9199C45.6135 34.6285 35.7336 44.1699 23.4835 44.1699C11.2335 44.1699 1.35352 34.6285 1.35352 22.9199C1.35352 11.2113 11.2335 1.66992 23.4835 1.66992C35.7336 1.66992 45.6135 11.2113 45.6135 22.9199Z"
+                      stroke="#0f6cbf" stroke-width="1.5"/>
+                <path d="M15.537 29.0649L5.85146 29.0693C5.85146 29.0693 5.81752 24.665 7.99252 20.57C10.1675 16.4751 13.8224 14.1587 13.8224 14.1587L18.8316 22.3841C18.8316 22.3841 17.3079 23.6841 16.443 25.3726C15.5781 27.0611 15.537 29.0649 15.537 29.0649Z"
+                      fill="#0f6cbf"/>
+                <path d="M32.267 29.0569L41.952 29.0615C41.952 29.0615 41.9859 24.6572 39.8109 20.5623C37.6359 16.4673 33.9811 14.1509 33.9811 14.1509L28.9726 22.3761C28.9726 22.3761 30.4963 23.6761 31.3612 25.3646C32.2261 27.0531 32.267 29.0569 32.267 29.0569Z"
+                      fill="#0f6cbf"/>
+                <path d="M20.0671 21.6494L15.608 13.1414C15.608 13.1414 19.3935 10.9998 24.0313 10.9998C28.6691 10.9998 32.4297 13.1414 32.4297 13.1414L27.514 21.4252C27.514 21.4252 25.6509 20.6892 23.7536 20.7174C21.8564 20.7456 20.0671 21.6494 20.0671 21.6494Z"
+                      fill="#0f6cbf"/>
+                <path d="M24.0207 21.0533L25.0669 29.2253C25.0673 29.2401 25.0336 29.252 24.9912 29.2523L23.4402 29.2616C23.3981 29.2619 23.3633 29.2501 23.3629 29.2356L23.8704 21.0543C23.872 21.0219 24.0168 21.021 24.0231 21.0533L24.0207 21.0533Z"
+                      fill="#0f6cbf"/>
+                <path d="M24.1846 28.2814C24.7524 28.278 25.1967 27.7884 25.177 27.188C25.1572 26.5876 24.6809 26.1036 24.1131 26.1071C23.5453 26.1105 23.101 26.6 23.1207 27.2005C23.1405 27.8009 23.6168 28.2849 24.1846 28.2814Z"
+                      fill="#0f6cbf"/>
+            </svg>
+            <span class="editing-headline">{{#str}} add_study_progress_view, block_disealytics {{/str}}</span>
+        </button>
+        <button class="add-view-btn block_disealytics_add_view_btn block_disealytics-add-learning-goals-view block_disealytics-editing hidden"
+                data-action="block_disealytics/add-learning-goals-view">
+            <svg id="learning-goals-view-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M45.6135 22.8398C45.6135 34.5484 35.7336 44.0898 23.4835 44.0898C11.2335 44.0898 1.35352 34.5484 1.35352 22.8398C1.35352 11.1312 11.2335 1.58984 23.4835 1.58984C35.7336 1.58984 45.6135 11.1312 45.6135 22.8398Z"
+                      stroke="#0f6cbf" stroke-width="1.5"/>
+                <path d="M28.8663 9.82178H16.3984V21.801H28.8663V9.82178Z" fill="#0f6cbf" stroke="#0f6cbf" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round"/>
+                <path d="M18.459 15.2147L22.4567 19.0558L30.7508 8.83984" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M29.0645 24.6064H16.207V36.9601H29.0645V24.6064Z" fill="#0f6cbf"/>
+                <path d="M28.8663 24.7935H16.3984V36.7727H28.8663V24.7935Z" stroke="#0f6cbf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.459 30.1864L22.4567 34.0275L30.7508 23.8115" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="editing-headline">{{#str}} add_learning_goals_view, block_disealytics {{/str}}</span>
+        </button>
+        <button class="add-view-btn block_disealytics_add_view_btn block_disealytics-add-success-chance-view block_disealytics-editing hidden"
+                data-action="block_disealytics/add-success-chance-view">
+            <svg id="success-chance-view-editing-icon" class="editing-icon" width="47" height="44" viewBox="0 0 47 44" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M45.6487 22C45.6487 33.7086 35.7687 43.25 23.5187 43.25C11.2686 43.25 1.38867 33.7086 1.38867 22C1.38867 10.2914 11.2686 0.75 23.5187 0.75C35.7687 0.75 45.6487 10.2914 45.6487 22Z"
+                      stroke="#0f6cbf" stroke-width="1.5"/>
+                <path d="M23.5239 35.1602C30.9908 35.1602 37.0439 29.3399 37.0439 22.1602C37.0439 14.9805 30.9908 9.16016 23.5239 9.16016C16.057 9.16016 10.0039 14.9805 10.0039 22.1602C10.0039 29.3399 16.057 35.1602 23.5239 35.1602Z"
+                      stroke="#0f6cbf" stroke-width="4.72727"/>
+                <path d="M20.2691 22.2475C19.5604 22.2475 18.9883 22.0228 18.5528 21.5735C18.122 21.1242 17.9066 20.5196 17.9066 19.7599C17.9066 18.9307 18.1359 18.2729 18.5945 17.7865C19.0578 17.3001 19.6739 17.0569 20.4428 17.0569C21.1794 17.0569 21.7538 17.277 22.1661 17.7171C22.583 18.1571 22.7915 18.7756 22.7915 19.5723C22.7915 20.3923 22.5622 21.0431 22.1036 21.5249C21.645 22.0066 21.0335 22.2475 20.2691 22.2475ZM20.4012 18.2799C19.7248 18.2799 19.3867 18.7501 19.3867 19.6904C19.3867 20.5799 19.7086 21.0246 20.3525 21.0246C21.0103 21.0246 21.3392 20.5613 21.3392 19.6349C21.3392 18.7315 21.0265 18.2799 20.4012 18.2799ZM27.5443 17.1959L21.0543 27.1602H19.3589L25.8349 17.1959H27.5443ZM26.4742 27.2991C25.7655 27.2991 25.1934 27.0745 24.7579 26.6251C24.3271 26.1758 24.1117 25.5713 24.1117 24.8115C24.1117 23.9823 24.341 23.3245 24.7996 22.8381C25.2628 22.3517 25.8789 22.1085 26.6479 22.1085C27.3891 22.1085 27.9658 22.3263 28.3781 22.7617C28.7904 23.1972 28.9965 23.8133 28.9965 24.61C28.9965 25.43 28.7672 26.0831 28.3086 26.5695C27.85 27.0559 27.2385 27.2991 26.4742 27.2991ZM26.5854 23.3315C25.9137 23.3315 25.5778 23.8017 25.5778 24.7421C25.5778 25.6315 25.9044 26.0762 26.5576 26.0762C27.2154 26.0762 27.5443 25.6129 27.5443 24.6865C27.5443 24.2557 27.4563 23.9221 27.2802 23.6859C27.1042 23.4496 26.8726 23.3315 26.5854 23.3315Z"
+                      fill="#0f6cbf"/>
+            </svg>
+            <span class="editing-headline">{{#str}} add_success_chance_view, block_disealytics {{/str}}</span>
+        </button>
+        <button class="add-view-btn block_disealytics_add_view_btn block_disealytics-add-progress-bar-view block_disealytics-editing hidden"
+                data-action="block_disealytics/add-progress-bar-view">
+            <svg id="progress-bar-view-editing-icon" class="editing-icon" width="47" height="45" viewBox="0 0 47 45" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M45.6096 22.9199C45.6096 34.6285 35.7297 44.1699 23.4796 44.1699C11.2296 44.1699 1.34961 34.6285 1.34961 22.9199C1.34961 11.2113 11.2296 1.66992 23.4796 1.66992C35.7297 1.66992 45.6096 11.2113 45.6096 22.9199Z"
+                      stroke="#0f6cbf" stroke-width="1.5"/>
+                <path d="M37.7124 15.9961H10.2706C10.1384 15.9961 10.0312 16.0981 10.0312 16.2239V21.2366C10.0312 21.3624 10.1384 21.4644 10.2706 21.4644H37.7124C37.8446 21.4644 37.9517 21.3624 37.9517 21.2366V16.2239C37.9517 16.0981 37.8446 15.9961 37.7124 15.9961Z"
+                      stroke="#0f6cbf" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10.2712 15.9199H28.7785V21.5402H10.2712C10.1866 21.5402 10.1054 21.5082 10.0456 21.4512C9.98577 21.3942 9.95215 21.3169 9.95215 21.2364V16.2237C9.95215 16.1431 9.98577 16.0659 10.0456 16.0089C10.1054 15.9519 10.1866 15.9199 10.2712 15.9199Z"
+                      fill="#0f6cbf"/>
+                <path d="M37.7124 23.6162H10.2706C10.1384 23.6162 10.0312 23.7182 10.0312 23.8441V28.8567C10.0312 28.9826 10.1384 29.0846 10.2706 29.0846H37.7124C37.8446 29.0846 37.9517 28.9826 37.9517 28.8567V23.8441C37.9517 23.7182 37.8446 23.6162 37.7124 23.6162Z"
+                      stroke="#0f6cbf" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10.3191 24H20.3705V29.6203H10.3191C10.2345 29.6203 10.1533 29.5882 10.0935 29.5313C10.0336 29.4743 10 29.397 10 29.3165V24.3038C10 24.2232 10.0336 24.146 10.0935 24.089C10.1533 24.032 10.2345 24 10.3191 24Z"
+                      fill="#0f6cbf"/>
+            </svg>
+            <span class="editing-headline">{{#str}} add_progress_bar_view, block_disealytics {{/str}}</span>
+        </button>
+        <button class="add-view-btn block_disealytics_add_view_btn block_disealytics-add-planner-view block_disealytics-editing hidden"
+                data-action="block_disealytics/add-planner-view">
+            <svg id="planner-view-editing-icon" class="editing-icon" width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="22" cy="22" r="21.25" stroke="#0f6cbf" stroke-width="1.5"/>
+                <path d="M10.5878 14.2596C10.5878 13.1634 11.4764 12.2748 12.5725 12.2748H31.4275C32.5236 12.2748 33.4122 13.1634 33.4122 14.2596V15.7481C33.4122 16.0221 33.1901 16.2443 32.916 16.2443H11.084C10.8099 16.2443 10.5878 16.0221 10.5878 15.7481V14.2596Z"
+                      fill="#0f6cbf"/>
+                <path d="M15.9466 11.3817C15.9466 10.9432 16.302 10.5878 16.7405 10.5878C17.1789 10.5878 17.5344 10.9432 17.5344 11.3817V12.3344C17.5344 12.5755 17.3389 12.771 17.0977 12.771H16.3832C16.1421 12.771 15.9466 12.5755 15.9466 12.3344V11.3817Z"
+                      fill="#0f6cbf"/>
+                <path d="M26.4657 11.3817C26.4657 10.9432 26.8211 10.5878 27.2596 10.5878C27.698 10.5878 28.0534 10.9432 28.0534 11.3817V12.3344C28.0534 12.5755 27.858 12.771 27.6168 12.771H26.9023C26.6611 12.771 26.4657 12.5755 26.4657 12.3344V11.3817Z"
+                      fill="#0f6cbf"/>
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M10.5878 18.4275C10.5878 18.1535 10.8099 17.9313 11.084 17.9313H32.916C33.1901 17.9313 33.4122 18.1535 33.4122 18.4275V31.4275C33.4122 32.5236 32.5236 33.4122 31.4275 33.4122H12.5725C11.4764 33.4122 10.5878 32.5236 10.5878 31.4275V18.4275ZM14.2595 20.3626C14.2595 20.8833 13.8375 21.3053 13.3168 21.3053C12.7961 21.3053 12.374 20.8833 12.374 20.3626C12.374 19.8419 12.7961 19.4198 13.3168 19.4198C13.8375 19.4198 14.2595 19.8419 14.2595 20.3626ZM16.1947 21.3053C16.7153 21.3053 17.1374 20.8833 17.1374 20.3626C17.1374 19.8419 16.7153 19.4198 16.1947 19.4198C15.674 19.4198 15.2519 19.8419 15.2519 20.3626C15.2519 20.8833 15.674 21.3053 16.1947 21.3053ZM20.0153 20.3626C20.0153 20.8833 19.5932 21.3053 19.0725 21.3053C18.5519 21.3053 18.1298 20.8833 18.1298 20.3626C18.1298 19.8419 18.5519 19.4198 19.0725 19.4198C19.5932 19.4198 20.0153 19.8419 20.0153 20.3626ZM21.9504 21.3053C22.4711 21.3053 22.8931 20.8833 22.8931 20.3626C22.8931 19.8419 22.4711 19.4198 21.9504 19.4198C21.4297 19.4198 21.0076 19.8419 21.0076 20.3626C21.0076 20.8833 21.4297 21.3053 21.9504 21.3053ZM28.6489 20.3626C28.6489 20.8833 28.2268 21.3053 27.7061 21.3053C27.1854 21.3053 26.7634 20.8833 26.7634 20.3626C26.7634 19.8419 27.1854 19.4198 27.7061 19.4198C28.2268 19.4198 28.6489 19.8419 28.6489 20.3626ZM30.584 21.3053C31.1046 21.3053 31.5267 20.8833 31.5267 20.3626C31.5267 19.8419 31.1046 19.4198 30.584 19.4198C30.0633 19.4198 29.6412 19.8419 29.6412 20.3626C29.6412 20.8833 30.0633 21.3053 30.584 21.3053ZM14.2595 23.042C14.2595 23.5627 13.8375 23.9847 13.3168 23.9847C12.7961 23.9847 12.374 23.5627 12.374 23.042C12.374 22.5213 12.7961 22.0993 13.3168 22.0993C13.8375 22.0993 14.2595 22.5213 14.2595 23.042ZM19.0725 23.9847C19.5932 23.9847 20.0153 23.5627 20.0153 23.042C20.0153 22.5213 19.5932 22.0993 19.0725 22.0993C18.5519 22.0993 18.1298 22.5213 18.1298 23.042C18.1298 23.5627 18.5519 23.9847 19.0725 23.9847ZM22.8931 23.042C22.8931 23.5627 22.4711 23.9847 21.9504 23.9847C21.4297 23.9847 21.0076 23.5627 21.0076 23.042C21.0076 22.5213 21.4297 22.0993 21.9504 22.0993C22.4711 22.0993 22.8931 22.5213 22.8931 23.042ZM30.584 23.9847C31.1046 23.9847 31.5267 23.5627 31.5267 23.042C31.5267 22.5213 31.1046 22.0993 30.584 22.0993C30.0633 22.0993 29.6412 22.5213 29.6412 23.042C29.6412 23.5627 30.0633 23.9847 30.584 23.9847ZM17.1374 25.7214C17.1374 26.242 16.7153 26.6641 16.1947 26.6641C15.674 26.6641 15.2519 26.242 15.2519 25.7214C15.2519 25.2007 15.674 24.7786 16.1947 24.7786C16.7153 24.7786 17.1374 25.2007 17.1374 25.7214ZM24.8282 26.6641C25.3489 26.6641 25.771 26.242 25.771 25.7214C25.771 25.2007 25.3489 24.7786 24.8282 24.7786C24.3076 24.7786 23.8855 25.2007 23.8855 25.7214C23.8855 26.242 24.3076 26.6641 24.8282 26.6641ZM28.6489 25.7214C28.6489 26.242 28.2268 26.6641 27.7061 26.6641C27.1854 26.6641 26.7634 26.242 26.7634 25.7214C26.7634 25.2007 27.1854 24.7786 27.7061 24.7786C28.2268 24.7786 28.6489 25.2007 28.6489 25.7214ZM19.0725 29.3435C19.5932 29.3435 20.0153 28.9214 20.0153 28.4008C20.0153 27.8801 19.5932 27.458 19.0725 27.458C18.5519 27.458 18.1298 27.8801 18.1298 28.4008C18.1298 28.9214 18.5519 29.3435 19.0725 29.3435ZM25.771 28.4008C25.771 28.9214 25.3489 29.3435 24.8282 29.3435C24.3076 29.3435 23.8855 28.9214 23.8855 28.4008C23.8855 27.8801 24.3076 27.458 24.8282 27.458C25.3489 27.458 25.771 27.8801 25.771 28.4008ZM30.584 29.3435C31.1046 29.3435 31.5267 28.9214 31.5267 28.4008C31.5267 27.8801 31.1046 27.458 30.584 27.458C30.0633 27.458 29.6412 27.8801 29.6412 28.4008C29.6412 28.9214 30.0633 29.3435 30.584 29.3435ZM14.2595 31.0801C14.2595 31.6008 13.8375 32.0229 13.3168 32.0229C12.7961 32.0229 12.374 31.6008 12.374 31.0801C12.374 30.5595 12.7961 30.1374 13.3168 30.1374C13.8375 30.1374 14.2595 30.5595 14.2595 31.0801ZM16.1947 32.0229C16.7153 32.0229 17.1374 31.6008 17.1374 31.0801C17.1374 30.5595 16.7153 30.1374 16.1947 30.1374C15.674 30.1374 15.2519 30.5595 15.2519 31.0801C15.2519 31.6008 15.674 32.0229 16.1947 32.0229ZM25.771 31.0801C25.771 31.6008 25.3489 32.0229 24.8282 32.0229C24.3076 32.0229 23.8855 31.6008 23.8855 31.0801C23.8855 30.5595 24.3076 30.1374 24.8282 30.1374C25.3489 30.1374 25.771 30.5595 25.771 31.0801ZM27.7061 32.0229C28.2268 32.0229 28.6489 31.6008 28.6489 31.0801C28.6489 30.5595 28.2268 30.1374 27.7061 30.1374C27.1854 30.1374 26.7634 30.5595 26.7634 31.0801C26.7634 31.6008 27.1854 32.0229 27.7061 32.0229Z"
+                      fill="#0f6cbf"/>
+            </svg>
+            <span class="editing-headline">{{#str}} add_planner_view, block_disealytics {{/str}}</span>
+        </button>
+    </div>
+</div>

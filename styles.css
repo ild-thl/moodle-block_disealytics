@@ -279,8 +279,9 @@
 /* edit view hover */
 
 .block_disealytics .block_disealytics-editing:hover {
-    /* stylelint-disable-line declaration-no-important */
+    /* stylelint-disable csstree/validator, declaration-no-important */
     background: var(--diseablue) !important;
+    /* stylelint-enable csstree/validator, declaration-no-important */
 }
 
 .block_disealytics .block_disealytics-editing:hover .editing-headline {
@@ -446,7 +447,9 @@
 /* optional input */
 
 .block_disealytics #block_disealytics-panel-optional-inputs-view {
-    border: none !important; /* stylelint-disable-line declaration-no-important */
+    /* stylelint-disable csstree/validator, declaration-no-important */
+    border: none !important;
+    /* stylelint-enable csstree/validator, declaration-no-important */
 }
 
 .block_disealytics #block_disealytics-panel-optional-inputs-view select {

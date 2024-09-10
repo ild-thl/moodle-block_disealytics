@@ -33,11 +33,9 @@
  * @throws upgrade_exception
  */
 function xmldb_block_disealytics_upgrade(int $oldversion): bool {
-    global $CFG, $DB;
+    global $DB;
 
     $dbman = $DB->get_manager();
-
-    $result = true;
 
     if ($oldversion < 2024012500) {
         // Define table block_disealytics_user_dates to be created.
@@ -68,6 +66,35 @@ function xmldb_block_disealytics_upgrade(int $oldversion): bool {
         // Disealytics savepoint reached.
         upgrade_block_savepoint(true, 2024012500, 'disealytics');
     }
+    if ($oldversion < 2024091000) {
 
-    return $result;
+        // Define table block_disealytics_statistics to be created.
+        $table = new xmldb_table('block_disealytics_statistics');
+
+        // Adding fields to table block_disealytics_statistics.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('instances', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('acceptancecount', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('activityview', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('assignmentview', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('learninggoalsview', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('plannerview', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('progressbarview', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('studyprogressview', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('successchanceview', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('cardstotal', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        // Adding keys to table block_disealytics_statistics.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+        // Conditionally launch create table for block_disealytics_statistics.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Disealytics savepoint reached.
+        upgrade_block_savepoint(true, 2024091000, 'disealytics');
+    }
+
+    return true;
 }

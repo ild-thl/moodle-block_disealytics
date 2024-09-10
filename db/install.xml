@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="blocks/disealytics/db" VERSION="20240125" COMMENT="XMLDB file for Moodle blocks/disealytics"
+<XMLDB PATH="blocks/disealytics/db" VERSION="20240829" COMMENT="XMLDB file for Moodle blocks/disealytics"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -86,6 +86,25 @@
         <FIELD NAME="location" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="eventtype" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="repeatid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="block_disealytics_statistics" COMMENT="Table for periodically calculated usage statistics">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="instances" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Number of block_disealytics instances"/>
+        <FIELD NAME="acceptancecount" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Number of users who agreed to use the Learner Dashboard"/>
+        <FIELD NAME="activityview" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Number of activity cards across Learner Dashboard instance"/>
+        <FIELD NAME="assignmentview" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Number of assignment cards across Learner Dashboard instance"/>
+        <FIELD NAME="learninggoalsview" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Number of learning goals cards across Learner Dashboard instance"/>
+        <FIELD NAME="plannerview" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Number of planner cards across Learner Dashboard instance"/>
+        <FIELD NAME="progressbarview" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Number of progressbar cards across Learner Dashboard instance"/>
+        <FIELD NAME="studyprogressview" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Number of study progress cards across Learner Dashboard instance"/>
+        <FIELD NAME="successchanceview" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Number of success chance cards across Learner Dashboard instance"/>
+        <FIELD NAME="cardstotal" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Number of cards used in the Learner Dashboard"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

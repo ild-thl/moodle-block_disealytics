@@ -47,9 +47,66 @@ class provider implements core_userlist_provider,
      */
     public static function get_metadata(collection $collection): collection {
         $collection->add_database_table(
-            'block_disealytics_user_dates',
-            [
-                        'id' => 'privacy:metadata:user_dates_id',
+                'block_disealytics_consent',
+                [
+                        'userid' => 'privacy:metadata:consent_userid',
+                        'counter' => 'privacy:metadata:consent_counter',
+                        'choice' => 'privacy:metadata:consent_choice',
+                        'timecreated' => 'privacy:metadata:consent_timecreated',
+                        'timemodified' => 'privacy:metadata:consent_timemodified',
+                ],
+                'privacy:metadata:block_disealytics_consent'
+        );
+        $collection->add_database_table(
+                'block_disealytics_user_goals',
+                [
+                        'usermodified' => 'privacy:metadata:user_goal_usermodified',
+                        'courseid' => 'privacy:metadata:user_goal_courseid',
+                        'userid' => 'privacy:metadata:user_goal_userid',
+                        'timecreated' => 'privacy:metadata:user_goal_timecreated',
+                        'timemodified' => 'privacy:metadata:user_goal_timemodified',
+                        'timecompleted' => 'privacy:metadata:user_goal_timecompleted',
+                        'duedate' => 'privacy:metadata:user_goal_duedate',
+                        'description' => 'privacy:metadata:user_goal_description',
+                        'finished' => 'privacy:metadata:user_goal_finished',
+                ],
+                'privacy:metadata:block_disealytics_user_goals'
+        );
+        $collection->add_database_table(
+                'block_disealytics_user_pages',
+                [
+                        'usermodified' => 'privacy:metadata:user_pages_usermodified',
+                        'courseid' => 'privacy:metadata:user_pages_courseid',
+                        'userid' => 'privacy:metadata:user_pages_userid',
+                        'timecreated' => 'privacy:metadata:user_pages_timecreated',
+                        'timemodified' => 'privacy:metadata:user_pages_timemodified',
+                        'timecompleted' => 'privacy:metadata:user_pages_timecompleted',
+                        'name' => 'privacy:metadata:user_pages_name',
+                        'currentpage' => 'privacy:metadata:user_pages_currentpage',
+                        'lastpage' => 'privacy:metadata:user_pages_lastpage',
+                        'expenditureoftime' => 'privacy:metadata:user_pages_expenditureoftime',
+                ],
+                'privacy:metadata:block_disealytics_user_pages'
+        );
+        $collection->add_database_table(
+                'block_disealytics_user_tasks',
+                [
+                        'component' => 'privacy:metadata:user_tasks_component',
+                        'target' => 'privacy:metadata:user_tasks_target',
+                        'action' => 'privacy:metadata:user_tasks_action',
+                        'eventname' => 'privacy:metadata:user_tasks_eventname',
+                        'courseid' => 'privacy:metadata:user_tasks_courseid',
+                        'userid' => 'privacy:metadata:user_tasks_userid',
+                        'timestart' => 'privacy:metadata:user_tasks_timestart',
+                        'n_events' => 'privacy:metadata:user_tasks_n_events',
+                        'duration' => 'privacy:metadata:user_tasks_duration',
+                        'timecreated' => 'privacy:metadata:user_tasks_timecreated',
+                ],
+                'privacy:metadata:block_disealytics_user_tasks'
+        );
+        $collection->add_database_table(
+                'block_disealytics_user_dates',
+                [
                         'name' => 'privacy:metadata:user_dates_name',
                         'usermodified' => 'privacy:metadata:user_dates_usermodified',
                         'courseid' => 'privacy:metadata:user_dates_courseid',
@@ -62,69 +119,10 @@ class provider implements core_userlist_provider,
                         'eventtype' => 'privacy:metadata:user_dates_eventtype',
                         'repeatid' => 'privacy:metadata:user_dates_repeatid',
                 ],
-            'privacy:metadata:block_disealytics_user_dates'
+                'privacy:metadata:block_disealytics_user_dates'
         );
-        $collection->add_database_table(
-            'block_disealytics_user_goals',
-            [
-                        'id' => 'privacy:metadata:user_goal_id',
-                        'usermodified' => 'privacy:metadata:user_goal_usermodified',
-                        'courseid' => 'privacy:metadata:user_goal_courseid',
-                        'userid' => 'privacy:metadata:user_goal_userid',
-                        'timecreated' => 'privacy:metadata:user_goal_timecreated',
-                        'timemodified' => 'privacy:metadata:user_goal_timemodified',
-                        'timecompleted' => 'privacy:metadata:user_goal_timecompleted',
-                        'duedate' => 'privacy:metadata:user_goal_duedate',
-                        'description' => 'privacy:metadata:user_goal_description',
-                        'finished' => 'privacy:metadata:user_goal_finished',
-                ],
-            'privacy:metadata:block_disealytics_user_goals'
-        );
-        $collection->add_database_table(
-            'block_disealytics_user_pages',
-            [
-                        'id' => 'privacy:metadata:user_pages_id',
-                        'usermodified' => 'privacy:metadata:user_pages_usermodified',
-                        'courseid' => 'privacy:metadata:user_pages_courseid',
-                        'userid' => 'privacy:metadata:user_pages_userid',
-                        'timecreated' => 'privacy:metadata:user_pages_timecreated',
-                        'timemodified' => 'privacy:metadata:user_pages_timemodified',
-                        'timecompleted' => 'privacy:metadata:user_pages_timecompleted',
-                        'name' => 'privacy:metadata:user_pages_name',
-                        'currentpage' => 'privacy:metadata:user_pages_currentpage',
-                        'lastpage' => 'privacy:metadata:user_pages_lastpage',
-                        'expenditureoftime' => 'privacy:metadata:user_pages_expenditureoftime',
-                ],
-            'privacy:metadata:block_disealytics_user_pages'
-        );
-        $collection->add_database_table(
-            'block_disealytics_consent',
-            [
-                        'id' => 'privacy:metadata:consent_id',
-                        'userid' => 'privacy:metadata:consent_userid',
-                        'counter' => 'privacy:metadata:consent_counter',
-                        'choice' => 'privacy:metadata:consent_choice',
-                        'timecreated' => 'privacy:metadata:consent_timecreated',
-                        'timemodified' => 'privacy:metadata:consent_timemodified',
-                ],
-            'privacy:metadata:block_disealytics_consent'
-        );
-        $collection->add_database_table(
-            'block_disealytics_user_tasks',
-            [
-                        'id' => 'privacy:metadata:user_id',
-                        'component' => 'privacy:metadata:user_component',
-                        'target' => 'privacy:metadata:user_target',
-                        'action' => 'privacy:metadata:user_action',
-                        'eventname' => 'privacy:metadata:user_eventname',
-                        'courseid' => 'privacy:metadata:user_courseid',
-                        'userid' => 'privacy:metadata:user_userid',
-                        'timestart' => 'privacy:metadata:user_timestart',
-                        'n_events' => 'privacy:metadata:user_n_events',
-                        'duration' => 'privacy:metadata:user_duration',
-                        'timecreated' => 'privacy:metadata:user_timecreated',
-                ],
-            'privacy:metadata:block_disealytics_user_tasks'
+        $collection->add_database_table('block_disealytics_statistics', [],
+                'privacy:metadata:block_disealytics_statistics'
         );
         $collection->add_user_preference("block_disealytics_editing", "privacy:metadata:preference:block_disealytics_editing");
         $collection->add_user_preference("block_disealytics_expanded_view",
@@ -136,8 +134,6 @@ class provider implements core_userlist_provider,
 
         return $collection;
     }
-
-    // Testing: tool_generator_000090 - lena becker id 92.
 
     /**
      * Get the list of contexts that contain user information for the specified user.
@@ -340,8 +336,8 @@ class provider implements core_userlist_provider,
                     break;
                 default:
                     $datedescription = get_string('privacy:metadata:preference:block_disealytics_planner_currentdate',
-                           'block_disealytics');
-                   break;
+                            'block_disealytics');
+                    break;
             }
             writer::export_user_preference('block_disealytics', 'block_disealytics_planner_currentdate', $date,
                     $datedescription);

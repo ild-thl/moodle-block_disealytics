@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024091000';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024091100';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Füge einen neuen Learner Dashboard Block hinzu.';
 $string['disealytics:myaddinstance'] = 'Füge einen neuen Learner Dashboard Block zu meinem Dashboard hinzu.';
@@ -291,6 +291,8 @@ $string['success-chance_info_text'] = 'Betrachten Sie die PVL-Wahrscheinlichkeit
 $string['success-chance_info_text_expanded'] = 'Die PVL-Wahrscheinlichkeit zeigt Ihnen den Status der Einsendeaufgaben an.';
 $string['pvl_success-chance-chart-text'] = 'PVL-Wahrscheinlichkeit';
 $string['success-chance-label-failed'] = 'PVL-Wahrscheinlichkeit';
+$string['success-chance_no_course_available'] = 'Sie sind in keinem Kurs des ausgewählten Semesters eingeschrieben, für den eine PVL-Wahrscheinlichkeit berechnet werden kann.';
+
 
 $string['pvl_assignment_info_text_summary_modul'] = 'Im laufenden Modul sieht Ihre Bilanz wie folgt aus:';
 $string['pvl_assignment_info_text_summary_semester'] = 'Im laufenden Semester sieht Ihre Bilanz wie folgt aus:';

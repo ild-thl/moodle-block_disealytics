@@ -143,9 +143,7 @@
                                         <h3 class="subtitle-light">{{#str}} planner-view_today_label, block_disealytics {{/str}}</h3>
                                         <div class="all-planner-events summary-planner">
                                             {{#events_today}}
-                                                <div class="planner-event-container"
-                                                     data-toggle="modal"
-                                                     data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
+                                                <div class="planner-event-container planner-event-open-details-modal" data-event-id="{{dateid}}"
                                                     {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
                                                     {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
                                                     {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
@@ -162,7 +160,7 @@
                                                                     {{#hasEnd}}
                                                                         - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
                                                                     {{/hasEnd}}
-                                                </span>
+                                                                </span>
                                                             </div>
                                                             <div class="event-details-right">
                                                                 <i class="fa fa-chevron-right"></i>
@@ -170,7 +168,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {{> block_disealytics/planner_event_modal}}
                                             {{/events_today}}
                                         </div>
                                     </div>
@@ -236,9 +233,7 @@
                                     <div class="planner-events-thismonth planner-events-list">
                                         <div class="all-planner-events expanded-planner">
                                             {{#events_thismonth}}
-                                                <div class="planner-event-container"
-                                                     data-toggle="modal"
-                                                     data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
+                                                <div class="planner-event-container planner-event-open-details-modal" data-event-id="{{dateid}}"
                                                     {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
                                                     {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
                                                     {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
@@ -259,7 +254,7 @@
                                                                     {{#hasEnd}}
                                                                         - {{#userdate}}{{timestampEnd}}, {{#str}}strftimetime24, core_langconfig{{/str}}{{/userdate}}
                                                                     {{/hasEnd}}
-                                                </span>
+                                                                </span>
                                                                 {{#eventTypeConference}}<span class="webconference-event">{{.}}</span>{{/eventTypeConference}}
                                                                 {{#eventTypePresence}}<span class="presence-event">{{.}}</span>{{/eventTypePresence}}
                                                                 {{#eventTypeOther}}<span class="other-event">{{.}}</span>{{/eventTypeOther}}
@@ -271,7 +266,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {{> block_disealytics/planner_event_modal}}
                                             {{/events_thismonth}}
                                         </div>
                                     </div>
@@ -342,9 +336,7 @@
                                         {{#events}}
                                             {{#time_container}}
                                                 {{#events_today}}
-                                                    <div class="planner-event-container"
-                                                         data-toggle="modal"
-                                                         data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
+                                                    <div class="planner-event-container planner-event-open-details-modal" data-event-id="{{dateid}}"
                                                         {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
                                                         {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
                                                         {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
@@ -370,7 +362,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {{> block_disealytics/planner_event_modal}}
                                                 {{/events_today}}
                                             {{/time_container}}
                                         {{/events}}
@@ -443,9 +434,7 @@
                                             {{#events}}
                                                 {{#time_container}}
                                                     {{#events_thismonth}}
-                                                        <div class="planner-event-container"
-                                                             data-toggle="modal"
-                                                             data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
+                                                        <div class="planner-event-container planner-event-open-details-modal" data-event-id="{{dateid}}"
                                                             {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
                                                             {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
                                                             {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
@@ -469,7 +458,7 @@
                                                                                 {{#str}} strftimetime24, core_langconfig{{/str}}
                                                                             {{/userdate}}
                                                                             {{/hasEnd}}
-                                                                </span>
+                                                                        </span>
                                                                         {{#eventTypeConference}}<span class="webconference-event">{{.}}</span>{{/eventTypeConference}}
                                                                         {{#eventTypePresence}}<span class="presence-event">{{.}}</span>{{/eventTypePresence}}
                                                                         {{#eventTypeOther}}<span class="other-event">{{.}}</span>{{/eventTypeOther}}
@@ -481,7 +470,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {{> block_disealytics/planner_event_modal}}
                                                     {{/events_thismonth}}
                                                 {{/time_container}}
                                             {{/events}}
@@ -561,9 +549,7 @@
                                         {{#events}}
                                             {{#time_container}}
                                                 {{#events_thismonth}}
-                                                    <div class="planner-event-container"
-                                                         data-toggle="modal"
-                                                         data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
+                                                    <div class="planner-event-container planner-event-open-details-modal" data-event-id="{{dateid}}"
                                                         {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
                                                         {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
                                                         {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
@@ -592,7 +578,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {{> block_disealytics/planner_event_modal}}
                                                 {{/events_thismonth}}
                                             {{/time_container}}
                                         {{/events}}
@@ -675,9 +660,7 @@
                                             {{#events}}
                                                 {{#time_container}}
                                                     {{#events_thismonth}}
-                                                        <div class="planner-event-container"
-                                                             data-toggle="modal"
-                                                             data-target="[data-container='block_disealytics/event-{{dateid}}-modal']"
+                                                        <div class="planner-event-container planner-event-open-details-modal" data-event-id="{{dateid}}"
                                                             {{#eventTypeConference}}data-eventtype="webconference" {{/eventTypeConference}}
                                                             {{#eventTypePresence}}data-eventtype="presence" {{/eventTypePresence}}
                                                             {{#eventTypeOther}}data-eventtype="other" {{/eventTypeOther}}>
@@ -701,7 +684,7 @@
                                                                                     {{#str}} strftimetime24, core_langconfig {{/str}}
                                                                                 {{/userdate}}
                                                                             {{/hasEnd}}
-                                                                </span>
+                                                                        </span>
                                                                         {{#eventTypeConference}}<span class="webconference-event">{{.}}</span>{{/eventTypeConference}}
                                                                         {{#eventTypePresence}}<span class="presence-event">{{.}}</span>{{/eventTypePresence}}
                                                                         {{#eventTypeOther}}<span class="other-event">{{.}}</span>{{/eventTypeOther}}
@@ -713,7 +696,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {{> block_disealytics/planner_event_modal}}
                                                     {{/events_thismonth}}
                                                 {{/time_container}}
                                             {{/events}}

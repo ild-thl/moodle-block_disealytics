@@ -55,19 +55,19 @@ class update_planner_event extends external_api {
                     'The updatetype of the event (add, delete or update).',
                     VALUE_REQUIRED
                 ),
+                'courseid' => new external_value(
+                        PARAM_INT,
+                        'The course id, that is saved for the date.',
+                        VALUE_OPTIONAL
+                ),
                 'dateid' => new external_value(
                     PARAM_INT,
                     'The date id, 0 if no date is created yet.',
-                    VALUE_REQUIRED
+                    VALUE_OPTIONAL
                 ),
                 'name' => new external_value(
                     PARAM_RAW,
                     'A name, that is saved for the date.',
-                    VALUE_OPTIONAL
-                ),
-                'courseid' => new external_value(
-                    PARAM_INT,
-                    'The course id, that is saved for the date.',
                     VALUE_OPTIONAL
                 ),
                 'timestart' => new external_value(
@@ -102,9 +102,9 @@ class update_planner_event extends external_api {
      * Executes the service.
      *
      * @param string $updatetype
+     * @param int|null $courseid
      * @param int|null $dateid
      * @param string|null $name
-     * @param int|null $courseid
      * @param int|null $timestart
      * @param int|null $timeduration
      * @param string|null $location
@@ -118,22 +118,23 @@ class update_planner_event extends external_api {
      */
     public static function execute(
         string $updatetype,
+        ?int $courseid,
         ?int $dateid,
         ?string $name = null,
-        ?int $courseid = null,
         ?int $timestart = null,
         ?int $timeduration = null,
         ?string $location = null,
         ?int $eventtype = null,
         ?int $repetitions = null
     ): bool {
-        global $USER;
+        global $USER, $COURSE;
+        $courseid = $courseid ?? $COURSE->id;
 
         self::validate_parameters(self::execute_parameters(), [
                 'updatetype' => $updatetype,
+                'courseid' => $courseid,
                 'dateid' => $dateid,
                 'name' => $name,
-                'courseid' => $courseid,
                 'timestart' => $timestart,
                 'timeduration' => $timeduration,
                 'location' => $location,
@@ -162,7 +163,7 @@ class update_planner_event extends external_api {
                     $date->timeduration = $timeduration;
                     $dateobjects[] = $date;
                 }
-                planner::add_date_series_to_database($dateobjects);
+                return planner::add_date_series_to_database($dateobjects);
             } else {
                 $date = new stdClass();
                 $date->name = $name;
@@ -173,7 +174,7 @@ class update_planner_event extends external_api {
                 $date->timestart = $timestart;
                 $date->timeduration = $timeduration;
                 $date->repeatid = 0;
-                planner::add_date_to_database($date);
+                return planner::add_date_to_database($date);
             }
         } else if ($updatetype == 'update') {
             $date = new stdClass();
@@ -186,12 +187,15 @@ class update_planner_event extends external_api {
             $date->timestart = $timestart;
             $date->timeduration = $timeduration;
             $date->repeatid = 0;
-            planner::update_date($date);
+            return planner::update_date($date);
         } else if ($updatetype == 'delete') {
-            planner::delete_date($dateid);
+            if (!planner::delete_date($dateid)) {
+                throw new dml_exception('Could not delete event, record not found or another issue occurred.');
+            }
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -200,6 +204,6 @@ class update_planner_event extends external_api {
      * @return external_value jsonobj
      */
     public static function execute_returns(): external_value {
-        return new external_value(PARAM_BOOL);
+        return new external_value(PARAM_RAW);
     }
 }

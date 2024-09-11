@@ -33,43 +33,24 @@
 
     }
 }}
-<div class="modal fade block_disealytics-planner-event-modal outer-modal-{{dateid}}" data-container="block_disealytics/event-{{dateid}}-modal">
-    <div class="modal-dialog">
-        <div class="modal-content content-modal-event-{{dateid}}">
-            <div class="modal-header">
-                <h5 class="modal-title text-semibold disea-blue">{{name}}</h5>
-                <a class="block_disealytics-close-modal-btn" data-dismiss="modal">
-                    <i class="fa fa-times"></i>
-                </a>
-            </div>
-            <div class="modal-body">
-                <div class="planner-event-modal">
-                    <span class="planner-event-modal-title">{{eventTypeName}}</span>
-                    <div class="planner-event-modal-items">
-                        <span class="planner-event-modal-title">{{#str}} planner_event_date_label, block_disealytics {{/str}}:</span>
-                        <span class="event-time">{{#userdate}}{{timestampStart}}, {{#str}}strftimedatetimeshort, core_langconfig{{/str}}{{/userdate}}
-                            {{#hasEnd}}
-                                - {{#userdate}}{{timestampEnd}}, {{#str}}strftimedatetimeshort, core_langconfig{{/str}}{{/userdate}}
-                            {{/hasEnd}}
+<div class="planner-event-modal block_disealytics">
+    <span class="planner-event-modal-title">{{eventTypeName}}</span>
+    <div class="planner-event-modal-items">
+        <span class="planner-event-modal-title">{{#str}} planner_event_date_label, block_disealytics {{/str}}:</span>
+        <span class="event-time">{{#userdate}}{{timestampStart}}, {{#str}}strftimedatetimeshort, core_langconfig{{/str}}{{/userdate}}
+            {{#hasEnd}}
+                - {{#userdate}}{{timestampEnd}}, {{#str}}strftimedatetimeshort, core_langconfig{{/str}}{{/userdate}}
+            {{/hasEnd}}
                     </span>
-                    </div>
-                    {{#location}}
-                        <div class="planner-event-modal-items">
-                            <span class="planner-event-modal-title">{{#str}} planner_event_location_label, block_disealytics {{/str}}:</span>
-                            <span class="event-location">{{.}}</span>
-                        </div>
-                    {{/location}}
-                    <div class="planner-event-modal-items">
-                        <span class="planner-event-modal-title">{{#str}} planner_event_course_label, block_disealytics {{/str}}:</span>
-                        <span class="event-location">{{courseName}}</span>
-                    </div>
-                </div>
-                <div class="btn-container" style="display: flex; gap: 8px; justify-content: end;">
-                    <button class="disea-cancel-btn btn btn-secondary text-small" data-dismiss="modal">{{#str}}
-                        planner_cancel_event, block_disealytics {{/str}}</button>
-                    <button id="delete-planner-date-{{dateid}}" class="disea-delete-btn delete-event-from-planner btn btn-danger text-small" data-dismiss="modal">{{#str}}planner_delete_event, block_disealytics {{/str}}</button>
-                </div>
-            </div>
+    </div>
+    {{#location}}
+        <div class="planner-event-modal-items">
+            <span class="planner-event-modal-title">{{#str}} planner_event_location_label, block_disealytics {{/str}}:</span>
+            <span class="event-location">{{.}}</span>
         </div>
+    {{/location}}
+    <div class="planner-event-modal-items">
+        <span class="planner-event-modal-title">{{#str}} planner_event_course_label, block_disealytics {{/str}}:</span>
+        <span class="event-location">{{courseName}}</span>
     </div>
 </div>

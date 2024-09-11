@@ -74,6 +74,15 @@ $functions = [
                 'ajax' => true,
                 'loginrequired' => true,
         ],
+        'block_disealytics_get_planner_event' => [
+                'classname'   => 'block_disealytics\external\get_planner_event',
+                'methodname'  => 'execute',
+                'classpath'   => 'blocks/disealytics/classes/external/get_planner_event.php',
+                'description' => 'Get an event from the planner',
+                'type'        => 'read',
+                'ajax'        => true,
+                'loginrequired' => true,
+        ],
         'block_disealytics_change_planner_view' => [
                 'classname' => 'block_disealytics\external\change_planner_view',
                 'methodname' => 'execute',

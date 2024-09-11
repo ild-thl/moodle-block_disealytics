@@ -837,9 +837,9 @@
     margin-bottom: 8px;
 }
 
-.block_disealytics .subtitle {
+.block_disealytics .block_disealytics-planner-left-side .subtitle {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 12px;
     margin: 0;
 }
 
@@ -940,7 +940,7 @@
 }
 
 .block_disealytics .all-planner-events.summary-planner {
-    max-height: 130px;
+    max-height: 160px;
     overflow: scroll;
 }
 

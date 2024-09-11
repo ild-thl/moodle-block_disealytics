@@ -50,7 +50,7 @@ class modid_to_courseid extends external_api {
         return new external_function_parameters([
                 'modid' => new external_value(
                     PARAM_INT,
-                    'ID of a corurse module',
+                    'ID of a course module',
                     VALUE_REQUIRED
                 ),
         ]);

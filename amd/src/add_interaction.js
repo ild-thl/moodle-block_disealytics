@@ -53,92 +53,6 @@ export const init = (viewname) => {
             infoOnViews.classList.remove('hidden');
         }
     }
-    moveModalsToBodyEnd(viewname);
-};
-
-/**
- * Creates a container for modals and inserts it before the closing body tag.
- * Modals are moved into the container if they have the class 'block_disealytics-main-modal'.
- * @returns {void}
- */
-export const createModalsContainer = () => {
-    // Create a div to contain all modals.
-    const modalsContainer = document.createElement('div');
-    modalsContainer.classList.add('block_disealytics');
-    modalsContainer.classList.add('block_disealytics-modals');
-    // Get the reference to the closing body tag.
-    const closingBodyTag = document.body.lastElementChild;
-    // Insert the container before the closing body tag.
-    document.body.insertBefore(modalsContainer, closingBodyTag);
-    const mainModals = document.querySelectorAll('.block_disealytics-main-modal');
-    if (mainModals && mainModals.length > 0) {
-        mainModals.forEach((modal) => {
-            modalsContainer.appendChild(modal);
-        });
-    }
-};
-
-/**
- * Moves specific modals with the given viewname into the modals container at the end of the body.
- * @param {string} viewname - The identifier for the modals.
- * @returns {void}
- */
-export const moveModalsToBodyEnd = (viewname) => {
-    const configModals = document.querySelectorAll(`.${viewname}-config-modal`);
-    const plannerModals = document.querySelectorAll('.block_disealytics-planner-event-modal');
-    const modalsContainer = document.querySelector('.block_disealytics-modals');
-
-    if (modalsContainer) {
-        if (plannerModals && plannerModals.length > 0) {
-            plannerModals.forEach((modal) => {
-                modalsContainer.appendChild(modal);
-            });
-        }
-        if (configModals && configModals.length > 0) {
-            configModals.forEach((modal) => {
-                modalsContainer.appendChild(modal);
-            });
-        }
-    }
-};
-
-/**
- * Deletes modals within the modals container, excluding those with the class 'block_disealytics-main-modal'.
- * @returns {void}
- */
-export const deleteModalsContainer = () => {
-    const modalsContainer = document.querySelector('.block_disealytics-modals');
-    Array.from(modalsContainer.children).forEach((child) => {
-        if (!child.classList.contains('block_disealytics-main-modal')) {
-            child.remove();
-        }
-    });
-};
-
-/**
- * Create a custom modal using a template.
- *
- * @param {string} linkToTemplate - The link to the template.
- * @param {Promise} title - The title of the modal.
- * @param {number} id - The ID parameter for the template.
- * @returns {Promise<object>} - A promise that resolves to the created modal.
- */
-export const createDiseaModal = async(linkToTemplate, title, id) => {
-    return await ModalFactory.create({
-        title: title,
-        body: Templates.render(linkToTemplate, {id: id}),
-        removeOnClose: true
-    });
-};
-
-/**
- * Show a modal.
- *
- * @param {object} modal - The modal to show.
- */
-export const showDiseaModal = async(modal) => {
-    const modalObj = await modal;
-    modalObj.show();
 };
 
 /**
@@ -527,8 +441,6 @@ export const updateSetting = (updatetype, setting, val = undefined) => {
         args,
     }
     ])[0].done(async function(response) {
-        // Remove contents of the modal container.
-        await deleteModalsContainer();
         if (setting === 'viewmode' || setting === 'editing') {
             let views = getViewlist().filter((e) => e.enabled === 1).map((e) => e.viewname);
             await updateView(getCourseId(), views);

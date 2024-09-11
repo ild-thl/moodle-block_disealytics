@@ -53,4 +53,12 @@ $capabilities = [
                         'user' => CAP_ALLOW,
                 ],
         ],
+
+        'block/disealytics:readlearningdashboard' => [
+                'captype' => 'read',
+                'contextlevel' => CONTEXT_BLOCK,
+                'archetypes' => [
+                        'user' => CAP_ALLOW,
+                ],
+        ],
 ];

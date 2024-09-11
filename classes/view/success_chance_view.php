@@ -265,6 +265,11 @@ class success_chance_view extends base_view {
         $this->output["help_info_text_expanded"] = get_string('success-chance-view_help_info_text_expanded', 'block_disealytics');
 
         $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
+
+        if (count($allusercourses) == 0) {
+            $this->output['nodata'] = get_string('success-chance_no_course_available', 'block_disealytics');
+            return;
+        }
         $assignments = [];
 
         foreach ($allusercourses as $course) {

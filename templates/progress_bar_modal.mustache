@@ -34,58 +34,50 @@
     }
 }}
 
-{{< core/modal }}
-    {{$title}}
-        {{#str}} progress_config_title, block_disealytics {{/str}}
-    {{/title}}
-    {{$body}}
-        <div class="block_disealytics">
-            <a id="block_disealytics_open-progress-bar-help-modal"
-               class="dashboard-button"
-               style="margin-right: 8px;">
-                <i class="fa fa-question"></i>
-            </a>
+<div class="block_disealytics">
+    <p>{{#str}}progress_bar_modal_intro, block_disealytics{{/str}}</p>
+    <a id="block_disealytics_open-progress-bar-help-modal"
+       style="color: var(--diseablue);">
+        {{#str}}progress_bar_additional_help, block_disealytics{{/str}}
+    </a>
 
+    <hr>
 
-            <p>{{#str}}progress_bar_modal_intro, block_disealytics{{/str}}</p>
-            <div id="progress-bar-accordion">
-                <div class="accordion-head flex-container">
-                    <h5>{{#str}}progress_bar_add_optional_input, block_disealytics{{/str}}</h5>
-                    <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
-                </div>
-                <div class="accordion-content" id="content-1">
-                    <div id="block_disealytics-add-optional-inputs">
-                        {{> block_disealytics/optional-inputs_add_inputs}}
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="accordion-head flex-container">
-                    <h5>{{#str}}progress_bar_manage_optional_input, block_disealytics{{/str}}</h5>
-                    <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
-                </div>
-                <div class="accordion-content" id="content-2">
-                    <div id="block_disealytics-manage-optional-inputs">
-                        <div id="optional-inputs-container">
-                            {{#optional_inputs}}
-                                {{#data}}
-                                    {{> block_disealytics/optional_input}}
-                                {{/data}}
-                            {{/optional_inputs}}
-                            {{#viewmode_module}}
-                                {{#nodata}}
-                                    <p class="show-when-no-optional-inputs-exist">{{#str}}nodata, block_disealytics {{/str}}</p>
-                                {{/nodata}}
-                            {{/viewmode_module}}
-                        </div>
-                    </div>
-                </div>
+    <div id="progress-bar-accordion">
+        <div class="accordion-head flex-container">
+            <h5>{{#str}}progress_bar_add_learning_material, block_disealytics{{/str}}</h5>
+            <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
+        </div>
+        <div class="accordion-content" id="content-1">
+            <div id="block_disealytics-add-learning-materials">
+                {{^files_left}}
+                    <p class="show-when-all-learning-materials-exist">{{#str}}learning_material_all_inputs_set, block_disealytics {{/str}}</p>
+                {{/files_left}}
+                {{#files_left}}
+                    <button id="add-learning-material-fields" class="disea-save-btn btn btn-primary">
+                        <span>{{#str}}add-learning-material, block_disealytics {{/str}}</span>
+                    </button>
+                {{/files_left}}
             </div>
         </div>
-    {{/body}}
-    {{$footer}}
-        <button type="button" class="btn btn-primary" data-action="login">{{#str}} confirm {{/str}}</button>
-        <button type="button" class="btn btn-secondary" data-action="cancel">{{#str}} cancel {{/str}}</button>
-    {{/footer}}
-{{/ core/modal }}
+
+        <hr>
+
+        <div class="accordion-head flex-container">
+            <h5>{{#str}}progress_bar_manage_learning_material, block_disealytics{{/str}}</h5>
+            <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
+        </div>
+        <div class="accordion-content" id="content-2">
+            <div id="block_disealytics-manage-learning-materials">
+                <div id="all-available-learning-materials-container" data-numberOfDocuments="{{number_of_documents}}" style="margin-bottom: 5px;">
+                    {{#data}}
+                       {{> block_disealytics/learning_material_content}}
+                    {{/data}}
+                </div>
+                {{#nodata}}
+                    <p class="show-when-no-learning-materials-exist">{{#str}}nodata, block_disealytics {{/str}}</p>
+                {{/nodata}}
+            </div>
+        </div>
+    </div>
+</div>

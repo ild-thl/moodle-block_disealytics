@@ -80,7 +80,7 @@ public static function execute(int $dateid) {
     // Security checks.
     $context = context_course::instance($COURSE->id);
     self::validate_context($context);
-    require_capability('block/disealytics:readlearningdashboard', $context);
+    require_capability('block/disealytics:editlearnerdashboard', $context);
 
     // Retrieve the event record from the database.
     $event = $DB->get_record('block_disealytics_user_dates', ['id' => $dateid]);

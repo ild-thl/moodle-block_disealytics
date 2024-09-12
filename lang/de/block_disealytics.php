@@ -31,7 +31,7 @@ $string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Füge einen neuen Learner Dashboard Block hinzu.';
 $string['disealytics:myaddinstance'] = 'Füge einen neuen Learner Dashboard Block zu meinem Dashboard hinzu.';
-$string['disealytics:editlearningdashboard'] = 'Bearbeite den Learner Dashboard.';
+$string['disealytics:editlearnerdashboard'] = 'Bearbeite den Learner Dashboard.';
 $string['languagesetting'] = 'de';
 $string['login_alert'] = 'Bitte melden Sie sich an, um das Learner Dashboard benutzten zu können.';
 $string['course_alert'] = 'Das Learner Dashboard kann nur auf der Kurshauptseite angezeigt werden.';
@@ -161,37 +161,38 @@ $string['add_progress_bar_view'] = '"Lesefortschrittsbalken" hinzufügen';
 $string['add_success_chance_view'] = '"PVL-Wahrscheinlichkeit" hinzufügen';
 $string['add_planner_view'] = '"Planungsassistent" hinzufügen';
 
-$string['optional-inputs-view'] = 'Lernmaterialien hinzufügen';
+$string['learning-materials-view'] = 'Lernmaterialien hinzufügen';
 
 $string['select_timeframe'] = 'Zeitraumauswahl';
 $string['total_study_period'] = 'Gesamtes Studium';
 $string['current_semester'] = 'Aktuelles Semester';
 
 // Optional input fields.
-$string['progress_bar_add_optional_input'] = 'Lernmaterialien des Kurses hinzufügen';
-$string['progress_bar_manage_optional_input'] = 'Lernmaterialien des Kurses verwalten';
+$string['progress_bar_add_learning_material'] = 'Lernmaterialien des Kurses hinzufügen';
+$string['progress_bar_manage_learning_material'] = 'Lernmaterialien des Kurses verwalten';
 $string['progress_bar_modal_intro'] = 'Sie können hier Dokumente, Videos oder Links, die im aufgerufenen Kurs hochgeladen sind, als Lernmaterialien hinzufügen oder die vorhandenen Lernmaterialien des aufgerufenen Kurses bearbeiten.';
-$string['add-optional-input'] = 'Lernmaterial aus dem Kurs hinzufügen';
-$string['optional_input_no_selection'] = 'Keine Auswahl';
-$string['optional_input_all_inputs_set'] = 'Sie haben alle verfügbaren Lernmaterialien des Kurses hinzugefügt.';
-$string['optional_input_document'] = 'Dokument auswählen';
-$string['optional_input_pages'] = 'Gelesene Seiten';
-$string['optional_input_current_page'] = 'Aktuelle Seite';
-$string['optional_input_last_page'] = 'Letzte Seite';
-$string['optional_input_expenditureoftime'] = 'Zeitaufwand (in Stunden)';
-$string['optional_input_save'] = 'Speichern';
-$string['optional_input_edit'] = 'Bearbeiten';
-$string['optional_input_delete'] = 'Löschen';
-$string['optional_input_cancel'] = 'Abbrechen';
-$string['optional_input_page_error'] = 'Aktuelle Seite kann nicht höher sein als die letzte Seite.';
-$string['optional_input_no_document_selected_error'] = 'Bitte wählen Sie ein Dokument, bevor Sie speichern.';
-$string['optional_input_page_zero_error'] = 'Die letzte Seite kann nicht 0 sein.';
-$string['optional_input_negative_page_error'] = 'Es können keine negativen Zahlen in den Seitenzahlen, oder im Zeitaufwand gespeichert werden.';
-$string['optional_input_page_overflow_error'] = 'Es können keine Seitenzahlen größer als 1000 gespeichert werden.';
-$string['optional_input_expenditure_of_time_overflow_error'] = 'Es kann kein Zeitaufwand größer als 500 gespeichert werden.';
-$string['optional_input_pattern_error'] = 'Bitte verwenden Sie nur Zahlen.';
-$string['optional_input_save_success'] = 'Der Lesefortschritt wurde erfolgreich gespeichert.';
-$string['optional_input_delete_success'] = 'Der Lesefortschritt wurde erfolgreich gelöscht.';
+$string['progress_bar_additional_help'] = 'Hilfe zur Verwaltung der Lernmaterialien';
+$string['add-learning-material'] = 'Lernmaterial aus dem Kurs hinzufügen';
+$string['learning_material_no_selection'] = 'Keine Auswahl';
+$string['learning_material_all_inputs_set'] = 'Sie haben alle verfügbaren Lernmaterialien des Kurses hinzugefügt.';
+$string['learning_material_document'] = 'Dokument auswählen';
+$string['learning_material_pages'] = 'Gelesene Seiten';
+$string['learning_material_current_page'] = 'Aktuelle Seite';
+$string['learning_material_last_page'] = 'Letzte Seite';
+$string['learning_material_expenditureoftime'] = 'Zeitaufwand (in Stunden)';
+$string['learning_material_save'] = 'Speichern';
+$string['learning_material_edit'] = 'Bearbeiten';
+$string['learning_material_delete'] = 'Löschen';
+$string['learning_material_cancel'] = 'Abbrechen';
+$string['learning_material_page_error'] = 'Aktuelle Seite kann nicht höher sein als die letzte Seite.';
+$string['learning_material_no_document_selected_error'] = 'Bitte wählen Sie ein Dokument, bevor Sie speichern.';
+$string['learning_material_page_zero_error'] = 'Die letzte Seite kann nicht 0 sein.';
+$string['learning_material_negative_page_error'] = 'Es können keine negativen Zahlen in den Seitenzahlen, oder im Zeitaufwand gespeichert werden.';
+$string['learning_material_page_overflow_error'] = 'Es können keine Seitenzahlen größer als 1000 gespeichert werden.';
+$string['learning_material_expenditure_of_time_overflow_error'] = 'Es kann kein Zeitaufwand größer als 500 gespeichert werden.';
+$string['learning_material_pattern_error'] = 'Bitte verwenden Sie nur Zahlen.';
+$string['learning_material_save_success'] = 'Der Lesefortschritt wurde erfolgreich gespeichert.';
+$string['learning_material_delete_success'] = 'Der Lesefortschritt wurde erfolgreich gelöscht.';
 $string['progress_bar_title'] = "Lesefortschritt";
 $string['pages_read'] = "Gelesen";
 $string['pages_left'] = "Verbleibend";
@@ -258,7 +259,7 @@ $string['consent_config_btn_delete'] = "Daten löschen und widerrufen";
 $string['consent_config_btn_save'] = "Daten behalten und widerrufen";
 $string['no-view-exists'] = "Starten Sie die Bearbeitungsfunktion zum Hinzufügen von Karten, indem Sie das Stift-Symbol anklicken.";
 
-$string['optional_inputs-view_help_info_text'] = 'Bleiben Sie bezüglich Ihres Lernfortschritts auf dem Laufenden und geben Sie hier zu den bereitgestellten Dokumenten des Kurses Ihren Fortschritt an, klicken Sie zum Hinzufügen eines Dokumentes unter "Lernmaterialien des Kurses hinzufügen" auf den Button.<p><strong>Dokument:</strong> Auswahl eines im Kurs zur Verfügung gestellten Dokumentes.<p><strong>Aktuelle Seite:</strong> Eingabe der Seite auf der Sie sich im Dokument befinden.<p><strong>Letzte Seite:</strong> Tragen Sie hier ein, wie viele Seiten das Dokument insgesamt hat.</p><p><strong>Zeitaufwand (in Stunden):</strong> Tragen Sie hier den geschätzten Zeitaufwand ein.</p>
+$string['learning_materials-view_help_info_text'] = '<p>Bleiben Sie bezüglich Ihres Lernfortschritts auf dem Laufenden und geben Sie hier zu den bereitgestellten Dokumenten des Kurses Ihren Fortschritt an, klicken Sie zum Hinzufügen eines Dokumentes unter "Lernmaterialien des Kurses hinzufügen" auf den Button.</p><p><strong>Dokument:</strong> Auswahl eines im Kurs zur Verfügung gestellten Dokumentes.<p><strong>Aktuelle Seite:</strong> Eingabe der Seite auf der Sie sich im Dokument befinden.<p><strong>Letzte Seite:</strong> Tragen Sie hier ein, wie viele Seiten das Dokument insgesamt hat.</p><p><strong>Zeitaufwand (in Stunden):</strong> Tragen Sie hier den geschätzten Zeitaufwand ein.</p>
 <p>Mit dem Button "Speichern" schließen Sie den Vorgang ab und speichern den Fortschritt in Ihrem persönlichen Bereich.</p>
 
 <p>Unter "Lernmaterialien des Kurses verwalten" können Sie Ihre bereits eingetragenen Materialien bearbeiten oder einzelne Lesefortschritte aus Ihrem persönlichen Bereich entfernen.</p>';

@@ -85,7 +85,7 @@ class progress_bar_view extends base_view {
     private function get_user_pages(): array {
         global $DB, $COURSE;
         $output = [];
-        $data = $this->learningdata->get_optional_inputs();
+        $data = $this->learningdata->get_learning_materials();
         $course = $DB->get_record('course', ['id' => $COURSE->id]);
         $modinfo = get_fast_modinfo($course);
         $cms = $modinfo->get_cms();
@@ -227,8 +227,8 @@ class progress_bar_view extends base_view {
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
         $this->output["help_info_text"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
-        $this->output["optional_input-view_help_info_text"] =
-                get_string('optional_inputs-view_help_info_text', 'block_disealytics');
+        $this->output["learning_material-view_help_info_text"] =
+                get_string('learning_materials-view_help_info_text', 'block_disealytics');
         // Viewmode settings.
         $iseditmode = get_user_preferences("block_disealytics_editing", "0");
         $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
@@ -238,11 +238,11 @@ class progress_bar_view extends base_view {
         } else {
             $this->output["viewmode"] = true;
 
-            // Data for optional input modal.
+            // Data for learning material modal.
             try {
-                $this->output["optional_inputs"] = $this->get_user_pages();
+                $this->output["learning_materials"] = $this->get_user_pages();
 
-                if (count($this->output["optional_inputs"]["file_names"]) > 0) {
+                if (count($this->output["learning_materials"]["file_names"]) > 0) {
                     $this->output["files_left"] = true;
                 }
             } catch (dml_exception | moodle_exception $e) {
@@ -252,7 +252,7 @@ class progress_bar_view extends base_view {
             // Display data for summary view.
             $course = new stdClass();
             $course->courseid = $COURSE->id;
-            $data = $this->learningdata->get_optional_inputs(
+            $data = $this->learningdata->get_learning_materials(
                 function ($v) {
                     return !empty($v->documentname);
                 },
@@ -279,8 +279,8 @@ class progress_bar_view extends base_view {
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
         $this->output["help_info_text"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
-        $this->output["optional_input-view_help_info_text"] =
-                get_string('optional_inputs-view_help_info_text', 'block_disealytics');
+        $this->output["learning_material-view_help_info_text"] =
+                get_string('learning_materials-view_help_info_text', 'block_disealytics');
         // Viewmode settings.
         $iseditmode = get_user_preferences("block_disealytics_editing", "0");
         $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
@@ -292,11 +292,11 @@ class progress_bar_view extends base_view {
             $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
 
             foreach ($allusercourses as $course) {
-                // Data for optional input modal.
+                // Data for learning material modal.
                 try {
-                    $this->output["optional_inputs"] = $this->get_user_pages();
+                    $this->output["learning_materials"] = $this->get_user_pages();
 
-                    if (count($this->output["optional_inputs"]["file_names"]) > 0) {
+                    if (count($this->output["learning_materials"]["file_names"]) > 0) {
                         $this->output["files_left"] = true;
                     }
                 } catch (dml_exception | moodle_exception $e) {
@@ -304,7 +304,7 @@ class progress_bar_view extends base_view {
                 }
 
                 // Display data for summary view.
-                $data = $this->learningdata->get_optional_inputs(
+                $data = $this->learningdata->get_learning_materials(
                     function ($v) {
                         return !empty($v->documentname);
                     },
@@ -362,11 +362,11 @@ class progress_bar_view extends base_view {
                 }
 
                 if ($issemester) {
-                    // Data for optional input modal.
+                    // Data for learning material modal.
                     try {
-                        $this->output["optional_inputs"] = $this->get_user_pages();
+                        $this->output["learning_materials"] = $this->get_user_pages();
 
-                        if (count($this->output["optional_inputs"]["file_names"]) > 0) {
+                        if (count($this->output["learning_materials"]["file_names"]) > 0) {
                             $this->output["files_left"] = true;
                         }
                     } catch (dml_exception | moodle_exception $e) {
@@ -374,7 +374,7 @@ class progress_bar_view extends base_view {
                     }
 
                     // Display data for summary view.
-                    $data = $this->learningdata->get_optional_inputs(
+                    $data = $this->learningdata->get_learning_materials(
                         function ($v) {
                             return !empty($v->documentname);
                         },

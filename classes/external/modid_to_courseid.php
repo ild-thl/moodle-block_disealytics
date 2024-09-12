@@ -74,7 +74,7 @@ class modid_to_courseid extends external_api {
         // Security checks.
         $context = context_course::instance($COURSE->id);
         self::validate_context($context);
-        require_capability('block/disealytics:editlearningdashboard', $context);
+        require_capability('block/disealytics:editlearnerdashboard', $context);
         $coursemod = $DB->get_record('course_modules', ['id' => $modid], 'id, course');
         return $coursemod->course;
     }

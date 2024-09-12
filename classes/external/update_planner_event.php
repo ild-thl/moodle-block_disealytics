@@ -145,7 +145,7 @@ class update_planner_event extends external_api {
         // Security checks.
         $context = context_course::instance($courseid);
         self::validate_context($context);
-        require_capability('block/disealytics:editlearningdashboard', $context);
+        require_capability('block/disealytics:editlearnerdashboard', $context);
 
         if ($updatetype == 'add') {
             if ($repetitions > 0) {

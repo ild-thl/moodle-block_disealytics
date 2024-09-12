@@ -91,7 +91,6 @@ async function updateMonthDisplay() {
  */
 function initModalEventListeners() {
     const showDetailsBtns = document.querySelectorAll('.planner-event-open-details-modal');
-    // Cancel/reset the create an event form.
     if (showDetailsBtns) {
         showDetailsBtns.forEach((showDetailsBtn) => {
             showDetailsBtn.addEventListener('click', async function() {

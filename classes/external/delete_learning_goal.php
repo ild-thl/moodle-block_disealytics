@@ -69,14 +69,14 @@ class delete_learning_goal extends external_api {
      * @throws required_capability_exception
      */
     public static function execute(string $goalid): bool {
-        global $CFG;
+        global $CFG, $COURSE;
         self::validate_parameters(self::execute_parameters(), ['goalid' => $goalid]);
         require_once($CFG->dirroot . '/blocks/disealytics/classes/learningdata.php');
 
         // Security checks.
         $context = context_course::instance($COURSE->id);
         self::validate_context($context);
-        require_capability('block/disealytics:editlearningdashboard', $context);
+        require_capability('block/disealytics:editlearnerdashboard', $context);
 
         learningdata::delete_goal($goalid);
         return true;

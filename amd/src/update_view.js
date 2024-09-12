@@ -241,7 +241,7 @@ const renderExpandedView = (viewtype) => {
     // Set every expandable windows in the views to hidden.
     const allViewContainer = document.querySelectorAll(".view-container");
     [].forEach.call(allViewContainer, (e) => {
-        if (e.getAttribute('id') !== 'block_disealytics-optional-inputs-view') {
+        if (e.getAttribute('id') !== 'block_disealytics-learning-materials-view') {
             e.classList.add("hidden");
         }
     });
@@ -295,7 +295,7 @@ if (currentView) {
     const expandableView = document.querySelector(viewSelectors.selectExpandableClass);
     // On first load the expandableView is null. Therefore, we need an if check.
 if (expandableView) {
-    if (viewtype !== 'optional-inputs-view') {
+    if (viewtype !== 'learning-materials-view') {
         setScrollToElement('block_disealytics-panel-' + viewtype);
         setOffsetTopForScroll(100);
     }

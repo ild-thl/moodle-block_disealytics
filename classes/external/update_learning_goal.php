@@ -101,7 +101,7 @@ class update_learning_goal extends external_api {
         // Security checks.
         $context = context_course::instance($COURSE->id);
         self::validate_context($context);
-        require_capability('block/disealytics:editlearningdashboard', $context);
+        require_capability('block/disealytics:editlearnerdashboard', $context);
 
         $goal = new stdClass();
         $goal->id = $goalid;

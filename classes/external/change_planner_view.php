@@ -89,7 +89,7 @@ class change_planner_view extends external_api {
         // Security checks.
         $context = context_course::instance($courseid);
         self::validate_context($context);
-        require_capability('block/disealytics:editlearningdashboard', $context);
+        require_capability('block/disealytics:editlearnerdashboard', $context);
 
         $now = new DateTime("now", core_date::get_user_timezone_object());
 

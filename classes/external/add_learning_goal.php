@@ -90,7 +90,7 @@ class add_learning_goal extends external_api {
         // Security checks.
         $context = context_course::instance($courseid);
         self::validate_context($context);
-        require_capability('block/disealytics:editlearningdashboard', $context);
+        require_capability('block/disealytics:editlearnerdashboard', $context);
 
         $goal = new stdClass();
         $goal->userid = $USER->id;

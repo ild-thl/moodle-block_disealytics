@@ -35,9 +35,9 @@ class learningdata {
      */
     private const GOALTABLE = 'block_disealytics_user_goals';
     /**
-     * Table that holds all optional inputs.
+     * Table that holds all learning materials.
      */
-    private const OPTIONALINPUTSTABLE = 'block_disealytics_user_pages';
+    private const PAGESTABLE = 'block_disealytics_user_pages';
     /**
      * helper number
      * @var int
@@ -60,7 +60,7 @@ class learningdata {
         $this->storage['logs'] = [];
         $this->storage['goals'] = [];
         $this->storage['finished_goals'] = [];
-        $this->storage['optional_inputs'] = [];
+        $this->storage['learning_materials'] = [];
     }
 
     /**
@@ -106,45 +106,45 @@ class learningdata {
     }
 
     /**
-     * Write optional input.
+     * Write learning material.
      * @param stdClass $data
      * @return bool
      * @throws dml_exception
      */
-    public static function write_optional_input(stdClass $data): bool {
+    public static function write_learning_material(stdClass $data): bool {
         global $DB, $USER;
         $now = (new DateTime())->format('U');
         $data->userid = $USER->id;
         $data->timecreated = $now;
         $data->timemodified = $now;
-        return $DB->insert_record(self::OPTIONALINPUTSTABLE, $data);
+        return $DB->insert_record(self::PAGESTABLE, $data);
     }
 
     /**
-     * Update optional input.
+     * Update learning material.
      * @param stdClass $data
      * @return void
      * @throws dml_exception
      */
-    public static function update_optional_input(stdClass $data): void {
+    public static function update_learning_material(stdClass $data): void {
         global $DB;
         $now = (new DateTime())->format('U');
-        if ($DB->record_exists(self::OPTIONALINPUTSTABLE, ['id' => $data->id])) {
+        if ($DB->record_exists(self::PAGESTABLE, ['id' => $data->id])) {
             $data->timemodified = $now;
-            $DB->update_record(self::OPTIONALINPUTSTABLE, $data);
+            $DB->update_record(self::PAGESTABLE, $data);
         }
     }
 
     /**
-     * Delete optional input
+     * Delete learning material
      * @param int $id
      * @return void
      * @throws dml_exception
      */
-    public static function delete_optional_input(int $id): void {
+    public static function delete_learning_material(int $id): void {
         global $DB;
-        if ($DB->record_exists(self::OPTIONALINPUTSTABLE, ['id' => $id])) {
-            $DB->delete_records(self::OPTIONALINPUTSTABLE, ['id' => $id]);
+        if ($DB->record_exists(self::PAGESTABLE, ['id' => $id])) {
+            $DB->delete_records(self::PAGESTABLE, ['id' => $id]);
         }
     }
 
@@ -398,41 +398,41 @@ class learningdata {
     }
 
     /**
-     * Get optional inputs
+     * Get learning materials
      *
      * @param null $filter
      * @param null $courseid
      * @return array
      * @throws dml_exception
      */
-    public function get_optional_inputs($filter = null, $courseid = null): array {
+    public function get_learning_materials($filter = null, $courseid = null): array {
         global $DB, $USER, $COURSE;
         if ($courseid != null) {
-            $optionalinputs = $DB->get_records(
-                self::OPTIONALINPUTSTABLE,
+            $learningmaterials = $DB->get_records(
+                self::PAGESTABLE,
                 ['userid' => $USER->id, 'courseid' => $courseid]
             );
         } else {
-            $optionalinputs = $DB->get_records(
-                self::OPTIONALINPUTSTABLE,
+            $learningmaterials = $DB->get_records(
+                self::PAGESTABLE,
                 ['userid' => $USER->id, 'courseid' => $COURSE->id]
             );
         }
-        $resultoptionalinputs = [];
-        foreach ($optionalinputs as $optionalinput) {
+        $resultlearningmaterials = [];
+        foreach ($learningmaterials as $learningmaterial) {
             $target = self::generate_unique_number();
-            $newoptionalinput = new stdClass();
-            $newoptionalinput->target = $target;
-            $newoptionalinput->optionalinputid = $optionalinput->id;
-            $newoptionalinput->documentname = $optionalinput->name;
-            $newoptionalinput->currentpage = $optionalinput->currentpage;
-            $newoptionalinput->lastpage = $optionalinput->lastpage;
-            $newoptionalinput->expenditureoftime = $optionalinput->expenditureoftime;
-            $resultoptionalinputs[] = $newoptionalinput;
+            $newlearningmaterial = new stdClass();
+            $newlearningmaterial->target = $target;
+            $newlearningmaterial->learningmaterialid = $learningmaterial->id;
+            $newlearningmaterial->documentname = $learningmaterial->name;
+            $newlearningmaterial->currentpage = $learningmaterial->currentpage;
+            $newlearningmaterial->lastpage = $learningmaterial->lastpage;
+            $newlearningmaterial->expenditureoftime = $learningmaterial->expenditureoftime;
+            $resultlearningmaterials[] = $newlearningmaterial;
         }
-        $this->storage['optional_inputs'] = $resultoptionalinputs;
+        $this->storage['learning_materials'] = $resultlearningmaterials;
 
-        return $filter ? array_filter($this->storage['optional_inputs'], $filter) : $this->storage['optional_inputs'];
+        return $filter ? array_filter($this->storage['learning_materials'], $filter) : $this->storage['learning_materials'];
     }
 
     /**

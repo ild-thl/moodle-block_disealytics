@@ -241,6 +241,11 @@ const registerEventListener = (viewname) => {
                 removeOnClose: true,
             });
             modal.setSaveButtonText(await getString('modal_remove_check', 'block_disealytics'));
+            const saveBtn = modal.getRoot().find(modal.getActionSelector('save'));
+            if (saveBtn) {
+                saveBtn.removeClass('btn-primary');
+                saveBtn.addClass('btn-danger');
+            }
             const cancelBtn = modal.getFooter().find(modal.getActionSelector('cancel'));
             if (cancelBtn) {
                 cancelBtn.css('display', 'none');

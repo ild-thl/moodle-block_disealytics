@@ -254,7 +254,10 @@ class learningdata {
         $storagegoal->target = $target;
         $storagegoal->goalid = $dbgoal->id;
         $storagegoal->name = $dbgoal->description;
-        $storagegoal->coursename = $COURSE->id != $dbgoal->courseid ? $this->get_coursename_from_id($dbgoal->courseid) : "";
+        $storagegoal->coursename =
+                $COURSE->id != $dbgoal->courseid ?
+                        $this->get_coursename_from_id($dbgoal->courseid) :
+                        $this->get_coursename_from_id($COURSE->id);
         $storagegoal->finished = $dbgoal->finished === '1' ? 'true' : 'false';
         $storagegoal->timestamp = $dbgoal->duedate;
         $timestamp = $dbgoal->duedate;

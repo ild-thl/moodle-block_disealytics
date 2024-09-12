@@ -613,12 +613,14 @@
 .block_disealytics #create-goal-container input {
     resize: none;
     width: 100%;
-    border: 1px solid var(--diseablue);
+    border: 1px solid var(--disea-lightgray);
+    border-radius: 5px;
 }
 
 .block_disealytics #create-goal-container textarea:focus-visible,
 .block_disealytics #create-goal-container input:focus-visible {
-    border: 1px solid var(--diseablue);
+    border: 1px solid var(--disea-lightgray);
+    border-radius: 5px;
     outline: none;
 }
 
@@ -631,38 +633,6 @@
     color: var(--diseared);
     font-weight: bold;
     line-height: normal;
-}
-
-.block_disealytics #save-goal,
-.block_disealytics #save-goal-edit {
-    background: var(--diseablue);
-    color: #fff;
-    padding: 5px 20px;
-    border: 1px solid var(--diseablue);
-    transition: .1s all ease-in-out;
-}
-
-.block_disealytics #save-goal:hover,
-.block_disealytics #save-goal-edit:hover {
-    background: transparent;
-    border-color: var(--diseablue);
-    color: var(--diseablue);
-}
-
-.block_disealytics #cancel-goal,
-.block_disealytics #cancel-goal-edit {
-    color: var(--diseablue);
-    background: transparent;
-    padding: 5px 20px;
-    border: 1px solid var(--diseablue);
-    transition: .1s all ease-in-out;
-}
-
-.block_disealytics #cancel-goal:hover,
-.block_disealytics #cancel-goal-edit:hover {
-    color: #fff;
-    background: var(--diseared);
-    border-color: var(--diseared);
 }
 
 /* edit learning-goals */

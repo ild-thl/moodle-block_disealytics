@@ -15,6 +15,13 @@ The Learner Dashboard provides the following features:
   * **Progressbar of Learning Materials**: The Progressbar card shows the student's progress in reading the material provided in the regarding course.
   * **PVL-Probability**: The PVL-Probability card shows the student's probability of passing the course. It is an estimation based on the submission status of assignments of the student.
 
+Some card data is user-based. This means that the following data is saved in the plugin's database tables and is available even after the course is deleted:
+- Self-defined learning goals
+- Settings of the progress bar (input learning materials)
+- Dates of the 'Planning Assistant'
+
+The data can be deleted by the user inside the configuration modal of the dashboard.
+
 ## Code Structure
 
 The codebase is primarily written in PHP, JavaScript, SQL.
@@ -30,7 +37,7 @@ JavaScript are used for client-side scripting. They handle user interactions and
 ## Requirements
 
 The plugin is developed to support **Moodle 4.1**, using the plugin with other Moodle versions may cause unexpected issues.
-As such the plugin has been has been tested specifically with the following configurations:
+As such the plugin has been tested specifically with the following configurations:
 * Database: MariaDB, PostgreSQL
 * PHP: 7.4, 8.0, 8.1
 

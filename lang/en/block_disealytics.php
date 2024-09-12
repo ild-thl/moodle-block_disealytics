@@ -123,7 +123,7 @@ $string['learning-goals-view_help_info_text_expanded'] = "The card 'Learning Goa
 $string['goal_editing'] = 'Turn editing off';
 // Goal input fields.
 $string['goal_date_input'] = 'Date';
-$string['goals_reached'] = 'Learning goals achieved.';
+$string['goals_reached'] = 'learning goals achieved.';
 $string['learning-goals_add_goal'] = 'New learning goal';
 // Goals timeline.
 $string['goals_finished_past'] = 'Achieved';

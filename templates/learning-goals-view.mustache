@@ -118,8 +118,8 @@
                     </div>
 
                     <div class="goal-btn-container">
-                        <button id="cancel-goal" class="disea-cancel-btn text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
-                        <button id="save-goal" class="disea-save-btn text-small">{{#str}}goal_input_save, block_disealytics {{/str}}</button>
+                        <button id="cancel-goal" class="btn btn-outline-secondary text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
+                        <button id="save-goal" class="btn btn-primary text-small">{{#str}}goal_input_save, block_disealytics {{/str}}</button>
                     </div>
 
                 </div>
@@ -264,8 +264,8 @@
                     </div>
 
                     <div class="goal-btn-container">
-                        <button id="cancel-goal" class="disea-cancel-btn text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
-                        <button id="save-goal" class="disea-save-btn text-small">{{#str}}goal_input_save, block_disealytics {{/str}}</button>
+                        <button id="cancel-goal" class="btn btn-outline-secondary text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
+                        <button id="save-goal" class="btn btn-primary text-small">{{#str}}goal_input_save, block_disealytics {{/str}}</button>
                     </div>
 
                 </div>
@@ -370,6 +370,9 @@
                         </div>
                     {{/time_container}}
                 {{/nodata}}
+                {{#nodata}}
+                    <p>{{#str}} nodata, block_disealytics {{/str}}</p>
+                {{/nodata}}
             </div>
         {{/viewmode_halfyear}}
         {{#viewmode_global}}
@@ -383,48 +386,6 @@
                         {{/categories}}
                     </div>
                 </div>
-                <div class="new-goal-btn">
-                    <a class="flex-container" id="show-goal-form">
-                        <span>{{#str}}learning-goals_add_goal, block_disealytics{{/str}}</span>
-                        <i class="fa fa-plus"></i>
-                    </a>
-                </div>
-                <span style="font-size:small;" id="goal-limit" class="hidden goal-invalid">
-            <i class="fa fa-exclamation-triangle"></i> {{#str}}goal_limit, block_disealytics{{/str}}
-        </span>
-                <div id="create-goal-container" class="hidden">
-
-                    <label for="goal-name-input">
-                        <textarea id="goal-name-input" class="text-small" placeholder="{{#str}}goal_placeholder, block_disealytics {{/str}}"></textarea>
-                    </label>
-
-                    <div class="goal-date-time" style="display:flex;gap:1em;">
-                        <label for="goal-due-date-input">
-                            <input type="date" id="goal-due-date-input" class="text-small" name="goal-due-date-input" required>
-                        </label>
-
-                        <label for="goal-due-time-input">
-                            <input type="time" id="goal-due-time-input" class="text-small" name="goal-due-time-input" required>
-                        </label>
-                    </div>
-
-
-                    <div class="goal-info-messages">
-                            <span style="font-size:small;" id="goal-name-invalid" class="hidden goal-invalid text-small">{{#str}}
-                                goal_name_invalid, block_disealytics {{/str}}</span>
-                        <span style="font-size:small;" id="goal-name-missing" class="hidden goal-invalid text-small">{{#str}}
-                            goal_name_missing, block_disealytics {{/str}}</span>
-                        <span style="font-size:small;" id="goal-date-missing" class="hidden goal-invalid text-small">{{#str}}
-                            goal_date_missing, block_disealytics {{/str}}</span>
-                    </div>
-
-                    <div class="goal-btn-container">
-                        <button id="cancel-goal" class="disea-cancel-btn text-small">{{#str}}goal_input_cancel, block_disealytics {{/str}}</button>
-                        <button id="save-goal" class="disea-save-btn text-small">{{#str}}goal_input_save, block_disealytics {{/str}}</button>
-                    </div>
-
-                </div>
-
                 {{^nodata}}
                     <hr class="hide-when-editing">
                     <div class="learning-goals-progress-bar"><label for="learning-goals-progress"><span>{{number_of_finished_goals}} / {{number_of_goals}} {{#str}}
@@ -525,6 +486,9 @@
                             </div>
                         </div>
                     {{/time_container}}
+                {{/nodata}}
+                {{#nodata}}
+                    <p>{{#str}} nodata, block_disealytics {{/str}}</p>
                 {{/nodata}}
             </div>
         {{/viewmode_global}}

@@ -61,6 +61,8 @@ class get_learning_materials extends external_api {
     /**
      * Returns a list of learning materials for the course.
      *
+     * @param int|null $courseid
+     *
      * @throws restricted_context_exception
      * @throws dml_exception
      * @throws moodle_exception

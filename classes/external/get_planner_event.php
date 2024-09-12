@@ -58,41 +58,40 @@ class get_planner_event extends external_api {
         ]);
     }
 
+    /**
+     * Executes the web service to get an event from the planner.
+     *
+     * @param int $dateid The ID of the planner date (event).
+     * @return stdClass|false The event record from the database, or false if not found.
+     * @throws invalid_parameter_exception If the parameters are invalid.
+     * @throws required_capability_exception If the user does not have the required capability.
+     * @throws restricted_context_exception If the context is restricted.
+     * @throws dml_exception If there is an error with the database query.
+     */
+    public static function execute(int $dateid) {
+        // Validate the parameters.
+        self::validate_parameters(self::execute_parameters(), [
+                'dateid' => $dateid,
+        ]);
 
-/**
- * Executes the web service to get an event from the planner.
- *
- * @param int $dateid The ID of the planner date (event).
- * @return stdClass|false The event record from the database, or false if not found.
- * @throws invalid_parameter_exception If the parameters are invalid.
- * @throws required_capability_exception If the user does not have the required capability.
- * @throws restricted_context_exception If the context is restricted.
- * @throws dml_exception If there is an error with the database query.
- */
-public static function execute(int $dateid) {
-    // Validate the parameters.
-    self::validate_parameters(self::execute_parameters(), [
-            'dateid' => $dateid,
-    ]);
+        global $DB, $COURSE;
 
-    global $DB, $COURSE;
+        // Security checks.
+        $context = context_course::instance($COURSE->id);
+        self::validate_context($context);
+        require_capability('block/disealytics:editlearnerdashboard', $context);
 
-    // Security checks.
-    $context = context_course::instance($COURSE->id);
-    self::validate_context($context);
-    require_capability('block/disealytics:editlearnerdashboard', $context);
+        // Retrieve the event record from the database.
+        $event = $DB->get_record('block_disealytics_user_dates', ['id' => $dateid]);
 
-    // Retrieve the event record from the database.
-    $event = $DB->get_record('block_disealytics_user_dates', ['id' => $dateid]);
+        // Retrieve the course information.
+        $course = $DB->get_record('course', ['id' => $event->courseid], 'id, fullname');
 
-    // Retrieve the course information.
-    $course = $DB->get_record('course', ['id' => $event->courseid], 'id, fullname');
+        // Combine event and course data.
+        $event->coursefullname = $course->fullname;
 
-    // Combine event and course data.
-    $event->coursefullname = $course->fullname;
-
-    return $event;
-}
+        return $event;
+    }
 
     /**
      * Describes the return structure of the service

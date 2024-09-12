@@ -37,6 +37,7 @@ use external_single_structure;
 use external_value;
 use invalid_parameter_exception;
 use moodle_database;
+use moodle_exception;
 use required_capability_exception;
 use restricted_context_exception;
 use stdClass;
@@ -46,6 +47,11 @@ use stdClass;
  */
 class get_learning_materials extends external_api {
 
+    /**
+     * Describes the parameters.
+     *
+     * @return external_function_parameters
+     */
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
                 'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_OPTIONAL),
@@ -53,9 +59,11 @@ class get_learning_materials extends external_api {
     }
 
     /**
+     * Returns a list of learning materials for the course.
+     *
      * @throws restricted_context_exception
      * @throws dml_exception
-     * @throws \moodle_exception
+     * @throws moodle_exception
      * @throws invalid_parameter_exception
      * @throws required_capability_exception
      */
@@ -69,7 +77,7 @@ class get_learning_materials extends external_api {
         require_capability('block/disealytics:editlearnerdashboard', $context);
 
         // Fetch learning materials.
-        $learningMaterialsData = $DB->get_records(
+        $learningmaterialsdata = $DB->get_records(
                 'block_disealytics_user_pages',
                 ['userid' => $USER->id, 'courseid' => $courseid]
         );
@@ -84,7 +92,7 @@ class get_learning_materials extends external_api {
                     case "resource":
                     case "page":
                     case "url":
-                        if (!self::check_name_exists($cm->name, $learningMaterialsData)) {
+                        if (!self::check_name_exists($cm->name, $learningmaterialsdata)) {
                             $addfile = new stdClass();
                             $addfile->name = $cm->name;
                             $filenames[] = $addfile;
@@ -114,11 +122,11 @@ class get_learning_materials extends external_api {
             }
         }
 
-        $learningMaterials = [];
+        $learningmaterials = [];
 
-        if (!empty($learningMaterialsData)) {
-            foreach ($learningMaterialsData as $lm) {
-                $learningMaterials[] = [
+        if (!empty($learningmaterialsdata)) {
+            foreach ($learningmaterialsdata as $lm) {
+                $learningmaterials[] = [
                         'learningmaterialid' => $lm->id,
                         'documentname' => $lm->name,
                         'currentpage' => $lm->currentpage,
@@ -130,10 +138,10 @@ class get_learning_materials extends external_api {
 
         return [
                 'file_names' => $filenames,
-                'files_left' => ($filescount > count($learningMaterials)),
-                'data' => $learningMaterials,
+                'files_left' => ($filescount > count($learningmaterials)),
+                'data' => $learningmaterials,
                 'number_of_documents' => $filescount,
-                'nodata' => empty($learningMaterials),
+                'nodata' => empty($learningmaterials),
         ];
 
     }
@@ -163,8 +171,8 @@ class get_learning_materials extends external_api {
         return new external_single_structure([
                 'file_names' => new external_multiple_structure(
                         new external_single_structure([
-                                'name' => new external_value(PARAM_TEXT, 'Name of the file')
-                        ])
+                                'name' => new external_value(PARAM_TEXT, 'Name of the file'),
+                        ]),
                 ),
                 'files_left' => new external_value(PARAM_BOOL, 'Files left flag'),
                 'data' => new external_multiple_structure(
@@ -173,11 +181,11 @@ class get_learning_materials extends external_api {
                                 'documentname' => new external_value(PARAM_TEXT, 'Name of the document'),
                                 'currentpage' => new external_value(PARAM_INT, 'Current page of the document'),
                                 'lastpage' => new external_value(PARAM_INT, 'Last page of the document'),
-                                'expenditureoftime' => new external_value(PARAM_INT, 'Time spent on the document')
-                        ])
+                                'expenditureoftime' => new external_value(PARAM_INT, 'Time spent on the document'),
+                        ]),
                 ),
                 'number_of_documents' => new external_value(PARAM_INT, 'Number of documents'),
-                'nodata' => new external_value(PARAM_BOOL, 'No data flag')
+                'nodata' => new external_value(PARAM_BOOL, 'No data flag'),
         ]);
     }
 

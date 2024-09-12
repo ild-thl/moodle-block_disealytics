@@ -93,23 +93,22 @@ class learning_material extends external_api {
      * Executes the service.
      *
      * @param string $calltype defines the calltype ('add', 'update', 'delete').
-     * @param int $id name of the document
-     * @param int $courseid currently visiting course id
+     * @param int|null $id name of the document
+     * @param int|null $courseid currently visiting course id
      * @param string $name name of the document
      * @param int $currentpage last page that was read in the document
      * @param int $lastpage last page of the document
      * @param int $expenditureoftime expenditure of time
      * @return bool $result
-     * @throws invalid_parameter_exception
      * @throws dml_exception
-     * @throws coding_exception
-     * @throws restricted_context_exception
+     * @throws invalid_parameter_exception
      * @throws required_capability_exception
+     * @throws restricted_context_exception
      */
     public static function execute(
             string $calltype,
-            int $id = null,
-            int $courseid = null,
+            ?int $id = null,
+            ?int $courseid = null,
             string $name = '',
             int $currentpage = 0,
             int $lastpage = 1,

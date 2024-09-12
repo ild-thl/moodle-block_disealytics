@@ -717,6 +717,7 @@
 
 .block_disealytics #pvl-doughnut canvas {
     max-height: 160px !important; /* stylelint-disable-line declaration-no-important */
+    max-width: 248px !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .block_disealytics .pvl-probability {

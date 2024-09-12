@@ -132,7 +132,7 @@ export const setEditingMode = () => {
 
             // Add view button.
             const addViewButton = document.querySelector('#block_disealytics-open-add-modal');
-            if (addViewButton) {
+            if (addViewButton && addViewButton.dataset.listenerAttached !== 'true') {
                 addViewButton.addEventListener("click", async function() {
                     try {
                         const modal = await ModalFactory.create({
@@ -146,12 +146,12 @@ export const setEditingMode = () => {
                         const allViews = document.querySelector('.show-when-all-views-enabled');
                         const anyViewSelectable = document.querySelector('.show-when-any-view-selectable');
 
-                        if (!allViewsEnabled()) {
-                            anyViewSelectable.classList.remove('hidden');
-                            allViews.classList.add('hidden');
-                        } else {
+                        if (allViewsEnabled()) {
                             anyViewSelectable.classList.add('hidden');
                             allViews.classList.remove('hidden');
+                        } else {
+                            anyViewSelectable.classList.remove('hidden');
+                            allViews.classList.add('hidden');
                         }
 
                         // Add EventListeners to the Buttons.
@@ -171,16 +171,21 @@ export const setEditingMode = () => {
                                     const updatedViewList = updateViewlist(viewname, 'add');
                                     await updateSetting('write', 'views', JSON.stringify(updatedViewList));
                                     // This handles the information given to the user, when all views are used or not.
-                                    if (allViewsEnabled) {
-                                        allViews.classList.remove('hidden');
-                                        anyViewSelectable.classList.add('hidden');
-                                    } else {
-                                        allViews.classList.add('hidden');
-                                        anyViewSelectable.classList.remove('hidden');
+                                    for (const view of updatedViewList) {
+                                        if (view.enabled === 0) {
+                                            allViews.classList.add('hidden');
+                                            anyViewSelectable.classList.remove('hidden');
+                                            break;
+                                        } else {
+                                            allViews.classList.remove('hidden');
+                                            anyViewSelectable.classList.add('hidden');
+                                        }
                                     }
                                 }, true);
                             }
                         });
+                        // Mark the event listener as attached.
+                        addViewButton.dataset.listenerAttached = 'true';
                     } catch (error) {
                         window.console.error("Failed to open the add view modal:", error);
                     }

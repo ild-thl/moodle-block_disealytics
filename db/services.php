@@ -74,6 +74,15 @@ $functions = [
                 'ajax' => true,
                 'loginrequired' => true,
         ],
+        'block_disealytics_get_planner_event' => [
+                'classname'   => 'block_disealytics\external\get_planner_event',
+                'methodname'  => 'execute',
+                'classpath'   => 'blocks/disealytics/classes/external/get_planner_event.php',
+                'description' => 'Get an event from the planner',
+                'type'        => 'read',
+                'ajax'        => true,
+                'loginrequired' => true,
+        ],
         'block_disealytics_change_planner_view' => [
                 'classname' => 'block_disealytics\external\change_planner_view',
                 'methodname' => 'execute',
@@ -82,12 +91,21 @@ $functions = [
                 'ajax' => true,
                 'loginrequired' => true,
         ],
-        'block_disealytics_optional_input' => [
-                'classname' => 'block_disealytics\external\optional_input',
+        'block_disealytics_learning_material' => [
+                'classname' => 'block_disealytics\external\learning_material',
                 'methodname' => 'execute',
-                'description' => 'Update optional inputs',
+                'description' => 'Update learning materials',
                 'type' => 'write',
                 'ajax' => true,
+                'loginrequired' => true,
+        ],
+        'block_disealytics_get_learning_materials' => [
+                'classname'   => 'block_disealytics\external\get_learning_materials',
+                'methodname'  => 'execute',
+                'classpath'   => 'blocks/disealytics/classes/external/get_learning_materials.php',
+                'description' => 'Get learning materials from the user and course',
+                'type'        => 'read',
+                'ajax'        => true,
                 'loginrequired' => true,
         ],
         'block_disealytics_modid_to_courseid' => [

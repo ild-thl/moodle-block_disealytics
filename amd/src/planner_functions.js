@@ -17,9 +17,10 @@ import Ajax from 'core/ajax';
 import {get_string as getString} from 'core/str';
 import {updateView} from "./update_view";
 import {getCourseId} from "./view_selection";
-import {createDiseaModal, getValueById, showDiseaModal} from "./add_interaction";
-
-let plannerModal = null;
+import {getValueById} from "./add_interaction";
+import ModalFactory from 'core/modal_factory';
+import Templates from "core/templates";
+import ModalEvents from "core/modal_events";
 
 /**
  * Initialize the planner-view interactions.
@@ -27,8 +28,8 @@ let plannerModal = null;
  */
 export const init = async() => {
     await updateMonthDisplay();
-    initDeleteEventListeners();
     initAddEventListeners();
+    initModalEventListeners();
 };
 
 /**
@@ -41,7 +42,7 @@ export const init = async() => {
  *
  * @throws {Error} If there is an error during the update process.
  */
-export async function updateMonthDisplay() {
+async function updateMonthDisplay() {
     try {
         const courseId = getCourseId();
         const plannerViews = document.querySelectorAll('.block_disealytics-planner-left-side');
@@ -85,6 +86,91 @@ export async function updateMonthDisplay() {
 }
 
 /**
+ * Initializes event listeners for the planner modal.
+ *
+ */
+function initModalEventListeners() {
+    const showDetailsBtns = document.querySelectorAll('.planner-event-open-details-modal');
+    if (showDetailsBtns) {
+        showDetailsBtns.forEach((showDetailsBtn) => {
+            showDetailsBtn.addEventListener('click', async function() {
+                const eventFromDb = await getEventFromPlanner(this.getAttribute('data-event-id'));
+
+                const plannerEvent = {};
+                plannerEvent.dateid = eventFromDb.id;
+                plannerEvent.name = eventFromDb.name;
+                plannerEvent.courseid = eventFromDb.courseid;
+                plannerEvent.timestampStart = eventFromDb.timestart;
+                if (eventFromDb.timeduration > 0) {
+                    plannerEvent.hasEnd = true;
+                    plannerEvent.timestampEnd = eventFromDb.timestart + eventFromDb.timeduration;
+                } else {
+                    plannerEvent.hasEnd = false;
+                }
+                plannerEvent.location = eventFromDb.location;
+                plannerEvent.eventType = eventFromDb.eventtype;
+                plannerEvent.courseName = eventFromDb.coursefullname;
+
+
+                // Create the modal with the custom content.
+                const modal = await ModalFactory.create({
+                    type: ModalFactory.types.SAVE_CANCEL,
+                    title: plannerEvent.name,
+                    body: await Templates.render('block_disealytics/planner_event_modal', plannerEvent),
+                    removeOnClose: true,
+                });
+                modal.setSaveButtonText(await getString('planner_delete_event', 'block_disealytics'));
+                const cancelBtn = modal.getFooter().find(modal.getActionSelector('cancel'));
+                if (cancelBtn) {
+                    cancelBtn.css('display', 'none');
+                }
+                const saveBtn = modal.getRoot().find(modal.getActionSelector('save'));
+                if (saveBtn) {
+                    saveBtn.removeClass('btn-primary');
+                    saveBtn.addClass('btn-danger');
+                }
+                modal.show();
+                modal.getRoot().on(ModalEvents.save, async function() {
+                    await deleteEventFromPlanner(plannerEvent.dateid, plannerEvent.courseid);
+                    await updateView(getCourseId(), ['planner-view']);
+                });
+            });
+        });
+    }
+}
+
+/**
+ * Initializes event listeners for adding events.
+ *
+ * @function
+ * @name initAddEventListeners
+ * @returns {void}
+ */
+function initAddEventListeners() {
+    const addNewEventBtns = document.querySelectorAll('.block_disealytics-add-new-event-to-planner');
+    if (addNewEventBtns) {
+        addNewEventBtns.forEach((addNewEventBtn) => {
+            addNewEventBtn.addEventListener('click', async function() {
+                const modal = await ModalFactory.create({
+                    type: ModalFactory.types.SAVE_CANCEL,
+                    title: getString('planner_add_event_modal', 'block_disealytics'),
+                    body: await Templates.render('block_disealytics/planner_add_event_modal', {id: 1}),
+                    removeOnClose: true
+                });
+                modal.setSaveButtonText(await getString('planner_save_event', 'block_disealytics'));
+                await modal.show();
+
+                populateDateInputs(this.getAttribute('data-date'));
+                initButtonsInPlannerForm();
+                modal.getRoot().on(ModalEvents.save, async function() {
+                    await addEventToPlanner();
+                });
+            });
+        });
+    }
+}
+
+/**
  * Initializes event listeners for buttons in the planner form.
  * Handle changes in the planner form inputs and updates the corresponding fields accordingly.
  *
@@ -92,7 +178,7 @@ export async function updateMonthDisplay() {
  * @name initButtonsInPlannerForm
  * @returns {void}
  */
-export function initButtonsInPlannerForm() {
+function initButtonsInPlannerForm() {
     const plannerNoEnd = document.getElementById('planner-no-end-input');
     const plannerWithEnd = document.getElementById('planner-until-input');
     const plannerDuration = document.getElementById('planner-duration-input');
@@ -130,97 +216,6 @@ export function initButtonsInPlannerForm() {
 }
 
 /**
- * Initializes event listeners for the planner form, including buttons for adding, saving and
- * canceling events. Also, handles interactions with the planner form inputs and the database.
- *
- * @function
- * @name initPlannerEventListeners
- * @returns {void}
- */
-export function initPlannerEventListeners() {
-    // The button to add goals.
-    const saveDateBtns = document.querySelectorAll('.save-planner-date');
-    const cancelDateBtns = document.querySelectorAll('.cancel-planner-date');
-
-    // Saving event in database.
-    if (saveDateBtns) {
-        saveDateBtns.forEach((saveDateBtn) => {
-            saveDateBtn.addEventListener('click', async function() {
-                if (await addEventToPlanner()) {
-                    cancelDateBtns.forEach((cancelDateBtn) => {
-                        cancelDateBtn.click();
-                    });
-                }
-            });
-        });
-    }
-
-    // Cancel/reset the create an event form.
-    if (cancelDateBtns) {
-        cancelDateBtns.forEach((cancelDateBtn) => {
-            cancelDateBtn.addEventListener('click', async function() {
-                resetPlannerEventForm();
-            });
-        });
-    }
-}
-
-/**
- * Initializes event listeners for deleting events.
- *
- * @function
- * @name initDeleteEventListeners
- * @returns {void}
- */
-export function initDeleteEventListeners() {
-    const deleteEventBtns = document.querySelectorAll('.delete-event-from-planner');
-
-    // Delete an event from the database.
-    if (deleteEventBtns) {
-        for (const deleteDateBtn of deleteEventBtns) {
-            deleteDateBtn.addEventListener('click', async function() {
-                // Extract the numeric part from the button's ID.
-                const dateid = this.id.match(/\d+$/)[0];
-                // Call the deleteEvent function with the extracted dateid.
-                await deleteEventFromPlanner(dateid);
-            });
-        }
-    }
-}
-
-/**
- * Initializes event listeners for adding events.
- *
- * @function
- * @name initAddEventListeners
- * @returns {void}
- */
-export function initAddEventListeners() {
-    const addNewEventBtns = document.querySelectorAll('.block_disealytics-add-new-event-to-planner');
-    if (addNewEventBtns) {
-        addNewEventBtns.forEach((addNewEventBtn) => {
-            addNewEventBtn.addEventListener('click', async function() {
-                plannerModal = await createDiseaModal(
-                    'block_disealytics/planner_add_event_modal',
-                    getString('planner_add_event_modal', 'block_disealytics'),
-                    1);
-
-                // Assuming showDiseaModal returns a promise.
-                await showDiseaModal(plannerModal);
-
-                // Add a delay to ensure the modal is fully shown (you may adjust the duration).
-                await new Promise(resolve => setTimeout(resolve, 500));
-
-                const clickedDate = this.getAttribute('data-date');
-                populateDateInputs(clickedDate);
-                initButtonsInPlannerForm();
-                initPlannerEventListeners();
-            });
-        });
-    }
-}
-
-/**
  * Populates date and time inputs in the planner form based on the provided date string.
  *
  * @function
@@ -228,7 +223,7 @@ export function initAddEventListeners() {
  * @param {string} clickedDateInput - The date string in the format 'YYYY/MM/DD'.
  * @returns {void}
  */
-export function populateDateInputs(clickedDateInput) {
+function populateDateInputs(clickedDateInput) {
     const [year, month, day] = clickedDateInput.split('/');
     const dateStartInput = document.getElementById('planner-date-start-input');
     const timeStartInput = document.getElementById('planner-time-start-input');
@@ -248,49 +243,6 @@ export function populateDateInputs(clickedDateInput) {
 }
 
 /**
- * Resets the inputs and selections in the planner event form to their default values.
- * Also, hides any information messages related to the form.
- *
- * @function
- * @name resetPlannerEventForm
- * @returns {void}
- */
-export function resetPlannerEventForm() {
-    // Reset Name Input.
-    document.getElementById('planner-event-name-input').value = '';
-
-    // Reset Date and Time Inputs.
-    const now = new Date();
-    // eslint-disable-next-line max-len
-    const currentDate = `${now.getFullYear()} - ${(now.getMonth() + 1).toString().padStart(2, '0')} - ${now.getDate().toString().padStart(2, '0')}`;
-    const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-    document.getElementById('planner-date-start-input').value = currentDate;
-    document.getElementById('planner-time-start-input').value = currentTime;
-    document.getElementById('planner-date-end-input').value = currentDate;
-    document.getElementById('planner-time-end-input').value = currentTime;
-
-    // Reset Location Input.
-    document.getElementById('planner-event-location-input').value = '';
-
-    // Reset Duration Input.
-    document.getElementById('planner-duration-text').value = '90';
-
-    // Reset Radio Buttons.
-    document.getElementById('planner-no-end-input').checked = true;
-    document.getElementById('planner-until-input').checked = false;
-    document.getElementById('planner-duration-input').checked = false;
-
-    // Reset Checkbox.
-    document.getElementById('planner-event-repetitions-input-checkbox').checked = false;
-    document.getElementById('planner-event-repetitions-input').value = '1';
-
-    // Reset Info Messages.
-    document.getElementById('planner-name-invalid').classList.add('hidden');
-    document.getElementById('planner-name-missing').classList.add('hidden');
-    document.getElementById('planner-date-invalid').classList.add('hidden');
-}
-
-/**
  * Combines date and time values from specified HTML elements to create a JavaScript Date object.
  *
  * @function
@@ -299,7 +251,7 @@ export function resetPlannerEventForm() {
  * @param {string} timeId - The ID of the HTML element containing the time value.
  * @returns {Date} - The JavaScript Date object representing the combined date and time.
  */
-export function getCombinedDateTime(dateId, timeId) {
+function getCombinedDateTime(dateId, timeId) {
     const date = document.getElementById(dateId).value;
     const time = document.getElementById(timeId).value;
     const combinedDateTimeString = `${date}T${time}`;
@@ -316,7 +268,7 @@ export function getCombinedDateTime(dateId, timeId) {
  * @returns {Promise<boolean>} - A promise that resolves when the event is successfully added to the planner.
  * @throws {Error} - Throws an error if there is an issue during the process.
  */
-export async function addEventToPlanner() {
+async function addEventToPlanner() {
     try {
         const name = getValueById('planner-event-name-input');
         const location = getValueById('planner-event-location-input');
@@ -468,25 +420,57 @@ export async function addEventToPlanner() {
 }
 
 /**
+ * Gets the event from the planner by making an AJAX call to receive the planner data.
+ *
+ * @async
+ * @function
+ * @name getEventFromPlanner
+ * @param {string} id - The ID of the event.
+ * @returns {Promise<Object>} - A promise that resolves with the event data.
+ * @throws {Error} - Throws an error if there is an issue during the receiving process.
+ */
+function getEventFromPlanner(id) {
+    return new Promise((resolve, reject) => {
+        Ajax.call([{
+            methodname: 'block_disealytics_get_planner_event',
+            args: {
+                dateid: id,
+            }
+        }])[0].done(function(data) {
+            resolve(data);
+        }).fail(function(err) {
+            reject(err);
+        });
+    });
+}
+
+/**
  * Deletes an event from the planner by making an AJAX call to update the planner data.
  *
  * @async
  * @function
  * @name deleteEventFromPlanner
- * @param {string} id - The ID of the event to be deleted.
+ * @param {int} id - The ID of the event to be deleted.
+ * @param {int} courseid - The ID of the course.
  * @throws {Error} - Throws an error if there is an issue during the deletion process.
  */
-export function deleteEventFromPlanner(id) {
-    Ajax.call([{
-        methodname: 'block_disealytics_update_planner_event',
-        args: {
-            updatetype: 'delete',
-            dateid: id,
-        }
-    }])[0].done(async function() {
-        await updateView(getCourseId(), ['planner-view']);
-    }).fail(err => {
-        window.console.log(err);
+async function deleteEventFromPlanner(id, courseid) {
+    await new Promise((resolve, reject) => {
+        Ajax.call([{
+            methodname: 'block_disealytics_update_planner_event',
+            args: {
+                updatetype: 'delete',
+                courseid: courseid,
+                dateid: id,
+            }
+        }])[0].done(() => {
+            // Resolve the promise when done.
+            resolve();
+        }).fail(err => {
+            // Reject the promise if there's an error.
+            window.console.log(err);
+            reject(err);
+        });
     });
 }
 
@@ -504,7 +488,7 @@ export function deleteEventFromPlanner(id) {
  * @param {number | null} repetitions - The number of repetitions for the event, or null if no repetitions.
  * @returns {string} - True if all inputs are valid, otherwise false.
  */
-export function validateInputs(name,
+function validateInputs(name,
                                location,
                                startDate,
                                endDate = null,

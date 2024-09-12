@@ -48,7 +48,7 @@ class category_view extends external_api {
      * @throws required_capability_exception
      */
     public static function execute(string $selectedcategory) {
-        global $USER;
+        global $USER, $COURSE;
         self::validate_parameters(self::execute_parameters(), [
                 'selectedcategory' => $selectedcategory,
         ]);
@@ -62,7 +62,7 @@ class category_view extends external_api {
         // Security checks.
         $context = context_course::instance($COURSE->id);
         self::validate_context($context);
-        require_capability('block/disealytics:editlearningdashboard', $context);
+        require_capability('block/disealytics:editlearnerdashboard', $context);
 
         // Return response to ajax call and hide everything that doesn't match the category.
         return json_encode($response);

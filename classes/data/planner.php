@@ -402,11 +402,12 @@ class planner {
 
     /**
      * Add a date series to the database.
+     *
      * @param array $dateobjects The date objects.
-     * @return void
+     * @return bool
      * @throws dml_exception
      */
-    public static function add_date_series_to_database(array $dateobjects): void {
+    public static function add_date_series_to_database(array $dateobjects): bool {
         global $DB;
         $count = count($dateobjects);
         $insertedid = 0;
@@ -414,42 +415,54 @@ class planner {
             if ($i == 0) {
                 $originaldate = $dateobjects[0];
                 $insertedid = self::add_date_to_database($originaldate);
+                if (!$insertedid) {
+                    return false;
+                }
                 $originaldate->id = $insertedid;
                 $originaldate->repeatid = $insertedid;
                 $DB->update_record(self::DATETABLE, $originaldate);
             } else {
                 $date = $dateobjects[$i];
                 $date->repeatid = $insertedid;
-                self::add_date_to_database($date);
+                if (!self::add_date_to_database($date)) {
+                    return false;
+                }
             }
         }
+        return true;
     }
 
     /**
      * Update a date in the database.
+     *
      * @param stdClass $updateddate The updated date.
-     * @return void
+     * @return bool
      * @throws dml_exception
      */
-    public static function update_date(stdClass $updateddate): void {
+    public static function update_date(stdClass $updateddate): bool {
         global $DB;
         $now = (new DateTime())->format('U');
         if ($DB->record_exists(self::DATETABLE, ['id' => $updateddate->id])) {
             $updateddate->timemodified = $now;
-            $DB->update_record(self::DATETABLE, $updateddate);
+            return $DB->update_record(self::DATETABLE, $updateddate);
         }
+        return false;
     }
 
     /**
      * Delete a date from the database.
+     *
      * @param int $id The ID of the date.
-     * @return void
+     * @return bool
      * @throws dml_exception
      */
-    public static function delete_date($id): void {
+    public static function delete_date(int $id): bool {
         global $DB;
         if ($DB->record_exists(self::DATETABLE, ['id' => $id])) {
-            $DB->delete_records(self::DATETABLE, ['id' => $id]);
+            return $DB->delete_records(self::DATETABLE, ['id' => $id]);
+        } else {
+            return false;
         }
     }
+
 }

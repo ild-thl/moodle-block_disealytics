@@ -35,7 +35,6 @@
         "title": "Progress Bar"
     }
 }}
-{{> block_disealytics/progress-bar_config_menu}}
 {{#editmode}}
     <div class="block_disealytics-editing block_disealytics-editing-{{viewname}}"
          data-container="block_disealytics/editing-{{viewname}}">
@@ -71,10 +70,7 @@
             </a></span>{{title}}</h1>
                 <div class="navigation-icons">
                     {{^nodata}}
-                        <a id="block_disealytics_progress_config_menu"
-                           class="dashboard-button"
-                           data-toggle="modal"
-                           data-target="#progressConfigModal">
+                        <a class="block_disealytics_open-progress-bar-modal dashboard-button">
                             <i class="fa fa-pencil"></i>
                         </a>
                     {{/nodata}}
@@ -118,11 +114,8 @@
                 {{#nodata}}
                     <p>{{#str}} nodata, block_disealytics {{/str}}</p>
                     {{#files_left}}
-                        <button id="block_disealytics_progress_config_menu"
-                                class="dashboard-button progress-bar-btn btn btn-primary"
-                                data-toggle="modal"
-                                data-target="#progressConfigModal">
-                            {{#str}} optional-inputs-view, block_disealytics {{/str}}
+                        <button class="block_disealytics_open-progress-bar-modal dashboard-button progress-bar-btn btn btn-primary">
+                            {{#str}} learning-materials-view, block_disealytics {{/str}}
                         </button>
                     {{/files_left}}
                 {{/nodata}}
@@ -166,11 +159,8 @@
                 {{#nodata}}
                     <p>{{#str}} nodata, block_disealytics {{/str}}</p>
                     {{#files_left}}
-                        <button id="block_disealytics_progress_config_menu"
-                                class="dashboard-button progress-bar-btn btn btn-primary"
-                                data-toggle="modal"
-                                data-target="#progressConfigModal">
-                            {{#str}} optional-inputs-view, block_disealytics {{/str}}
+                        <button class="block_disealytics_open-progress-bar-modal dashboard-button progress-bar-btn btn btn-primary">
+                            {{#str}} learning-materials-view, block_disealytics {{/str}}
                         </button>
                     {{/files_left}}
                 {{/nodata}}
@@ -215,11 +205,8 @@
                 {{#nodata}}
                     <p>{{#str}} nodata, block_disealytics {{/str}}</p>
                     {{#files_left}}
-                        <button id="block_disealytics_progress_config_menu"
-                                class="dashboard-button progress-bar-btn btn btn-primary"
-                                data-toggle="modal"
-                                data-target="#progressConfigModal">
-                            {{#str}} optional-inputs-view, block_disealytics {{/str}}
+                        <button class="block_disealytics_open-progress-bar-modal dashboard-button progress-bar-btn btn btn-primary">
+                            {{#str}} learning-materials-view, block_disealytics {{/str}}
                         </button>
                     {{/files_left}}
                 {{/nodata}}

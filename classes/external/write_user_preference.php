@@ -78,7 +78,7 @@ class write_user_preference extends external_api {
         // Security checks.
         $context = context_course::instance($COURSE->id);
         self::validate_context($context);
-        require_capability('block/disealytics:editlearningdashboard', $context);
+        require_capability('block/disealytics:editlearnerdashboard', $context);
 
         switch ($info['action']) {
             case "write":

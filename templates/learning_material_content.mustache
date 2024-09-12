@@ -1,0 +1,89 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_disealytics/learning_material_content
+
+    Template purpose and description.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * none
+
+    Example context (json):
+    {
+
+    }
+}}
+<div class="learning-material-container" data-learningmaterialid="{{learningmaterialid}}">
+    <span id="learning-materials-deletion-successful" class="hidden">{{#str}}learning_material_delete_success, block_disealytics {{/str}}</span>
+    <h5>{{documentname}}</h5>
+    <div>
+        <span>{{#str}}learning_material_pages, block_disealytics {{/str}}: </span>
+        <span>{{currentpage}} / {{lastpage}}</span>
+    </div>
+    <div>
+        <span>{{#str}}learning_material_expenditureoftime, block_disealytics {{/str}}: </span>
+        <span>{{expenditureoftime}}</span>
+    </div>
+    <div class="btn-container">
+        <button class="delete-learning-material-button btn btn-danger text-small">{{#str}}learning_material_delete, block_disealytics {{/str}}</button>
+        <button class="edit-learning-material-button btn btn-primary text-small">{{#str}}learning_material_edit, block_disealytics {{/str}}</button>
+    </div>
+</div>
+<div class="edit-learning-material-container hidden" data-learningmaterialid="{{learningmaterialid}}">
+    <h5 id="learning-material-document-name-{{learningmaterialid}}" class="learning-material-document-name">{{documentname}}</h5>
+    <p class="learning-material-update-warning warning-learning-material pageerror text-small hidden">
+        {{#str}}learning_material_page_error, block_disealytics {{/str}}</p>
+    <p class="learning-material-update-warning warning-learning-material nodocumentselectederror text-small hidden">
+        {{#str}}learning_material_no_document_selected_error, block_disealytics {{/str}}</p>
+    <p class="learning-material-update-warning warning-learning-material negativepageerror text-small hidden">
+        {{#str}}learning_material_negative_page_error, block_disealytics {{/str}}</p>
+    <p class="learning-material-update-warning warning-learning-material lastpagezeroerror text-small hidden">
+        {{#str}}learning_material_page_zero_error, block_disealytics {{/str}}</p>
+    <p class="learning-material-update-warning warning-learning-material pageoverflowerror text-small hidden">
+        {{#str}}learning_material_page_overflow_error, block_disealytics {{/str}}</p>
+    <p class="learning-material-update-warning warning-learning-material expenditureoftimeoverflowerror text-small hidden">
+        {{#str}}learning_material_expenditure_of_time_overflow_error, block_disealytics {{/str}}<br></p>
+    <div style="display: grid; grid-gap: 8px;">
+        <div class="grid-container">
+            <label for="learning-material-update-currentpage-{{learningmaterialid}}">{{#str}}learning_material_current_page, block_disealytics {{/str}} </label>
+            <input style="width: 50px" id="learning-material-update-currentpage-{{learningmaterialid}}" class="learning-material-update-currentpage check-pattern text-small"
+                   type="number" value="{{currentpage}}" min="1" max="1000" step="1" required>
+        </div>
+        <div class="grid-container">
+            <label for="learning-material-update-lastpage-{{learningmaterialid}}">{{#str}}learning_material_last_page, block_disealytics {{/str}} </label>
+            <input style="width: 50px" id="learning-material-update-lastpage-{{learningmaterialid}}" class="learning-material-update-lastpage check-pattern text-small"
+                   type="number" value="{{lastpage}}" min="1" max="1000" step="1" required>
+        </div>
+        <div class="grid-container">
+            <label for="learning-material-update-expenditureoftime-{{learningmaterialid}}">{{#str}}learning_material_expenditureoftime, block_disealytics {{/str}} </label>
+            <input style="width: 50px" id="learning-material-update-expenditureoftime-{{learningmaterialid}}"
+                   class="learning-material-update-expenditureoftime check-pattern text-small" type="number" value="{{expenditureoftime}}" min="1" max="500" step="1" required>
+        </div>
+    </div>
+    <div class="btn-container" style="margin-bottom: 0; margin-top: 15px">
+        <button class="btn btn-secondary cancel-update-learning-material-button disea-cancel-btn text-small">{{#str}}
+            learning_material_cancel, block_disealytics {{/str}}</button>
+        <button class="btn btn-primary update-learning-material-button disea-save-btn text-small">{{#str}}
+            learning_material_save, block_disealytics {{/str}}</button>
+    </div>
+</div>

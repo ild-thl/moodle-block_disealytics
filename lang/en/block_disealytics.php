@@ -27,11 +27,11 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024091100';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024091201';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
-$string['disealytics:editlearningdashboard'] = 'Edit the Learner Dashboard.';
+$string['disealytics:editlearnerdashboard'] = 'Edit the Learner Dashboard.';
 $string['languagesetting'] = 'en';
 $string['login_alert'] = 'Please log in to use the Learner Dashboard.';
 $string['course_alert'] = 'The Learner Dashboard can only be displayed on the main course page.';
@@ -123,7 +123,7 @@ $string['learning-goals-view_help_info_text_expanded'] = "The card 'Learning Goa
 $string['goal_editing'] = 'Turn editing off';
 // Goal input fields.
 $string['goal_date_input'] = 'Date';
-$string['goals_reached'] = 'Learning goals achieved.';
+$string['goals_reached'] = 'learning goals achieved.';
 $string['learning-goals_add_goal'] = 'New learning goal';
 // Goals timeline.
 $string['goals_finished_past'] = 'Achieved';
@@ -161,37 +161,38 @@ $string['add_progress_bar_view'] = "Add 'Progressbar'";
 $string['add_success_chance_view'] = "Add 'PVL-Probability'";
 $string['add_planner_view'] = "Add 'Planning Assistent'";
 
-$string['optional-inputs-view'] = "Add learning material";
+$string['learning-materials-view'] = "Add learning material";
 
 $string['select_timeframe'] = 'Time period selection';
 $string['total_study_period'] = 'Entire study program';
 $string['current_semester'] = 'Current semester';
 
 // Optional input fields.
-$string['progress_bar_add_optional_input'] = 'Add course learning material';
-$string['progress_bar_manage_optional_input'] = 'Manage course learning material';
+$string['progress_bar_add_learning_material'] = 'Add course learning material';
+$string['progress_bar_manage_learning_material'] = 'Manage course learning material';
 $string['progress_bar_modal_intro'] = 'Here you can add documents, videos or links that have been uploaded in the selected course as learning material.';
-$string['add-optional-input'] = 'Add course learning material';
-$string['optional_input_no_selection'] = 'No selection';
-$string['optional_input_all_inputs_set'] = 'You added all available learning materials of the course.';
-$string['optional_input_document'] = 'Select document';
-$string['optional_input_pages'] = 'Pages read';
-$string['optional_input_current_page'] = 'Current page';
-$string['optional_input_last_page'] = 'Last page';
-$string['optional_input_expenditureoftime'] = 'Expenditure of time (in hours)';
-$string['optional_input_save'] = 'Save';
-$string['optional_input_edit'] = 'Edit';
-$string['optional_input_delete'] = 'Delete';
-$string['optional_input_cancel'] = 'Cancel';
-$string['optional_input_page_error'] = 'Current page cannot be higher than the last page.';
-$string['optional_input_no_document_selected_error'] = 'Please select a document before saving.';
-$string['optional_input_page_zero_error'] = 'The last page cannot be 0.';
-$string['optional_input_negative_page_error'] = 'Negative numbers cannot be saved as page numbers or as expenditure of time.';
-$string['optional_input_page_overflow_error'] = 'Page numbers greater than 1000 cannot be saved.';
-$string['optional_input_expenditure_of_time_overflow_error'] = 'Time expenditure greater than 500 cannot be saved.';
-$string['optional_input_pattern_error'] = 'Please use numbers only.';
-$string['optional_input_save_success'] = 'The reading progress was saved successfully.';
-$string['optional_input_delete_success'] = 'The reading progress was deleted successfully.';
+$string['progress_bar_additional_help'] = 'Further help with managing learning materials';
+$string['add-learning-material'] = 'Add course learning material';
+$string['learning_material_no_selection'] = 'No selection';
+$string['learning_material_all_inputs_set'] = 'You added all available learning materials of the course.';
+$string['learning_material_document'] = 'Select document';
+$string['learning_material_pages'] = 'Pages read';
+$string['learning_material_current_page'] = 'Current page';
+$string['learning_material_last_page'] = 'Last page';
+$string['learning_material_expenditureoftime'] = 'Expenditure of time (in hours)';
+$string['learning_material_save'] = 'Save';
+$string['learning_material_edit'] = 'Edit';
+$string['learning_material_delete'] = 'Delete';
+$string['learning_material_cancel'] = 'Cancel';
+$string['learning_material_page_error'] = 'Current page cannot be higher than the last page.';
+$string['learning_material_no_document_selected_error'] = 'Please select a document before saving.';
+$string['learning_material_page_zero_error'] = 'The last page cannot be 0.';
+$string['learning_material_negative_page_error'] = 'Negative numbers cannot be saved as page numbers or as expenditure of time.';
+$string['learning_material_page_overflow_error'] = 'Page numbers greater than 1000 cannot be saved.';
+$string['learning_material_expenditure_of_time_overflow_error'] = 'Time expenditure greater than 500 cannot be saved.';
+$string['learning_material_pattern_error'] = 'Please use numbers only.';
+$string['learning_material_save_success'] = 'The reading progress was saved successfully.';
+$string['learning_material_delete_success'] = 'The reading progress was deleted successfully.';
 $string['progress_bar_title'] = "Reading progress";
 $string['pages_read'] = "Pages read";
 $string['pages_left'] = "Pages left";
@@ -257,7 +258,7 @@ $string['consent_config_btn_delete'] = "Delete data and revoke consent";
 $string['consent_config_btn_save'] = "Keep data and revoke consent";
 $string['no-view-exists'] = "Start the editing mode for adding cards by clicking on the pencil icon.";
 
-$string['optional_inputs-view_help_info_text'] = 'Stay up to date with your learning progress and indicate your progress here on the course documents provided. To add a document, click on the button under "Add course learning materials".<p><strong>Document:</strong > Select a document provided in the course.<p><strong>Current page:</strong> Enter the page you are on in the document.<p><strong>Last page:</strong> Enter here Enter how many pages the document has in total.</p><p><strong>Time required (in hours):</strong> Enter the estimated time required here.</p>
+$string['learning_materials-view_help_info_text'] = '<p>Stay up to date with your learning progress and indicate your progress here on the course documents provided. To add a document, click on the button under "Add course learning materials".</p><p><strong>Document:</strong > Select a document provided in the course.<p><strong>Current page:</strong> Enter the page you are on in the document.<p><strong>Last page:</strong> Enter here Enter how many pages the document has in total.</p><p><strong>Time required (in hours):</strong> Enter the estimated time required here.</p>
 <p>Use the "Save" button to complete the process and save the progress in your personal area.</p>
 
 <p>Under "Manage course learning materials" you can edit the materials you have already entered or remove individual reading progress from your personal area.</p>';

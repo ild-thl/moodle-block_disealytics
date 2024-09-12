@@ -27,13 +27,18 @@ import {toggleAccordion} from "./add_interaction";
 export const init = () => {
     initGoalDueDate();
     handleCheckboxes();
-    // Attach click event to each accordion head.
+    // Attach click event to each accordion head if not already present.
     const accordion = document.getElementById('learning-goals-panel-accordion');
     const accordionHeads = document.querySelectorAll('#learning-goals-panel-accordion .accordion-head');
     accordionHeads.forEach((head, index) => {
-        head.addEventListener('click', () => {
-            toggleAccordion(accordion, index + 1);
-        });
+        // Check if the event listener is already attached.
+        if (head.dataset.listenerAttached !== 'true') {
+            head.addEventListener('click', () => {
+                toggleAccordion(accordion, index + 1);
+            });
+            // Mark the event listener as attached.
+            head.dataset.listenerAttached = 'true';
+        }
     });
 };
 

@@ -1,10 +1,10 @@
 :root {
-    --diseablue: #0f6cbf;
+    --diseablue: var(--primary);
     --diseared: #d91f11;
     --diseagreen: #077d55;
     --diseaorange: #ff9500;
     --diseayellow: #f5c518;
-    --disea-highlightblue: #bfcade;
+    --disea-highlightblue: var(--secondary);
     --disea-highlightblue-2: #2875a0;
     --disea-greyish: #487290;
     --disea-lightgray: rgba(120, 120, 128, 0.5);

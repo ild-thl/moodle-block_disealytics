@@ -134,9 +134,9 @@ class activity_view extends base_view {
             $chart1->set_stacked(true);
             $groupedtasks = task::block_disealytics_make_task_buckets($groupedtasks, "weekdays");
             $colors = new ArrayIterator([
-                    style::BLOCK_DISEALYTICS_HIGHLIGHT_BLUE,
-                    style::BLOCK_DISEALYTICS_SECONDARY_BLUE,
-                    style::BLOCK_DISEALYTICS_ORANGE,
+                    style::BLOCK_DISEALYTICS_PRIMARY,
+                    style::BLOCK_DISEALYTICS_SECONDARY,
+                    style::BLOCK_DISEALYTICS_DARK,
             ]);
             while (count($groupedtasks) > 0) {
                 $key = array_key_last($groupedtasks);

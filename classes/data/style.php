@@ -24,17 +24,17 @@ namespace block_disealytics\data;
  */
 class style {
     /**
-     * Highlight blue color.
+     * Highlight color.
      */
-    const BLOCK_DISEALYTICS_HIGHLIGHT_BLUE = "#0f6cbf";
+    const BLOCK_DISEALYTICS_PRIMARY = "#419999";
     /**
-     * Secondary blue color.
+     * Secondary color.
      */
-    const BLOCK_DISEALYTICS_SECONDARY_BLUE = "#bfcade";
+    const BLOCK_DISEALYTICS_SECONDARY = "#ced4da";
     /**
-     * Orange color.
+     * Dark accent color.
      */
-    const BLOCK_DISEALYTICS_ORANGE = "#ff9500";
+    const BLOCK_DISEALYTICS_DARK = "#343a40";
 
     /**
      * Map a value from one range to another.

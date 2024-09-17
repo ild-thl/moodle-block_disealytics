@@ -1,10 +1,10 @@
 :root {
-    --diseablue: #0f6cbf;
+    --diseablue: var(--primary);
     --diseared: #d91f11;
     --diseagreen: #077d55;
     --diseaorange: #ff9500;
     --diseayellow: #f5c518;
-    --disea-highlightblue: #bfcade;
+    --disea-highlightblue: var(--secondary);
     --disea-highlightblue-2: #2875a0;
     --disea-greyish: #487290;
     --disea-lightgray: rgba(120, 120, 128, 0.5);
@@ -84,7 +84,7 @@
 }
 
 .block_disealytics .modal-title {
-    color: var(--diseablue);
+    color: var(--primary);
     font-weight: 600;
 }
 
@@ -114,7 +114,7 @@
 .block_disealytics .view {
     margin-top: 8px;
     margin-bottom: 8px;
-    border: 2px solid var(--diseablue);
+    border: 2px solid var(--primary);
     padding: 8px;
     height: auto;
     position: relative;
@@ -186,7 +186,7 @@
 
 .block_disealytics .fa.fa-chevron-up,
 .block_disealytics .fa.fa-chevron-down {
-    color: var(--diseablue);
+    color: var(--primary);
 }
 
 [data-container="block_disealytics/add-view-buttons"] {
@@ -258,7 +258,7 @@
     justify-items: center;
     height: 125px;
     transition: .1s background ease-in-out;
-    border: 2px solid var(--diseablue);
+    border: 2px solid var(--primary);
     position: relative;
     border-radius: 8px;
     background: #fff !important; /* stylelint-disable-line declaration-no-important */
@@ -280,7 +280,7 @@
 
 .block_disealytics .block_disealytics-editing:hover {
     /* stylelint-disable csstree/validator, declaration-no-important */
-    background: var(--diseablue) !important;
+    background: var(--primary) !important;
     /* stylelint-enable csstree/validator, declaration-no-important */
 }
 
@@ -299,7 +299,7 @@
 
 .block_disealytics .block_disealytics-editing:hover #activity-view-editing-icon {
     fill: transparent;
-    stroke: var(--diseablue);
+    stroke: var(--primary);
 }
 
 .block_disealytics .block_disealytics-editing:hover #progress-bar-view-editing-icon path:nth-child(3),
@@ -374,14 +374,14 @@
     border: none;
     font-size: 15px;
     padding: 0;
-    color: var(--diseablue);
+    color: var(--primary);
     cursor: pointer;
 }
 
 .block_disealytics #block_disealytics-open-add-modal {
     background: transparent;
-    color: var(--diseablue);
-    border: 2px solid var(--diseablue);
+    color: var(--primary);
+    border: 2px solid var(--primary);
     padding: 8px;
     display: grid;
     justify-content: center;
@@ -393,7 +393,7 @@
 }
 
 .block_disealytics #block_disealytics-open-add-modal:hover {
-    background: var(--diseablue);
+    background: var(--primary);
     color: #fff;
 }
 
@@ -440,7 +440,7 @@
 }
 
 .block_disealytics .table-of-assignments tr.fourth_assignment {
-    color: var(--diseablue);
+    color: var(--primary);
     opacity: .5;
 }
 
@@ -483,11 +483,11 @@
 }
 
 .block_disealytics progress::-moz-progress-bar {
-    background: var(--diseablue);
+    background: var(--primary);
 }
 
 .block_disealytics progress::-webkit-progress-value {
-    background: var(--diseablue);
+    background: var(--primary);
     border-radius: 30px;
 }
 
@@ -498,7 +498,7 @@
 
 .block_disealytics progress {
     background-color: var(--disea-highlightblue);
-    color: var(--diseablue);
+    color: var(--primary);
     width: 100%;
     height: 10px;
     border-radius: 30px;
@@ -519,7 +519,7 @@
 }
 
 .block_disealytics .accordion-head .fa {
-    color: var(--diseablue);
+    color: var(--primary);
 }
 
 .block_disealytics .accordion-content {
@@ -658,7 +658,7 @@
 .block_disealytics .accordion-content.edit-mode .goal-view-mode #edit-goal {
     grid-area: edit;
     cursor: pointer;
-    color: var(--diseablue);
+    color: var(--primary);
     justify-self: end;
 }
 
@@ -679,12 +679,12 @@
 .block_disealytics .goal-edit-mode input {
     resize: none;
     width: 100%;
-    border: 1px solid var(--diseablue);
+    border: 1px solid var(--primary);
 }
 
 .block_disealytics .goal-edit-mode textarea:focus-visible,
 .block_disealytics .goal-edit-mode input:focus-visible {
-    border: 1px solid var(--diseablue);
+    border: 1px solid var(--primary);
     outline: none;
 }
 
@@ -751,7 +751,7 @@
 }
 
 .block_disealytics .progress-bar-btn {
-    background: var(--diseablue);
+    background: var(--primary);
     /* stylelint-disable csstree/validator, declaration-block-no-duplicate-properties */
     width: -moz-available;
     width: -webkit-fill-available;
@@ -779,7 +779,7 @@
 .block_disealytics .add-learning-material-container,
 .block_disealytics .edit-learning-material-container {
     margin: 8px 0;
-    border: 2px solid var(--diseablue);
+    border: 2px solid var(--primary);
     padding: 8px;
     border-radius: .2rem;
 }
@@ -859,7 +859,7 @@
 }
 
 .block_disealytics .add-event-to-planner span.current-day {
-    color: var(--diseablue);
+    color: var(--primary);
     font-weight: bold;
 }
 
@@ -878,7 +878,7 @@
 
 .block_disealytics .hover-overlay {
     opacity: 0;
-    background: var(--diseablue);
+    background: var(--primary);
     width: 15px;
     height: 15px;
     border-radius: 50%;
@@ -1083,14 +1083,14 @@
 /* COURSE CATEGORY */
 
 .block_disealytics .course-category-divider {
-    border-bottom: 1px solid var(--diseablue);
+    border-bottom: 1px solid var(--primary);
     width: 100%;
     margin: 2px;
 }
 
 .block_disealytics .course-category-icon {
     margin-bottom: 8px;
-    color: var(--diseablue);
+    color: var(--primary);
 }
 
 .block_disealytics .categories-container {
@@ -1147,7 +1147,7 @@
 
 .block_disealytics .course-category-global-item.selected {
     font-weight: bold;
-    color: var(--diseablue);
+    color: var(--primary);
 }
 
 .block_disealytics .table-of-assignments.hidden {

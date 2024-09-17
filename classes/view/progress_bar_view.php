@@ -26,6 +26,7 @@ use dml_exception;
 use Exception;
 use moodle_exception;
 use stdClass;
+use theme_config;
 
 defined('MOODLE_INTERNAL') || die();
 global $CFG;
@@ -149,6 +150,7 @@ class progress_bar_view extends base_view {
      * @throws coding_exception
      */
     private function generate_chart_and_preview(array $data, int $initalbars, object $course): bool {
+        global $PAGE;
         if (!empty($data) && $course->courseid != 1) {
             $readpages = [];
             $lastpages = [];
@@ -178,10 +180,10 @@ class progress_bar_view extends base_view {
             $chartpreview->set_horizontal(true);
             $chartpreview->set_stacked(true);
             $series1 = new chart_series(get_string('pages_read', 'block_disealytics'), $readpagespreview);
-            $series1->set_color(style::BLOCK_DISEALYTICS_HIGHLIGHT_BLUE);
+            $series1->set_color(style::BLOCK_DISEALYTICS_PRIMARY);
             $chartpreview->add_series($series1);
             $series2 = new chart_series(get_string('pages_left', 'block_disealytics'), $leftpagespreview);
-            $series2->set_color(style::BLOCK_DISEALYTICS_SECONDARY_BLUE);
+            $series2->set_color(style::BLOCK_DISEALYTICS_SECONDARY);
             $chartpreview->get_xaxis(0, true)->set_max((int) max($lastpagespreview) * 3);
             $chartpreview->add_series($series2);
             $chartpreview->set_labels($namespreview);
@@ -191,10 +193,10 @@ class progress_bar_view extends base_view {
             $chart->set_horizontal(true);
             $chart->set_stacked(true);
             $series1 = new chart_series(get_string('pages_read', 'block_disealytics'), $readpages);
-            $series1->set_color(style::BLOCK_DISEALYTICS_HIGHLIGHT_BLUE);
+            $series1->set_color(style::BLOCK_DISEALYTICS_PRIMARY);
             $chart->add_series($series1);
             $series2 = new chart_series(get_string('pages_left', 'block_disealytics'), $leftpages);
-            $series2->set_color(style::BLOCK_DISEALYTICS_SECONDARY_BLUE);
+            $series2->set_color(style::BLOCK_DISEALYTICS_SECONDARY);
             $chart->add_series($series2);
             $chart->set_labels($names);
             $chart->get_xaxis(0, true)->set_max((int) max($lastpages));

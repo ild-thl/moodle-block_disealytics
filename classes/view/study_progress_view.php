@@ -182,8 +182,8 @@ class study_progress_view extends base_view {
                 100 - (self::DOCUMENTWEIGHT * 100),
                 100 - (self::ASSIGNMENTWEIGHT * 100),
         ]);
-        $series->set_color(style::BLOCK_DISEALYTICS_HIGHLIGHT_BLUE);
-        $series2->set_color(style::BLOCK_DISEALYTICS_SECONDARY_BLUE);
+        $series->set_color(style::BLOCK_DISEALYTICS_PRIMARY);
+        $series2->set_color(style::BLOCK_DISEALYTICS_SECONDARY);
 
         $labels = [get_string("study-progress_activity", "block_disealytics"),
             get_string("study-progress_doc", "block_disealytics"),

@@ -456,7 +456,7 @@ class learningdata {
             return ["start" => new DateTime($year . "-01-01"), "end" => new DateTime($year . "-10-00")];
             // End of year, semester starts this year, ends next year.
         } else {
-            return ["start" => new DateTime($year . "-08-01"), "end" => new DateTime(($year + 1) . "-10-00")];
+            return ["start" => new DateTime($year . "-08-01"), "end" => new DateTime(($year + 1) . "-04-00")];
         }
     }
 }

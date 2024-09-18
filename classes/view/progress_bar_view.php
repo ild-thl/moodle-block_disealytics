@@ -291,7 +291,7 @@ class progress_bar_view extends base_view {
             $this->output["editmode"] = true;
         } else {
             $this->output["viewmode"] = true;
-            $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
+            $allusercourses = course::get_all_courses_of_current_semester();
 
             foreach ($allusercourses as $course) {
                 // Data for learning material modal.
@@ -343,7 +343,7 @@ class progress_bar_view extends base_view {
             $this->output["editmode"] = true;
         } else {
             $this->output["viewmode"] = true;
-            $allusercourses = course::get_all_courses_of_user($USER->id);
+            $allusercourses = course::get_all_courses();
             $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->categoryname);
             $this->output["viewmode_global"]['course'] = [];
             $this->output["categories"] = [];

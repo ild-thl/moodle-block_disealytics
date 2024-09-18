@@ -80,15 +80,19 @@
             {{^nodata}}
                 <div class="panel-body">
                     <p>{{datadate}}</p>
-                    <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
-                    <p>{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}
-                        {{#maincharts}}  {{> core/chart }} {{/maincharts}}
+                    <div style="display:flex;" class="flex-column">
+                        <span class="text-small">{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}</span>
+                        <span class="text-small">{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}</span>
+                    </div>
+                    {{#maincharts}}  {{> core/chart }} {{/maincharts}}
                 </div>
 
                 <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
-                    <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
-                    <p>{{#str}}activity_view_detail_axislabel_x, block_disealytics{{/str}}
-                        {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
+                    <div style="display:flex;" class="flex-column">
+                        <span class="text-small">{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}</span>
+                        <span class="text-small">{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}</span>
+                    </div>
+                    {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
                 </div>
             {{/nodata}}
             {{#nodata}}
@@ -96,29 +100,32 @@
             {{/nodata}}
         {{/viewmode_module}}
         {{#viewmode_halfyear}}
-            {{^nodata}}
-                {{#outputs}}
-                    <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
-                        <span id="title">{{coursename}}</span>
-                        <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
-                    </button>
-                    <div class="hidden panel-body">
+            {{#outputs}}
+                <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
+                    <span id="accordion-subtitle">{{coursename}}</span>
+                    <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
+                </button>
+                <div class="hidden panel-body">
+                    {{#nodata}}
+                        <p>{{#str}}nodata, block_disealytics{{/str}}</p>
+                    {{/nodata}}
+                    {{^nodata}}
                         <p>{{datadate}}</p>
-                        <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
-                        <p>{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}
-                            {{#maincharts}}  {{> core/chart }} {{/maincharts}}
-                        <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
-                            <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
-                            <p>{{#str}}activity_view_detail_axislabel_x, block_disealytics{{/str}}
-                                {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
+                        <div style="display:flex;" class="flex-column">
+                            <span class="text-small">{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}</span>
+                            <span class="text-small">{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}</span>
                         </div>
-                    </div>
-                {{/outputs}}
-
-            {{/nodata}}
-            {{#nodata}}
-                <p>{{#str}}nodata, block_disealytics{{/str}}</p>
-            {{/nodata}}
+                        {{#maincharts}}  {{> core/chart }} {{/maincharts}}
+                        <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
+                            <div style="display:flex;" class="flex-column">
+                                <span class="text-small">{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}</span>
+                                <span class="text-small">{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}</span>
+                            </div>
+                            {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
+                        </div>
+                    {{/nodata}}
+                </div>
+            {{/outputs}}
         {{/viewmode_halfyear}}
         {{#viewmode_global}}
             <div class="panel-body">
@@ -131,29 +138,33 @@
                         {{/categories}}
                     </div>
                 </div>
-                {{^nodata}}
-                    {{#outputs}}
-                        <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
-                            <span id="title">{{coursename}}</span>
-                            <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
-                        </button>
-                        <div class="hidden">
-                            <p>{{datadate}}</p>
-                            <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
-                            <p>{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}
-                                {{#maincharts}}  {{> core/chart }} {{/maincharts}}
-
-                            <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
-                                <p>{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}
-                                <p>{{#str}}activity_view_detail_axislabel_x, block_disealytics{{/str}}
-                                    {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
-                            </div>
+                {{#outputs}}
+                    <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
+                        <span id="accordion-subtitle">{{coursename}}</span>
+                        <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
+                    </button>
+                <div class="hidden">
+                    {{^nodata}}
+                        <p>{{datadate}}</p>
+                        <div style="display:flex;" class="flex-column">
+                            <span class="text-small">{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}</span>
+                            <span class="text-small">{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}</span>
                         </div>
-                    {{/outputs}}
-                {{/nodata}}
-                {{#nodata}}
-                    <p>{{#str}}nodata, block_disealytics{{/str}}</p>
-                {{/nodata}}
+                        {{#maincharts}}  {{> core/chart }} {{/maincharts}}
+
+                        <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
+                            <div style="display:flex;" class="flex-column">
+                                <span class="text-small">{{#str}}activity_view_axislabel_y, block_disealytics{{/str}}</span>
+                                <span class="text-small">{{#str}}activity_view_main_axislabel_x, block_disealytics{{/str}}</span>
+                            </div>
+                            {{#detailcharts}}  {{> core/chart }} {{/detailcharts}}
+                        </div>
+                    </div>
+                    {{/nodata}}
+                    {{#nodata}}
+                        <p>{{#str}}nodata, block_disealytics{{/str}}</p>
+                    {{/nodata}}
+                {{/outputs}}
             </div>
         {{/viewmode_global}}
         {{> block_disealytics/bottom_navigation }}

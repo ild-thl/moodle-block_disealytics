@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024091700';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024091800';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Füge einen neuen Learner Dashboard Block hinzu.';
 $string['disealytics:myaddinstance'] = 'Füge einen neuen Learner Dashboard Block zu meinem Dashboard hinzu.';
@@ -328,8 +328,8 @@ $string['task_statistics'] = 'Statistiken';
 
 // Planner view.
 $string['planner-view'] = 'Planungsassistent';
-$string['planner-view_help_info_text'] = "Diese Karte zeigt Ihnen einen Überblick über Ihre anstehenden Webkonferenzen, Einsendeaufgaben oder andere Aktivitäten. Zudem können Sie Termine hinzufügen, indem Sie einen einfachen Klick auf einen Tag ihrer Wahl tätigen. In der Detailansicht können Sie alle Termine einsehen.";
-$string['planner-view_help_info_text_expanded'] = "Diese Karte zeigt Ihnen einen Überblick über Ihre anstehenden Webkonferenzen, Einsendeaufgaben oder andere Aktivitäten. Zudem können Sie Termine hinzufügen, indem Sie einen einfachen Klick auf einen Tag ihrer Wahl tätigen. In der Detailansicht können Sie alle Termine einsehen.";
+$string['planner-view_help_info_text'] = "Diese Karte zeigt Ihnen einen Überblick über Ihre anstehenden Webkonferenzen, Einsendeaufgaben oder andere Aktivitäten. Zudem können Sie Termine für den aktuell aufgerufenen Kurs hinzufügen, indem Sie einen einfachen Klick auf einen Tag ihrer Wahl tätigen. In der Detailansicht können Sie alle Termine einsehen.";
+$string['planner-view_help_info_text_expanded'] = "Diese Karte zeigt Ihnen einen Überblick über Ihre anstehenden Webkonferenzen, Einsendeaufgaben oder andere Aktivitäten. Zudem können Sie Termine für den aktuell aufgerufenen Kurs hinzufügen, indem Sie einen einfachen Klick auf einen Tag ihrer Wahl tätigen. In der Detailansicht können Sie alle Termine einsehen.";
 $string['planner-view_monday_short'] = "Mo";
 $string['planner-view_tuesday_short'] = "Di";
 $string['planner-view_wednesday_short'] = "Mi";

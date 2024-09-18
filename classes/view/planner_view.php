@@ -223,7 +223,7 @@ class planner_view extends base_view {
             $selecteddate = json_decode(get_user_preferences('block_disealytics_planner_currentdate', 0), true);
             $planner = planner::block_disealytics_create_planner($selecteddate);
             $this->output["viewmode_halfyear"]['calendar'] = $this->block_disealytics_build_planner($planner);
-            $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
+            $allusercourses = course::get_all_courses_of_current_semester();
             $this->output["viewmode_halfyear"]['course'] = [];
             foreach ($allusercourses as $course) {
                 $courseevents = $this->get_dates_for_planner($planner, $course->courseid);
@@ -262,7 +262,7 @@ class planner_view extends base_view {
             $selecteddate = json_decode(get_user_preferences('block_disealytics_planner_currentdate', 0), true);
             $planner = planner::block_disealytics_create_planner($selecteddate);
             $this->output["viewmode_global"]['calendar'] = $this->block_disealytics_build_planner($planner);
-            $allusercourses = course::get_all_courses_of_user($USER->id);
+            $allusercourses = course::get_all_courses();
             $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->categoryname);
             $this->output["viewmode_global"]['course'] = [];
             $this->output["categories"] = [];

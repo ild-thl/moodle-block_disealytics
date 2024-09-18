@@ -59,6 +59,14 @@
     text-align: left;
 }
 
+.block_disealytics #accordion-subtitle {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
 .block_disealytics a,
 .block_disealytics p,
 .block_disealytics span,
@@ -516,6 +524,7 @@
 
 .block_disealytics .accordion-head {
     cursor: pointer;
+    color: var(--primary);
 }
 
 .block_disealytics .accordion-head .fa {

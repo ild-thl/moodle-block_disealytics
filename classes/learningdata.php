@@ -293,7 +293,7 @@ class learningdata {
      */
     public function get_goals_semester(): array {
         global $DB, $USER;
-        $semestercourseids = course::get_all_courses_of_user_current_semester($USER->id);
+        $semestercourseids = course::get_all_courses_of_current_semester();
         $courseids = array_column($semestercourseids, 'courseid');
         $resultgoals = [];
         foreach ($courseids as $courseid) {
@@ -363,7 +363,7 @@ class learningdata {
      */
     public function get_finished_goals_semester(): array {
         global $DB, $USER;
-        $semestercourseids = course::get_all_courses_of_user_current_semester($USER->id);
+        $semestercourseids = course::get_all_courses_of_current_semester();
         $courseids = array_column($semestercourseids, 'courseid');
         $finishedgoals = [];
         foreach ($courseids as $courseid) {

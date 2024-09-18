@@ -57,7 +57,6 @@
 {{/editmode}}
 {{#viewmode}}
     <div id="block_disealytics-panel-{{viewname}}" class="block_disealytics panel panel-info view block_disealytics-panel-{{viewname}}">
-
         <div class="panel-heading">
             <div class="flex-container">
                 <h1 id="title"><span class="show-when-expanded"><a
@@ -81,7 +80,7 @@
                 </div>
             </div>
         </div>
-    {{#viewmode_module}}
+        {{#viewmode_module}}
             <div class="panel-body hide-when-expanded">
                 {{#table}}
                     <table class="table-of-assignments">
@@ -128,88 +127,15 @@
                     </table>
                 {{/table}}
             </div>
-        {{> block_disealytics/bottom_navigation }}
-        </div>
-    {{/viewmode_module}}
-    {{#viewmode_halfyear}}
-        {{#tables}}
-            <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
-                <span id="title">{{coursename}}</span>
-                <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
-            </button>
-            <div class="hidden panel-body master-table-of-assignments hide-when-expanded">
-                <table class="table-of-assignments" data-coursename="{{coursename}}">
-                    <tr>
-                        <th>{{assignstring}}</th>
-                        <th>{{submitstring}}</th>
-                    </tr>
-                    {{#first_three}}
-                        <tr>
-                            <td>{{{html_a}}}</td>
-                            <td>{{{status}}}</td>
-                        </tr>
-                    {{/first_three}}
-                    {{#table_elements_fourth_assign}}
-                        <tr class="fourth_assignment">
-                            <td>{{name}}</td>
-                            <td>{{{status}}}</td>
-                        </tr>
-                    {{/table_elements_fourth_assign}}
-                </table>
-            </div>
-        {{/tables}}
-
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
-            {{#tables}}
-                <table class="table-of-assignments" data-coursename="{{coursename}}">
-                    <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
-                        <span id="title">{{coursename}}</span>
-                        <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
-                    </div>
-                    <tr>
-                        <th>{{assignstring}}</th>
-                        <th>{{submitstring}}</th>
-                    </tr>
-                    {{#first_three}}
-                        <tr>
-                            <td>{{{html_a}}}</td>
-                            <td>{{{status}}}</td>
-                        </tr>
-                    {{/first_three}}
-                    {{#after_first_three}}
-                        <tr>
-                            <td>{{{html_a}}}</td>
-                            <td>{{{status}}}</td>
-                        </tr>
-                    {{/after_first_three}}
-                </table>
-            {{/tables}}
-        </div>
-        {{^data_in_course}}
-            <p>{{#str}}assignment_view_no_assignments_available, block_disealytics{{/str}}</p>
-        {{/data_in_course}}
-        {{#data_in_course}}
             {{> block_disealytics/bottom_navigation }}
-        {{/data_in_course}}
-        </div>
-    {{/viewmode_halfyear}}
-    {{#viewmode_global}}
-        <div class="categories-container">
-            <div class="course-category-global">
-                {{#categories}}
-                    <button class="course-category-global-item-{{viewname}} course-category-global-item {{#selected}}selected{{/selected}}">
-                        {{name}}
-                    </button>
-                {{/categories}}
-            </div>
-        </div>
-        {{#tables}}
-            <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
-                <span id="title">{{coursename}}</span>
-                <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
-            </button>
-            <div class="hidden panel-body hide-when-expanded">
-                <div class="master-table-of-assignments">
+        {{/viewmode_module}}
+        {{#viewmode_halfyear}}
+            {{#tables}}
+                <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
+                    <span id="accordion-subtitle">{{coursename}}</span>
+                    <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
+                </button>
+                <div class="hidden panel-body master-table-of-assignments">
                     <table class="table-of-assignments" data-coursename="{{coursename}}">
                         <tr>
                             <th>{{assignstring}}</th>
@@ -229,16 +155,15 @@
                         {{/table_elements_fourth_assign}}
                     </table>
                 </div>
-            </div>
-        {{/tables}}
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
-            <div class="master-table-of-assignments">
+            {{/tables}}
+
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
                 {{#tables}}
                     <table class="table-of-assignments" data-coursename="{{coursename}}">
-                        <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
+                        <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
+                            <span id="accordion-subtitle">{{coursename}}</span>
                             <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
-                        </button>
-                        <span id="title">{{coursename}}</span>
+                        </div>
                         <tr>
                             <th>{{assignstring}}</th>
                             <th>{{submitstring}}</th>
@@ -256,27 +181,102 @@
                             </tr>
                         {{/after_first_three}}
                     </table>
-                    <a style="cursor: pointer; display:block; margin-top: 1em"
-                       class="more-assignments hide-when-expanded block_disealytics-show-more-btn block_disealytics-show-more-btn-{{viewname}} hide-when-editing">
+                    <hr>
+                {{/tables}}
+            </div>
+
+            {{^data_in_course}}
+                <p>{{#str}}assignment_view_no_assignments_available, block_disealytics{{/str}}</p>
+            {{/data_in_course}}
+            {{#data_in_course}}
+                {{> block_disealytics/bottom_navigation }}
+            {{/data_in_course}}
+        {{/viewmode_halfyear}}
+        {{#viewmode_global}}
+            <div class="categories-container">
+                <div class="course-category-global">
+                    {{#categories}}
+                        <button class="course-category-global-item-{{viewname}} course-category-global-item {{#selected}}selected{{/selected}}">
+                            {{name}}
+                        </button>
+                    {{/categories}}
+                </div>
+            </div>
+            {{#tables}}
+                <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
+                    <span id="accordion-subtitle">{{coursename}}</span>
+                    <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
+                </button>
+                <div class="hidden panel-body">
+                    <div class="master-table-of-assignments">
+                        <table class="table-of-assignments" data-coursename="{{coursename}}">
+                            <tr>
+                                <th>{{assignstring}}</th>
+                                <th>{{submitstring}}</th>
+                            </tr>
+                            {{#first_three}}
+                                <tr>
+                                    <td>{{{html_a}}}</td>
+                                    <td>{{{status}}}</td>
+                                </tr>
+                            {{/first_three}}
+                            {{#table_elements_fourth_assign}}
+                                <tr class="fourth_assignment">
+                                    <td>{{name}}</td>
+                                    <td>{{{status}}}</td>
+                                </tr>
+                            {{/table_elements_fourth_assign}}
+                        </table>
+                    </div>
+                </div>
+            {{/tables}}
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
+                <div class="master-table-of-assignments">
+                    {{#tables}}
+                        <table class="table-of-assignments" data-coursename="{{coursename}}">
+                            <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
+                                <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
+                            </button>
+                            <span id="accordion-subtitle">{{coursename}}</span>
+                            <tr>
+                                <th>{{assignstring}}</th>
+                                <th>{{submitstring}}</th>
+                            </tr>
+                            {{#first_three}}
+                                <tr>
+                                    <td>{{{html_a}}}</td>
+                                    <td>{{{status}}}</td>
+                                </tr>
+                            {{/first_three}}
+                            {{#after_first_three}}
+                                <tr>
+                                    <td>{{{html_a}}}</td>
+                                    <td>{{{status}}}</td>
+                                </tr>
+                            {{/after_first_three}}
+                        </table>
+                        <hr>
+                        <a style="cursor: pointer; display:block; margin-top: 1em"
+                           class="more-assignments hide-when-expanded block_disealytics-show-more-btn block_disealytics-show-more-btn-{{viewname}} hide-when-editing">
                     <span class="show-more-assignments" data-coursename="{{coursename}}">
                         ...
                     </span>
-                        <span class="show-less-assignments hidden">
-                            {{#str}}assignment_view_load-less-assignments, block_disealytics{{/str}}
-                        </span>
-                    </a>
-                {{/tables}}
+                            <span class="show-less-assignments hidden">
+                                {{#str}}assignment_view_load-less-assignments, block_disealytics{{/str}}
+                            </span>
+                        </a>
+                    {{/tables}}
+                </div>
             </div>
-        </div>
 
-        {{^data_in_course}}
-            <p>{{#str}}assignment_view_no_assignments_available, block_disealytics{{/str}}</p>
-        {{/data_in_course}}
-        {{#data_in_course}}
-            {{> block_disealytics/bottom_navigation }}
-        {{/data_in_course}}
-        </div>
-    {{/viewmode_global}}
+            {{^data_in_course}}
+                <p>{{#str}}assignment_view_no_assignments_available, block_disealytics{{/str}}</p>
+            {{/data_in_course}}
+            {{#data_in_course}}
+                {{> block_disealytics/bottom_navigation }}
+            {{/data_in_course}}
+        {{/viewmode_global}}
+    </div>
 {{/viewmode}}
 
 {{#js}}

@@ -200,7 +200,7 @@ class learning_goals_view extends base_view {
 
         $goalsforselectedsemester = [];
 
-        $allusercourses = course::get_all_courses_of_user($USER->id);
+        $allusercourses = course::get_all_courses();
         $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->categoryname);
 
         foreach ($allusercourses as $course) {

@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024091700';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.2.4 2024091800';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -328,8 +328,8 @@ $string['task_statistics'] = 'Task usage statistics';
 
 // Planner view.
 $string['planner-view'] = 'Planning Assistant';
-$string['planner-view_help_info_text'] = "This card gives you an overview of your upcoming web conferences, assignments or other activities. You can add further appointments by simply clicking on a day of your choice. You can view all appointments in the detailed view.";
-$string['planner-view_help_info_text_expanded'] = "This card gives you an overview of your upcoming web conferences, assignments or other activities. You can add further appointments by simply clicking on a day of your choice. You can view all appointments in the detailed view.";
+$string['planner-view_help_info_text'] = "This card gives you an overview of your upcoming web conferences, assignments or other activities. You can add further appointments for the currently displayed course by simply clicking on a day of your choice. You can view all appointments in the detailed view.";
+$string['planner-view_help_info_text_expanded'] = "This card gives you an overview of your upcoming web conferences, assignments or other activities. You can add further appointments for the currently displayed course by simply clicking on a day of your choice. You can view all appointments in the detailed view.";
 $string['planner-view_monday_short'] = "Mo";
 $string['planner-view_tuesday_short'] = "Tu";
 $string['planner-view_wednesday_short'] = "We";

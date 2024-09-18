@@ -26,6 +26,36 @@ use dml_exception;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course {
+
+    /**
+     * Get all courses of the current semester.
+     *
+     * @return array
+     * @throws dml_exception
+     */
+    public static function get_all_courses_of_current_semester(): array {
+        global $DB;
+        $now = (new DateTime())->format("U");
+        $sql = "SELECT c.instanceid AS courseid, cr.fullname AS coursename, cr.enddate AS enddate
+                FROM {context} c
+                JOIN {role_assignments} ra ON c.id = ra.contextid
+                JOIN {course} cr ON c.instanceid = cr.id
+                WHERE c.contextlevel = :contextlevel
+                  AND cr.startdate <= :now";
+        $params = [
+                'contextlevel' => CONTEXT_COURSE,
+                'now' => $now,
+        ];
+        $data = $DB->get_records_sql($sql, $params);
+        return array_filter($data, function($item) use ($now) {
+            if ($item->enddate == 0) {
+                return true;
+            }
+            $end = DateTime::createFromFormat("U", $item->enddate)->add(new DateInterval("P1M"));
+            return $end->format("U") >= $now;
+        });
+    }
+
     /**
      * Get all courses of a user in the current semester.
      *
@@ -58,6 +88,30 @@ class course {
             $end = DateTime::createFromFormat("U", $item->enddate)->add(new DateInterval("P1M"));
             return $end->format("U") >= $now;
         });
+    }
+
+    /**
+     * Get all courses.
+     *
+     * @return array
+     * @throws dml_exception
+     */
+    public static function get_all_courses(): array {
+        global $DB;
+        $sql = "SELECT c.instanceid AS courseid, cr.fullname AS coursename, cat.name AS categoryname, cr.enddate AS coursetimestamp
+            FROM {context} c
+            JOIN {role_assignments} ra ON c.id = ra.contextid
+            JOIN {course} cr ON c.instanceid = cr.id
+            LEFT JOIN {context} catc ON cr.category = catc.instanceid
+            LEFT JOIN {course_categories} cat ON catc.instanceid = cat.id
+            WHERE c.contextlevel = :contextlevel
+              ORDER BY cr.enddate DESC";
+
+        $params = [
+                'contextlevel' => CONTEXT_COURSE,
+        ];
+
+        return $DB->get_records_sql($sql, $params);
     }
 
     /**

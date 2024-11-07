@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2024092300';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2024110600';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -263,6 +263,10 @@ $string['learning_materials-view_help_info_text'] = '<p>Stay up to date with you
 
 <p>Under "Manage course learning materials" you can edit the materials you have already entered or remove individual reading progress from your personal area.</p>';
 
+// Statistic insights view.
+$string['statistic-insights-view'] = 'Statistical Insights';
+$string['study-progress-view_help_info_text'] = "sample";
+$string['study-progress-view_help_info_text_expanded']= "sample";
 
 // Study progress view.
 $string['study-progress-view'] = "Study Progress";

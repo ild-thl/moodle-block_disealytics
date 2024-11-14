@@ -265,8 +265,10 @@ $string['learning_materials-view_help_info_text'] = '<p>Stay up to date with you
 
 // Statistic insights view.
 $string['statistic-insights-view'] = 'Statistical Insights';
-$string['study-progress-view_help_info_text'] = "sample";
-$string['study-progress-view_help_info_text_expanded']= "sample";
+$string['statistic-insights-view_help_info_text'] = "sample";
+$string['statistic-insights-view_info_text_expanded']= "The Statistical Insights card provides statistical data on which a prediction is made regarding course completion.";
+$string['statistic-insights-view_at_risk']= '<p style="color: var(--danger)">You are currently at risk of not passing this course.</p>';
+$string['statistic-insights-view_not_at_risk']= '<p style="color: var(--green)">Your progress on the course so far is good.</p>';
 
 // Study progress view.
 $string['study-progress-view'] = "Study Progress";

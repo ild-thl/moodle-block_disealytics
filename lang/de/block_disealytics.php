@@ -266,8 +266,10 @@ $string['learning_materials-view_help_info_text'] = '<p>Bleiben Sie bezüglich I
 
 // Statistic insights view.
 $string['statistic-insights-view'] = 'Statistische Einblicke';
-$string['study-progress-view_help_info_text'] = "sample";
-$string['study-progress-view_help_info_text_expanded']= "sample";
+$string['statistic-insights-view_help_info_text'] = "sample";
+$string['statistic-insights-view_info_text_expanded']= "Die statistischen Einblicke geben Ihnen die Indikatoren und Werte aus, die zu dem Ergebnis führen, ob Sie gefährdet sind, den Kurs nicht zu bestehen.";
+$string['statistic-insights-view_at_risk']= '<p style="color: var(--danger)">Sie sind gefährdet, den Kurs nicht zu bestehen.</p>';
+$string['statistic-insights-view_not_at_risk']= '<p style="color: var(--green)">Bei gleichbleibender Beteiligung am Kurs werden Sie diesen wahrscheinlich bestehen.</p>';
 
 // Study progress view.
 $string['study-progress-view'] = "Lernfortschrittsanzeige";

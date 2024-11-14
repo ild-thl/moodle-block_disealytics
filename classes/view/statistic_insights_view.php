@@ -44,10 +44,10 @@ class statistic_insights_view extends base_view {
 
     private prediction $prediction;
 
-    private function load_prediction(): prediction {
+    private function create_prediction(): bool {
         global $DB, $USER, $COURSE;
 
-        $sql = "SELECT *
+        $sql = "SELECT ap.*
         FROM {analytics_predictions} ap
         JOIN {context} cx ON cx.id = ap.contextid
         JOIN {course} c ON (c.id = cx.instanceid AND cx.contextlevel = 50)
@@ -61,12 +61,11 @@ class statistic_insights_view extends base_view {
                 'courseid' => $COURSE->id
         ];
 
-        // Fetch a single record.
         $data = $DB->get_record_sql($sql, $params);
 
-        $this->prediction = new prediction($data->id, $data);
+        if ($this->prediction = new prediction($data->id, $data)) return true;
 
-        return $this->prediction;
+        return false;
     }
 
 
@@ -94,36 +93,71 @@ class statistic_insights_view extends base_view {
         $this->output["help_info_text"] = get_string(self::TITLE . '_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] = get_string(self::TITLE . '_help_info_text_expanded', 'block_disealytics');
 
-        if ($this->load_prediction()) {
-            // Calculated indicators values.
-            $this->output['insights']['calculations'] = json_encode($this->prediction->get_calculations());
+        if ($this->create_prediction()) {
+            global $PAGE;
+            $output = $PAGE->get_renderer('core'); // Get a generic core renderer.
 
-            // copied from report/insights/classes/output/insight.php
-            //foreach ($calculations as $calculation) {
-            //
-            //    // Hook for indicators with extra features that should not be displayed (e.g. discrete indicators).
-            //    if (!$calculation->indicator->should_be_displayed($calculation->value, $calculation->subtype)) {
-            //        continue;
-            //    }
-            //
-            //    if ($calculation->value === null) {
-            //        // We don't show values that could not be calculated.
-            //        continue;
-            //    }
-            //
-            //    $obj = new \stdClass();
-            //    $obj->name = call_user_func(array($calculation->indicator, 'get_name'));
-            //    $obj->displayvalue = $calculation->indicator->get_display_value($calculation->value, $calculation->subtype);
-            //    list($obj->style, $obj->outcomeicon) = insight::get_calculation_display($calculation->indicator,
-            //            floatval($calculation->value), $output, $calculation->subtype);
-            //
-            //    $identifier = $calculation->indicator->get_name()->get_identifier() . 'def';
-            //    $component = $calculation->indicator->get_name()->get_component();
-            //    if (get_string_manager()->string_exists($identifier, $component)) {
-            //        $obj->outcomehelp = (new \help_icon($identifier, $component))->export_for_template($output);
-            //    }
-            //    $this->output['insights']['calculations'] = $obj;
-            //}
+            if ($this->prediction->get_prediction_data()->prediction > 0) {
+                $this->output["student_at_risk"] = get_string(self::TITLE . '_at_risk', 'block_disealytics');
+            } else {
+                $this->output["student_at_risk"] = get_string(self::TITLE . '_not_at_risk', 'block_disealytics');
+            }
+
+            $calculations = $this->prediction->get_calculations();
+            $firstThreeIndicators = [];
+            $fourthIndicator = [];
+            $allCalculations = [];
+            $count = 0;
+
+            foreach ($calculations as $calculation) {
+                if (!$calculation->indicator->should_be_displayed($calculation->value, $calculation->subtype)) {
+                    continue;
+                }
+                if ($calculation->value === null) {
+                    continue;
+                }
+
+                // Construct the entry with name and display value.
+                $entry = [
+                        'name' => (string) call_user_func([$calculation->indicator, 'get_name']),
+                        'displayvalue' => $calculation->indicator->get_display_value($calculation->value, $calculation->subtype)
+                ];
+
+                // Add style and icon to the entry.
+                list($entry['style'], $entry['outcomeicon']) = insight::get_calculation_display(
+                        $calculation->indicator,
+                        floatval($calculation->value),
+                        $output,
+                        $calculation->subtype
+                );
+
+                // Add help icon if available.
+                $identifier = $calculation->indicator->get_name()->get_identifier() . 'def';
+                $component = $calculation->indicator->get_name()->get_component();
+                if (get_string_manager()->string_exists($identifier, $component)) {
+                    $helpicon = new \help_icon($identifier, $component);
+                    $entry['outcomehelp'] = $helpicon->export_for_template($output);
+                }
+
+                // Add to all calculations list.
+                $allCalculations[] = $entry;
+
+                // Separate into first three and fourth indicators.
+                if ($count < 3) {
+                    $firstThreeIndicators[] = $entry;
+                } elseif ($count == 3) {
+                    $fourthIndicator[] = $entry;
+                }
+                $count++;
+            }
+
+            // Add the indicators to the output structure.
+            $this->output['insights'] = [
+                    'first_three' => $firstThreeIndicators,
+                    'fourth' => $fourthIndicator,
+                    'all_calculations' => $allCalculations,
+            ];
+
         } else {
             $this->output['nodata'] = get_string('nodata', 'block_disealytics');
         }

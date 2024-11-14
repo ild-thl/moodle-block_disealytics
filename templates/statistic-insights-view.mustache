@@ -79,22 +79,59 @@
         </div>
         <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}} show-when-expanded"
              data-container="block_disealytics/expandable-{{viewname}}">
-            <p>{{#str}}success-chance_info_text_expanded, block_disealytics {{/str}}</p>
+            <p>{{#str}}statistic-insights-view_info_text_expanded, block_disealytics {{/str}}</p>
         </div>
         {{#viewmode_module}}
-            <div class="panel-body">
+            <div class="panel-body hide-when-expanded">
                 {{^nodata}}
-                    <p>Statistic Insights</p>
-                    {{#insights}}
-                        <div class="insight">
-                            {{calculations}}
-                        </div>
-                    {{/insights}}
+                    <p>{{{student_at_risk}}}</p>
+                    <table class="table-of-assignments">
+                        <tbody>
+                        <tr>
+                            <th>Indicator</th>
+                            <th>Value</th>
+                        </tr>
+                        {{#insights.first_three}}
+                            <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
+                                <td>{{name}}</td>
+                                <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
+                            </tr>
+                        {{/insights.first_three}}
+                        {{#insights.fourth}}
+                            <tr class="{{#style}}table-{{style}}{{/style}}" style="opacity: .5; padding: 4px;">
+                                <td>{{name}}</td>
+                                <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
+                            </tr>
+                        {{/insights.fourth}}
+                        </tbody>
+                    </table>
                 {{/nodata}}
                 {{#nodata}}
                     <p>{{nodata}}</p>
                 {{/nodata}}
             </div>
+
+            <!-- Expanded view with all indicators -->
+            <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}"
+                 data-container="block_disealytics/expandable-{{viewname}}">
+                <p>{{{student_at_risk}}}</p>
+                <table class="table-of-assignments">
+                    <tbody>
+                    <tr>
+                        <th>Indicator</th>
+                        <th>Value</th>
+                    </tr>
+                    {{#insights.all_calculations}}
+                        <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
+                            <td>{{name}}</td>
+                            <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
+                        </tr>
+                        {{/insights.all_calculations}}
+                    </tbody>
+                </table>
+            </div>
+
+            {{> block_disealytics/bottom_navigation }}
         {{/viewmode_module}}
         {{#viewmode_halfyear}}
             <p>Nothing to show yet.</p>
@@ -102,10 +139,6 @@
         {{#viewmode_global}}
             <p>Nothing to show yet.</p>
         {{/viewmode_global}}
-        {{#nodata}}
-            <p>{{nodata}}</p>
-        {{/nodata}}
-        {{> block_disealytics/bottom_navigation }}
     </div>
 {{/viewmode}}
 {{#js}}

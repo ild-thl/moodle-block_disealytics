@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2024111400';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2024112101';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Füge einen neuen Learner Dashboard Block hinzu.';
 $string['disealytics:myaddinstance'] = 'Füge einen neuen Learner Dashboard Block zu meinem Dashboard hinzu.';
@@ -268,8 +268,13 @@ $string['learning_materials-view_help_info_text'] = '<p>Bleiben Sie bezüglich I
 $string['statistic-insights-view'] = 'Statistische Einblicke';
 $string['statistic-insights-view_help_info_text'] = "sample";
 $string['statistic-insights-view_info_text_expanded']= "Die statistischen Einblicke geben Ihnen die Indikatoren und Werte aus, die zu dem Ergebnis führen, ob Sie gefährdet sind, den Kurs nicht zu bestehen.";
-$string['statistic-insights-view_at_risk']= '<p style="color: var(--danger)">Sie sind gefährdet, den Kurs nicht zu bestehen.</p>';
+$string['statistic-insights-view_at_risk']= '<p style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> Sie sind gefährdet, den Kurs nicht zu bestehen.</p>';
 $string['statistic-insights-view_not_at_risk']= '<p style="color: var(--green)">Bei gleichbleibender Beteiligung am Kurs werden Sie diesen wahrscheinlich bestehen.</p>';
+$string['general_indicators']= 'Allgemeine Indikatoren';
+$string['cognitive_indicators']= 'Indikatoren der kognitiven Tiefe';
+$string['social_indicators']= 'Indikatoren der sozialen Breite';
+$string['analytics_indicator']= 'Indikator';
+$string['analytics_value']= 'Wert';
 
 // Study progress view.
 $string['study-progress-view'] = "Lernfortschrittsanzeige";

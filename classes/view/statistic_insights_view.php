@@ -139,6 +139,16 @@ class statistic_insights_view extends base_view {
                     $entry['outcomehelp'] = $helpicon->export_for_template($output);
                 }
 
+
+                // If the name contains 'cognitive', add to a separate list.
+                if ((strpos($entry['name'], 'cognitive') !== false) || (strpos($entry['name'], 'kognitiv') !== false)) {
+                    $cognitiveIndicators[] = $entry;
+                } else if ((strpos($entry['name'], 'social') !== false) || (strpos($entry['name'], 'sozial') !== false)) {
+                    $socialIndicators[] = $entry;
+                } else {
+                    $restIndicators[] = $entry;
+                }
+
                 // Add to all calculations list.
                 $allCalculations[] = $entry;
 
@@ -156,6 +166,9 @@ class statistic_insights_view extends base_view {
                     'first_three' => $firstThreeIndicators,
                     'fourth' => $fourthIndicator,
                     'all_calculations' => $allCalculations,
+                    'cognitive' => $cognitiveIndicators,
+                    'social' => $socialIndicators,
+                    'rest' => $restIndicators
             ];
 
         } else {

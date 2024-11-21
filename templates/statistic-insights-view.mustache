@@ -85,26 +85,71 @@
             <div class="panel-body hide-when-expanded">
                 {{^nodata}}
                     <p>{{{student_at_risk}}}</p>
-                    <table class="table-of-assignments">
-                        <tbody>
-                        <tr>
-                            <th>Indicator</th>
-                            <th>Value</th>
-                        </tr>
-                        {{#insights.first_three}}
-                            <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
-                                <td>{{name}}</td>
-                                <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
-                            </tr>
-                        {{/insights.first_three}}
-                        {{#insights.fourth}}
-                            <tr class="{{#style}}table-{{style}}{{/style}}" style="opacity: .5; padding: 4px;">
-                                <td>{{name}}</td>
-                                <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
-                            </tr>
-                        {{/insights.fourth}}
-                        </tbody>
-                    </table>
+                    <p></p>
+                    <div id="statistic-insights-accordion">
+                        <div class="accordion-head flex-container">
+                            <span>{{#str}}general_indicators, block_disealytics{{/str}}</span>
+                            <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content" id="content-1">
+                            <table class="table-of-assignments">
+                                <tbody>
+                                <tr>
+                                    <th>{{#str}}analytics_indicator, block_disealytics{{/str}}</th>
+                                    <th>{{#str}}analytics_value, block_disealytics{{/str}}</th>
+                                </tr>
+                                {{#insights.rest}}
+                                    <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
+                                        <td>{{name}}</td>
+                                        <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
+                                    </tr>
+                                {{/insights.rest}}
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <div class="accordion-head flex-container">
+                            <span>{{#str}}cognitive_indicators, block_disealytics{{/str}}</span>
+                            <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content" id="content-2">
+                            <table class="table-of-assignments">
+                                <tbody>
+                                <tr>
+                                    <th>Indicator</th>
+                                    <th>Value</th>
+                                </tr>
+                                {{#insights.cognitive}}
+                                    <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
+                                        <td>{{name}}</td>
+                                        <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
+                                    </tr>
+                                {{/insights.cognitive}}
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <div class="accordion-head flex-container">
+                            <span>{{#str}}social_indicators, block_disealytics{{/str}}</span>
+                            <i id="icon-3" class="fa fa-chevron-down accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content" id="content-3">
+                            <table class="table-of-assignments">
+                                <tbody>
+                                <tr>
+                                    <th>Indicator</th>
+                                    <th>Value</th>
+                                </tr>
+                                {{#insights.social}}
+                                    <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
+                                        <td>{{name}}</td>
+                                        <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
+                                    </tr>
+                                {{/insights.social}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 {{/nodata}}
                 {{#nodata}}
                     <p>{{nodata}}</p>
@@ -126,7 +171,7 @@
                             <td>{{name}}</td>
                             <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
                         </tr>
-                        {{/insights.all_calculations}}
+                    {{/insights.all_calculations}}
                     </tbody>
                 </table>
             </div>
@@ -144,6 +189,10 @@
 {{#js}}
     require(['block_disealytics/add_interaction'], function(addInteraction) {
     addInteraction.init("{{viewname}}");
+    });
+    require(['block_disealytics/statistic_insights_functions'],
+    function(statisticInsights) {
+    statisticInsights.init();
     });
 {{/js}}
 

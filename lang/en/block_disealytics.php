@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2024111400';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2024112101';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -263,12 +263,18 @@ $string['learning_materials-view_help_info_text'] = '<p>Stay up to date with you
 
 <p>Under "Manage course learning materials" you can edit the materials you have already entered or remove individual reading progress from your personal area.</p>';
 
-// Statistic insights view.
+// Statistical insights view.
 $string['statistic-insights-view'] = 'Statistical Insights';
-$string['statistic-insights-view_help_info_text'] = "sample";
+$string['statistic-insights-view_help_info_text'] = "Sample";
 $string['statistic-insights-view_info_text_expanded']= "The Statistical Insights card provides statistical data on which a prediction is made regarding course completion.";
-$string['statistic-insights-view_at_risk']= '<p style="color: var(--danger)">You are currently at risk of not passing this course.</p>';
+$string['statistic-insights-view_at_risk']= '<p style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> You are currently at risk of not passing this course.</p>';
 $string['statistic-insights-view_not_at_risk']= '<p style="color: var(--green)">Your progress on the course so far is good.</p>';
+$string['general_indicators']= 'General Indicators';
+$string['cognitive_indicators']= 'Cognitive Depth Indicators';
+$string['social_indicators']= 'Social Breadth Indicators';
+$string['analytics_indicator']= 'Indicator';
+$string['analytics_value']= 'Value';
+
 
 // Study progress view.
 $string['study-progress-view'] = "Study Progress";

@@ -85,7 +85,7 @@
             <div class="panel-body hide-when-expanded">
                 {{^nodata}}
                     <p>{{{student_at_risk}}}</p>
-                    {{#prediction_available}}
+                    {{#user_prediction_available}}
                         <p></p>
                         <div id="statistic-insights-accordion">
                             <div class="accordion-head flex-container">
@@ -151,33 +151,35 @@
                                 </table>
                             </div>
                         </div>
-                    {{/prediction_available}}
+                    {{/user_prediction_available}}
                 {{/nodata}}
                 {{#nodata}}
-                    <p>{{nodata}}</p>
+                    {{{no_prediction_in_course}}}
                 {{/nodata}}
             </div>
 
             <!-- Expanded view with all indicators -->
             <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}"
                  data-container="block_disealytics/expandable-{{viewname}}">
-                <p>{{{student_at_risk}}}</p>
-                {{#prediction_available}}
-                    <table class="table-of-assignments">
-                        <tbody>
-                        <tr>
-                            <th>Indicator</th>
-                            <th>Value</th>
-                        </tr>
-                        {{#insights.all_calculations}}
-                            <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
-                                <td>{{name}}</td>
-                                <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
+                {{^nodata}}
+                    <p>{{{student_at_risk}}}</p>
+                    {{#user_prediction_available}}
+                        <table class="table-of-assignments">
+                            <tbody>
+                            <tr>
+                                <th>Indicator</th>
+                                <th>Value</th>
                             </tr>
-                        {{/insights.all_calculations}}
-                        </tbody>
-                    </table>
-                {{/prediction_available}}
+                            {{#insights.all_calculations}}
+                                <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
+                                    <td>{{name}}</td>
+                                    <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
+                                </tr>
+                            {{/insights.all_calculations}}
+                            </tbody>
+                        </table>
+                    {{/user_prediction_available}}
+                {{/nodata}}
             </div>
 
             {{> block_disealytics/bottom_navigation }}

@@ -115,7 +115,7 @@ class statistic_insights_view extends base_view {
 
         if ($this->any_course_predictions()) {
             if ($this->create_prediction_for_user()) {
-                $this->output["prediction_available"] = true;
+                $this->output["user_prediction_available"] = true;
                 global $PAGE;
                 $output = $PAGE->get_renderer('core'); // Get a generic core renderer.
 
@@ -189,11 +189,12 @@ class statistic_insights_view extends base_view {
                 ];
 
             } else {
-                $this->output["prediction_available"] = false;
+                $this->output["user_prediction_available"] = false;
                 $this->output["student_at_risk"] = get_string(self::TITLE . '_not_at_risk', 'block_disealytics');
             }
         } else {
-            $this->output['statistic-insights-view_course_not_available'] = get_string('nodata', 'block_disealytics');
+            $this->output['nodata'] = [];
+            $this->output['nodata']['no_prediction_in_course'] = get_string('statistic-insights-view_course_not_available', 'block_disealytics');
         }
     }
 

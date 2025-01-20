@@ -16,6 +16,7 @@
 // phpcs:ignore
 namespace block_disealytics\view;
 
+use block_completionstatus;
 use coding_exception;
 use core\chart_bar;
 use core\chart_series;
@@ -27,7 +28,6 @@ use report_insights\output\insight;
 use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
-global $CFG;
 
 /**
  * Class statistic_insight_view
@@ -90,6 +90,71 @@ class statistic_insights_view extends base_view {
         return false;
     }
 
+    private function is_completion_enabled(): bool {
+        global $COURSE, $USER;
+
+        $coursecompletion = new \completion_info($COURSE);
+        return ($coursecompletion->is_enabled() && $coursecompletion->has_criteria());
+    }
+
+    private function user_has_completed_course(): bool {
+        global $COURSE, $USER;
+
+        $coursecompletion = new \completion_info($COURSE);
+        if ($coursecompletion->is_enabled() && $coursecompletion->has_criteria()) {
+            $usercompletion = new \completion_completion(array('userid' => $USER->userid, 'course' => $COURSE->id));
+            return $usercompletion->is_complete();
+        }
+        return false;
+    }
+
+    private function render_completion_help(): array {
+        global $PAGE;
+        $output = $PAGE->get_renderer('core'); // Get a generic core renderer.
+        $details = [];
+
+        // Add help icon if available.
+        $identifier = 'analytics_completion:explanation';
+        $component = 'block_disealytics';
+        if (get_string_manager()->string_exists($identifier, $component)) {
+            $helpicon = new \help_icon($identifier, $component);
+            $details[] = $helpicon->export_for_template($output);
+        }
+
+        return $details;
+    }
+
+    private function get_completion_status_block() {
+        global $PAGE, $CFG;
+
+        require_once($CFG->dirroot . '/blocks/moodleblock.class.php');
+        require_once($CFG->dirroot . '/blocks/completionstatus/block_completionstatus.php');
+
+        $completionstatus_block = new block_completionstatus();
+        $completionstatus_block->page = $PAGE;
+        $completion_content = $completionstatus_block->get_content();
+
+        return $completion_content->text;
+    }
+
+    private function filter_indicators(array $calculations): array {
+        $filteredCalculations = [];
+        foreach ($calculations as $calculation) {
+            if (!$calculation->indicator->should_be_displayed($calculation->value, $calculation->subtype)) {
+                continue;
+            }
+
+            // if there is no activity for this module in the course, do not display the insights
+            if ($calculation->value === null) {
+                continue;
+            }
+
+            $filteredCalculations[] = $calculation;
+        }
+
+        return $filteredCalculations;
+    }
+
     /**
      * Get the output for the viewmode: module.
      *
@@ -97,6 +162,8 @@ class statistic_insights_view extends base_view {
      * @throws coding_exception
      */
     protected function get_module_output(): void {
+        global $PAGE;
+        $output = $PAGE->get_renderer('core'); // Get a generic core renderer.
         // Viewmode settings.
         $iseditmode = get_user_preferences("block_disealytics_editing", "0");
         $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
@@ -113,12 +180,18 @@ class statistic_insights_view extends base_view {
         $this->output["help_info_text"] = get_string(self::TITLE . '_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] = get_string(self::TITLE . '_help_info_text_expanded', 'block_disealytics');
 
+        if ($this->is_completion_enabled()) {
+            $this->output["completion_enabled"] = true;
+            $this->output["completion"]['completion_title'] = get_string(self::TITLE . '_completion_title', 'block_disealytics');
+            $this->output["completion"]['outcomehelp'] = $this->render_completion_help();
+            $this->output["completion"]['completion_status'] = $this->get_completion_status_block();
+        } else {
+            $this->output["completion_enabled"] = false;
+        }
+
         if ($this->any_course_predictions()) {
             if ($this->create_prediction_for_user()) {
                 $this->output["user_prediction_available"] = true;
-                global $PAGE;
-                $output = $PAGE->get_renderer('core'); // Get a generic core renderer.
-
                 $this->output["student_at_risk"] = get_string(self::TITLE . '_at_risk', 'block_disealytics');
 
                 $calculations = $this->prediction->get_calculations();
@@ -131,6 +204,8 @@ class statistic_insights_view extends base_view {
                     if (!$calculation->indicator->should_be_displayed($calculation->value, $calculation->subtype)) {
                         continue;
                     }
+
+                    // if there is no activity for this module in the course, do not display the insights
                     if ($calculation->value === null) {
                         continue;
                     }
@@ -177,6 +252,10 @@ class statistic_insights_view extends base_view {
                     }
                     $count++;
                 }
+
+                //$cognitiveIndicators;
+                //$socialIndicators;
+                //$restIndicators;
 
                 // Add the indicators to the output structure.
                 $this->output['insights'] = [

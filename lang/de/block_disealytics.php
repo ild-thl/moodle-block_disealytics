@@ -276,6 +276,10 @@ $string['cognitive_indicators']= 'Indikatoren der kognitiven Tiefe';
 $string['social_indicators']= 'Indikatoren der sozialen Breite';
 $string['analytics_indicator']= 'Indikator';
 $string['analytics_value']= 'Wert';
+$string['statistic-insights-view_completion_title'] = 'Status des Kursabschlusses';
+$string['analytics_completion:explanation'] = 'Kursabschluss';
+$string['analytics_completion:explanation_help'] = 'The course completion is enabled in this course. View your current progress in completing the course below.';
+$string['analytics_completion:explanation_link'] = 'Kursabschluss';
 
 // Study progress view.
 $string['study-progress-view'] = "Lernfortschrittsanzeige";

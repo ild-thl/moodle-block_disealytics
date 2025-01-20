@@ -85,14 +85,29 @@
             <div class="panel-body hide-when-expanded">
                 {{^nodata}}
                     <p>{{{student_at_risk}}}</p>
-                    {{#user_prediction_available}}
-                        <p></p>
-                        <div id="statistic-insights-accordion">
+                    <p></p>
+                    <div id="statistic-insights-accordion">
+                        {{#completion_enabled}}
+                            {{#completion}}
+                                <div class="accordion-head flex-container">
+                                    <div>
+                                        <span>{{completion_title}}</span>
+                                        <span>{{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</span>
+                                    </div>
+                                    <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
+                                </div>
+                                <div class="accordion-content" id="content-1">
+                                    {{{completion_status}}}
+                                </div>
+                                <hr>
+                            {{/completion}}
+                        {{/completion_enabled}}
+                        {{#user_prediction_available}}
                             <div class="accordion-head flex-container">
                                 <span>{{#str}}general_indicators, block_disealytics{{/str}}</span>
-                                <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
+                                <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
                             </div>
-                            <div class="accordion-content" id="content-1">
+                            <div class="accordion-content" id="content-2">
                                 <table class="table-of-assignments">
                                     <tbody>
                                     <tr>
@@ -111,9 +126,9 @@
                             <hr>
                             <div class="accordion-head flex-container">
                                 <span>{{#str}}cognitive_indicators, block_disealytics{{/str}}</span>
-                                <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
+                                <i id="icon-3" class="fa fa-chevron-down accordion-icon"></i>
                             </div>
-                            <div class="accordion-content" id="content-2">
+                            <div class="accordion-content" id="content-3">
                                 <table class="table-of-assignments">
                                     <tbody>
                                     <tr>
@@ -132,9 +147,9 @@
                             <hr>
                             <div class="accordion-head flex-container">
                                 <span>{{#str}}social_indicators, block_disealytics{{/str}}</span>
-                                <i id="icon-3" class="fa fa-chevron-down accordion-icon"></i>
+                                <i id="icon-4" class="fa fa-chevron-down accordion-icon"></i>
                             </div>
-                            <div class="accordion-content" id="content-3">
+                            <div class="accordion-content" id="content-4">
                                 <table class="table-of-assignments">
                                     <tbody>
                                     <tr>
@@ -150,8 +165,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                    {{/user_prediction_available}}
+                        {{/user_prediction_available}}
+                    </div>
+
                 {{/nodata}}
                 {{#nodata}}
                     {{{no_prediction_in_course}}}

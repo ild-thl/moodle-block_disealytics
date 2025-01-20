@@ -108,19 +108,16 @@ class statistic_insights_view extends base_view {
         return false;
     }
 
-    private function render_completion_help(): array {
+    private function render_help_popup_message($identifier, $component = "block_disealytics"): array {
         global $PAGE;
         $output = $PAGE->get_renderer('core'); // Get a generic core renderer.
         $details = [];
 
         // Add help icon if available.
-        $identifier = 'analytics_completion:explanation';
-        $component = 'block_disealytics';
         if (get_string_manager()->string_exists($identifier, $component)) {
             $helpicon = new \help_icon($identifier, $component);
             $details[] = $helpicon->export_for_template($output);
         }
-
         return $details;
     }
 
@@ -183,7 +180,7 @@ class statistic_insights_view extends base_view {
         if ($this->is_completion_enabled()) {
             $this->output["completion_enabled"] = true;
             $this->output["completion"]['completion_title'] = get_string(self::TITLE . '_completion_title', 'block_disealytics');
-            $this->output["completion"]['outcomehelp'] = $this->render_completion_help();
+            $this->output["completion"]['outcomehelp'] = $this->render_help_popup_message('analytics_completion:explanation');
             $this->output["completion"]['completion_status'] = $this->get_completion_status_block();
         } else {
             $this->output["completion_enabled"] = false;
@@ -192,7 +189,8 @@ class statistic_insights_view extends base_view {
         if ($this->any_course_predictions()) {
             if ($this->create_prediction_for_user()) {
                 $this->output["user_prediction_available"] = true;
-                $this->output["student_at_risk"] = get_string(self::TITLE . '_at_risk', 'block_disealytics');
+                $this->output["student_at_risk"]['status'] = get_string(self::TITLE . '_at_risk', 'block_disealytics');
+                $this->output["student_at_risk"]['outcomehelp'] = $this->render_help_popup_message('analytics_at_risk:explanation');
 
                 $calculations = $this->prediction->get_calculations();
                 $firstThreeIndicators = [];

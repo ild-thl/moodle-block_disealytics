@@ -267,9 +267,12 @@ $string['learning_materials-view_help_info_text'] = '<p>Stay up to date with you
 $string['statistic-insights-view'] = 'Statistical Insights';
 $string['statistic-insights-view_help_info_text'] = "Sample";
 $string['statistic-insights-view_info_text_expanded']= "The Statistical Insights card provides statistical data on which a prediction is made regarding course completion.";
-$string['statistic-insights-view_course_not_available']= '<p style="color: var(--gray);"><i class="fa fa-warning"></i> No predictions of your current progress in this course are available or have not been initiated by the administrator.</p>';
-$string['statistic-insights-view_at_risk']= '<p style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> You are currently at risk of not passing this course.</p>';
-$string['statistic-insights-view_not_at_risk']= '<p style="color: var(--green)">Your progress on the course so far is good.</p>';
+$string['statistic-insights-view_course_not_available']= '<span style="color: var(--gray);"><i class="fa fa-warning"></i> No predictions of your current progress in this course are available or have not been initiated by the administrator.</span>';
+$string['statistic-insights-view_at_risk']= '<span style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> You are currently at risk of not passing this course.</span>';
+$string['statistic-insights-view_not_at_risk']= '<span style="color: var(--green)">Your progress on the course so far is good.</span>';
+$string['analytics_at_risk:explanation'] = 'Student at risk of dropping out';
+$string['analytics_at_risk:explanation_help'] = 'The analytics model predicts the likelihood of a student disengaging from a course based on their activity and participation. It analyzes factors like logins, forum posts, assignment submissions, and other interactions to provide an estimation of their engagement level. This is only a prediction and should be used as a guide rather than a definite outcome, encouraging students to stay active and seek support if needed.';
+$string['analytics_at_risk:explanation_link'] = 'Students_at_risk_of_dropping_out';
 $string['general_indicators']= 'General Indicators';
 $string['cognitive_indicators']= 'Cognitive Depth Indicators';
 $string['social_indicators']= 'Social Breadth Indicators';

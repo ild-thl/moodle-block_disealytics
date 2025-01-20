@@ -268,9 +268,12 @@ $string['learning_materials-view_help_info_text'] = '<p>Bleiben Sie bezüglich I
 $string['statistic-insights-view'] = 'Statistische Einblicke';
 $string['statistic-insights-view_help_info_text'] = "sample";
 $string['statistic-insights-view_info_text_expanded']= "Die statistischen Einblicke geben Ihnen die Indikatoren und Werte aus, die zu dem Ergebnis führen, ob Sie gefährdet sind, den Kurs nicht zu bestehen.";
-$string['statistic-insights-view_course_not_available']= '<p style="color: var(--gray);"><i class="fa fa-warning"></i> Es sind keine Vorhersagen zu Ihrem aktuellen Fortschritt in diesem Kurs verfügbar oder wurden von der administrierenden Person nicht initiiert.</p>';
-$string['statistic-insights-view_at_risk']= '<p style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> Sie sind gefährdet, den Kurs nicht zu bestehen.</p>';
-$string['statistic-insights-view_not_at_risk']= '<p style="color: var(--green)">Bei gleichbleibender Beteiligung am Kurs werden Sie diesen wahrscheinlich bestehen.</p>';
+$string['statistic-insights-view_course_not_available']= '<span style="color: var(--gray);"><i class="fa fa-warning"></i> Es sind keine Vorhersagen zu Ihrem aktuellen Fortschritt in diesem Kurs verfügbar oder wurden von der administrierenden Person nicht initiiert.</span>';
+$string['statistic-insights-view_at_risk']= '<span style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> Sie sind gefährdet, den Kurs nicht zu bestehen.</span>';
+$string['statistic-insights-view_not_at_risk']= '<span style="color: var(--green)">Bei gleichbleibender Beteiligung am Kurs werden Sie diesen wahrscheinlich bestehen.</span>';
+$string['analytics_at_risk:explanation'] = 'Course completion';
+$string['analytics_at_risk:explanation_help'] = 'Das Analysemodell prognostiziert die Wahrscheinlichkeit, dass ein/e Studierende/r seinen/ihren Kurs abbricht, basierend auf seiner/ihrer Aktivität und Beteiligung. Es analysiert Faktoren wie Anmeldungen, Forenbeiträge, Einsendungen von Aufgaben und andere Interaktionen, um eine Schätzung des Engagements zu erstellen. Es handelt sich hierbei nur um eine Vorhersage, die eher als Leitfaden dienen sollte. Die Studierenden werden ermutigt, aktiv zu bleiben und bei Bedarf Unterstützung zu suchen.';
+$string['analytics_at_risk:explanation_link'] = 'Teilnehmer/innen,_die_Gefahr_laufen,_aus_dem_Kurs_auszusteigen';
 $string['general_indicators']= 'Allgemeine Indikatoren';
 $string['cognitive_indicators']= 'Indikatoren der kognitiven Tiefe';
 $string['social_indicators']= 'Indikatoren der sozialen Breite';

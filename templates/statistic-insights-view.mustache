@@ -84,7 +84,12 @@
         {{#viewmode_module}}
             <div class="panel-body hide-when-expanded">
                 {{^nodata}}
-                    <p>{{{student_at_risk}}}</p>
+                    {{#student_at_risk}}
+                        <div>
+                            <span>{{{status}}}</span>
+                            <span>{{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</span>
+                        </div>
+                    {{/student_at_risk}}
                     <p></p>
                     <div id="statistic-insights-accordion">
                         {{#completion_enabled}}

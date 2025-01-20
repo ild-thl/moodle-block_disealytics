@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2024112700';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2024121800';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Füge einen neuen Learner Dashboard Block hinzu.';
 $string['disealytics:myaddinstance'] = 'Füge einen neuen Learner Dashboard Block zu meinem Dashboard hinzu.';
@@ -511,3 +511,8 @@ $string['editingyes'] = "Bearbeitungsmodus im Learner Dashboard aktiviert";
 $string['expandedno'] = "Keine Detailansicht im Learner Dashboard ist aktiviert.";
 $string['plannerdateno'] = "Der Standardwert für das Datum im Planungsassistenten, beschreibt 'jetzt'.";
 $string['viewmode_selected'] = "ist die angezeigte Ansicht des Learner Dashboard.";
+
+$string['analytics_pastday'] = 'Vergangener Tag';
+$string['analytics_pastday_help'] = 'Dieses Analyseintervall generiert Vorhersagen jeden Tag. Die Berechnung der Indikatoren basiert auf dem letzten Tag.';
+$string['analytics_daysaccum'] = 'Bisherige Tage akkumuliert';
+$string['analytics_daysaccum_help'] = 'Dieses Analyseintervall unterteilt den Kurs in Tage, wobei jede Vorhersage auf den Daten aller bisherigen Tage basiert.';

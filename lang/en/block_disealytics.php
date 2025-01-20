@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2024112700';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2024121800';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -504,3 +504,8 @@ $string['editingyes'] = "Editing mode in Learner Dashboard turned on.";
 $string['expandedno'] = "No view in Learner Dashboard is expanded.";
 $string['plannerdateno'] = "The default value of the planning assistant, now.";
 $string['viewmode_selected'] = "is the currently selected viewmode of the Learner Dashboard.";
+
+$string['analytics_pastday'] = 'Past day';
+$string['analytics_pastday_help'] = 'This analysis interval generates predictions every day. The indicators calculations will be based on the past day.';
+$string['analytics_daysaccum'] = 'All previous days';
+$string['analytics_daysaccum_help'] = 'This analysis interval divides the course into days, with each prediction being based on the accumulated data of all previous days.';

@@ -134,24 +134,6 @@ class statistic_insights_view extends base_view {
         return $completion_content->text;
     }
 
-    private function filter_indicators(array $calculations): array {
-        $filteredCalculations = [];
-        foreach ($calculations as $calculation) {
-            if (!$calculation->indicator->should_be_displayed($calculation->value, $calculation->subtype)) {
-                continue;
-            }
-
-            // if there is no activity for this module in the course, do not display the insights
-            if ($calculation->value === null) {
-                continue;
-            }
-
-            $filteredCalculations[] = $calculation;
-        }
-
-        return $filteredCalculations;
-    }
-
     /**
      * Get the output for the viewmode: module.
      *
@@ -186,93 +168,120 @@ class statistic_insights_view extends base_view {
             $this->output["completion_enabled"] = false;
         }
 
-        if ($this->any_course_predictions()) {
-            if ($this->create_prediction_for_user()) {
-                $this->output["user_prediction_available"] = true;
-                $this->output["student_at_risk"]['status'] = get_string(self::TITLE . '_at_risk', 'block_disealytics');
-                $this->output["student_at_risk"]['outcomehelp'] = $this->render_help_popup_message('analytics_at_risk:explanation');
-
-                $calculations = $this->prediction->get_calculations();
-                $firstThreeIndicators = [];
-                $fourthIndicator = [];
-                $allCalculations = [];
-                $count = 0;
-
-                foreach ($calculations as $calculation) {
-                    if (!$calculation->indicator->should_be_displayed($calculation->value, $calculation->subtype)) {
-                        continue;
-                    }
-
-                    // if there is no activity for this module in the course, do not display the insights
-                    if ($calculation->value === null) {
-                        continue;
-                    }
-
-                    // Construct the entry with name and display value.
-                    $entry = [
-                            'name' => (string) call_user_func([$calculation->indicator, 'get_name']),
-                            'displayvalue' => $calculation->indicator->get_display_value($calculation->value, $calculation->subtype)
-                    ];
-
-                    // Add style and icon to the entry.
-                    list($entry['style'], $entry['outcomeicon']) = insight::get_calculation_display(
-                            $calculation->indicator,
-                            floatval($calculation->value),
-                            $output,
-                            $calculation->subtype
-                    );
-
-                    // Add help icon if available.
-                    $identifier = $calculation->indicator->get_name()->get_identifier() . 'def';
-                    $component = $calculation->indicator->get_name()->get_component();
-                    if (get_string_manager()->string_exists($identifier, $component)) {
-                        $helpicon = new \help_icon($identifier, $component);
-                        $entry['outcomehelp'] = $helpicon->export_for_template($output);
-                    }
-
-                    // If the name contains 'cognitive', add to a separate list.
-                    if ((strpos($identifier, 'cognitive') !== false)) {
-                        $cognitiveIndicators[] = $entry;
-                    } else if ((strpos($identifier, 'social') !== false)) {
-                        $socialIndicators[] = $entry;
-                    } else {
-                        $restIndicators[] = $entry;
-                    }
-
-                    // Add to all calculations list.
-                    $allCalculations[] = $entry;
-
-                    // Separate into first three and fourth indicators.
-                    if ($count < 3) {
-                        $firstThreeIndicators[] = $entry;
-                    } else if ($count == 3) {
-                        $fourthIndicator[] = $entry;
-                    }
-                    $count++;
-                }
-
-                //$cognitiveIndicators;
-                //$socialIndicators;
-                //$restIndicators;
-
-                // Add the indicators to the output structure.
-                $this->output['insights'] = [
-                        'first_three' => $firstThreeIndicators,
-                        'fourth' => $fourthIndicator,
-                        'all_calculations' => $allCalculations,
-                        'cognitive' => $cognitiveIndicators,
-                        'social' => $socialIndicators,
-                        'rest' => $restIndicators
-                ];
-
-            } else {
-                $this->output["user_prediction_available"] = false;
-                $this->output["student_at_risk"] = get_string(self::TITLE . '_not_at_risk', 'block_disealytics');
-            }
-        } else {
-            $this->output['nodata'] = [];
-            $this->output['nodata']['no_prediction_in_course'] = get_string('statistic-insights-view_course_not_available', 'block_disealytics');
+        if (!$this->any_course_predictions()) {
+            $this->output['nodata'] = [
+                    'no_prediction_in_course' => get_string('statistic-insights-view_course_not_available', 'block_disealytics')
+            ];
+            return;
         }
+
+        if (!$this->create_prediction_for_user()) {
+            $this->output["user_prediction_available"] = false;
+            $this->output["student_at_risk"] = get_string(self::TITLE . '_not_at_risk', 'block_disealytics');
+            return;
+        }
+
+        $this->output["user_prediction_available"] = true;
+        $this->output["student_at_risk"] = [
+                'status' => get_string(self::TITLE . '_at_risk', 'block_disealytics'),
+                'outcomehelp' => $this->render_help_popup_message('analytics_at_risk:explanation')
+        ];
+
+        $calculations = $this->prediction->get_calculations();
+        $firstThreeIndicators = [];
+        $fourthIndicator = [];
+        $allCalculations = [];
+        $cognitiveIndicators = [];
+        $socialIndicators = [];
+        $generalIndicators = [];
+        $count = 0;
+
+        foreach ($calculations as $calculation) {
+            if ($calculation->value === null ||
+                    !$calculation->indicator->should_be_displayed($calculation->value, $calculation->subtype)) {
+                continue;
+            }
+
+            $indicatortype = $calculation->indicator->get_name()->get_identifier();
+
+            if (strpos($indicatortype, 'potential') !== false) {
+                continue;
+            }
+
+            if (!preg_match('/indicator:(activitiesdue|readactions|anywriteincourse|cognitive|social)/', $indicatortype)) {
+                continue;
+            }
+
+            $indicatorname = (string) $calculation->indicator->get_name();
+            $indicatorvalue = $calculation->indicator->get_display_value($calculation->value, $calculation->subtype);
+
+            $entry = [];
+
+            switch ($indicatortype) {
+                case 'indicator:activitiesdue':
+                    if($calculation->value == 1) {
+                        $entry['activitiesdue']['activitiesdueclass'] = 'activitiesdue';
+                        $indicatorvalue = get_string(self::TITLE . '_activitiesdue', 'block_disealytics');
+                    } else {
+                        $entry['activitiesdue']['activitiesdueclass'] = 'noactivitiesdue';
+                        $indicatorvalue = get_string(self::TITLE . '_noactivitiesdue', 'block_disealytics');
+                    }
+                    $entry['activitiesdue']['name'] = $indicatorname;
+                    $entry['activitiesdue']['value'] = $indicatorvalue;
+                    break;
+                case 'indicator:readactions':
+                    $indicatorvalue = rtrim($indicatorvalue, '%');
+                    $entry['readactions']['name'] = $indicatorname;
+                    $entry['readactions']['value'] = $indicatorvalue;
+                    break;
+                case 'indicator:anywriteincourse':
+                    if($calculation->value == 0) {
+                        $indicatorvalue = get_string(self::TITLE . '_anywriteincourse', 'block_disealytics');
+                    } else {
+                        $indicatorvalue = get_string(self::TITLE . '_nowriteincourse', 'block_disealytics');
+                    }
+                    $entry['anywriteincourse']['name'] = $indicatorname;
+                    $entry['anywriteincourse']['value'] = $indicatorvalue;
+                    break;
+                case (preg_match('/cognitive(?!potential)/', $indicatortype) ? true : false):
+                case (preg_match('/social(?!potential)/', $indicatortype) ? true : false):
+                    $entry['name'] = $indicatorname;
+                    $entry['value'] = $indicatorvalue;
+                    break;
+            }
+
+            //list($entry['style'], $entry['outcomeicon']) = insight::get_calculation_display(
+            //        $calculation->indicator,
+            //        (float) $calculation->value,
+            //        $output,
+            //        $calculation->subtype
+            //);
+
+            $identifier = $calculation->indicator->get_name()->get_identifier() . 'def';
+            $component = $calculation->indicator->get_name()->get_component();
+            if (get_string_manager()->string_exists($identifier, $component)) {
+                $helpicon = new \help_icon($identifier, $component);
+                $entry['outcomehelp'] = $helpicon->export_for_template($output);
+            }
+
+            if (strpos($identifier, 'cognitive') !== false) {
+                $cognitiveIndicators[] = $entry;
+            } else if (strpos($identifier, 'social') !== false) {
+                $socialIndicators[] = $entry;
+            } else {
+                $generalIndicators[] = $entry;
+            }
+
+            $allCalculations[] = $entry;
+        }
+
+        $this->output['insights'] = [
+                'all_calculations' => $allCalculations,
+                'cognitive' => $cognitiveIndicators,
+                'social' => $socialIndicators,
+                'general' => $generalIndicators
+        ];
+
     }
 
     /**

@@ -512,11 +512,11 @@
     border-radius: 30px;
 }
 
-.block_disealytics .learning-goals-progress-bar {
+.block_disealytics .block_disealytics-progress-bar {
     margin: 1em 0;
 }
 
-.block_disealytics .learning-goals-progress-bar label {
+.block_disealytics .block_disealytics-progress-bar label {
     margin: 0;
 }
 

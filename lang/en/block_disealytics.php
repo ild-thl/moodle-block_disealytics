@@ -273,12 +273,16 @@ $string['statistic-insights-view_not_at_risk']= '<span style="color: var(--green
 $string['analytics_at_risk:explanation'] = 'Student at risk of dropping out';
 $string['analytics_at_risk:explanation_help'] = 'The analytics model predicts the likelihood of a student disengaging from a course based on their activity and participation. It analyzes factors like logins, forum posts, assignment submissions, and other interactions to provide an estimation of their engagement level. This is only a prediction and should be used as a guide rather than a definite outcome, encouraging students to stay active and seek support if needed.';
 $string['analytics_at_risk:explanation_link'] = 'Students_at_risk_of_dropping_out';
-$string['general_indicators']= 'General Indicators';
+$string['general_indicators']= 'Overview';
+$string['statistic-insights-view_anywriteincourse']= '<p style="color: var(--green);"><i class="fa fa-check-circle"></i></p><p>You have completed a "write" action (saved content) in this course.</p>';
+$string['statistic-insights-view_nowriteincourse']= '<p style="color: var(--gray);"><i class="fa fa-warning"></i></p><p>You have not yet completed a "write" action (saved content) in this course.</p>';
+$string['statistic-insights-view_activitiesdue']= '<p style="color: var(--white);"><i class="fa fa-warning"></i></p><p>You have activities due in this course!</p>';
+$string['statistic-insights-view_noactivitiesdue']= '<p style="color: var(--white);"><i class="fa fa-check-circle"></i></p><p>You do not have any activities due currently.</p>';
 $string['cognitive_indicators']= 'Cognitive Depth Indicators';
 $string['social_indicators']= 'Social Breadth Indicators';
 $string['analytics_indicator']= 'Indicator';
 $string['analytics_value']= 'Value';
-$string['statistic-insights-view_completion_title'] = 'Completion status';
+$string['statistic-insights-view_completion_title'] = 'Your course completion status';
 $string['analytics_completion:explanation'] = 'Course completion';
 $string['analytics_completion:explanation_help'] = 'The course completion is enabled in this course. View your current progress in completing the course below.';
 $string['analytics_completion:explanation_link'] = 'Course_completion';

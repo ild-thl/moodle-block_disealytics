@@ -108,29 +108,60 @@
                             {{/completion}}
                         {{/completion_enabled}}
                         {{#user_prediction_available}}
+                            <div style="
+                                display: grid;
+                                grid-template-areas: 'activitiesdue anywriteincourse' 'readactions readactions';
+                                grid-template-columns: 1fr 1fr;
+                                grid-template-rows: 1fr .5fr;
+                                grid-gap: 8px;
+                                align-items: center;
+                                ">
+                                {{#insights.general}}
+                                    {{#activitiesdue}}
+                                        <div id="{{activitiesdueclass}}" class="insights-general" style="grid-area: activitiesdue;">
+                                            {{{value}}}
+                                        </div>
+                                    {{/activitiesdue}}
+                                    {{#anywriteincourse}}
+                                        <div class="insights-general" style="grid-area: anywriteincourse;">
+                                            {{{value}}}
+                                        </div>
+                                    {{/anywriteincourse}}
+                                    {{#readactions}}
+                                        <div class="insights-general" style="grid-area: readactions;" class="block_disealytics-progress-bar">
+                                            <p>{{name}}</p>
+                                            <label for="read-actions-indicator-progress">
+                                                <span>{{value}} / 100%</span>
+                                            </label>
+                                            <progress id="read-actions-indicator-progress" value="{{value}}" max="100"></progress>
+                                        </div>
+                                    {{/readactions}}
+                                {{/insights.general}}
+                            </div>
+                            <hr>
                             <div class="accordion-head flex-container">
-                                <span>{{#str}}general_indicators, block_disealytics{{/str}}</span>
+                                <span>{{#str}}cognitive_indicators, block_disealytics{{/str}}</span>
                                 <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
                             </div>
                             <div class="accordion-content" id="content-2">
                                 <table class="table-of-assignments">
                                     <tbody>
                                     <tr>
-                                        <th>{{#str}}analytics_indicator, block_disealytics{{/str}}</th>
-                                        <th>{{#str}}analytics_value, block_disealytics{{/str}}</th>
+                                        <th>Indicator</th>
+                                        <th>Value</th>
                                     </tr>
-                                    {{#insights.rest}}
-                                        <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
+                                    {{#insights.cognitive}}
+                                        <tr style="padding: 4px;">
                                             <td>{{name}}</td>
-                                            <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
+                                            <td style="display: flex; text-align: center;">{{value}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
                                         </tr>
-                                    {{/insights.rest}}
+                                    {{/insights.cognitive}}
                                     </tbody>
                                 </table>
                             </div>
                             <hr>
                             <div class="accordion-head flex-container">
-                                <span>{{#str}}cognitive_indicators, block_disealytics{{/str}}</span>
+                                <span>{{#str}}social_indicators, block_disealytics{{/str}}</span>
                                 <i id="icon-3" class="fa fa-chevron-down accordion-icon"></i>
                             </div>
                             <div class="accordion-content" id="content-3">
@@ -140,31 +171,10 @@
                                         <th>Indicator</th>
                                         <th>Value</th>
                                     </tr>
-                                    {{#insights.cognitive}}
-                                        <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
-                                            <td>{{name}}</td>
-                                            <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
-                                        </tr>
-                                    {{/insights.cognitive}}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <hr>
-                            <div class="accordion-head flex-container">
-                                <span>{{#str}}social_indicators, block_disealytics{{/str}}</span>
-                                <i id="icon-4" class="fa fa-chevron-down accordion-icon"></i>
-                            </div>
-                            <div class="accordion-content" id="content-4">
-                                <table class="table-of-assignments">
-                                    <tbody>
-                                    <tr>
-                                        <th>Indicator</th>
-                                        <th>Value</th>
-                                    </tr>
                                     {{#insights.social}}
-                                        <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
+                                        <tr style="padding: 4px;">
                                             <td>{{name}}</td>
-                                            <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
+                                            <td style="display: flex; text-align: center;">{{value}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
                                         </tr>
                                     {{/insights.social}}
                                     </tbody>
@@ -184,22 +194,6 @@
                  data-container="block_disealytics/expandable-{{viewname}}">
                 {{^nodata}}
                     <p>{{{student_at_risk}}}</p>
-                    {{#user_prediction_available}}
-                        <table class="table-of-assignments">
-                            <tbody>
-                            <tr>
-                                <th>Indicator</th>
-                                <th>Value</th>
-                            </tr>
-                            {{#insights.all_calculations}}
-                                <tr class="{{#style}}table-{{style}}{{/style}}" style="padding: 4px;">
-                                    <td>{{name}}</td>
-                                    <td style="display: flex; text-align: center;">{{#outcomeicon}}{{> core/pix_icon}}{{/outcomeicon}} {{displayvalue}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
-                                </tr>
-                            {{/insights.all_calculations}}
-                            </tbody>
-                        </table>
-                    {{/user_prediction_available}}
                 {{/nodata}}
             </div>
 
@@ -222,4 +216,34 @@
     statisticInsights.init();
     });
 {{/js}}
+
+<style>
+    .block_disealytics .insights-general {
+        background: var(--light);
+        border-radius: 8px;
+        padding: 8px;
+        height: 100%;
+    }
+    @keyframes fadeInOut {
+        0%, 100% {
+            opacity: .7;
+        }
+        50% {
+            opacity: .3;
+        }
+    }
+
+    .block_disealytics #activitiesdue {
+        color: white;
+        background: var(--danger);
+        opacity: .7;
+        animation: fadeInOut 2s ease-in-out 3;
+    }
+
+    .block_disealytics #noactivitiesdue {
+        color: white;
+        background: var(--green);
+    }
+
+</style>
 

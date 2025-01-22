@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2025012200';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2025012201';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -280,10 +280,8 @@ $string['statistic-insights-view_activitiesdue']= '<p style="color: var(--white)
 $string['statistic-insights-view_noactivitiesdue']= '<p style="color: var(--white);"><i class="fa fa-check-circle"></i></p><p>You do not have any activities due currently.</p>';
 $string['cognitive_indicators']= 'Cognitive Depth Indicators';
 $string['social_indicators']= 'Social Breadth Indicators';
-$string['mod_indicators']= 'Module Indicators';
-$string['analytics_indicator']= 'Indicator';
-$string['analytics_value']= 'Value';
-$string['statistic-insights-view_completion_title'] = 'Your course completion status';
+$string['mod_indicators']= 'Status of course activities';
+$string['statistic-insights-view_completion_title'] = 'Status of course completion';
 $string['analytics_completion:explanation'] = 'Course completion';
 $string['analytics_completion:explanation_help'] = 'The course completion is enabled in this course. View your current progress in completing the course below.';
 $string['analytics_completion:explanation_link'] = 'Course_completion';

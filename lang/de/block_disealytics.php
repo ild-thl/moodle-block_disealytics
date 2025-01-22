@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2025012200';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2025012201';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Füge einen neuen Learner Dashboard Block hinzu.';
 $string['disealytics:myaddinstance'] = 'Füge einen neuen Learner Dashboard Block zu meinem Dashboard hinzu.';
@@ -279,12 +279,10 @@ $string['statistic-insights-view_anywriteincourse']= '<p style="color: var(--gre
 $string['statistic-insights-view_nowriteincourse']= '<p style="color: var(--gray);"><i class="fa fa-warning"></i></p><p>Sie haben noch keine Schreibaktivität in diesem Kurs.</p>';
 $string['statistic-insights-view_noactivitiesdue']= '<p style="color: var(--green);"><i class="fa fa-check-circle"></i></p><p>Sie haben keine fälligen Aufgaben.</p>';
 $string['statistic-insights-view_activitiesdue']= '<p style="color: var(--gray);"><i class="fa fa-warning"></i></p><p>Sie haben fällige Aufgaben!</p>';
-$string['mod_indicators']= 'Aktivitätsindicatoren';
-$string['analytics_indicator']= 'Indikator';
-$string['analytics_value']= 'Wert';
-$string['statistic-insights-view_completion_title'] = 'Ihr Status des Kursabschlusses';
+$string['mod_indicators']= 'Status der Kursaktivitäten';
+$string['statistic-insights-view_completion_title'] = 'Status des Kursabschlusses';
 $string['analytics_completion:explanation'] = 'Kursabschluss';
-$string['analytics_completion:explanation_help'] = 'The course completion is enabled in this course. View your current progress in completing the course below.';
+$string['analytics_completion:explanation_help'] = 'Der Kursabschluss ist in diesem Kurs aktiviert. Der aktuelle Fortschritt bezüglich der Beendigung des Kurses kann unten eingesehen werden.';
 $string['analytics_completion:explanation_link'] = 'Kursabschluss';
 
 // Study progress view.

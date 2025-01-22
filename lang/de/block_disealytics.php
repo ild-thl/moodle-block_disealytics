@@ -279,6 +279,7 @@ $string['statistic-insights-view_anywriteincourse']= '<p style="color: var(--gre
 $string['statistic-insights-view_nowriteincourse']= '<p style="color: var(--gray);"><i class="fa fa-warning"></i></p><p>Sie haben noch keine Schreibaktivität in diesem Kurs.</p>';
 $string['statistic-insights-view_noactivitiesdue']= '<p style="color: var(--green);"><i class="fa fa-check-circle"></i></p><p>Sie haben keine fälligen Aufgaben.</p>';
 $string['statistic-insights-view_activitiesdue']= '<p style="color: var(--gray);"><i class="fa fa-warning"></i></p><p>Sie haben fällige Aufgaben!</p>';
+$string['mod_indicators']= 'Aktivitätsindicatoren';
 $string['analytics_indicator']= 'Indikator';
 $string['analytics_value']= 'Wert';
 $string['statistic-insights-view_completion_title'] = 'Ihr Status des Kursabschlusses';

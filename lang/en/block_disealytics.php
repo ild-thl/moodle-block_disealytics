@@ -280,6 +280,7 @@ $string['statistic-insights-view_activitiesdue']= '<p style="color: var(--white)
 $string['statistic-insights-view_noactivitiesdue']= '<p style="color: var(--white);"><i class="fa fa-check-circle"></i></p><p>You do not have any activities due currently.</p>';
 $string['cognitive_indicators']= 'Cognitive Depth Indicators';
 $string['social_indicators']= 'Social Breadth Indicators';
+$string['mod_indicators']= 'Module Indicators';
 $string['analytics_indicator']= 'Indicator';
 $string['analytics_value']= 'Value';
 $string['statistic-insights-view_completion_title'] = 'Your course completion status';

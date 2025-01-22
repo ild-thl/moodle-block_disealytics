@@ -118,7 +118,7 @@
                                 ">
                                 {{#insights.general}}
                                     {{#activitiesdue}}
-                                        <div id="{{activitiesdueclass}}" class="insights-general" style="grid-area: activitiesdue;">
+                                        <div id="{{id}}" class="insights-general" style="grid-area: activitiesdue;">
                                             {{{value}}}
                                         </div>
                                     {{/activitiesdue}}
@@ -140,45 +140,25 @@
                             </div>
                             <hr>
                             <div class="accordion-head flex-container">
-                                <span>{{#str}}cognitive_indicators, block_disealytics{{/str}}</span>
+                                <span>{{#str}}mod_indicators, block_disealytics{{/str}}</span>
                                 <i id="icon-2" class="fa fa-chevron-down accordion-icon"></i>
                             </div>
-                            <div class="accordion-content" id="content-2">
-                                <table class="table-of-assignments">
-                                    <tbody>
-                                    <tr>
-                                        <th>Indicator</th>
-                                        <th>Value</th>
-                                    </tr>
-                                    {{#insights.cognitive}}
-                                        <tr style="padding: 4px;">
-                                            <td>{{name}}</td>
-                                            <td style="display: flex; text-align: center;">{{value}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
-                                        </tr>
-                                    {{/insights.cognitive}}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <hr>
-                            <div class="accordion-head flex-container">
-                                <span>{{#str}}social_indicators, block_disealytics{{/str}}</span>
-                                <i id="icon-3" class="fa fa-chevron-down accordion-icon"></i>
-                            </div>
-                            <div class="accordion-content" id="content-3">
-                                <table class="table-of-assignments">
-                                    <tbody>
-                                    <tr>
-                                        <th>Indicator</th>
-                                        <th>Value</th>
-                                    </tr>
-                                    {{#insights.social}}
-                                        <tr style="padding: 4px;">
-                                            <td>{{name}}</td>
-                                            <td style="display: flex; text-align: center;">{{value}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</td>
-                                        </tr>
-                                    {{/insights.social}}
-                                    </tbody>
-                                </table>
+                            <div class="accordion-content" id="content-2" style="display: grid; gap: 8px;">
+                                {{#insights.mod}}
+                                    <div class="insights-general">
+                                        <p style="font-weight: bold;">{{module_name}}</p>
+                                        <table style="width: 100%;">
+                                            {{#indicators}}
+                                                <tr style="padding: 4px; display: flex; justify-content: space-between;">
+                                                    <td>{{name}}</td>
+                                                    <td style="display: flex; text-align: center;">
+                                                        {{value}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}
+                                                    </td>
+                                                </tr>
+                                            {{/indicators}}
+                                        </table>
+                                    </div>
+                                {{/insights.mod}}
                             </div>
                         {{/user_prediction_available}}
                     </div>
@@ -224,6 +204,7 @@
         padding: 8px;
         height: 100%;
     }
+
     @keyframes fadeInOut {
         0%, 100% {
             opacity: .7;

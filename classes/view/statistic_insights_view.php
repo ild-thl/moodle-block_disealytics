@@ -188,13 +188,8 @@ class statistic_insights_view extends base_view {
         ];
 
         $calculations = $this->prediction->get_calculations();
-        $firstThreeIndicators = [];
-        $fourthIndicator = [];
-        $allCalculations = [];
-        $cognitiveIndicators = [];
-        $socialIndicators = [];
         $generalIndicators = [];
-        $count = 0;
+        $modIndicators = [];
 
         foreach ($calculations as $calculation) {
             if ($calculation->value === null ||
@@ -217,69 +212,72 @@ class statistic_insights_view extends base_view {
 
             $entry = [];
 
-            switch ($indicatortype) {
-                case 'indicator:activitiesdue':
-                    if($calculation->value == 1) {
-                        $entry['activitiesdue']['activitiesdueclass'] = 'activitiesdue';
-                        $indicatorvalue = get_string(self::TITLE . '_activitiesdue', 'block_disealytics');
-                    } else {
-                        $entry['activitiesdue']['activitiesdueclass'] = 'noactivitiesdue';
-                        $indicatorvalue = get_string(self::TITLE . '_noactivitiesdue', 'block_disealytics');
-                    }
-                    $entry['activitiesdue']['name'] = $indicatorname;
-                    $entry['activitiesdue']['value'] = $indicatorvalue;
-                    break;
-                case 'indicator:readactions':
-                    $indicatorvalue = rtrim($indicatorvalue, '%');
-                    $entry['readactions']['name'] = $indicatorname;
-                    $entry['readactions']['value'] = $indicatorvalue;
-                    break;
-                case 'indicator:anywriteincourse':
-                    if($calculation->value == 0) {
-                        $indicatorvalue = get_string(self::TITLE . '_anywriteincourse', 'block_disealytics');
-                    } else {
-                        $indicatorvalue = get_string(self::TITLE . '_nowriteincourse', 'block_disealytics');
-                    }
-                    $entry['anywriteincourse']['name'] = $indicatorname;
-                    $entry['anywriteincourse']['value'] = $indicatorvalue;
-                    break;
-                case (preg_match('/cognitive(?!potential)/', $indicatortype) ? true : false):
-                case (preg_match('/social(?!potential)/', $indicatortype) ? true : false):
-                    $entry['name'] = $indicatorname;
-                    $entry['value'] = $indicatorvalue;
-                    break;
-            }
-
-            //list($entry['style'], $entry['outcomeicon']) = insight::get_calculation_display(
-            //        $calculation->indicator,
-            //        (float) $calculation->value,
-            //        $output,
-            //        $calculation->subtype
-            //);
-
-            $identifier = $calculation->indicator->get_name()->get_identifier() . 'def';
-            $component = $calculation->indicator->get_name()->get_component();
-            if (get_string_manager()->string_exists($identifier, $component)) {
-                $helpicon = new \help_icon($identifier, $component);
-                $entry['outcomehelp'] = $helpicon->export_for_template($output);
-            }
-
-            if (strpos($identifier, 'cognitive') !== false) {
-                $cognitiveIndicators[] = $entry;
-            } else if (strpos($identifier, 'social') !== false) {
-                $socialIndicators[] = $entry;
-            } else {
+            // Handle general indicators first
+            if ($indicatortype === 'indicator:activitiesdue') {
+                $entry['activitiesdue']['id'] = $calculation->value == 1 ? 'activitiesdue' : 'noactivitiesdue';
+                $indicatorvalue = get_string(self::TITLE . ($calculation->value == 1 ? '_activitiesdue' : '_noactivitiesdue'), 'block_disealytics');
+                $entry['activitiesdue']['name'] = $indicatorname;
+                $entry['activitiesdue']['value'] = $indicatorvalue;
                 $generalIndicators[] = $entry;
+            } else if ($indicatortype === 'indicator:readactions') {
+                $indicatorvalue = rtrim($indicatorvalue, '%');
+                $entry['readactions']['name'] = $indicatorname;
+                $entry['readactions']['value'] = $indicatorvalue;
+                $generalIndicators[] = $entry;
+            } else if ($indicatortype === 'indicator:anywriteincourse') {
+                $indicatorvalue = get_string(self::TITLE . ($calculation->value == 0 ? '_anywriteincourse' : '_nowriteincourse'), 'block_disealytics');
+                $entry['anywriteincourse']['name'] = $indicatorname;
+                $entry['anywriteincourse']['value'] = $indicatorvalue;
+                $generalIndicators[] = $entry;
+            } else {
+                // Extract module name (e.g., "mod_assign") from the class path
+                $modName = explode('\\', get_class($calculation->indicator))[0];
+
+                // Skip "core" but only for module indicators (not general ones)
+                if ($modName === 'core' || $modName === 'core_course') {
+                    continue;
+                }
+
+                // Initialize module group if not set
+                if (!isset($modIndicators[$modName])) {
+                    $modIndicators[$modName] = [];
+                }
+
+                $entry['name'] = $indicatorname;
+                $entry['value'] = $indicatorvalue;
+
+                $identifier = $calculation->indicator->get_name()->get_identifier() . 'def';
+                $component = $calculation->indicator->get_name()->get_component();
+                if (get_string_manager()->string_exists($identifier, $component)) {
+                    $helpicon = new \help_icon($identifier, $component);
+                    $entry['outcomehelp'] = $helpicon->export_for_template($output);
+                }
+
+                // Add entry to the corresponding module's array
+                $modIndicators[$modName][] = $entry;
+            }
+        }
+
+        // Convert mod indicators to friendly names
+        $modIndicatorsArray = [];
+        foreach ($modIndicators as $moduleName => $indicators) {
+            // Convert "mod_assign" to "Assignment"
+            $friendlyName = get_string('pluginname', $moduleName);
+
+            // If no readable name is found, fall back to original module name
+            if ($friendlyName === "[[$moduleName]]") {
+                $friendlyName = ucfirst(str_replace('mod_', '', $moduleName));
             }
 
-            $allCalculations[] = $entry;
+            $modIndicatorsArray[] = [
+                    'module_name' => $friendlyName,
+                    'indicators' => $indicators
+            ];
         }
 
         $this->output['insights'] = [
-                'all_calculations' => $allCalculations,
-                'cognitive' => $cognitiveIndicators,
-                'social' => $socialIndicators,
-                'general' => $generalIndicators
+                'general' => $generalIndicators,
+                'mod' => $modIndicatorsArray
         ];
 
     }

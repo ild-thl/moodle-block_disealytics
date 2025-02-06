@@ -146,17 +146,25 @@
                             <div class="accordion-content" id="content-2" style="display: grid; gap: 8px; margin-top:8px;">
                                 {{#insights.mod}}
                                     <div class="insights-general">
-                                        <p style="font-weight: bold;">{{module_name}}</p>
-                                        <table style="width: 100%;">
-                                            {{#indicators}}
-                                                <tr style="padding: 4px; display: flex; justify-content: space-between;">
-                                                    <td>{{name}}</td>
-                                                    <td style="display: flex; text-align: center;">
-                                                        {{value}} {{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}
-                                                    </td>
-                                                </tr>
-                                            {{/indicators}}
-                                        </table>
+                                        <p style="font-weight: bold;">{{module_name}} {{#str}}mod_indicators_subtitle, block_disealytics{{/str}}</p>
+                                        <div class="progress-wrapper">
+                                            <div class="progressbar-circle">
+                                                <div class="progressbar-cognitive" role="progressbar" aria-valuenow="{{cognitive.value}}" aria-valuemin="0" aria-valuemax="100"
+                                                     style="--value:{{cognitive.value}}"></div>
+                                                <div class="progressbar-social" role="progressbar" aria-valuenow="{{social.value}}" aria-valuemin="0" aria-valuemax="100"
+                                                     style="--value:{{social.value}}"></div>
+                                            </div>
+                                            <div class="progressbar-explanation">
+                                                <div>
+                                                    <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--primary);"></div>
+                                                    <span>{{cognitive.value}}% {{cognitive.name}} {{#cognitive.outcomehelp}}{{> core/help_icon}}{{/cognitive.outcomehelp}}</span>
+                                                </div>
+                                                <div>
+                                                    <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--orange);"></div>
+                                                    <span>{{social.value}}% {{social.name}} {{#social.outcomehelp}}{{> core/help_icon}}{{/social.outcomehelp}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 {{/insights.mod}}
                             </div>
@@ -224,6 +232,59 @@
     .block_disealytics #noactivitiesdue {
         color: white;
         background: var(--green);
+    }
+
+    .block_disealytics .progress-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: space-around;
+        gap: 8px;
+    }
+
+    .block_disealytics .progressbar-explanation div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .block_disealytics .progressbar-circle {
+        position: relative;
+        width: min-content;
+    }
+
+    .block_disealytics .progressbar-cognitive {
+        --size: 5rem;
+        --fg: var(--primary);
+        --bg: color-mix(in srgb, var(--fg) 30%, transparent); /* Lighter version of fg */
+    }
+
+    .block_disealytics .progressbar-social {
+        --size: 5rem;
+        --fg: var(--orange);
+        --bg: color-mix(in srgb, var(--fg) 30%, transparent); /* Lighter version of fg */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.75);
+    }
+
+    @property --pgPercentage {
+        syntax: '<number>';
+        inherits: false;
+        initial-value: 0;
+    }
+
+    .block_disealytics div[role="progressbar"] {
+        --pgPercentage: var(--value);
+        width: var(--size);
+        height: var(--size);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+        conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+        font-size: calc(var(--size) / 5);
+        color: var(--fg);
     }
 
 </style>

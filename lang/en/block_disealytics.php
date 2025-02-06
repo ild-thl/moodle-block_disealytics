@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2025012201';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2025020600';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -278,9 +278,10 @@ $string['statistic-insights-view_anywriteincourse']= '<p style="color: var(--gre
 $string['statistic-insights-view_nowriteincourse']= '<p style="color: var(--gray);"><i class="fa fa-warning"></i></p><p>You have not yet completed a "write" action (saved content) in this course.</p>';
 $string['statistic-insights-view_activitiesdue']= '<p style="color: var(--white);"><i class="fa fa-warning"></i></p><p>You have activities due in this course!</p>';
 $string['statistic-insights-view_noactivitiesdue']= '<p style="color: var(--white);"><i class="fa fa-check-circle"></i></p><p>You do not have any activities due currently.</p>';
-$string['cognitive_indicators']= 'Cognitive Depth Indicators';
-$string['social_indicators']= 'Social Breadth Indicators';
-$string['mod_indicators']= 'Status of course activities';
+$string['cognitive_indicators']= 'Cognitive';
+$string['social_indicators']= 'Social';
+$string['mod_indicators']= 'Status of engagement in course activities';
+$string['mod_indicators_subtitle']= 'Engagement';
 $string['statistic-insights-view_completion_title'] = 'Status of course completion';
 $string['analytics_completion:explanation'] = 'Course completion';
 $string['analytics_completion:explanation_help'] = 'The course completion is enabled in this course. View your current progress in completing the course below.';

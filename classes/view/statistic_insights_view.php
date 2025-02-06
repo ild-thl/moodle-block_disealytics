@@ -258,21 +258,55 @@ class statistic_insights_view extends base_view {
             }
         }
 
-        // Convert mod indicators to friendly names
+        // Convert mod indicators to structured data
         $modIndicatorsArray = [];
+
         foreach ($modIndicators as $moduleName => $indicators) {
             // Convert "mod_assign" to "Assignment"
             $friendlyName = get_string('pluginname', $moduleName);
 
-            // If no readable name is found, fall back to original module name
+            // If no readable name is found, fall back to the original module name
             if ($friendlyName === "[[$moduleName]]") {
                 $friendlyName = ucfirst(str_replace('mod_', '', $moduleName));
             }
 
+            // Ensure that we prepare cognitive and social indicators separately
+            $cognitiveValue = 0;
+            $socialValue = 0;
+            $cognitiveHelp = null;
+            $socialHelp = null;
+
+            // Loop through indicators and assign values
+            foreach ($indicators as $indicator) {
+                if (isset($indicator['name']) && isset($indicator['value'])) {
+                    $cleanValue = floatval(str_replace('%', '', $indicator['value']));
+
+                    // Determine if it's cognitive or social based on name
+                    if (strpos(strtolower($indicator['name']), 'cognitive') !== false) {
+                        $cognitiveValue = $cleanValue;
+                        $cognitiveHelp = $indicator['outcomehelp'] ?? null; // Store cognitive help if available
+                    } elseif (strpos(strtolower($indicator['name']), 'social') !== false) {
+                        $socialValue = $cleanValue;
+                        $socialHelp = $indicator['outcomehelp'] ?? null; // Store social help if available
+                    }
+                }
+            }
+
+            // Store structured data
             $modIndicatorsArray[] = [
                     'module_name' => $friendlyName,
-                    'indicators' => $indicators
+                    'cognitive' => [
+                            'value' => $cognitiveValue,
+                            'name' => get_string('cognitive_indicators', 'block_disealytics'),
+                            'outcomehelp' => $cognitiveHelp, // Assign cognitive outcome help
+                    ],
+                    'social' => [
+                            'value' => $socialValue,
+                            'name' => get_string('social_indicators', 'block_disealytics'),
+                            'outcomehelp' => $socialHelp, // Assign social outcome help
+                    ]
             ];
+
         }
 
         $this->output['insights'] = [

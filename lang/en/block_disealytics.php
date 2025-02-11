@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2025020600';
+$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2025 - Version 0.3.0 2025021100';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -160,6 +160,7 @@ $string['add_assignment_view'] = "Add 'Assignments'";
 $string['add_progress_bar_view'] = "Add 'Progressbar'";
 $string['add_success_chance_view'] = "Add 'PVL-Probability'";
 $string['add_planner_view'] = "Add 'Planning Assistent'";
+$string['add_statistic-insights_view'] = "Add 'Statistical Insights'";
 
 $string['learning-materials-view'] = "Add learning material";
 

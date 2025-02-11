@@ -310,6 +310,11 @@
     stroke: var(--primary);
 }
 
+.block_disealytics .block_disealytics-editing:hover #statistic-insight-view-editing-icon {
+    fill: transparent;
+    stroke: var(--primary);
+}
+
 .block_disealytics .block_disealytics-editing:hover #progress-bar-view-editing-icon path:nth-child(3),
 .block_disealytics .block_disealytics-editing:hover #progress-bar-view-editing-icon path:nth-child(5) {
     fill: white;

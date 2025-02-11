@@ -27,6 +27,7 @@ import ModalEvents from 'core/modal_events';
 import Templates from 'core/templates';
 import {get_string as getString} from 'core/str';
 import {
+    getVersionInfo,
     allViewsEnabled,
     anyViewsEnabled,
     getCourseId,
@@ -139,7 +140,7 @@ export const setEditingMode = () => {
                         const modal = await ModalFactory.create({
                             title: await getString('main_add_view_title', 'block_disealytics'),
                             body: await Templates.render('block_disealytics/addview_modal', {id: 6}),
-                            footer: await getString('plugin-version-details', 'block_disealytics'),
+                            footer: getVersionInfo(),
                             removeOnClose: true
                         });
                         await modal.show();
@@ -294,7 +295,7 @@ export const toggleInformationModal = (viewname) => {
     if (btn) {
         btn.addEventListener('click', async function() {
             const footerContent = viewname === 'main' ?
-                '<div>' + await getString('plugin-version-details', 'block_disealytics') + '</div>' :
+                '<div>' + getVersionInfo() + '</div>' :
                 '';
 
             const modal = await ModalFactory.create({

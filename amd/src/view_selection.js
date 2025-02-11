@@ -23,6 +23,7 @@
 
 let viewlist = [];
 let courseid = null;
+let versioninfo = null;
 
 /**
  * Set the viewtypes array based on the provided views. Sets them to 1 as in visible/enabled like so:
@@ -33,6 +34,22 @@ let courseid = null;
  */
 export const setViewlist = (views) => {
     viewlist = views;
+};
+
+/**
+ * Set the version info.
+ * @param {String} version
+ */
+export const setVersionInfo = (version) => {
+    versioninfo = version;
+};
+
+/**
+ * Get the version info.
+ * @returns {String} versioninfo
+ */
+export const getVersionInfo = () => {
+    return versioninfo;
 };
 
 /**

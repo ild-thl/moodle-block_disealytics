@@ -24,6 +24,7 @@
 import Ajax from 'core/ajax';
 import Template from 'core/templates';
 import {
+    setVersionInfo,
     getViewlist,
     getViewSelectors,
     setViewlist,
@@ -51,8 +52,9 @@ import {
  * @param {string} viewmode - The current view mode.
  * @param {number} courseid - The ID of the course associated with the plugin.
  * @param {string} agreementurl - URL at which the data policy can be viewed
+ * @param {string} versioninfo - The current version of the plugin
  */
-export const init = async(views, viewmode, courseid, agreementurl) => {
+export const init = async(views, viewmode, courseid, agreementurl, versioninfo) => {
     /**
      * Callback function to execute when the document is ready.
      */
@@ -60,6 +62,7 @@ export const init = async(views, viewmode, courseid, agreementurl) => {
         // Set the available views and configured views.
         setViewlist(views);
         setCourseId(courseid);
+        setVersionInfo(versioninfo);
 
         // Render the main template with the available views and view mode.
         renderMainTemplate(getViewlist(), viewmode, agreementurl);

@@ -17,15 +17,12 @@
 namespace block_disealytics\view;
 
 use block_completionstatus;
+use block_disealytics\data\course;
 use coding_exception;
-use core\chart_bar;
-use core\chart_series;
 use core_analytics\prediction;
-use dml_exception;
-use Exception;
+use core_course\analytics\indicator\completion_enabled;
 use moodle_exception;
-use report_insights\output\insight;
-use stdClass;
+
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -44,8 +41,8 @@ class statistic_insights_view extends base_view {
 
     private prediction $prediction;
 
-    private function any_course_predictions(): bool {
-        global $DB, $COURSE;
+    private function any_course_predictions($course): bool {
+        global $DB;
 
         $sql = "SELECT ap.*
             FROM {analytics_predictions} ap
@@ -56,7 +53,7 @@ class statistic_insights_view extends base_view {
             WHERE c.id = :courseid";
 
         $params = [
-                'courseid' => $COURSE->id
+                'courseid' => $course->id
         ];
 
         $predictions = $DB->get_records_sql($sql, $params);
@@ -64,8 +61,8 @@ class statistic_insights_view extends base_view {
         return !empty($predictions);
     }
 
-    private function create_prediction_for_user(): bool {
-        global $DB, $USER, $COURSE;
+    private function create_prediction_for_user($course): bool {
+        global $DB, $USER;
 
         $sql = "SELECT ap.*
         FROM {analytics_predictions} ap
@@ -78,7 +75,7 @@ class statistic_insights_view extends base_view {
 
         $params = [
                 'userid' => $USER->id,
-                'courseid' => $COURSE->id
+                'courseid' => $course->id
         ];
 
         $data = $DB->get_record_sql($sql, $params);
@@ -90,22 +87,9 @@ class statistic_insights_view extends base_view {
         return false;
     }
 
-    private function is_completion_enabled(): bool {
-        global $COURSE, $USER;
-
-        $coursecompletion = new \completion_info($COURSE);
+    private function is_completion_enabled($course): bool {
+        $coursecompletion = new \completion_info($course);
         return ($coursecompletion->is_enabled() && $coursecompletion->has_criteria());
-    }
-
-    private function user_has_completed_course(): bool {
-        global $COURSE, $USER;
-
-        $coursecompletion = new \completion_info($COURSE);
-        if ($coursecompletion->is_enabled() && $coursecompletion->has_criteria()) {
-            $usercompletion = new \completion_completion(array('userid' => $USER->userid, 'course' => $COURSE->id));
-            return $usercompletion->is_complete();
-        }
-        return false;
     }
 
     private function render_help_popup_message($identifier, $component = "block_disealytics"): array {
@@ -134,55 +118,41 @@ class statistic_insights_view extends base_view {
         return $completion_content->text;
     }
 
-    /**
-     * Get the output for the viewmode: module.
-     *
-     * @return void
-     * @throws coding_exception
-     */
-    protected function get_module_output(): void {
-        global $PAGE;
-        $output = $PAGE->get_renderer('core'); // Get a generic core renderer.
-        // Viewmode settings.
-        $iseditmode = get_user_preferences("block_disealytics_editing", "0");
-        $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
-        // If in editing mode.
-        if ($iseditmode == 1) {
-            $this->output["editmode"] = true;
-        } else {
-            $this->output["viewmode"] = true;
-        }
-        $this->output["viewmode_module"] = true;
-
-        // Texts.
-        $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string(self::TITLE . '_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string(self::TITLE . '_help_info_text_expanded', 'block_disealytics');
-
-        if ($this->is_completion_enabled()) {
+    private function get_course_completion_output() {
+        global $COURSE;
+        if ($this->is_completion_enabled($COURSE)) {
             $this->output["completion_enabled"] = true;
             $this->output["completion"]['completion_title'] = get_string(self::TITLE . '_completion_title', 'block_disealytics');
             $this->output["completion"]['outcomehelp'] = $this->render_help_popup_message('analytics_completion:explanation');
             $this->output["completion"]['completion_status'] = $this->get_completion_status_block();
+            $this->output["prediction_accordion_number"] = 2;
         } else {
             $this->output["completion_enabled"] = false;
+            $this->output["prediction_accordion_number"] = 1; // if completion is disabled, the accordion starts at 1 with the predictions.
         }
+    }
 
-        if (!$this->any_course_predictions()) {
-            $this->output['nodata'] = [
+    private function get_prediction_output($course): array {
+        global $PAGE;
+        $pageoutput = $PAGE->get_renderer('core'); // Get a generic core renderer.
+        $predictionoutput = [];
+        $predictionoutput['coursename'] = $course->fullname;
+
+        if (!$this->any_course_predictions($course)) {
+            $predictionoutput['nodata'] = [
                     'no_prediction_in_course' => get_string('statistic-insights-view_course_not_available', 'block_disealytics')
             ];
-            return;
+            return $predictionoutput;
         }
 
-        if (!$this->create_prediction_for_user()) {
-            $this->output["user_prediction_available"] = false;
-            $this->output["student_at_risk"] = get_string(self::TITLE . '_not_at_risk', 'block_disealytics');
-            return;
+        if (!$this->create_prediction_for_user($course)) {
+            $predictionoutput["user_prediction_available"] = false;
+            $predictionoutput["student_at_risk"] = get_string(self::TITLE . '_not_at_risk', 'block_disealytics');
+            return $predictionoutput;
         }
 
-        $this->output["user_prediction_available"] = true;
-        $this->output["student_at_risk"] = [
+        $predictionoutput["user_prediction_available"] = true;
+        $predictionoutput["student_at_risk"] = [
                 'status' => get_string(self::TITLE . '_at_risk', 'block_disealytics'),
                 'outcomehelp' => $this->render_help_popup_message('analytics_at_risk:explanation')
         ];
@@ -214,7 +184,7 @@ class statistic_insights_view extends base_view {
 
             // Handle general indicators first
             if ($indicatortype === 'indicator:activitiesdue') {
-                $entry['activitiesdue']['id'] = $calculation->value == 1 ? 'activitiesdue' : 'noactivitiesdue';
+                $entry['activitiesdue']['class'] = $calculation->value == 1 ? 'activitiesdue' : 'noactivitiesdue';
                 $indicatorvalue = get_string(self::TITLE . ($calculation->value == 1 ? '_activitiesdue' : '_noactivitiesdue'), 'block_disealytics');
                 $entry['activitiesdue']['name'] = $indicatorname;
                 $entry['activitiesdue']['value'] = $indicatorvalue;
@@ -250,7 +220,7 @@ class statistic_insights_view extends base_view {
                 $component = $calculation->indicator->get_name()->get_component();
                 if (get_string_manager()->string_exists($identifier, $component)) {
                     $helpicon = new \help_icon($identifier, $component);
-                    $entry['outcomehelp'] = $helpicon->export_for_template($output);
+                    $entry['outcomehelp'] = $helpicon->export_for_template($pageoutput);
                 }
 
                 // Add entry to the corresponding module's array
@@ -309,11 +279,40 @@ class statistic_insights_view extends base_view {
 
         }
 
-        $this->output['insights'] = [
+        $predictionoutput['insights'] = [
                 'general' => $generalIndicators,
                 'mod' => $modIndicatorsArray
         ];
 
+        return $predictionoutput;
+    }
+
+    /**
+     * Get the output for the viewmode: module.
+     *
+     * @return void
+     * @throws coding_exception
+     */
+    protected function get_module_output(): void {
+        global $COURSE;
+        // Viewmode settings.
+        $iseditmode = get_user_preferences("block_disealytics_editing", "0");
+        $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
+        // If in editing mode.
+        if ($iseditmode == 1) {
+            $this->output["editmode"] = true;
+        } else {
+            $this->output["viewmode"] = true;
+        }
+        $this->output["viewmode_module"] = true;
+
+        // Texts.
+        $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
+        $this->output["help_info_text"] = get_string(self::TITLE . '_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string(self::TITLE . '_help_info_text_expanded', 'block_disealytics');
+
+        $this->get_course_completion_output();
+        $this->output['prediction_output'] = $this->get_prediction_output($COURSE);
     }
 
     /**
@@ -324,6 +323,7 @@ class statistic_insights_view extends base_view {
      * @throws moodle_exception
      */
     protected function get_halfyear_output(): void {
+        global $USER;
         // Viewmode settings.
         $iseditmode = get_user_preferences("block_disealytics_editing", "0");
         $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
@@ -338,6 +338,19 @@ class statistic_insights_view extends base_view {
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
         $this->output["help_info_text"] = get_string(self::TITLE . '_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] = get_string(self::TITLE . '_help_info_text_expanded', 'block_disealytics');
+
+        $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
+
+        if (count($allusercourses) == 0) {
+            $this->output['nodata'] = get_string(self::TITLE . '_no_course_available', 'block_disealytics');
+            return;
+        }
+        $outputs = [];
+        foreach ($allusercourses as $usercourse) {
+            $course = get_course($usercourse->courseid);
+            $outputs[] = $this->get_prediction_output($course);
+        }
+        $this->output["courseoutputs"] = $outputs;
     }
 
     /**
@@ -348,6 +361,7 @@ class statistic_insights_view extends base_view {
      * @throws moodle_exception
      */
     protected function get_global_output(): void {
+        global $USER;
         // Viewmode settings.
         $iseditmode = get_user_preferences("block_disealytics_editing", "0");
         $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
@@ -361,5 +375,19 @@ class statistic_insights_view extends base_view {
         $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
         $this->output["help_info_text"] = get_string(self::TITLE . '_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] = get_string(self::TITLE . '_help_info_text_expanded', 'block_disealytics');
+        $this->output["additional_info"] = get_string(self::TITLE . '_global_additional_info', 'block_disealytics');
+
+        $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
+
+        if (count($allusercourses) == 0) {
+            $this->output['no_course_available'] = get_string(self::TITLE . '_no_course_available', 'block_disealytics');
+            return;
+        }
+        $outputs = [];
+        foreach ($allusercourses as $usercourse) {
+            $course = get_course($usercourse->courseid);
+            $outputs[] = $this->get_prediction_output($course);
+        }
+        $this->output["courseoutputs"] = $outputs;
     }
 }

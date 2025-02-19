@@ -217,6 +217,8 @@ class statistic_insights_view extends base_view {
                 $entry['value'] = $indicatorvalue;
 
                 $identifier = $calculation->indicator->get_name()->get_identifier() . 'def';
+                $entry['identifier'] = $identifier;
+
                 $component = $calculation->indicator->get_name()->get_component();
                 if (get_string_manager()->string_exists($identifier, $component)) {
                     $helpicon = new \help_icon($identifier, $component);
@@ -252,10 +254,10 @@ class statistic_insights_view extends base_view {
                     $cleanValue = floatval(str_replace('%', '', $indicator['value']));
 
                     // Determine if it's cognitive or social based on name
-                    if (strpos(strtolower($indicator['name']), 'cognitive') !== false) {
+                    if (strpos(strtolower($indicator['identifier']), 'cognitive') !== false) {
                         $cognitiveValue = $cleanValue;
                         $cognitiveHelp = $indicator['outcomehelp'] ?? null; // Store cognitive help if available
-                    } elseif (strpos(strtolower($indicator['name']), 'social') !== false) {
+                    } elseif (strpos(strtolower($indicator['identifier']), 'social') !== false) {
                         $socialValue = $cleanValue;
                         $socialHelp = $indicator['outcomehelp'] ?? null; // Store social help if available
                     }
@@ -346,9 +348,12 @@ class statistic_insights_view extends base_view {
             return;
         }
         $outputs = [];
+        $i = 1;
         foreach ($allusercourses as $usercourse) {
             $course = get_course($usercourse->courseid);
             $outputs[] = $this->get_prediction_output($course);
+            $outputs[]['output_index'] = $i;
+            $i++;
         }
         $this->output["courseoutputs"] = $outputs;
     }
@@ -384,9 +389,12 @@ class statistic_insights_view extends base_view {
             return;
         }
         $outputs = [];
+        $i = 1;
         foreach ($allusercourses as $usercourse) {
             $course = get_course($usercourse->courseid);
             $outputs[] = $this->get_prediction_output($course);
+            $outputs[]['output_index'] = $i;
+            $i++;
         }
         $this->output["courseoutputs"] = $outputs;
     }

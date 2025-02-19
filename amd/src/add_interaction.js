@@ -39,6 +39,12 @@ import {
 } from 'block_disealytics/view_selection';
 import {updateView} from 'block_disealytics/update_view';
 
+let theDisealyticsAddModal = null;
+let theDisealyticsRemoveModal = null;
+let theDisealyticsInfoModal = null;
+let theDisealyticsConfigModal = null;
+let theDisealyticsConfigConsentModal = null;
+
 /**
  * Initializes the view functionality with the specified viewname.
  * Calls registerEventListener.
@@ -123,12 +129,13 @@ export const setEditingMode = () => {
             });
             dropContainer.addEventListener("dragover", (e) => {
                 e.preventDefault();
-                const afterElement = getDragAfterElement(dropContainer, e.clientY);
-                const draggable = document.querySelector('.dragging');
-                if (afterElement === null) {
-                    dropContainer.appendChild(draggable);
+                const draggingElement = dropContainer.querySelector('.dragging');
+                const afterElement = getDragAfterElementByGrid(dropContainer, e.clientX, e.clientY);
+
+                if (afterElement && afterElement !== draggingElement) {
+                    dropContainer.insertBefore(draggingElement, afterElement);
                 } else {
-                    dropContainer.insertBefore(draggable, afterElement);
+                    dropContainer.appendChild(draggingElement);
                 }
             });
 
@@ -137,13 +144,16 @@ export const setEditingMode = () => {
             if (addViewButton && addViewButton.dataset.listenerAttached !== 'true') {
                 addViewButton.addEventListener("click", async function() {
                     try {
-                        const modal = await ModalFactory.create({
+                        if (theDisealyticsAddModal) {
+                            theDisealyticsAddModal.destroy();
+                        }
+                        theDisealyticsAddModal = await ModalFactory.create({
                             title: await getString('main_add_view_title', 'block_disealytics'),
                             body: await Templates.render('block_disealytics/addview_modal', {id: 6}),
                             footer: getVersionInfo(),
                             removeOnClose: true
                         });
-                        await modal.show();
+                        await theDisealyticsAddModal.show();
 
                         const allViews = document.querySelector('.show-when-all-views-enabled');
                         const anyViewSelectable = document.querySelector('.show-when-any-view-selectable');
@@ -198,31 +208,74 @@ export const setEditingMode = () => {
 };
 
 /**
- * Get the element after which the dragged element should be inserted within a container.
- * The function finds the closest element based on the vertical position (y-coordinate).
- *
- * @param {HTMLElement} container - The container element containing draggable elements.
- * @param {number} y - The vertical position (y-coordinate) of the dragged element.
- * @returns {HTMLElement} The element after which the dragged element should be inserted.
+ * Get the grid position of the mouse pointer relative to the container.
+ * @param {HTMLElement} container - the container element
+ * @param {number} x - mouse x position
+ * @param {number} y - mouse y position
+ * @returns {{row: number, col: number}|null}
  */
-const getDragAfterElement = (container, y) => {
-    // Get an array of draggable elements within the container (excluding the currently dragging element).
-    const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
-    // Use the `reduce` function to find the closest element based on the vertical position (y-coordinate).
-    return draggableElements.reduce((closest, child) => {
-        // Calculate the offset from the vertical center of each element to the dragged element's position.
-        const box = child.getBoundingClientRect();
-        const offset = y - box.top - box.height / 2;
+const getGridPosition = (container, x, y) => {
+    const containerRect = container.getBoundingClientRect();
+    const gridGap = 8;
+    const colCount = 2;
 
-        // Update the closest element if the current offset is negative (above the dragged element) and
-        // closer to the dragged element than the previous closest element.
-        if (offset < 0 && offset > closest.offset) {
-            return {offset: offset, element: child};
-        } else {
-            return closest;
-        }
-    }, {offset: Number.NEGATIVE_INFINITY}).element;
+    // Calculate available width per cell.
+    // Total gap width between columns is gridGap * (colCount - 1)
+    const totalGapWidth = gridGap * (colCount - 1);
+    const cellWidth = (containerRect.width - totalGapWidth) / colCount;
+
+    // Calculate mouse position relative to the container
+    const relX = x - containerRect.left;
+    const relY = y - containerRect.top;
+
+    // Determine the column (clamp in case of slight overflows)
+    let col = Math.floor(relX / (cellWidth + gridGap));
+    if (col < 0) {
+        col = 0;
+    }
+    if (col > colCount - 1) {
+        col = colCount - 1;
+    }
+
+    // For row, we assume all items have the same height.
+    const firstItem = container.querySelector('.draggable');
+    if (!firstItem) {
+        return null;
+    }
+    const itemRect = firstItem.getBoundingClientRect();
+    const cellHeight = itemRect.height + gridGap;
+    let row = Math.floor(relY / cellHeight);
+
+    return {row, col};
 };
+
+/**
+ * Get the element after which the dragged element should be placed.
+ * @param {HTMLElement} container - the container element
+ * @param {number} x - mouse x position
+ * @param {number} y - mouse y position
+ * @returns {*|null}
+ */
+const getDragAfterElementByGrid = (container, x, y) => {
+    const pos = getGridPosition(container, x, y);
+    if (!pos) {
+        return null;
+    }
+    const {row, col} = pos;
+
+    // Get only visible draggable elements
+    const draggables = [...container.querySelectorAll('.draggable:not(.dragging)[data-visible="true"]')];
+
+    // Compute target index based on grid coordinates
+    let targetIndex = row * 2 + col;
+
+    if (targetIndex === draggables.length || targetIndex > draggables.length) {
+        return null;
+    }
+
+    return draggables[targetIndex];
+};
+
 
 /**
  * Registers event listeners (for a single view) that change the user preferences.
@@ -240,25 +293,28 @@ const registerEventListener = (viewname) => {
             const modalRemoveView = await getString(viewname, 'block_disealytics');
             const modalRemoveText2 = await getString('modal_remove_text_2', 'block_disealytics');
 
-            // Create the modal with the custom content.
-            const modal = await ModalFactory.create({
+            if (theDisealyticsRemoveModal) {
+                theDisealyticsRemoveModal.destroy();
+            }
+            // Create the remove modal
+            theDisealyticsRemoveModal = await ModalFactory.create({
                 type: ModalFactory.types.SAVE_CANCEL,
                 title: await getString('modal_remove_title', 'block_disealytics'),
                 body: `${modalRemoveText1} <strong>${modalRemoveView}</strong> ${modalRemoveText2}`,
                 removeOnClose: true,
             });
-            modal.setSaveButtonText(await getString('modal_remove_check', 'block_disealytics'));
-            const saveBtn = modal.getRoot().find(modal.getActionSelector('save'));
+            theDisealyticsRemoveModal.setSaveButtonText(await getString('modal_remove_check', 'block_disealytics'));
+            const saveBtn = theDisealyticsRemoveModal.getRoot().find(theDisealyticsRemoveModal.getActionSelector('save'));
             if (saveBtn) {
                 saveBtn.removeClass('btn-primary');
                 saveBtn.addClass('btn-danger');
             }
-            const cancelBtn = modal.getFooter().find(modal.getActionSelector('cancel'));
+            const cancelBtn = theDisealyticsRemoveModal.getFooter().find(theDisealyticsRemoveModal.getActionSelector('cancel'));
             if (cancelBtn) {
                 cancelBtn.css('display', 'none');
             }
-            modal.show();
-            modal.getRoot().on(ModalEvents.save, async function() {
+            theDisealyticsRemoveModal.show();
+            theDisealyticsRemoveModal.getRoot().on(ModalEvents.save, async function() {
                 const viewContainer = document.querySelector('#block_disealytics-' + viewname);
                 viewContainer.setAttribute('data-visible', 'false');
                 const updatedViewList = updateViewlist(viewname, 'delete');
@@ -298,7 +354,11 @@ export const toggleInformationModal = (viewname) => {
                 '<div>' + getVersionInfo() + '</div>' :
                 '';
 
-            const modal = await ModalFactory.create({
+            if (theDisealyticsInfoModal) {
+                theDisealyticsInfoModal.destroy();
+            }
+
+            theDisealyticsInfoModal = await ModalFactory.create({
                 title: viewname === 'main' ?
                     await getString('main_help_title', 'block_disealytics') :
                     await getString(viewname, 'block_disealytics'),
@@ -309,7 +369,7 @@ export const toggleInformationModal = (viewname) => {
                 removeOnClose: true
             });
 
-            await modal.show();
+            await theDisealyticsInfoModal.show();
 
             if (viewname === 'main') {
                 initHelpModalAccordion();
@@ -340,18 +400,21 @@ export const toggleMainConfigModal = () => {
     const mainConfigBtn = document.querySelector("#block_disealytics_config_menu");
     if (mainConfigBtn) {
         mainConfigBtn.addEventListener('click', async function() {
+            if (theDisealyticsConfigModal) {
+                theDisealyticsConfigModal.destroy();
+            }
             // Create the main config modal with custom content.
-            const modal = await ModalFactory.create({
+            theDisealyticsConfigModal = await ModalFactory.create({
                 title: await getString('main_config_title', 'block_disealytics'),
                 body: await Templates.render('block_disealytics/config_menu', {id: 1}),
                 removeOnClose: true
             });
 
             // Show the modal.
-            await modal.show();
+            await theDisealyticsConfigModal.show();
 
             // Wait until the modal content is fully shown.
-            if (modal.getRoot()) {
+            if (theDisealyticsConfigModal.getRoot()) {
                 const mainConsentBtn = document.querySelector("#block_disealytics_config_consent_menu");
                 if (mainConsentBtn) {
                     const toggleIcon = mainConsentBtn.querySelector('i');
@@ -366,18 +429,20 @@ export const toggleMainConfigModal = () => {
                             toggleIcon.classList.remove('disea-gray', 'fa-toggle-off');
                             toggleIcon.classList.add('disea-green', 'fa-toggle-on');
                         }, 1000);
-
+                        if (theDisealyticsConfigConsentModal) {
+                            theDisealyticsConfigConsentModal.destroy();
+                        }
                         // Create and show the consent modal.
-                        const consentModal = await ModalFactory.create({
+                        theDisealyticsConfigConsentModal = await ModalFactory.create({
                             title: await getString('consent_config_title', 'block_disealytics'),
                             body: await Templates.render('block_disealytics/config_menu_consent', {id: 2}),
                             removeOnClose: true
                         });
 
-                        await consentModal.show();
+                        await theDisealyticsConfigConsentModal.show();
 
                         // Initialize consent buttons after the consent modal is shown.
-                        enableConsentButtons(consentModal);
+                        enableConsentButtons(theDisealyticsConfigConsentModal);
                     });
                 }
             }

@@ -23,6 +23,9 @@ import {get_string as getString} from 'core/str';
 import ModalEvents from "core/modal_events";
 
 let progressBarModals = [];
+let theDisealyticsProgressbarModal = null;
+let theDisealyticsProgressbarHelpModal = null;
+let theDisealyticsProgressbarAddModal = null;
 
 /**
  * Initialize the progress bar interface.
@@ -40,14 +43,16 @@ function initProgressBarModal() {
         progressBarModalBtns.forEach((progressBarModalBtn) => {
             progressBarModalBtn.addEventListener('click', async function() {
                 const learningMaterials = await getLearningMaterials();
-
-                const progressBarModal = await ModalFactory.create({
+                if (theDisealyticsProgressbarModal) {
+                    theDisealyticsProgressbarModal.destroy();
+                }
+                theDisealyticsProgressbarModal = await ModalFactory.create({
                     title: await getString('progress_config_title', 'block_disealytics'),
                     body: await Templates.render('block_disealytics/progress_bar_modal', learningMaterials),
                     removeOnClose: true,
                 });
-                progressBarModals.push(progressBarModal);
-                await progressBarModal.show();
+                progressBarModals.push(theDisealyticsProgressbarModal);
+                await theDisealyticsProgressbarModal.show();
                 initProgressBarModalAccordion();
                 initButtonsInProgressBarModal(learningMaterials);
             });
@@ -80,14 +85,17 @@ function initButtonsInProgressBarModal(learningMaterials) {
 
     if (helpBtn) {
         helpBtn.addEventListener('click', async() => {
-            const helpModal = await ModalFactory.create({
+            if (theDisealyticsProgressbarHelpModal) {
+                theDisealyticsProgressbarHelpModal.destroy();
+            }
+            theDisealyticsProgressbarHelpModal = await ModalFactory.create({
                 type: ModalFactory.types.OK,
                 title: await getString('progress_config_help_title', 'block_disealytics'),
                 body: await getString('learning_materials-view_help_info_text', 'block_disealytics'),
                 removeOnClose: true,
             });
-            progressBarModals.push(helpModal);
-            await helpModal.show();
+            progressBarModals.push(theDisealyticsProgressbarHelpModal);
+            await theDisealyticsProgressbarHelpModal.show();
         });
     }
 
@@ -96,16 +104,19 @@ function initButtonsInProgressBarModal(learningMaterials) {
 
     if (addFieldBtn) {
         addFieldBtn.addEventListener('click', async() => {
-            const addLearningMaterialModal = await ModalFactory.create({
+            if (theDisealyticsProgressbarAddModal) {
+                theDisealyticsProgressbarAddModal.destroy();
+            }
+            theDisealyticsProgressbarAddModal = await ModalFactory.create({
                 type: ModalFactory.types.SAVE_CANCEL,
                 title: await getString('progress_config_help_title', 'block_disealytics'),
                 body: await Templates.render('block_disealytics/learning_material_add_inputs', learningMaterials),
                 removeOnClose: true,
             });
-            addLearningMaterialModal.setSaveButtonText(await getString('learning_material_save', 'block_disealytics'));
-            progressBarModals.push(addLearningMaterialModal);
-            addLearningMaterialModal.show();
-            addLearningMaterialModal.getRoot().on(ModalEvents.save, async function() {
+            theDisealyticsProgressbarAddModal.setSaveButtonText(await getString('learning_material_save', 'block_disealytics'));
+            progressBarModals.push(theDisealyticsProgressbarAddModal);
+            theDisealyticsProgressbarAddModal.show();
+            theDisealyticsProgressbarAddModal.getRoot().on(ModalEvents.save, async function() {
                 const material = document.getElementById('learning-material-document');
                 const currentpage = document.getElementById('learning-material-currentpage');
                 const lastpage = document.getElementById('learning-material-lastpage');

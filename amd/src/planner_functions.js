@@ -22,6 +22,9 @@ import ModalFactory from 'core/modal_factory';
 import Templates from "core/templates";
 import ModalEvents from "core/modal_events";
 
+let theDisealyticsPlannerAddEventModal = null;
+let theDisealyticsPlannerEventDetailsModal = null;
+
 /**
  * Initialize the planner-view interactions.
  *
@@ -111,26 +114,31 @@ function initModalEventListeners() {
                 plannerEvent.eventType = eventFromDb.eventtype;
                 plannerEvent.courseName = eventFromDb.coursefullname;
 
-
+                if (theDisealyticsPlannerEventDetailsModal) {
+                    theDisealyticsPlannerEventDetailsModal.destroy();
+                }
                 // Create the modal with the custom content.
-                const modal = await ModalFactory.create({
+                theDisealyticsPlannerEventDetailsModal = await ModalFactory.create({
                     type: ModalFactory.types.SAVE_CANCEL,
                     title: plannerEvent.name,
                     body: await Templates.render('block_disealytics/planner_event_modal', plannerEvent),
                     removeOnClose: true,
                 });
-                modal.setSaveButtonText(await getString('planner_delete_event', 'block_disealytics'));
-                const cancelBtn = modal.getFooter().find(modal.getActionSelector('cancel'));
+                theDisealyticsPlannerEventDetailsModal.setSaveButtonText(
+                    await getString('planner_delete_event', 'block_disealytics'));
+                const cancelBtn = theDisealyticsPlannerEventDetailsModal.getFooter().find(
+                    theDisealyticsPlannerEventDetailsModal.getActionSelector('cancel'));
                 if (cancelBtn) {
                     cancelBtn.css('display', 'none');
                 }
-                const saveBtn = modal.getRoot().find(modal.getActionSelector('save'));
+                const saveBtn = theDisealyticsPlannerEventDetailsModal.getRoot().find(
+                    theDisealyticsPlannerEventDetailsModal.getActionSelector('save'));
                 if (saveBtn) {
                     saveBtn.removeClass('btn-primary');
                     saveBtn.addClass('btn-danger');
                 }
-                modal.show();
-                modal.getRoot().on(ModalEvents.save, async function() {
+                theDisealyticsPlannerEventDetailsModal.show();
+                theDisealyticsPlannerEventDetailsModal.getRoot().on(ModalEvents.save, async function() {
                     await deleteEventFromPlanner(plannerEvent.dateid, plannerEvent.courseid);
                     await updateView(getCourseId(), ['planner-view']);
                 });
@@ -151,18 +159,21 @@ function initAddEventListeners() {
     if (addNewEventBtns) {
         addNewEventBtns.forEach((addNewEventBtn) => {
             addNewEventBtn.addEventListener('click', async function() {
-                const modal = await ModalFactory.create({
+                if (theDisealyticsPlannerAddEventModal) {
+                    theDisealyticsPlannerAddEventModal.destroy();
+                }
+                theDisealyticsPlannerAddEventModal = await ModalFactory.create({
                     type: ModalFactory.types.SAVE_CANCEL,
                     title: getString('planner_add_event_modal', 'block_disealytics'),
                     body: await Templates.render('block_disealytics/planner_add_event_modal', {id: 1}),
                     removeOnClose: true
                 });
-                modal.setSaveButtonText(await getString('planner_save_event', 'block_disealytics'));
-                await modal.show();
+                theDisealyticsPlannerAddEventModal.setSaveButtonText(await getString('planner_save_event', 'block_disealytics'));
+                await theDisealyticsPlannerAddEventModal.show();
 
                 populateDateInputs(this.getAttribute('data-date'));
                 initButtonsInPlannerForm();
-                modal.getRoot().on(ModalEvents.save, async function() {
+                theDisealyticsPlannerAddEventModal.getRoot().on(ModalEvents.save, async function() {
                     await addEventToPlanner();
                 });
             });

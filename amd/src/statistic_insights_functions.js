@@ -21,8 +21,8 @@ import {toggleAccordion} from "./add_interaction";
  */
 export const init = () => {
     // Attach click event to each accordion head if not already present.
-    const accordion = document.getElementById('statistic-insights-accordion');
-    const accordionHeads = document.querySelectorAll('#statistic-insights-accordion .accordion-head');
+    const accordion = document.getElementById('block_disealytics-panel-statistic-insights-view');
+    const accordionHeads = document.querySelectorAll('.statistic-insights-accordion .accordion-head');
     accordionHeads.forEach((head, index) => {
         // Check if the event listener is already attached.
         if (head.dataset.listenerAttached !== 'true') {

@@ -310,9 +310,8 @@ $string['statistic-insights-view_help_info_text_expanded']= '<p>
     Für jedes Kursmodul zeigt die Karte zusätzliche Leistungsdaten an - insbesondere kognitive und soziale
     Indikatoren, die einen tieferen Einblick in bestimmte Bereiche des Lernfortschritts ermöglichen.
 </p>';
-$string['statistic-insights-view_course_not_available']= '<span style="color: var(--gray);"><i class="fa fa-warning"></i> Es sind keine Vorhersagen zu Ihrem aktuellen Fortschritt in diesem Kurs verfügbar oder wurden von der administrierenden Person nicht initiiert.</span>';
 $string['statistic-insights-view_at_risk']= '<span style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> Sie sind gefährdet, den Kurs nicht zu bestehen.</span>';
-$string['statistic-insights-view_not_at_risk']= '<span style="color: var(--green)">Bei gleichbleibender Beteiligung am Kurs werden Sie diesen wahrscheinlich bestehen.</span>';
+$string['statistic-insights-view_not_at_risk']= '<p style="color: var(--gray);"><i class="fa fa-check-circle" style="color: var(--green);"></i> Bei gleichbleibender Beteiligung am Kurs werden Sie diesen wahrscheinlich bestehen.</p>';
 $string['analytics_at_risk:explanation'] = 'Teilnehmer/innen, die Gefahr laufen, aus dem Kurs auszusteigen';
 $string['analytics_at_risk:explanation_help'] = 'Das Analysemodell prognostiziert die Wahrscheinlichkeit, dass ein/e Studierende/r seinen/ihren Kurs abbricht, basierend auf seiner/ihrer Aktivität und Beteiligung. Es analysiert Faktoren wie Anmeldungen, Forenbeiträge, Einsendungen von Aufgaben und andere Interaktionen, um eine Schätzung des Engagements zu erstellen. Es handelt sich hierbei nur um eine Vorhersage, die eher als Leitfaden dienen sollte. Die Studierenden werden ermutigt, aktiv zu bleiben und bei Bedarf Unterstützung zu suchen.';
 $string['analytics_at_risk:explanation_link'] = 'Teilnehmer/innen,_die_Gefahr_laufen,_aus_dem_Kurs_auszusteigen';
@@ -329,8 +328,9 @@ $string['statistic-insights-view_completion_title'] = 'Status des Kursabschlusse
 $string['analytics_completion:explanation'] = 'Kursabschluss';
 $string['analytics_completion:explanation_help'] = 'Der Kursabschluss ist in diesem Kurs aktiviert. Der aktuelle Fortschritt bezüglich der Beendigung des Kurses kann unten eingesehen werden.';
 $string['analytics_completion:explanation_link'] = 'Kursabschluss';
-$string['statistic-insights-view_no_course_available'] = '<p style="color: var(--gray);"><i class="fa fa-warning"></i></p><p>Sie sind in keinem Kurs des ausgewählten Semesters eingeschrieben, für den statistische Einblicke vorhanden sind.</p>';
+$string['statistic-insights-view_course_prediction_not_initialized']= '<span style="color: var(--gray);"><i class="fa fa-warning"></i> Es sind keine Vorhersagen zu Ihrem aktuellen Fortschritt in diesem Kurs verfügbar oder wurden von der administrierenden Person nicht initiiert.</span>';
 $string['statistic-insights-view_global_additional_info'] = 'Hinweis: Die Prognosen können nur für laufende Kurse ausgegeben werden. Daher entspricht die globale Ansicht in dieser Karte der Semesteransicht.';
+$string['statistic-insights-view_no_course_available'] = 'Es liegen keine Statistiken vor, da Sie in diesem Semester in keinem Kurs eingeschrieben sind.';
 
 // Study progress view.
 $string['study-progress-view'] = "Lernfortschrittsanzeige";

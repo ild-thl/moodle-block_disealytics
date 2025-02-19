@@ -76,39 +76,131 @@
                 </div>
             </div>
         </div>
-        <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}} show-when-expanded"
-             data-container="block_disealytics/expandable-{{viewname}}">
-            <p>{{#str}}statistic-insights-view_info_text_expanded, block_disealytics {{/str}}</p>
-        </div>
         {{#viewmode_module}}
             <div class="panel-body">
                 {{#prediction_output}}
                     {{^nodata}}
-                        {{#student_at_risk}}
-                            <div>
-                                <span>{{{status}}}</span>
-                                <span>{{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</span>
-                            </div>
-                        {{/student_at_risk}}
-                        <p></p>
-                        <div id="statistic-insights-accordion">
-                            {{#completion_enabled}}
-                                {{#completion}}
-                                    <div class="accordion-head flex-container">
-                                        <div>
-                                            <span>{{completion_title}}</span>
-                                            <span>{{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</span>
+                        {{#user_prediction_available}}
+                            {{#student_at_risk}}
+                                <div>
+                                    <span>{{{status}}}</span>
+                                    <span>{{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</span>
+                                </div>
+                            {{/student_at_risk}}
+                            <p></p>
+                            <div class="statistic-insights-accordion">
+                                {{#completion_enabled}}
+                                    {{#completion}}
+                                        <div class="accordion-head flex-container">
+                                            <div>
+                                                <span>{{completion_title}}</span>
+                                                <span>{{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</span>
+                                            </div>
+                                            <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
                                         </div>
-                                        <i id="icon-1" class="fa fa-chevron-down accordion-icon"></i>
-                                    </div>
-                                    <div class="accordion-content" id="content-1">
-                                        {{{completion_status}}}
+                                        <div class="accordion-content" id="content-1">
+                                            {{{completion_status}}}
+                                        </div>
+                                        <hr>
+                                    {{/completion}}
+                                {{/completion_enabled}}
+                                {{#user_prediction_available}}
+                                    <div style="
+                                        display: grid;
+                                        grid-template-areas: 'activitiesdue anywriteincourse' 'readactions readactions';
+                                        grid-template-columns: 1fr 1fr;
+                                        grid-template-rows: 1fr .5fr;
+                                        grid-gap: 8px;
+                                        align-items: center;
+                                        ">
+                                        {{#insights.general}}
+                                            {{#activitiesdue}}
+                                                <div class="insights-general {{class}}" style="grid-area: activitiesdue;">
+                                                    {{{value}}}
+                                                </div>
+                                            {{/activitiesdue}}
+                                            {{#anywriteincourse}}
+                                                <div class="insights-general" style="grid-area: anywriteincourse;">
+                                                    {{{value}}}
+                                                </div>
+                                            {{/anywriteincourse}}
+                                            {{#readactions}}
+                                                <div class="insights-general block_disealytics-progress-bar" style="grid-area: readactions;">
+                                                    <p>{{name}}</p>
+                                                    <label for="read-actions-indicator-progress">
+                                                        <span>{{value}} / 100%</span>
+                                                    </label>
+                                                    <progress id="read-actions-indicator-progress" value="{{value}}" max="100"></progress>
+                                                </div>
+                                            {{/readactions}}
+                                        {{/insights.general}}
                                     </div>
                                     <hr>
-                                {{/completion}}
-                            {{/completion_enabled}}
+                                    <div class="accordion-head flex-container">
+                                        <span>{{#str}}mod_indicators, block_disealytics{{/str}}</span>
+                                        <i id="icon-{{prediction_accordion_number}}" class="fa fa-chevron-down accordion-icon"></i>
+                                    </div>
+                                    <div class="accordion-content" id="content-{{prediction_accordion_number}}" style="display: grid; gap: 8px; margin-top:8px;">
+                                        {{#insights.mod}}
+                                            <div class="insights-general">
+                                                <p style="font-weight: bold;">{{module_name}} {{#str}}mod_indicators_subtitle, block_disealytics{{/str}}</p>
+                                                <div class="progress-wrapper">
+                                                    <div class="progressbar-circle">
+                                                        <div class="progressbar-cognitive" role="progressbar" aria-valuenow="{{cognitive.value}}" aria-valuemin="0" aria-valuemax="100"
+                                                             style="--value:{{cognitive.value}}"></div>
+                                                        <div class="progressbar-social" role="progressbar" aria-valuenow="{{social.value}}" aria-valuemin="0" aria-valuemax="100"
+                                                             style="--value:{{social.value}}"></div>
+                                                    </div>
+                                                    <div class="progressbar-explanation">
+                                                        <div>
+                                                            <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--primary);"></div>
+                                                            <span>{{cognitive.value}}% {{cognitive.name}} {{#cognitive.outcomehelp}}{{> core/help_icon}}{{/cognitive.outcomehelp}}</span>
+                                                        </div>
+                                                        <div>
+                                                            <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--orange);"></div>
+                                                            <span>{{social.value}}% {{social.name}} {{#social.outcomehelp}}{{> core/help_icon}}{{/social.outcomehelp}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {{/insights.mod}}
+                                    </div>
+                                {{/user_prediction_available}}
+                            </div>
+                        {{/user_prediction_available}}
+                        {{^user_prediction_available}}
+                            <span>{{{student_at_risk}}}</span>
+                        {{/user_prediction_available}}
+                    {{/nodata}}
+                    {{#nodata}}
+                        {{{no_prediction_in_course}}}
+                    {{/nodata}}
+                {{/prediction_output}}
+            </div>
+        {{/viewmode_module}}
+        {{#viewmode_halfyear}}
+            <div class="panel-body">
+                {{#nocourses}}
+                    <span>{{{nocourses}}}</span>
+                {{/nocourses}}
+                {{^nocourses}}
+                    {{#courseoutputs}}
+                        <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
+                            <span id="accordion-subtitle">{{coursename}}</span>
+                            <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
+                        </button>
+                        <div class="hidden accordion-content-course-category-{{viewname}}">
                             {{#user_prediction_available}}
-                                <div style="
+                                {{#student_at_risk}}
+                                    <div>
+                                        <span>{{{status}}}</span>
+                                        <span>{{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</span>
+                                    </div>
+                                {{/student_at_risk}}
+                                <p></p>
+                                <div class="statistic-insights-accordion">
+                                    {{#user_prediction_available}}
+                                        <div style="
                                     display: grid;
                                     grid-template-areas: 'activitiesdue anywriteincourse' 'readactions readactions';
                                     grid-template-columns: 1fr 1fr;
@@ -116,255 +208,174 @@
                                     grid-gap: 8px;
                                     align-items: center;
                                     ">
-                                    {{#insights.general}}
-                                        {{#activitiesdue}}
-                                            <div class="insights-general {{class}}" style="grid-area: activitiesdue;">
-                                                {{{value}}}
-                                            </div>
-                                        {{/activitiesdue}}
-                                        {{#anywriteincourse}}
-                                            <div class="insights-general" style="grid-area: anywriteincourse;">
-                                                {{{value}}}
-                                            </div>
-                                        {{/anywriteincourse}}
-                                        {{#readactions}}
-                                            <div class="insights-general block_disealytics-progress-bar" style="grid-area: readactions;">
-                                                <p>{{name}}</p>
-                                                <label for="read-actions-indicator-progress">
-                                                    <span>{{value}} / 100%</span>
-                                                </label>
-                                                <progress id="read-actions-indicator-progress" value="{{value}}" max="100"></progress>
-                                            </div>
-                                        {{/readactions}}
-                                    {{/insights.general}}
-                                </div>
-                                <hr>
-                                <div class="accordion-head flex-container">
-                                    <span>{{#str}}mod_indicators, block_disealytics{{/str}}</span>
-                                    <i id="icon-{{prediction_accordion_number}}" class="fa fa-chevron-down accordion-icon"></i>
-                                </div>
-                                <div class="accordion-content" id="content-{{prediction_accordion_number}}" style="display: grid; gap: 8px; margin-top:8px;">
-                                    {{#insights.mod}}
-                                        <div class="insights-general">
-                                            <p style="font-weight: bold;">{{module_name}} {{#str}}mod_indicators_subtitle, block_disealytics{{/str}}</p>
-                                            <div class="progress-wrapper">
-                                                <div class="progressbar-circle">
-                                                    <div class="progressbar-cognitive" role="progressbar" aria-valuenow="{{cognitive.value}}" aria-valuemin="0" aria-valuemax="100"
-                                                         style="--value:{{cognitive.value}}"></div>
-                                                    <div class="progressbar-social" role="progressbar" aria-valuenow="{{social.value}}" aria-valuemin="0" aria-valuemax="100"
-                                                         style="--value:{{social.value}}"></div>
-                                                </div>
-                                                <div class="progressbar-explanation">
-                                                    <div>
-                                                        <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--primary);"></div>
-                                                        <span>{{cognitive.value}}% {{cognitive.name}} {{#cognitive.outcomehelp}}{{> core/help_icon}}{{/cognitive.outcomehelp}}</span>
+                                            {{#insights.general}}
+                                                {{#activitiesdue}}
+                                                    <div class="insights-general {{class}}" style="grid-area: activitiesdue;">
+                                                        {{{value}}}
                                                     </div>
-                                                    <div>
-                                                        <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--orange);"></div>
-                                                        <span>{{social.value}}% {{social.name}} {{#social.outcomehelp}}{{> core/help_icon}}{{/social.outcomehelp}}</span>
+                                                {{/activitiesdue}}
+                                                {{#anywriteincourse}}
+                                                    <div class="insights-general" style="grid-area: anywriteincourse;">
+                                                        {{{value}}}
                                                     </div>
-                                                </div>
-                                            </div>
+                                                {{/anywriteincourse}}
+                                                {{#readactions}}
+                                                    <div class="insights-general block_disealytics-progress-bar" style="grid-area: readactions;">
+                                                        <p>{{name}}</p>
+                                                        <label for="read-actions-indicator-progress">
+                                                            <span>{{value}} / 100%</span>
+                                                        </label>
+                                                        <progress id="read-actions-indicator-progress" value="{{value}}" max="100"></progress>
+                                                    </div>
+                                                {{/readactions}}
+                                            {{/insights.general}}
                                         </div>
-                                    {{/insights.mod}}
+                                        <div class="accordion-head flex-container">
+                                            <span>{{#str}}mod_indicators, block_disealytics{{/str}}</span>
+                                            <i id="icon-{{output_index}}" class="fa fa-chevron-down accordion-icon"></i>
+                                        </div>
+                                        <div class="accordion-content" id="content-{{output_index}}" style="display: grid; gap: 8px; margin-top:8px;">
+                                            {{#insights.mod}}
+                                                <div class="insights-general">
+                                                    <p style="font-weight: bold;">{{module_name}} {{#str}}mod_indicators_subtitle, block_disealytics{{/str}}</p>
+                                                    <div class="progress-wrapper">
+                                                        <div class="progressbar-circle">
+                                                            <div class="progressbar-cognitive" role="progressbar" aria-valuenow="{{cognitive.value}}" aria-valuemin="0"
+                                                                 aria-valuemax="100"
+                                                                 style="--value:{{cognitive.value}}"></div>
+                                                            <div class="progressbar-social" role="progressbar" aria-valuenow="{{social.value}}" aria-valuemin="0" aria-valuemax="100"
+                                                                 style="--value:{{social.value}}"></div>
+                                                        </div>
+                                                        <div class="progressbar-explanation">
+                                                            <div>
+                                                                <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--primary);"></div>
+                                                                <span>{{cognitive.value}}% {{cognitive.name}} {{#cognitive.outcomehelp}}{{> core/help_icon}}{{/cognitive.outcomehelp}}</span>
+                                                            </div>
+                                                            <div>
+                                                                <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--orange);"></div>
+                                                                <span>{{social.value}}% {{social.name}} {{#social.outcomehelp}}{{> core/help_icon}}{{/social.outcomehelp}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {{/insights.mod}}
+                                        </div>
+                                        <hr>
+                                    {{/user_prediction_available}}
                                 </div>
                             {{/user_prediction_available}}
+                            {{^user_prediction_available}}
+                                <span>{{{student_at_risk}}}</span>
+                            {{/user_prediction_available}}
+                            {{#nodata}}
+                                {{{no_prediction_in_course}}}
+                            {{/nodata}}
                         </div>
-                    {{/nodata}}
-                    {{#nodata}}
-                        {{{no_prediction_in_course}}}
-                    {{/nodata}}
-                {{/prediction_output}}
+                    {{/courseoutputs}}
+                {{/nocourses}}
             </div>
-            {{> block_disealytics/bottom_navigation }}
-        {{/viewmode_module}}
-        {{#viewmode_halfyear}}
-            {{#no_course_available}}
-                {{{no_course_available}}}
-            {{/no_course_available}}
-            {{^no_course_available}}
-                {{#courseoutputs}}
-                    <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
-                        <span id="accordion-subtitle">{{coursename}}</span>
-                        <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
-                    </button>
-                    <div class="hidden panel-body">
-                        {{^nodata}}
-                            {{#student_at_risk}}
-                                <div>
-                                    <span>{{{status}}}</span>
-                                    <span>{{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</span>
-                                </div>
-                            {{/student_at_risk}}
-                            <p></p>
-                            <div id="statistic-insights-accordion">
-                                {{#user_prediction_available}}
-                                    <div style="
-                                display: grid;
-                                grid-template-areas: 'activitiesdue anywriteincourse' 'readactions readactions';
-                                grid-template-columns: 1fr 1fr;
-                                grid-template-rows: 1fr .5fr;
-                                grid-gap: 8px;
-                                align-items: center;
-                                ">
-                                        {{#insights.general}}
-                                            {{#activitiesdue}}
-                                                <div class="insights-general {{class}}" style="grid-area: activitiesdue;">
-                                                    {{{value}}}
-                                                </div>
-                                            {{/activitiesdue}}
-                                            {{#anywriteincourse}}
-                                                <div class="insights-general" style="grid-area: anywriteincourse;">
-                                                    {{{value}}}
-                                                </div>
-                                            {{/anywriteincourse}}
-                                            {{#readactions}}
-                                                <div class="insights-general block_disealytics-progress-bar" style="grid-area: readactions;">
-                                                    <p>{{name}}</p>
-                                                    <label for="read-actions-indicator-progress">
-                                                        <span>{{value}} / 100%</span>
-                                                    </label>
-                                                    <progress id="read-actions-indicator-progress" value="{{value}}" max="100"></progress>
-                                                </div>
-                                            {{/readactions}}
-                                        {{/insights.general}}
-                                    </div>
-                                    <div class="accordion-head flex-container">
-                                        <span>{{#str}}mod_indicators, block_disealytics{{/str}}</span>
-                                        <i id="icon-{{output_index}}" class="fa fa-chevron-down accordion-icon"></i>
-                                    </div>
-                                    <div class="accordion-content" id="content-{{output_index}}" style="display: grid; gap: 8px; margin-top:8px;">
-                                        {{#insights.mod}}
-                                            <div class="insights-general">
-                                                <p style="font-weight: bold;">{{module_name}} {{#str}}mod_indicators_subtitle, block_disealytics{{/str}}</p>
-                                                <div class="progress-wrapper">
-                                                    <div class="progressbar-circle">
-                                                        <div class="progressbar-cognitive" role="progressbar" aria-valuenow="{{cognitive.value}}" aria-valuemin="0"
-                                                             aria-valuemax="100"
-                                                             style="--value:{{cognitive.value}}"></div>
-                                                        <div class="progressbar-social" role="progressbar" aria-valuenow="{{social.value}}" aria-valuemin="0" aria-valuemax="100"
-                                                             style="--value:{{social.value}}"></div>
-                                                    </div>
-                                                    <div class="progressbar-explanation">
-                                                        <div>
-                                                            <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--primary);"></div>
-                                                            <span>{{cognitive.value}}% {{cognitive.name}} {{#cognitive.outcomehelp}}{{> core/help_icon}}{{/cognitive.outcomehelp}}</span>
-                                                        </div>
-                                                        <div>
-                                                            <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--orange);"></div>
-                                                            <span>{{social.value}}% {{social.name}} {{#social.outcomehelp}}{{> core/help_icon}}{{/social.outcomehelp}}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {{/insights.mod}}
-                                    </div>
-                                    <hr>
-                                {{/user_prediction_available}}
-                            </div>
-                        {{/nodata}}
-                        {{#nodata}}
-                            {{{no_prediction_in_course}}}
-                        {{/nodata}}
-                    </div>
-                {{/courseoutputs}}
-                {{> block_disealytics/bottom_navigation }}
-            {{/no_course_available}}
         {{/viewmode_halfyear}}
         {{#viewmode_global}}
-            {{#no_course_available}}
-                {{{no_course_available}}}
-            {{/no_course_available}}
-            {{^no_course_available}}
-                <p>{{{additional_info}}}</p>
-                {{#courseoutputs}}
-                    <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">
-                        <span id="accordion-subtitle">{{coursename}}</span>
-                        <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
-                    </button>
-                    <div class="hidden panel-body">
-                        {{^nodata}}
-                            {{#student_at_risk}}
-                                <div>
-                                    <span>{{{status}}}</span>
-                                    <span>{{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</span>
+            <div class="panel-body">
+                {{#nocourses}}
+                    <span>{{{nocourses}}}</span>
+                {{/nocourses}}
+                {{^nocourses}}
+                    <p>{{{additional_info}}}</p>
+                    {{#courseoutputs}}
+                        <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
+                            <span id="accordion-subtitle">{{coursename}}</span>
+                            <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
+                        </button>
+                        <div class="hidden accordion-content-course-category-{{viewname}}">
+                            {{#user_prediction_available}}
+                                {{#student_at_risk}}
+                                    <div>
+                                        <span>{{{status}}}</span>
+                                        <span>{{#outcomehelp}}{{> core/help_icon}}{{/outcomehelp}}</span>
+                                    </div>
+                                {{/student_at_risk}}
+                                <p></p>
+                                <div class="statistic-insights-accordion">
+                                    {{#user_prediction_available}}
+                                        <div style="
+                                    display: grid;
+                                    grid-template-areas: 'activitiesdue anywriteincourse' 'readactions readactions';
+                                    grid-template-columns: 1fr 1fr;
+                                    grid-template-rows: 1fr .5fr;
+                                    grid-gap: 8px;
+                                    align-items: center;
+                                    ">
+                                            {{#insights.general}}
+                                                {{#activitiesdue}}
+                                                    <div class="insights-general {{class}}" style="grid-area: activitiesdue;">
+                                                        {{{value}}}
+                                                    </div>
+                                                {{/activitiesdue}}
+                                                {{#anywriteincourse}}
+                                                    <div class="insights-general" style="grid-area: anywriteincourse;">
+                                                        {{{value}}}
+                                                    </div>
+                                                {{/anywriteincourse}}
+                                                {{#readactions}}
+                                                    <div class="insights-general block_disealytics-progress-bar" style="grid-area: readactions;">
+                                                        <p>{{name}}</p>
+                                                        <label for="read-actions-indicator-progress">
+                                                            <span>{{value}} / 100%</span>
+                                                        </label>
+                                                        <progress id="read-actions-indicator-progress" value="{{value}}" max="100"></progress>
+                                                    </div>
+                                                {{/readactions}}
+                                            {{/insights.general}}
+                                        </div>
+                                        <div class="accordion-head flex-container">
+                                            <span>{{#str}}mod_indicators, block_disealytics{{/str}}</span>
+                                            <i id="icon-{{output_index}}" class="fa fa-chevron-down accordion-icon"></i>
+                                        </div>
+                                        <div class="accordion-content" id="content-{{output_index}}" style="display: grid; gap: 8px; margin-top:8px;">
+                                            {{#insights.mod}}
+                                                <div class="insights-general">
+                                                    <p style="font-weight: bold;">{{module_name}} {{#str}}mod_indicators_subtitle, block_disealytics{{/str}}</p>
+                                                    <div class="progress-wrapper">
+                                                        <div class="progressbar-circle">
+                                                            <div class="progressbar-cognitive" role="progressbar" aria-valuenow="{{cognitive.value}}" aria-valuemin="0"
+                                                                 aria-valuemax="100"
+                                                                 style="--value:{{cognitive.value}}"></div>
+                                                            <div class="progressbar-social" role="progressbar" aria-valuenow="{{social.value}}" aria-valuemin="0" aria-valuemax="100"
+                                                                 style="--value:{{social.value}}"></div>
+                                                        </div>
+                                                        <div class="progressbar-explanation">
+                                                            <div>
+                                                                <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--primary);"></div>
+                                                                <span>{{cognitive.value}}% {{cognitive.name}} {{#cognitive.outcomehelp}}{{> core/help_icon}}{{/cognitive.outcomehelp}}</span>
+                                                            </div>
+                                                            <div>
+                                                                <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--orange);"></div>
+                                                                <span>{{social.value}}% {{social.name}} {{#social.outcomehelp}}{{> core/help_icon}}{{/social.outcomehelp}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {{/insights.mod}}
+                                        </div>
+                                        <hr>
+                                    {{/user_prediction_available}}
                                 </div>
-                            {{/student_at_risk}}
-                            <p></p>
-                            <div id="statistic-insights-accordion">
-                                {{#user_prediction_available}}
-                                    <div style="
-                                display: grid;
-                                grid-template-areas: 'activitiesdue anywriteincourse' 'readactions readactions';
-                                grid-template-columns: 1fr 1fr;
-                                grid-template-rows: 1fr .5fr;
-                                grid-gap: 8px;
-                                align-items: center;
-                                ">
-                                        {{#insights.general}}
-                                            {{#activitiesdue}}
-                                                <div class="insights-general {{class}}" style="grid-area: activitiesdue;">
-                                                    {{{value}}}
-                                                </div>
-                                            {{/activitiesdue}}
-                                            {{#anywriteincourse}}
-                                                <div class="insights-general" style="grid-area: anywriteincourse;">
-                                                    {{{value}}}
-                                                </div>
-                                            {{/anywriteincourse}}
-                                            {{#readactions}}
-                                                <div class="insights-general block_disealytics-progress-bar" style="grid-area: readactions;">
-                                                    <p>{{name}}</p>
-                                                    <label for="read-actions-indicator-progress">
-                                                        <span>{{value}} / 100%</span>
-                                                    </label>
-                                                    <progress id="read-actions-indicator-progress" value="{{value}}" max="100"></progress>
-                                                </div>
-                                            {{/readactions}}
-                                        {{/insights.general}}
-                                    </div>
-                                    <div class="accordion-head flex-container">
-                                        <span>{{#str}}mod_indicators, block_disealytics{{/str}}</span>
-                                        <i id="icon-{{output_index}}" class="fa fa-chevron-down accordion-icon"></i>
-                                    </div>
-                                    <div class="accordion-content" id="content-{{output_index}}" style="display: grid; gap: 8px; margin-top:8px;">
-                                        {{#insights.mod}}
-                                            <div class="insights-general">
-                                                <p style="font-weight: bold;">{{module_name}} {{#str}}mod_indicators_subtitle, block_disealytics{{/str}}</p>
-                                                <div class="progress-wrapper">
-                                                    <div class="progressbar-circle">
-                                                        <div class="progressbar-cognitive" role="progressbar" aria-valuenow="{{cognitive.value}}" aria-valuemin="0"
-                                                             aria-valuemax="100"
-                                                             style="--value:{{cognitive.value}}"></div>
-                                                        <div class="progressbar-social" role="progressbar" aria-valuenow="{{social.value}}" aria-valuemin="0" aria-valuemax="100"
-                                                             style="--value:{{social.value}}"></div>
-                                                    </div>
-                                                    <div class="progressbar-explanation">
-                                                        <div>
-                                                            <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--primary);"></div>
-                                                            <span>{{cognitive.value}}% {{cognitive.name}} {{#cognitive.outcomehelp}}{{> core/help_icon}}{{/cognitive.outcomehelp}}</span>
-                                                        </div>
-                                                        <div>
-                                                            <div style="width:1rem; height: 1rem; border-radius: 50%; display: block; background:var(--orange);"></div>
-                                                            <span>{{social.value}}% {{social.name}} {{#social.outcomehelp}}{{> core/help_icon}}{{/social.outcomehelp}}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {{/insights.mod}}
-                                    </div>
-                                    <hr>
-                                {{/user_prediction_available}}
-                            </div>
-                        {{/nodata}}
-                        {{#nodata}}
-                            {{{no_prediction_in_course}}}
-                        {{/nodata}}
-                    </div>
-                {{/courseoutputs}}
-                {{> block_disealytics/bottom_navigation }}
-            {{/no_course_available}}
+                            {{/user_prediction_available}}
+                            {{^user_prediction_available}}
+                                <span>{{{student_at_risk}}}</span>
+                            {{/user_prediction_available}}
+                            {{#nodata}}
+                                {{{no_prediction_in_course}}}
+                            {{/nodata}}
+                        </div>
+                    {{/courseoutputs}}
+                {{/nocourses}}
+            </div>
         {{/viewmode_global}}
+        <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
+        </div>
+        {{> block_disealytics/bottom_navigation }}
     </div>
 {{/viewmode}}
 {{#js}}

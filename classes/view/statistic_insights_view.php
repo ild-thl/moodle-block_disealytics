@@ -139,9 +139,9 @@ class statistic_insights_view extends base_view {
         $predictionoutput['coursename'] = $course->fullname;
 
         if (!$this->any_course_predictions($course)) {
-            $predictionoutput['nodata'] = [
-                    'no_prediction_in_course' => get_string('statistic-insights-view_course_not_available', 'block_disealytics')
-            ];
+            $predictionoutput['nodata'] = ['no_prediction_in_course' => get_string(
+                    'statistic-insights-view_course_prediction_not_initialized', 'block_disealytics'
+            )];
             return $predictionoutput;
         }
 
@@ -344,18 +344,20 @@ class statistic_insights_view extends base_view {
         $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
 
         if (count($allusercourses) == 0) {
-            $this->output['nodata'] = get_string(self::TITLE . '_no_course_available', 'block_disealytics');
+            $this->output['nocourses'] = get_string(self::TITLE . '_no_course_available', 'block_disealytics');
             return;
         }
         $outputs = [];
         $i = 1;
         foreach ($allusercourses as $usercourse) {
             $course = get_course($usercourse->courseid);
-            $outputs[] = $this->get_prediction_output($course);
-            $outputs[]['output_index'] = $i;
+            $output = $this->get_prediction_output($course);
+            $output['output_index'] = $i; // Add index inside the output
+            $outputs[] = $output; // Append to the outputs array
             $i++;
         }
         $this->output["courseoutputs"] = $outputs;
+
     }
 
     /**
@@ -385,15 +387,16 @@ class statistic_insights_view extends base_view {
         $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
 
         if (count($allusercourses) == 0) {
-            $this->output['no_course_available'] = get_string(self::TITLE . '_no_course_available', 'block_disealytics');
+            $this->output['nocourses'] = get_string(self::TITLE . '_no_course_available', 'block_disealytics');
             return;
         }
         $outputs = [];
         $i = 1;
         foreach ($allusercourses as $usercourse) {
             $course = get_course($usercourse->courseid);
-            $outputs[] = $this->get_prediction_output($course);
-            $outputs[]['output_index'] = $i;
+            $output = $this->get_prediction_output($course);
+            $output['output_index'] = $i; // Add index inside the output
+            $outputs[] = $output; // Append to the outputs array
             $i++;
         }
         $this->output["courseoutputs"] = $outputs;

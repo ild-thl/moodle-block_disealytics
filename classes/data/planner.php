@@ -46,7 +46,7 @@ class planner {
     /**
      * @var $monthname The name of the month.
      */
-    private $monthname;
+    private $monthName;
     /**
      * @var $year The year.
      */
@@ -124,19 +124,10 @@ class planner {
      * @throws coding_exception
      */
     public function block_disealytics_get_this_month_name(): string {
-        global $USER;
-
-        // Get the user's language preference.
-        $userlanguage = get_user_preferences('lang', $USER->lang);
-
         // Create a DateTime object.
         $datetime = (new DateTime())->setDate($this->year, $this->month, $this->day);
 
-        // Create an IntlDateFormatter with the user's preferred language.
-        $formatter = new IntlDateFormatter($userlanguage, IntlDateFormatter::NONE, IntlDateFormatter::NONE, null, null, 'MMMM');
-
-        // Get the month name using the formatter.
-        $this->monthName = $formatter->format($datetime);
+        $this->monthName = userdate($datetime->getTimestamp(), get_string('strftimemonth', 'core_langconfig'));
 
         return $this->monthName;
     }

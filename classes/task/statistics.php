@@ -52,19 +52,18 @@ class statistics extends scheduled_task {
     public function execute(): void {
 
         $now = (new \DateTimeImmutable("now"))->format("U");
-
         global $DB;
         $stats = new stdClass();
         $get = $DB->start_delegated_transaction();
         $stats->instances = $DB->count_records_select("block_instances", "blockname = 'disealytics'");
-        $stats->acceptancecount = $DB->count_records_select("block_disealytics_consent", "choice = 1");
         // Get all block_disealytics_view preferences of users that gave consent to use their data.
         $preferences = $DB->get_records_sql(
                 "SELECT prefs.id, prefs.value
                        FROM {user_preferences} prefs
-                       JOIN {block_disealytics_consent} consent ON prefs.userid = consent.userid
+                       INNER JOIN {block_disealytics_consent} consent ON prefs.userid = consent.userid
                       WHERE prefs.name = 'block_disealytics_views'
                             AND consent.choice = 1");
+        $stats->acceptancecount = count($preferences);
         $DB->commit_delegated_transaction($get);
         $preferences = array_map(function($pref) {
             return json_decode($pref->value, true);

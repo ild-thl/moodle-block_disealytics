@@ -97,6 +97,7 @@ $string['select_view'] = 'Ansichtauswahl';
 $string['activity-view'] = "Nutzungsaktivität";
 $string['activity-view_help_info_text'] = "Betrachten Sie Ihre Lernzeit im Überblick! Die farbigen Segmente repräsentieren unterschiedliche Aktivitäten und ihre Höhe zeigt die Dauer jeder Aktivität. Im Aktivitätsdiagramm werden verschiedene Werte entsprechend den Aktivitäten in Moodle gruppiert dargestellt. Diese Werte können je nach Aktivität unterschiedlich sein. Das System analysiert alle Aktivitäten und gruppiert sie, wobei die Aktivitäten mit der längsten Dauer im Aktivitätsdiagramm angezeigt werden.";
 $string['activity-view_help_info_text_expanded'] = "Die Detailansicht der Karte \"Aktivität\" zeigt Ihnen das bekannte Diagramm zu den Zusammenfassungen in Ihrem Kurs und weitere Graphen zu Ihren Aktivitäten mit zusätzlichen Informationen.";
+$string['last_refresh'] = 'Letzte Aktualisierung der Daten am {$a}';
 
 // Assignment view.
 $string['assignment-view'] = 'Aufgabenübersicht';

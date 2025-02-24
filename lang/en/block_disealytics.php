@@ -97,6 +97,7 @@ $string['select_view'] = 'Select view';
 $string['activity-view'] = "Activity";
 $string['activity-view_help_info_text'] = "Take a look at your learning time! The colored segments represent different activities, and their height indicates the duration of each activity. In the activity diagram, various values are grouped according to your activities in Moodle. These values may vary depending on the activity. The system analyzes all activities and groups them, and activities with the longest duration are displayed in the activity diagram.";
 $string['activity-view_help_info_text_expanded'] = "In the activity card’s detail view, you can see the familiar diagram of summaries from your course and additional graphs of your activities with extra information.";
+$string['last_refresh'] = 'Latest data from {$a}';
 
 // Assignment view.
 $string['assignment-view'] = 'Assignments';

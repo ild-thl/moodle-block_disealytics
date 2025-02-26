@@ -1108,7 +1108,8 @@
 }
 
 @keyframes fadeInOut {
-    0%, 100% {
+    0%,
+    100% {
         opacity: .7;
     }
     50% {
@@ -1165,7 +1166,9 @@
 @property --disealytics_progress_percentage {
     syntax: '<number>';
     inherits: false;
+    /* stylelint-disable csstree/validator */
     initial-value: 0;
+    /* stylelint-enable csstree/validator */
 }
 
 .block_disealytics #block_disealytics-panel-statistic-insights-view div[role="progressbar"] {
@@ -1175,8 +1178,9 @@
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
-    conic-gradient(var(--fg) calc(var(--disealytics_progress_percentage) * 1%), var(--bg) 0);
+    background:
+        radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+        conic-gradient(var(--fg) calc(var(--disealytics_progress_percentage) * 1%), var(--bg) 0);
     font-size: calc(var(--size) / 5);
     color: var(--fg);
 }

@@ -22,9 +22,7 @@ use coding_exception;
 use core_analytics\prediction;
 use core_course\analytics\indicator\completion_enabled;
 use moodle_exception;
-
-
-defined('MOODLE_INTERNAL') || die();
+use stdClass;
 
 /**
  * Class statistic_insight_view
@@ -45,11 +43,13 @@ class statistic_insights_view extends base_view {
     private prediction $prediction;
 
     /**
-     * @param $course
-     * @return bool
+     * Return whether predictions are available for the given course.
+     *
+     * @param $course stdClass course to check for predictions.
+     * @return bool True if predictions are available, false otherwise.
      * @throws \dml_exception
      */
-    private function any_course_predictions($course): bool {
+    private function any_course_predictions(stdClass $course): bool {
         global $DB;
 
         $sql = "SELECT ap.*
@@ -70,11 +70,13 @@ class statistic_insights_view extends base_view {
     }
 
     /**
-     * @param $course
-     * @return bool
+     * Create a prediction for the current user in the given course.
+     *
+     * @param $course stdClass course to create the prediction for.
+     * @return bool True if a prediction was created, false otherwise.
      * @throws \dml_exception
      */
-    private function create_prediction_for_user($course): bool {
+    private function create_prediction_for_user(stdClass $course): bool {
         global $DB, $USER;
 
         $sql = "SELECT ap.*
@@ -101,20 +103,24 @@ class statistic_insights_view extends base_view {
     }
 
     /**
-     * @param $course
-     * @return bool
+     * Return whether completion is enabled for the given course.
+     *
+     * @param $course stdClass course to check for completion.
+     * @return bool True if completion is enabled, false otherwise.
      */
-    private function is_completion_enabled($course): bool {
+    private function is_completion_enabled(stdClass $course): bool {
         $coursecompletion = new \completion_info($course);
         return ($coursecompletion->is_enabled() && $coursecompletion->has_criteria());
     }
 
     /**
-     * @param $identifier
-     * @param $component
+     * Render help popup message.
+     *
+     * @param $identifier string identifier of the help icon.
+     * @param $component string component of the help icon.
      * @return array
      */
-    private function render_help_popup_message($identifier, $component = "block_disealytics"): array {
+    private function render_help_popup_message(string $identifier, string $component = "block_disealytics"): array {
         global $PAGE;
         $output = $PAGE->get_renderer('core'); // Get a generic core renderer.
         $details = [];
@@ -128,9 +134,11 @@ class statistic_insights_view extends base_view {
     }
 
     /**
-     * @return mixed
+     * Get the completion status block.
+     *
+     * @return string completion status block.
      */
-    private function get_completion_status_block() {
+    private function get_completion_status_block(): string {
         global $PAGE, $CFG;
 
         require_once($CFG->dirroot . '/blocks/moodleblock.class.php');
@@ -144,6 +152,10 @@ class statistic_insights_view extends base_view {
     }
 
     /**
+     * Generate the output for the course completion if enabled.
+     * If completion is disabled, the accordion starts at 1 with the predictions,
+     * skipping the completion output in the view completely.
+     *
      * @return void
      * @throws coding_exception
      */
@@ -163,17 +175,22 @@ class statistic_insights_view extends base_view {
     }
 
     /**
-     * @param $course
-     * @return array
+     * Get the prediction output for the given course.
+     * If no prediction is available, the output will contain a message.
+     * If a prediction is available, the output will contain the prediction data.
+     *
+     * @param $course stdClass course to get the prediction output for.
+     * @return array prediction output.
      * @throws \dml_exception
      * @throws coding_exception
      */
-    private function get_prediction_output($course): array {
+    private function get_prediction_output(stdClass $course): array {
         global $PAGE;
         $pageoutput = $PAGE->get_renderer('core'); // Get a generic core renderer.
         $predictionoutput = [];
         $predictionoutput['coursename'] = $course->fullname;
 
+        // Check if predictions for the course are available.
         if (!$this->any_course_predictions($course)) {
             $predictionoutput['nodata'] = ['no_prediction_in_course' => get_string(
                     'statistic-insights-view_course_prediction_not_initialized', 'block_disealytics'
@@ -181,12 +198,14 @@ class statistic_insights_view extends base_view {
             return $predictionoutput;
         }
 
+        // Check if a prediction is available for the current user.
         if (!$this->create_prediction_for_user($course)) {
             $predictionoutput["user_prediction_available"] = false;
             $predictionoutput["student_at_risk"] = get_string(self::TITLE . '_not_at_risk', 'block_disealytics');
             return $predictionoutput;
         }
 
+        // Prediction is available.
         $predictionoutput["user_prediction_available"] = true;
         $predictionoutput["student_at_risk"] = [
                 'status' => get_string(self::TITLE . '_at_risk', 'block_disealytics'),
@@ -331,7 +350,7 @@ class statistic_insights_view extends base_view {
      * Get the output for the viewmode: module.
      *
      * @return void
-     * @throws coding_exception
+     * @throws coding_exception|\dml_exception
      */
     protected function get_module_output(): void {
         global $COURSE;

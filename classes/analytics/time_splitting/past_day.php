@@ -16,8 +16,6 @@
 
 namespace block_disealytics\analytics\time_splitting;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Daily analysis interval is defined here.
  *

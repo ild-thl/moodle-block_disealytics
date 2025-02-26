@@ -45,7 +45,7 @@ class statistic_insights_view extends base_view {
     /**
      * Return whether predictions are available for the given course.
      *
-     * @param $course stdClass course to check for predictions.
+     * @param stdClass $course course to check for predictions.
      * @return bool True if predictions are available, false otherwise.
      * @throws \dml_exception
      */
@@ -72,7 +72,7 @@ class statistic_insights_view extends base_view {
     /**
      * Create a prediction for the current user in the given course.
      *
-     * @param $course stdClass course to create the prediction for.
+     * @param stdClass $course course to create the prediction for.
      * @return bool True if a prediction was created, false otherwise.
      * @throws \dml_exception
      */
@@ -105,7 +105,7 @@ class statistic_insights_view extends base_view {
     /**
      * Return whether completion is enabled for the given course.
      *
-     * @param $course stdClass course to check for completion.
+     * @param stdClass $course course to check for completion.
      * @return bool True if completion is enabled, false otherwise.
      */
     private function is_completion_enabled(stdClass $course): bool {
@@ -116,9 +116,9 @@ class statistic_insights_view extends base_view {
     /**
      * Render help popup message.
      *
-     * @param $identifier string identifier of the help icon.
-     * @param $component string component of the help icon.
-     * @return array
+     * @param string $identifier identifier of the help icon.
+     * @param string $component component of the help icon.
+     * @return array help popup message.
      */
     private function render_help_popup_message(string $identifier, string $component = "block_disealytics"): array {
         global $PAGE;
@@ -179,7 +179,7 @@ class statistic_insights_view extends base_view {
      * If no prediction is available, the output will contain a message.
      * If a prediction is available, the output will contain the prediction data.
      *
-     * @param $course stdClass course to get the prediction output for.
+     * @param stdClass $course course to get the prediction output for.
      * @return array prediction output.
      * @throws \dml_exception
      * @throws coding_exception

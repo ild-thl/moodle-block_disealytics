@@ -39,8 +39,16 @@ class statistic_insights_view extends base_view {
      */
     private const TITLE = 'statistic-insights-view';
 
+    /**
+     * @var prediction
+     */
     private prediction $prediction;
 
+    /**
+     * @param $course
+     * @return bool
+     * @throws \dml_exception
+     */
     private function any_course_predictions($course): bool {
         global $DB;
 
@@ -53,7 +61,7 @@ class statistic_insights_view extends base_view {
             WHERE c.id = :courseid";
 
         $params = [
-                'courseid' => $course->id
+                'courseid' => $course->id,
         ];
 
         $predictions = $DB->get_records_sql($sql, $params);
@@ -61,6 +69,11 @@ class statistic_insights_view extends base_view {
         return !empty($predictions);
     }
 
+    /**
+     * @param $course
+     * @return bool
+     * @throws \dml_exception
+     */
     private function create_prediction_for_user($course): bool {
         global $DB, $USER;
 
@@ -75,7 +88,7 @@ class statistic_insights_view extends base_view {
 
         $params = [
                 'userid' => $USER->id,
-                'courseid' => $course->id
+                'courseid' => $course->id,
         ];
 
         $data = $DB->get_record_sql($sql, $params);
@@ -87,11 +100,20 @@ class statistic_insights_view extends base_view {
         return false;
     }
 
+    /**
+     * @param $course
+     * @return bool
+     */
     private function is_completion_enabled($course): bool {
         $coursecompletion = new \completion_info($course);
         return ($coursecompletion->is_enabled() && $coursecompletion->has_criteria());
     }
 
+    /**
+     * @param $identifier
+     * @param $component
+     * @return array
+     */
     private function render_help_popup_message($identifier, $component = "block_disealytics"): array {
         global $PAGE;
         $output = $PAGE->get_renderer('core'); // Get a generic core renderer.
@@ -105,19 +127,26 @@ class statistic_insights_view extends base_view {
         return $details;
     }
 
+    /**
+     * @return mixed
+     */
     private function get_completion_status_block() {
         global $PAGE, $CFG;
 
         require_once($CFG->dirroot . '/blocks/moodleblock.class.php');
         require_once($CFG->dirroot . '/blocks/completionstatus/block_completionstatus.php');
 
-        $completionstatus_block = new block_completionstatus();
-        $completionstatus_block->page = $PAGE;
-        $completion_content = $completionstatus_block->get_content();
+        $blockcompletionstatus = new block_completionstatus();
+        $blockcompletionstatus->page = $PAGE;
+        $completioncontent = $blockcompletionstatus->get_content();
 
-        return $completion_content->text;
+        return $completioncontent->text;
     }
 
+    /**
+     * @return void
+     * @throws coding_exception
+     */
     private function get_course_completion_output() {
         global $COURSE;
         if ($this->is_completion_enabled($COURSE)) {
@@ -128,10 +157,17 @@ class statistic_insights_view extends base_view {
             $this->output["prediction_accordion_number"] = 2;
         } else {
             $this->output["completion_enabled"] = false;
-            $this->output["prediction_accordion_number"] = 1; // if completion is disabled, the accordion starts at 1 with the predictions.
+            // If completion is disabled, the accordion starts at 1 with the predictions.
+            $this->output["prediction_accordion_number"] = 1;
         }
     }
 
+    /**
+     * @param $course
+     * @return array
+     * @throws \dml_exception
+     * @throws coding_exception
+     */
     private function get_prediction_output($course): array {
         global $PAGE;
         $pageoutput = $PAGE->get_renderer('core'); // Get a generic core renderer.
@@ -154,12 +190,12 @@ class statistic_insights_view extends base_view {
         $predictionoutput["user_prediction_available"] = true;
         $predictionoutput["student_at_risk"] = [
                 'status' => get_string(self::TITLE . '_at_risk', 'block_disealytics'),
-                'outcomehelp' => $this->render_help_popup_message('analytics_at_risk:explanation')
+                'outcomehelp' => $this->render_help_popup_message('analytics_at_risk:explanation'),
         ];
 
         $calculations = $this->prediction->get_calculations();
-        $generalIndicators = [];
-        $modIndicators = [];
+        $generalindicators = [];
+        $modindicators = [];
 
         foreach ($calculations as $calculation) {
             if ($calculation->value === null ||
@@ -182,35 +218,37 @@ class statistic_insights_view extends base_view {
 
             $entry = [];
 
-            // Handle general indicators first
+            // Handle general indicators first.
             if ($indicatortype === 'indicator:activitiesdue') {
                 $entry['activitiesdue']['class'] = $calculation->value == 1 ? 'activitiesdue' : 'noactivitiesdue';
-                $indicatorvalue = get_string(self::TITLE . ($calculation->value == 1 ? '_activitiesdue' : '_noactivitiesdue'), 'block_disealytics');
+                $indicatorvalue = get_string(self::TITLE . ($calculation->value == 1 ? '_activitiesdue' : '_noactivitiesdue'),
+                        'block_disealytics');
                 $entry['activitiesdue']['name'] = $indicatorname;
                 $entry['activitiesdue']['value'] = $indicatorvalue;
-                $generalIndicators[] = $entry;
+                $generalindicators[] = $entry;
             } else if ($indicatortype === 'indicator:readactions') {
                 $indicatorvalue = rtrim($indicatorvalue, '%');
                 $entry['readactions']['name'] = $indicatorname;
                 $entry['readactions']['value'] = $indicatorvalue;
-                $generalIndicators[] = $entry;
+                $generalindicators[] = $entry;
             } else if ($indicatortype === 'indicator:anywriteincourse') {
-                $indicatorvalue = get_string(self::TITLE . ($calculation->value == 0 ? '_anywriteincourse' : '_nowriteincourse'), 'block_disealytics');
+                $indicatorvalue = get_string(self::TITLE . ($calculation->value == 0 ? '_anywriteincourse' : '_nowriteincourse'),
+                        'block_disealytics');
                 $entry['anywriteincourse']['name'] = $indicatorname;
                 $entry['anywriteincourse']['value'] = $indicatorvalue;
-                $generalIndicators[] = $entry;
+                $generalindicators[] = $entry;
             } else {
-                // Extract module name (e.g., "mod_assign") from the class path
-                $modName = explode('\\', get_class($calculation->indicator))[0];
+                // Extract module name (e.g., "mod_assign") from the class path.
+                $modname = explode('\\', get_class($calculation->indicator))[0];
 
-                // Skip "core" but only for module indicators (not general ones)
-                if ($modName === 'core' || $modName === 'core_course') {
+                // Skip "core" but only for module indicators (not general ones).
+                if ($modname === 'core' || $modname === 'core_course') {
                     continue;
                 }
 
-                // Initialize module group if not set
-                if (!isset($modIndicators[$modName])) {
-                    $modIndicators[$modName] = [];
+                // Initialize module group if not set.
+                if (!isset($modindicators[$modname])) {
+                    $modindicators[$modname] = [];
                 }
 
                 $entry['name'] = $indicatorname;
@@ -225,65 +263,65 @@ class statistic_insights_view extends base_view {
                     $entry['outcomehelp'] = $helpicon->export_for_template($pageoutput);
                 }
 
-                // Add entry to the corresponding module's array
-                $modIndicators[$modName][] = $entry;
+                // Add entry to the corresponding module's array.
+                $modindicators[$modname][] = $entry;
             }
         }
 
-        // Convert mod indicators to structured data
-        $modIndicatorsArray = [];
+        // Convert mod indicators to structured data.
+        $scructuredmodindicators = [];
 
-        foreach ($modIndicators as $moduleName => $indicators) {
-            // Convert "mod_assign" to "Assignment"
-            $friendlyName = get_string('pluginname', $moduleName);
+        foreach ($modindicators as $modulename => $indicators) {
+            // Convert "mod_assign" to "Assignment".
+            $friendlyname = get_string('pluginname', $modulename);
 
-            // If no readable name is found, fall back to the original module name
-            if ($friendlyName === "[[$moduleName]]") {
-                $friendlyName = ucfirst(str_replace('mod_', '', $moduleName));
+            // If no readable name is found, fall back to the original module name.
+            if ($friendlyname === "[[$modulename]]") {
+                $friendlyname = ucfirst(str_replace('mod_', '', $modulename));
             }
 
-            // Ensure that we prepare cognitive and social indicators separately
-            $cognitiveValue = 0;
-            $socialValue = 0;
-            $cognitiveHelp = null;
-            $socialHelp = null;
+            // Ensure that we prepare cognitive and social indicators separately.
+            $cognitivevalue = 0;
+            $socialvalue = 0;
+            $cognitivehelp = null;
+            $socialhelp = null;
 
-            // Loop through indicators and assign values
+            // Loop through indicators and assign values.
             foreach ($indicators as $indicator) {
                 if (isset($indicator['name']) && isset($indicator['value'])) {
-                    $cleanValue = floatval(str_replace('%', '', $indicator['value']));
+                    $cleanvalue = floatval(str_replace('%', '', $indicator['value']));
 
-                    // Determine if it's cognitive or social based on name
+                    // Determine if it's cognitive or social based on name.
                     if (strpos(strtolower($indicator['identifier']), 'cognitive') !== false) {
-                        $cognitiveValue = $cleanValue;
-                        $cognitiveHelp = $indicator['outcomehelp'] ?? null; // Store cognitive help if available
-                    } elseif (strpos(strtolower($indicator['identifier']), 'social') !== false) {
-                        $socialValue = $cleanValue;
-                        $socialHelp = $indicator['outcomehelp'] ?? null; // Store social help if available
+                        $cognitivevalue = $cleanvalue;
+                        $cognitivehelp = $indicator['outcomehelp'] ?? null; // Store cognitive help if available.
+                    } else if (strpos(strtolower($indicator['identifier']), 'social') !== false) {
+                        $socialvalue = $cleanvalue;
+                        $socialhelp = $indicator['outcomehelp'] ?? null; // Store social help if available.
                     }
                 }
             }
 
-            // Store structured data
-            $modIndicatorsArray[] = [
-                    'module_name' => $friendlyName,
+            // Store structured data.
+            $scructuredmodindicators[] = [
+                    'module_name' => $friendlyname,
                     'cognitive' => [
-                            'value' => $cognitiveValue,
+                            'value' => $cognitivevalue,
                             'name' => get_string('cognitive_indicators', 'block_disealytics'),
-                            'outcomehelp' => $cognitiveHelp, // Assign cognitive outcome help
+                            'outcomehelp' => $cognitivehelp, // Assign cognitive outcome help.
                     ],
                     'social' => [
-                            'value' => $socialValue,
+                            'value' => $socialvalue,
                             'name' => get_string('social_indicators', 'block_disealytics'),
-                            'outcomehelp' => $socialHelp, // Assign social outcome help
-                    ]
+                            'outcomehelp' => $socialhelp, // Assign social outcome help.
+                    ],
             ];
 
         }
 
         $predictionoutput['insights'] = [
-                'general' => $generalIndicators,
-                'mod' => $modIndicatorsArray
+                'general' => $generalindicators,
+                'mod' => $scructuredmodindicators,
         ];
 
         return $predictionoutput;
@@ -352,8 +390,8 @@ class statistic_insights_view extends base_view {
         foreach ($allusercourses as $usercourse) {
             $course = get_course($usercourse->courseid);
             $output = $this->get_prediction_output($course);
-            $output['output_index'] = $i; // Add index inside the output
-            $outputs[] = $output; // Append to the outputs array
+            $output['output_index'] = $i; // Add index inside the output.
+            $outputs[] = $output; // Append to the outputs array.
             $i++;
         }
         $this->output["courseoutputs"] = $outputs;
@@ -395,8 +433,8 @@ class statistic_insights_view extends base_view {
         foreach ($allusercourses as $usercourse) {
             $course = get_course($usercourse->courseid);
             $output = $this->get_prediction_output($course);
-            $output['output_index'] = $i; // Add index inside the output
-            $outputs[] = $output; // Append to the outputs array
+            $output['output_index'] = $i; // Add index inside the output.
+            $outputs[] = $output; // Append to the outputs array.
             $i++;
         }
         $this->output["courseoutputs"] = $outputs;

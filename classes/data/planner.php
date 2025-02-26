@@ -46,7 +46,7 @@ class planner {
     /**
      * @var $monthname The name of the month.
      */
-    private $monthName;
+    private $monthname;
     /**
      * @var $year The year.
      */
@@ -81,7 +81,7 @@ class planner {
             $this->month = $selecteddate['month'];
             $this->year = $selecteddate['year'];
         }
-        $this->monthName = $this->block_disealytics_get_this_month_name();
+        $this->monthname = $this->block_disealytics_get_this_month_name();
     }
 
     /**
@@ -127,9 +127,9 @@ class planner {
         // Create a DateTime object.
         $datetime = (new DateTime())->setDate($this->year, $this->month, $this->day);
 
-        $this->monthName = userdate($datetime->getTimestamp(), get_string('strftimemonth', 'core_langconfig'));
+        $this->monthname = userdate($datetime->getTimestamp(), get_string('strftimemonth', 'core_langconfig'));
 
-        return $this->monthName;
+        return $this->monthname;
     }
 
     /**

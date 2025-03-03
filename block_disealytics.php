@@ -128,11 +128,20 @@ class block_disealytics extends block_base {
                 set_user_preference('block_disealytics_views', json_encode($viewsinpref));
             }
 
+            // Get the current version of the block.
+            // e.g. DiSEA Learner Dashboard 2025 - Version 0.3.0 2025021100.
+            if (!isset($plugin)) {
+                $plugin = new stdClass();
+                require_once($CFG->dirroot . '/blocks/disealytics/version.php');
+            }
+            $versioninfo = 'DiSEA Learner Dashboard ' . substr($plugin->version, 0, 4) . ' - Version ' . $plugin->release . ' ' .
+                    $plugin->version;
+
             // Hand over the data from the database to the update_view.js.
             $this->page->requires->js_call_amd(
                 'block_disealytics/update_view',
                 'init',
-                [$viewsinpref, $viewmode, $COURSE->id, $url->out()]
+                [$viewsinpref, $viewmode, $COURSE->id, $url->out(), $versioninfo]
             );
         }
         $footertext = get_string('testfooter', 'block_disealytics');

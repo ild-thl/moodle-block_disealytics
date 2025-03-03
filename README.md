@@ -14,6 +14,7 @@ The Learner Dashboard provides the following features:
   * **Study Progress**: The Study Progress card shows the student's learning progress in the course/semester/studies.
   * **Progressbar of Learning Materials**: The Progressbar card shows the student's progress in reading the material provided in the regarding course.
   * **PVL-Probability**: The PVL-Probability card shows the student's probability of passing the course. It is an estimation based on the submission status of assignments of the student.
+  * **Statistical Insights**: This card presents results of Moodle's learning analytics model 'Students at risk of dropping out'.
 
 Some card data is user-based. This means that the following data is saved in the plugin's database tables and is available even after the course is deleted:
 - Self-defined learning goals

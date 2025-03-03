@@ -27,7 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
-$string['plugin-version-details'] = 'DiSEA Learner Dashboard 2024 - Version 0.3.0 2024092300';
 $string['disea'] = 'Learner Dashboard';
 $string['disealytics:addinstance'] = 'Add a new Learner Dashboard block.';
 $string['disealytics:myaddinstance'] = 'Add a new Learner Dashboard block to my dashboard.';
@@ -98,11 +97,12 @@ $string['select_view'] = 'Select view';
 $string['activity-view'] = "Activity";
 $string['activity-view_help_info_text'] = "Take a look at your learning time! The colored segments represent different activities, and their height indicates the duration of each activity. In the activity diagram, various values are grouped according to your activities in Moodle. These values may vary depending on the activity. The system analyzes all activities and groups them, and activities with the longest duration are displayed in the activity diagram.";
 $string['activity-view_help_info_text_expanded'] = "In the activity card’s detail view, you can see the familiar diagram of summaries from your course and additional graphs of your activities with extra information.";
+$string['last_refresh'] = 'Latest data from {$a}';
 
 // Assignment view.
 $string['assignment-view'] = 'Assignments';
-$string['assignment-view_help_info_text'] = "<p>The 'Assignments' card lists all the assignments of the course available to you and shows the current status of the assignment. When you click on the link of an assignment, you will be forwarded to the page with the details of that assignment.</p> <p style='color: var(--primary)'>Symbol meanings:</p> <p> <span style='color: var(--primary)'>Neutral status (grey circle):</span> The grey circle represents the neutral status of the assignment. No action is required. <p> <span style='color: var(--primary)'>Not passed (red 'X'):</span> The red 'X' indicates that the respective assignment has been assessed but not passed. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Not yet attempted (grey \'X\'):</span> The grey \'X\' indicates that the respective assignment has not yet been submitted / attempted. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Incomplete (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p><span style='color: var(--primary)'>Submitted on time (grey check mark):</span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Incomplete/Warning (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p> <span style='color: var(--primary)'>Submitted on time (Grey check mark): </span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Marked as completed by yourself (Yellow check mark): </span> The yellow check mark indicates that the assignment has been self-marked as complete by the student, but may still need to be reviewed by the instructor. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Passed (Green check mark): </span> The green check mark indicates that the assignment was passed. For more details, please click on the assignment link.";
-$string['assignment-view_help_info_text_expanded'] = "<p>The 'Assignments' card lists all the assignments of the course available to you and shows the current status of the assignment. When you click on the link of an assignment, you will be forwarded to the page with the details of that assignment.</p> <p style='color: var(--primary)'>Symbol meanings:</p> <p> <span style='color: var(--primary)'>Neutral status (grey circle):</span> The grey circle represents the neutral status of the assignment. No action is required. <p> <span style='color: var(--primary)'>Not passed (red 'X'):</span> The red 'X' indicates that the respective assignment has been assessed but not passed. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Not yet attempted (grey \'X\'):</span> The grey \'X\' indicates that the respective assignment has not yet been submitted / attempted. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Incomplete (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p><span style='color: var(--primary)'>Submitted on time (grey check mark):</span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Incomplete/Warning (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p> <span style='color: var(--primary)'>Submitted on time (Grey check mark): </span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Marked as completed by yourself (Yellow check mark): </span> The yellow check mark indicates that the assignment has been self-marked as complete by the student, but may still need to be reviewed by the instructor. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Passed (Green check mark): </span> The green check mark indicates that the assignment was passed. For more details, please click on the assignment link.";
+$string['assignment-view_help_info_text'] = "<p>The 'Assignments' card lists all the assignments of the course available to you and shows the current status of the assignment. When you click on the link of an assignment, you will be forwarded to the page with the details of that assignment.</p> <p style='color: var(--primary)'>Symbol meanings:</p> <p> <span style='color: var(--primary)'>Neutral status (grey circle):</span> The grey circle represents the neutral status of the assignment. No action is required. <p> <span style='color: var(--primary)'>Not passed (red 'X'):</span> The red 'X' indicates that the respective assignment has been assessed but not passed. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Not yet attempted (grey 'X'):</span> The grey 'X' indicates that the respective assignment has not yet been submitted / attempted. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Incomplete (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p><span style='color: var(--primary)'>Submitted on time (grey check mark):</span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Incomplete/Warning (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p> <span style='color: var(--primary)'>Submitted on time (Grey check mark): </span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Marked as completed by yourself (Yellow check mark): </span> The yellow check mark indicates that the assignment has been self-marked as complete by the student, but may still need to be reviewed by the instructor. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Passed (Green check mark): </span> The green check mark indicates that the assignment was passed. For more details, please click on the assignment link.";
+$string['assignment-view_help_info_text_expanded'] = "<p>The 'Assignments' card lists all the assignments of the course available to you and shows the current status of the assignment. When you click on the link of an assignment, you will be forwarded to the page with the details of that assignment.</p> <p style='color: var(--primary)'>Symbol meanings:</p> <p> <span style='color: var(--primary)'>Neutral status (grey circle):</span> The grey circle represents the neutral status of the assignment. No action is required. <p> <span style='color: var(--primary)'>Not passed (red 'X'):</span> The red 'X' indicates that the respective assignment has been assessed but not passed. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Not yet attempted (grey 'X'):</span> The grey 'X' indicates that the respective assignment has not yet been submitted / attempted. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Incomplete (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p><span style='color: var(--primary)'>Submitted on time (grey check mark):</span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Incomplete/Warning (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p> <span style='color: var(--primary)'>Submitted on time (Grey check mark): </span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Marked as completed by yourself (Yellow check mark): </span> The yellow check mark indicates that the assignment has been self-marked as complete by the student, but may still need to be reviewed by the instructor. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Passed (Green check mark): </span> The green check mark indicates that the assignment was passed. For more details, please click on the assignment link.";
 $string['assignment_info_text'] = "Here you can see the status of the assignments available in the course.";
 $string['assignment_view_hover_failed'] = 'Assignment failed';
 $string['assignment_view_hover_okay'] = 'Assignment passed';
@@ -160,6 +160,7 @@ $string['add_assignment_view'] = "Add 'Assignments'";
 $string['add_progress_bar_view'] = "Add 'Progressbar'";
 $string['add_success_chance_view'] = "Add 'PVL-Probability'";
 $string['add_planner_view'] = "Add 'Planning Assistent'";
+$string['add_statistic-insights_view'] = "Add 'Statistical Insights'";
 
 $string['learning-materials-view'] = "Add learning material";
 
@@ -263,6 +264,77 @@ $string['learning_materials-view_help_info_text'] = '<p>Stay up to date with you
 
 <p>Under "Manage course learning materials" you can edit the materials you have already entered or remove individual reading progress from your personal area.</p>';
 
+// Statistical insights view.
+$string['statistic-insights-view'] = 'Statistical Insights';
+$string['statistic-insights-view_help_info_text'] = "<p>
+    The 'Statistical Insights' card provides an overview of your calculations of Moodle's Learning Analytics model
+    'students at risk of dropping out'. It is separated into the following sections:
+</p>
+<p style='color: var(--primary)'>Student Risk Status:</p>
+<p>
+    Displays whether you are predicted to be 'at risk' based on analytics. If so, an accompanying help icon offers
+    additional context and guidance.
+</p>
+<p style='color: var(--primary)'>Course Completion Information:</p>
+<p>
+    If course completion tracking is enabled, the card shows current progress and detailed criteria, allowing you to see
+    how close you are to meeting course requirements.
+</p>
+<p style='color: var(--primary)'>General Engagement Metrics:</p>
+<p>
+    Summarizes key measures such as pending activities, reading actions, and writing engagement. These indicators help
+    you quickly assess your overall involvement.
+</p>
+<p style='color: var(--primary)'>Module-Specific Insights:</p>
+<p>
+    For each course module, the card displays additional performance data — particularly cognitive and social
+    indicators — offering a deeper dive into specific areas of your progress.
+</p>";
+$string['statistic-insights-view_help_info_text_expanded'] = "<p>
+    The 'Statistical Insights' card provides an overview of your calculations of Moodle's Learning Analytics model
+    'students at risk of dropping out'. It is separated into the following sections:
+</p>
+<p style='color: var(--primary)'>Student Risk Status:</p>
+<p>
+    Displays whether you are predicted to be 'at risk' based on analytics. If so, an accompanying help icon offers
+    additional context and guidance.
+</p>
+<p style='color: var(--primary)'>Course Completion Information:</p>
+<p>
+    If course completion tracking is enabled, the card shows current progress and detailed criteria, allowing you to see
+    how close you are to meeting course requirements.
+</p>
+<p style='color: var(--primary)'>General Engagement Metrics:</p>
+<p>
+    Summarizes key measures such as pending activities, reading actions, and writing engagement. These indicators help
+    you quickly assess your overall involvement.
+</p>
+<p style='color: var(--primary)'>Module-Specific Insights:</p>
+<p>
+    For each course module, the card displays additional performance data — particularly cognitive and social
+    indicators — offering a deeper dive into specific areas of your progress.
+</p>";
+$string['statistic-insights-view_at_risk'] = '<span style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> You are currently at risk of not passing this course.</span>';
+$string['statistic-insights-view_not_at_risk'] = '<p style="color: var(--gray);"><i class="fa fa-check-circle" style="color: var(--green);"></i> Your progress on the course so far is good.</p>';
+$string['analytics_at_risk:explanation'] = 'Student at risk of dropping out';
+$string['analytics_at_risk:explanation_help'] = 'The analytics model predicts the likelihood of a student disengaging from a course based on their activity and participation. It analyzes factors like logins, forum posts, assignment submissions, and other interactions to provide an estimation of their engagement level. This is only a prediction and should be used as a guide rather than a definite outcome, encouraging students to stay active and seek support if needed.';
+$string['analytics_at_risk:explanation_link'] = 'Students_at_risk_of_dropping_out';
+$string['general_indicators'] = 'Overview';
+$string['statistic-insights-view_anywriteincourse'] = '<p style="color: var(--green);"><i class="fa fa-check-circle"></i></p><p>You have completed a "write" action (saved content) in this course.</p>';
+$string['statistic-insights-view_nowriteincourse'] = '<p style="color: var(--gray);"><i class="fa fa-warning"></i></p><p>You have not yet completed a "write" action (saved content) in this course.</p>';
+$string['statistic-insights-view_activitiesdue'] = '<p style="color: var(--white);"><i class="fa fa-warning"></i></p><p>You have activities due in this course!</p>';
+$string['statistic-insights-view_noactivitiesdue'] = '<p style="color: var(--white);"><i class="fa fa-check-circle"></i></p><p>You do not have any activities due currently.</p>';
+$string['cognitive_indicators'] = 'Cognitive';
+$string['social_indicators'] = 'Social';
+$string['mod_indicators'] = 'Status of engagement in course activities';
+$string['mod_indicators_subtitle'] = 'Engagement';
+$string['statistic-insights-view_completion_title'] = 'Status of course completion';
+$string['analytics_completion:explanation'] = 'Course completion';
+$string['analytics_completion:explanation_help'] = 'The course completion is enabled in this course. View your current progress in completing the course below.';
+$string['analytics_completion:explanation_link'] = 'Course_completion';
+$string['statistic-insights-view_course_prediction_not_initialized'] = '<span style="color: var(--gray);"><i class="fa fa-warning"></i> No predictions of your current progress in this course are available or have not been initiated by the administrator.</span>';
+$string['statistic-insights-view_global_additional_info'] = 'Note: The predictions can only be generated for currently ongoing courses. Therefore, the full view in this card corresponds to the semester view.';
+$string['statistic-insights-view_no_course_available'] = 'There are no insights available because you are not enrolled in any course this semester.';
 
 // Study progress view.
 $string['study-progress-view'] = "Study Progress";
@@ -491,3 +563,8 @@ $string['editingyes'] = "Editing mode in Learner Dashboard turned on.";
 $string['expandedno'] = "No view in Learner Dashboard is expanded.";
 $string['plannerdateno'] = "The default value of the planning assistant, now.";
 $string['viewmode_selected'] = "is the currently selected viewmode of the Learner Dashboard.";
+
+$string['analytics_pastday'] = 'Past day';
+$string['analytics_pastday_help'] = 'This analysis interval generates predictions every day. The indicators calculations will be based on the past day.';
+$string['analytics_daysaccum'] = 'All previous days';
+$string['analytics_daysaccum_help'] = 'This analysis interval divides the course into days, with each prediction being based on the accumulated data of all previous days.';

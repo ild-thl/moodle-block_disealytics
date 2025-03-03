@@ -310,6 +310,11 @@
     stroke: var(--primary);
 }
 
+.block_disealytics .block_disealytics-editing:hover #statistic-insight-view-editing-icon {
+    fill: transparent;
+    stroke: var(--primary);
+}
+
 .block_disealytics .block_disealytics-editing:hover #progress-bar-view-editing-icon path:nth-child(3),
 .block_disealytics .block_disealytics-editing:hover #progress-bar-view-editing-icon path:nth-child(5) {
     fill: white;
@@ -332,12 +337,16 @@
 
 .block_disealytics .draggable {
     cursor: grab;
+    transition: transform 0.2s ease-in-out; /* Smooth movement for elements */
+    z-index: 10;
 }
 
-.block_disealytics .dragging {
+.block_disealytics .draggable.dragging {
     cursor: grabbing;
     transform: rotate(3deg);
     background: #f2f2f2;
+    transition: none; /* No transition for the dragging item */
+    opacity: 0.7;
 }
 
 .block_disealytics .panel-body {
@@ -512,11 +521,11 @@
     border-radius: 30px;
 }
 
-.block_disealytics .learning-goals-progress-bar {
+.block_disealytics .block_disealytics-progress-bar {
     margin: 1em 0;
 }
 
-.block_disealytics .learning-goals-progress-bar label {
+.block_disealytics .block_disealytics-progress-bar label {
     margin: 0;
 }
 
@@ -1087,6 +1096,93 @@
 
 .block_disealytics .planner-event-modal-title {
     font-size: 13px !important; /* stylelint-disable-line declaration-no-important */
+}
+
+/* STATISTIC INSIGHTS */
+
+.block_disealytics #block_disealytics-panel-statistic-insights-view .insights-general {
+    background: var(--light);
+    border-radius: 8px;
+    padding: 8px;
+    height: 100%;
+}
+
+@keyframes fadeInOut {
+    0%,
+    100% {
+        opacity: .7;
+    }
+    50% {
+        opacity: .3;
+    }
+}
+
+.block_disealytics #block_disealytics-panel-statistic-insights-view .activitiesdue {
+    color: white;
+    background: var(--danger);
+    opacity: .7;
+    animation: fadeInOut 2s ease-in-out 3;
+}
+
+.block_disealytics #block_disealytics-panel-statistic-insights-view .noactivitiesdue {
+    color: white;
+    background: var(--green);
+}
+
+.block_disealytics #block_disealytics-panel-statistic-insights-view .progress-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    gap: 8px;
+}
+
+.block_disealytics #block_disealytics-panel-statistic-insights-view .progressbar-explanation div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.block_disealytics #block_disealytics-panel-statistic-insights-view .progressbar-circle {
+    position: relative;
+    width: min-content;
+}
+
+.block_disealytics #block_disealytics-panel-statistic-insights-view .progressbar-cognitive {
+    --size: 5rem;
+    --fg: var(--primary);
+    --bg: color-mix(in srgb, var(--fg) 30%, transparent); /* Lighter version of fg */
+}
+
+.block_disealytics #block_disealytics-panel-statistic-insights-view .progressbar-social {
+    --size: 5rem;
+    --fg: var(--orange);
+    --bg: color-mix(in srgb, var(--fg) 30%, transparent); /* Lighter version of fg */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.75);
+}
+
+@property --disealytics_progress_percentage {
+    syntax: '<number>';
+    inherits: false;
+    /* stylelint-disable csstree/validator */
+    initial-value: 0;
+    /* stylelint-enable csstree/validator */
+}
+
+.block_disealytics #block_disealytics-panel-statistic-insights-view div[role="progressbar"] {
+    --disealytics_progress_percentage: var(--value);
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+        conic-gradient(var(--fg) calc(var(--disealytics_progress_percentage) * 1%), var(--bg) 0);
+    font-size: calc(var(--size) / 5);
+    color: var(--fg);
 }
 
 /* COURSE CATEGORY */

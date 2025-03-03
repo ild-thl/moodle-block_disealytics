@@ -125,7 +125,8 @@ class activity_view extends base_view {
             }
 
             if ($transformtime) {
-                $output['datadate'] = userdate($transformtime, get_string('strftimedatefullshort', 'langconfig'));
+                $output['datadate'] = get_string('last_refresh', 'block_disealytics',
+                        userdate($transformtime, get_string('strftimedatefullshort', 'langconfig'), 99, false));
             }
             $groupedtasks = task::block_disealytics_group_and_reduce($tasks);
             // Reverse it for easy popping.

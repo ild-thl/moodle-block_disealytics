@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_disealytics';
 $plugin->release = '0.3.0';
-$plugin->version = 2025022602;
+$plugin->version = 2025030300;
 $plugin->requires = 2021051700;
 $plugin->maturity = MATURITY_STABLE;

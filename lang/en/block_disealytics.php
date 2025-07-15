@@ -570,3 +570,20 @@ $string['analytics_pastday'] = 'Past day';
 $string['analytics_pastday_help'] = 'This analysis interval generates predictions every day. The indicators calculations will be based on the past day.';
 $string['analytics_daysaccum'] = 'All previous days';
 $string['analytics_daysaccum_help'] = 'This analysis interval divides the course into days, with each prediction being based on the accumulated data of all previous days.';
+
+$string['main_config_export_title'] = 'Export Your Data';
+$string['main_config_export_config'] = 'Export your configuration?';
+$string['main_config_export_goals'] = 'Export your goals?';
+$string['main_config_export_pages'] = 'Export your reading progress?';
+$string['main_config_export_dates'] = 'Export your planner information?';
+$string['main_config_export_action'] = 'Export';
+$string['main_config_import_action'] = 'Import';
+
+$string['import_modal_choose_course'] = 'Choose a course for data from';
+$string['import_modal_course_choices'] = 'Assign course data';
+$string['import_modal_title'] = 'Import Options';
+$string['import_alert_title'] = 'Import Results';
+$string['import_success'] = 'Data imported sucessfully.';
+$string['import_errors'] = 'Some views were not activated because they do not exist in this Learner Dashboard version.';
+$string['technical_details'] = 'Technical Details';
+$string['not_imported'] = 'Views not imported:';

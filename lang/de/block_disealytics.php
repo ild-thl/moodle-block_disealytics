@@ -574,3 +574,20 @@ $string['analytics_pastday'] = 'Vergangener Tag';
 $string['analytics_pastday_help'] = 'Dieses Analyseintervall generiert Vorhersagen jeden Tag. Die Berechnung der Indikatoren basiert auf dem letzten Tag.';
 $string['analytics_daysaccum'] = 'Bisherige Tage akkumuliert';
 $string['analytics_daysaccum_help'] = 'Dieses Analyseintervall unterteilt den Kurs in Tage, wobei jede Vorhersage auf den Daten aller bisherigen Tage basiert.';
+
+$string['main_config_export_title'] = 'Datenexport';
+$string['main_config_export_config'] = 'Einstellungen exportieren?';
+$string['main_config_export_goals'] = 'Lernziele exportieren?';
+$string['main_config_export_pages'] = 'Lesefortschritt exportieren?';
+$string['main_config_export_dates'] = 'Termine exportieren?';
+$string['main_config_export_action'] = 'Exportieren';
+$string['main_config_import_action'] = 'Importieren';
+
+$string['import_modal_choose_course'] = 'Wähle einen Kurs für Daten aus';
+$string['import_modal_course_choices'] = 'Kursdaten-Zuordnung';
+$string['import_modal_title'] = 'Importoptionen';
+$string['import_alert_title'] = 'Importergebnisse';
+$string['import_success'] = 'Daten erfolgreich importiert.';
+$string['import_errors'] = 'Einige Karten wurden nicht aktiviert, weil sie in dieser Learner Dashboard Version nicht verfügbar sind.';
+$string['technical_details'] = 'Technische Details';
+$string['not_imported'] = 'Nicht importierte Karten:';

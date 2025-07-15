@@ -14,7 +14,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 import Ajax from 'core/ajax';
-import {get_string as getString} from 'core/str';
+import {getString} from 'core/str';
 import {updateView} from "./update_view";
 import {getCourseId} from "./view_selection";
 import {getValueById} from "./add_interaction";

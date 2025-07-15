@@ -34,12 +34,52 @@
     }
 }}
 
-<p class="modal-desc">{{#str}} main_config_desc, block_disealytics {{/str}}</p>
+<p class="modal-desc" xmlns="http://www.w3.org/1999/html">{{#str}} main_config_desc, block_disealytics {{/str}}</p>
 <div class="config-section">
     <h5 class="consent-title">{{#str}} main_config_consent_title, block_disealytics {{/str}}</h5>
-    <a  id="block_disealytics_config_consent_menu"
-        class="dashboard-button">
+    <a id="block_disealytics_config_consent_menu"
+       class="dashboard-button">
         <i class="fa fa-toggle-on disea-green" aria-hidden="true"></i>
     </a>
     <span class="consent-desc text-small disea-gray">{{#str}} main_config_consent_desc, block_disealytics {{/str}}</span>
+</div>
+<div class="config-section">
+    <h5 class="consent-title">{{#str}} main_config_export_title, block_disealytics {{/str}}</h5>
+    <table class="table-reboot">
+        <tr>
+            <td>
+                <input type="checkbox" name="configexport" id="block_disealytics_configexport" checked>
+                <label for="block_disealytics_configexport">{{#str}} main_config_export_config, block_disealytics {{/str}}</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="goalexport" id="block_disealytics_goalexport" checked>
+                <label for="block_disealytics_goalexport">{{#str}} main_config_export_goals, block_disealytics {{/str}}</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="progessexport" id="block_disealytics_pageexport" checked>
+                <label for="block_disealytics_pageexport">{{#str}} main_config_export_pages, block_disealytics {{/str}}</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="dateexport" id="block_disealytics_dateexport" checked>
+                <label for="block_disealytics_dateexport">{{#str}} main_config_export_dates, block_disealytics {{/str}}</label>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <button id="block_disealytics_config_export_menu"
+            class="btn btn-primary">
+        <i class="fa fa-download" aria-hidden="true"></i>
+        <span class="consent-desc text-small">{{#str}} main_config_export_action, block_disealytics {{/str}}</span>
+    </button>
+    <button id="block_disealytics_config_import_menu"
+            class="btn btn-primary">
+        <i class="fa fa-upload" aria-hidden="true"></i>
+        <span class="consent-desc text-small">{{#str}} main_config_import_action, block_disealytics {{/str}}</span>
+    </button>
 </div>

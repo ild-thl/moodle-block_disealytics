@@ -78,6 +78,10 @@ export const anyViewsEnabled = () => {
     return getViewlist().some(({enabled}) => enabled === 1);
 };
 
+export const noViewsEnabled = () => {
+    return !getViewlist().some(({enabled}) => enabled === 1);
+};
+
 
 /**
  * Update the view order and which views are visible in the DOM by modifying the viewtypes array.

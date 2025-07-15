@@ -24,26 +24,26 @@
 import Ajax from 'core/ajax';
 import ModalEvents from 'core/modal_events';
 import Templates from 'core/templates';
-import {get_string as getString} from 'core/str';
+import {getString} from 'core/str';
 import {
-    getVersionInfo,
     allViewsEnabled,
     anyViewsEnabled,
     getCourseId,
-    getViewlist,
+    getVersionInfo,
+    getViewlist, noViewsEnabled,
     setScrollTo,
     setScrollToElement,
     setViewlist,
-    updateViewlist
+    updateViewlist,
 } from 'block_disealytics/view_selection';
-import {updateView, privacyurl} from 'block_disealytics/update_view';
+import {updateView, privacyurl, reorderViews, importClick} from 'block_disealytics/update_view';
 import ModalSaveCancel from "core/modal_save_cancel";
 import Modal from "core/modal";
 
 let theDisealyticsAddModal = null;
 let theDisealyticsRemoveModal = null;
 let theDisealyticsInfoModal = null;
-let theDisealyticsConfigModal = null;
+export let theDisealyticsConfigModal = null;
 let theDisealyticsConfigConsentModal = null;
 
 /**
@@ -65,6 +65,88 @@ export const init = (viewname) => {
 };
 
 /**
+ * What to do when dragging starts, as a function to be able to remove the event listener that uses this function
+ */
+export function dragstart(){
+
+    this.classList.add("dragging");
+}
+
+/**
+ * What to do when dragging ends, as a function to be able to remove the event listener that uses this function
+ */
+export function dragend(){
+    this.classList.remove("dragging");
+    // Save the new order in the database.
+    const allViewsContainer = document.querySelector(".block_disealytics-all-views-container");
+    const viewElements = [...allViewsContainer.children];
+    const updatedViews = [];
+    viewElements.forEach(viewElement => {
+        const viewname = viewElement.id.replace(/^block_disealytics-/, '');
+        if (viewElement.textContent.trim() !== '') {
+            const newView = {viewname: viewname, enabled: 1};
+            updatedViews.push(newView);
+        } else {
+            const newView = {viewname: viewname, enabled: 0};
+            updatedViews.push(newView);
+        }
+    });
+    updateSetting('write', 'views', JSON.stringify(updatedViews));
+}
+
+/**
+ * What to do when dragging happens, as a function to be able to remove the event listener that uses this function
+ * @param {Event} event The event that triggered dragover
+ */
+function dragover(event){
+    const dropContainer = document.querySelector(".block_disealytics-drop-container");
+
+    event.preventDefault();
+    const draggingElement = dropContainer.querySelector('.dragging');
+    const afterElement = getDragAfterElementByGrid(dropContainer, event.clientX, event.clientY);
+    if (afterElement && afterElement !== draggingElement) {
+
+        dropContainer.insertBefore(draggingElement, afterElement);
+    } else {
+        dropContainer.appendChild(draggingElement);
+    }
+}
+
+/**
+ * Provides functions and functionality used to enable drag and drop on card positions
+ */
+function setupDragDrop() {
+
+    const dropContainer = document.querySelector(".block_disealytics-drop-container");
+
+    getViewlist().forEach(({viewname}) => {
+        const viewContainer = document.querySelector('#block_disealytics-' + viewname);
+
+        // Set up drag and drop functionality.
+        viewContainer.removeEventListener('dragstart', dragstart);
+        viewContainer.removeEventListener('dragend', dragend);
+        viewContainer.addEventListener("dragstart", dragstart);
+        viewContainer.addEventListener("dragend", dragend);
+        // Show/Hide edit-buttons on views.
+        const editBtn = document.querySelector('.edit-button-' + viewname);
+        if (editBtn) {
+            if (!editBtn.classList.contains('hidden')) {
+                editBtn.classList.add('hidden');
+            } else {
+                editBtn.classList.remove('hidden');
+            }
+        }
+    });
+    if (!dropContainerHasEventListener) {
+        dropContainer.addEventListener("dragover", dragover, true);
+        dropContainerHasEventListener = true;
+    }
+    //dropContainer.removeEventListener("dragover", dragover, true);
+}
+
+let dropContainerHasEventListener = false;
+
+/**
  * Sets up the editing mode functionality.
  * Adds event listeners to the toggle button, drag and drop functionality,
  * and add view buttons for each view in the editing mode.
@@ -82,6 +164,12 @@ export const setEditingMode = () => {
     if (exitEditing) {
         exitEditing.addEventListener("click", function() {
             updateSetting('toggle', 'editing');
+            getViewlist().forEach((view) => {
+                const viewContainer = document.querySelector('#block_disealytics-' + view.viewname);
+                // Set up drag and drop functionality.
+                viewContainer.removeEventListener('dragstart', dragstart);
+                viewContainer.removeEventListener('dragend', dragend);
+            });
         });
     }
     const toggleButton = document.querySelector('.block_disealytics-toggle-editing');
@@ -93,52 +181,7 @@ export const setEditingMode = () => {
             }
             updateSetting('toggle', 'editing');
             // Drag and Drop.
-            const dropContainer = document.querySelector(".block_disealytics-drop-container");
-            getViewlist().forEach(({viewname}) => {
-                const viewContainer = document.querySelector('#block_disealytics-' + viewname);
-                // Set up drag and drop functionality.
-                viewContainer.addEventListener("dragstart", () => {
-                    viewContainer.classList.add("dragging");
-                });
-                viewContainer.addEventListener("dragend", () => {
-                    viewContainer.classList.remove("dragging");
-                    // Save the new order in the database.
-                    const allViewsContainer = document.querySelector(".block_disealytics-all-views-container");
-                    const viewElements = [...allViewsContainer.children];
-                    const updatedViews = [];
-                    viewElements.forEach(viewElement => {
-                        const viewname = viewElement.id.replace(/^block_disealytics-/, '');
-                        if (viewElement.textContent.trim() !== '') {
-                            const newView = {viewname: viewname, enabled: 1};
-                            updatedViews.push(newView);
-                        } else {
-                            const newView = {viewname: viewname, enabled: 0};
-                            updatedViews.push(newView);
-                        }
-                    });
-                    updateSetting('write', 'views', JSON.stringify(updatedViews));
-                });
-                // Show/Hide edit-buttons on views.
-                const editBtn = document.querySelector('.edit-button-' + viewname);
-                if (editBtn) {
-                    if (!editBtn.classList.contains('hidden')) {
-                        editBtn.classList.add('hidden');
-                    } else {
-                        editBtn.classList.remove('hidden');
-                    }
-                }
-            });
-            dropContainer.addEventListener("dragover", (e) => {
-                e.preventDefault();
-                const draggingElement = dropContainer.querySelector('.dragging');
-                const afterElement = getDragAfterElementByGrid(dropContainer, e.clientX, e.clientY);
-
-                if (afterElement && afterElement !== draggingElement) {
-                    dropContainer.insertBefore(draggingElement, afterElement);
-                } else {
-                    dropContainer.appendChild(draggingElement);
-                }
-            });
+            setupDragDrop();
 
             // Add view button.
             const addViewButton = document.querySelector('#block_disealytics-open-add-modal');
@@ -170,12 +213,12 @@ export const setEditingMode = () => {
                         // Add EventListeners to the Buttons.
                         getViewlist().forEach(({viewname, enabled}) => {
                             const addButton = document.querySelector('.block_disealytics-add-' + viewname);
-                            const viewContainer = document.querySelector('#block_disealytics-' + viewname);
                             if (addButton) {
                                 if (!enabled) {
                                     addButton.classList.remove('hidden');
                                 }
                                 addButton.addEventListener("click", async function() {
+                                    const viewContainer = document.querySelector('#block_disealytics-' + viewname);
                                     addButton.classList.add('hidden');
                                     viewContainer.parentElement.append(viewContainer);
                                     viewContainer.setAttribute('data-visible', 'true');
@@ -446,11 +489,90 @@ export const toggleMainConfigModal = () => {
                         enableConsentButtons(theDisealyticsConfigConsentModal);
                     });
                 }
+                let mainExportButton = document.getElementById("block_disealytics_config_export_menu");
+                if (mainExportButton) {
+                    mainExportButton.addEventListener('click', function() {
+                        let exported = {};
+                        exported.version = getVersionInfo().match(/\d{10}$/);
+                        let data = collectData();
+                        let indices = data.indices;
+                        data.results.then(results => {
+                            // No data was selected for export, so we return early TODO: Maybe present an error to the user?
+                            if (results.length === 0) {
+                                return;
+                            }
+                            if (indices.hasOwnProperty('config')) {
+                                exported.config = results[indices.config].preferences[0];
+                            }
+                            if (indices.hasOwnProperty('goals')) {
+                                exported.goals = JSON.parse(results[indices.goals]);
+                            }
+                            if (indices.hasOwnProperty('pages')) {
+                                exported.pages = JSON.parse(results[indices.pages]);
+                            }
+                            if (indices.hasOwnProperty('dates')) {
+                                exported.dates = JSON.parse(results[indices.dates]);
+                            }
+
+                            let blob = new Blob([JSON.stringify(exported, null, 2)], {type: 'application/json'});
+                            let anchor = document.createElement('a');
+                            anchor.href = URL.createObjectURL(blob);
+                            anchor.download = "ld_export.json";
+                            anchor.click();
+                            URL.revokeObjectURL(anchor.href);
+                        });
+                    });
+                }
+                let mainImportButton = document.getElementById("block_disealytics_config_import_menu");
+                if (mainImportButton) {
+                    mainImportButton.removeEventListener('click', importClick);
+                    mainImportButton.addEventListener('click', importClick);
+                }
             }
         });
+
+
     }
 };
 
+/**
+ * Collects userdata to for exporting.
+ *
+ * @returns {{indices: {}, results: Promise}}
+ */
+function collectData() {
+    let calls = [];
+    let indices = {};
+    let datatypes = [];
+    if (document.getElementById("block_disealytics_configexport").checked) {
+        indices.config = calls.length;
+        calls.push({
+            methodname: 'core_user_get_user_preferences',
+            args: {name: 'block_disealytics_views'},
+        });
+    }
+    if (document.getElementById("block_disealytics_goalexport").checked) {
+        datatypes.push('goals');
+    }
+    if (document.getElementById("block_disealytics_pageexport").checked) {
+        datatypes.push('pages');
+    }
+    if (document.getElementById("block_disealytics_dateexport").checked) {
+        datatypes.push('dates');
+    }
+    for (const entry of datatypes) {
+        indices[entry] =  calls.length;
+        calls.push({
+            methodname: 'block_disealytics_export_user_data',
+            args: {type: entry},
+        });
+    }
+
+    return {
+        indices,
+        "results" : Promise.all(Ajax.call(calls)),
+    };
+}
 export const initHelpModalAccordion = () => {
     // Attach click event to each accordion head.
     const accordion = document.getElementById('block_disealytics_info-modal-accordion');
@@ -502,7 +624,7 @@ export function getValueById(id) {
  * @param {string} updatetype - The type of update to perform (set, toggle, expand).
  * @param {string} setting - Determines which and how a user preference should be changed.
  * @param {string} val tmp.
- * @returns {void}
+ * @returns {promise<void>|void}
  */
 export const updateSetting = (updatetype, setting, val = undefined) => {
     let args = {
@@ -526,7 +648,24 @@ export const updateSetting = (updatetype, setting, val = undefined) => {
             if (setting === 'views') {
                 const data = JSON.parse(response);
                 setViewlist(JSON.parse(data.setting));
-                await updateView(getCourseId(), getViewlist());
+                updateView(getCourseId(), getViewlist().map((e) => e.viewname)).then(() => {
+                    reorderViews();
+                    if (noViewsEnabled()) {
+                        document.querySelector(".show-when-no-view-enabled").classList.remove("hidden");
+                    } else {
+                        document.querySelector(".show-when-no-view-enabled").classList.add("hidden");
+                    }
+                    // Drag and Drop.
+                    Ajax.call([{
+                        methodname: 'core_user_get_user_preferences',
+                        args: {name: 'block_disealytics_editing'},
+                    }])[0].then((result) => {
+                        // If the dashboard is in edit mode (as indicated by the preference), re-setup drag & drop
+                        if (result.preferences[0].value === "1") {
+                            setupDragDrop();
+                        }
+                    });
+                });
             } else if (setting === 'expanded_view') {
                 await updateView(getCourseId(), [val]);
             } else {

@@ -116,5 +116,20 @@ $functions = [
                 'ajax' => true,
                 'loginrequired' => true,
         ],
-
+        'block_disealytics_export_user_data' => [
+                'classname' => 'block_disealytics\external\export_user_data',
+            'methodname' => 'execute',
+            'description' => 'Export user\'s learning data',
+            'type' => 'read',
+            'ajax' => true,
+            'loginrequired' => true,
+        ],
+        'block_disealytics_import_user_data' => [
+                'classname' => 'block_disealytics\external\import_user_data',
+                'methodname' => 'execute',
+                'description' => 'Import user\'s learning data',
+                'type' => 'write',
+                'ajax' => true,
+                'loginrequired' => true,
+        ],
 ];

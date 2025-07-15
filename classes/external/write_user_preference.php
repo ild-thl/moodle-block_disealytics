@@ -22,7 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 namespace block_disealytics\external;
 
 defined('MOODLE_INTERNAL') || die();
@@ -45,24 +44,9 @@ use restricted_context_exception;
  */
 class write_user_preference extends external_api {
     /**
-     * Describes the parameters.
-     *
-     * @return external_function_parameters
-     */
-    public static function execute_parameters(): external_function_parameters {
-        return new external_function_parameters(
-            ['info' => new external_single_structure([
-                        'action' => new external_value(PARAM_ALPHAEXT, 'The type of update to perform', VALUE_REQUIRED),
-                        'name' => new external_value(PARAM_ALPHAEXT, 'The setting to update', VALUE_REQUIRED),
-                        'value' => new external_value(PARAM_RAW, 'The value to write', VALUE_OPTIONAL)]),
-            ]
-        );
-    }
-
-    /**
      * Execute the service.
      *
-     * @param  array $info
+     * @param array $info
      * @return string $result
      * @throws invalid_parameter_exception
      * @throws coding_exception|dml_exception
@@ -97,7 +81,24 @@ class write_user_preference extends external_api {
                         break;
                     case 'views':
                         if (get_user_preferences('block_disealytics_' . $info["name"]) !== $info["value"]) {
-                            set_user_preference('block_disealytics_' . $info["name"], $info["value"]);
+                            $newpref = json_decode($info["value"], true);
+                            $accept = [];
+                            $reject = [];
+                            foreach ($newpref as $view) {
+                                // Check if $e (view) is available on the system (it's file exists), sort into accept and reject
+                                global $CFG;
+                                $viewunderscore = str_replace('-', '_', $view['viewname']);
+
+                                // Load the PHP file for the view (e.g., 'some_view.php') based on the view name.
+                                $filepath = $CFG->dirroot . '/blocks/disealytics/classes/view/' . $viewunderscore . '.php';
+
+                                if (file_exists($filepath)) {
+                                    $accept[] = $view;
+                                } else {
+                                    $reject[] = $view;
+                                }
+                            }
+                            set_user_preference('block_disealytics_' . $info["name"], json_encode($accept));
                         }
                         break;
                 }
@@ -137,6 +138,21 @@ class write_user_preference extends external_api {
                 'setting' => get_user_preferences("block_disealytics_{$info["name"]}"),
         ];
         return json_encode($response);
+    }
+
+    /**
+     * Describes the parameters.
+     *
+     * @return external_function_parameters
+     */
+    public static function execute_parameters(): external_function_parameters {
+        return new external_function_parameters(
+                ['info' => new external_single_structure([
+                        'action' => new external_value(PARAM_ALPHAEXT, 'The type of update to perform', VALUE_REQUIRED),
+                        'name' => new external_value(PARAM_ALPHAEXT, 'The setting to update', VALUE_REQUIRED),
+                        'value' => new external_value(PARAM_RAW, 'The value to write', VALUE_OPTIONAL)]),
+                ]
+        );
     }
 
     /**

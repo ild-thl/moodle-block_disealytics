@@ -20,33 +20,36 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 import Ajax from 'core/ajax';
-import Template from 'core/templates';
+import Templates from 'core/templates';
 import {
-    setVersionInfo,
-    getViewlist,
-    getViewSelectors,
-    setViewlist,
-    scrollToTargetAdjusted,
-    setScrollToElement,
-    setOffsetTopForScroll,
+    getCourseId,
+    getOffsetTopForScroll,
     getScrollTo,
     getScrollToElement,
-    getOffsetTopForScroll,
-    viewIsOld,
-    setOld,
-    unsetOld,
+    getViewlist,
+    getViewSelectors,
+    scrollToTargetAdjusted,
     selectors,
     setCourseId,
-    getCourseId
+    setOffsetTopForScroll,
+    setOld,
+    setScrollToElement,
+    setVersionInfo,
+    setViewlist,
+    unsetOld,
+    viewIsOld
 } from 'block_disealytics/view_selection';
-import {
-    initGoalEventListeners
-} from "./learning_goals_functions";
+import {initGoalEventListeners} from "./learning_goals_functions";
+import {dragend, dragstart, theDisealyticsConfigModal, updateSetting} from "./add_interaction";
+import {getString} from "core/str";
+import ModalSaveCancel from "core/modal_save_cancel";
+import ModalEvents from "core/modal_events";
+import ModalAlert from "core/local/modal/alert";
 
 export let privacyurl;
 
+let theDisealyticsImportModal = null;
 /**
  * Initializes the plugin when it first loads by rendering the main template.
  *
@@ -57,11 +60,11 @@ export let privacyurl;
  * @param {string} versioninfo - The current version of the plugin
  * @param {array} viewmodes - The viewmodes enabled for the plugin
  */
-export const init = async(views, viewmode, courseid, agreementurl, versioninfo, viewmodes) => {
+export const init = async (views, viewmode, courseid, agreementurl, versioninfo, viewmodes) => {
     /**
      * Callback function to execute when the document is ready.
      */
-    const callback = async function() {
+    const callback = async function () {
         // Set the available views and configured views.
         setViewlist(views);
         setCourseId(courseid);
@@ -83,7 +86,7 @@ export const init = async(views, viewmode, courseid, agreementurl, versioninfo, 
         await callback();
     } else {
         // Add an event listener for when the document is ready.
-        document.addEventListener("DOMContentLoaded", async function() {
+        document.addEventListener("DOMContentLoaded", async function () {
             await callback();
         });
     }
@@ -107,15 +110,17 @@ const renderMainTemplate = (views, viewmode, agreementurl, viewmodes) => {
             'enabled': (view.enabled === 1)
         };
     });
-    Object.entries(viewmodes).forEach(([mode, enabled]) => {maintemplatedata[mode + "_enabled"] = enabled;});
+    Object.entries(viewmodes).forEach(([mode, enabled]) => {
+        maintemplatedata[mode + "_enabled"] = enabled;
+    });
     maintemplatedata.viewmode = viewmode;
     maintemplatedata[viewmode] = true;
     maintemplatedata.agreementurl = agreementurl;
 
-    Template.renderForPromise("block_disealytics/main", maintemplatedata)
+    Templates.renderForPromise("block_disealytics/main", maintemplatedata)
         .then(({html, js}) => {
-            Template.replaceNodeContents('.block_disealytics .content', html, js);
-             return renderEditingMode('0');
+            Templates.replaceNodeContents('.block_disealytics .content', html, js);
+            return renderEditingMode('0');
         }).catch(ex => window.console.log(ex));
 };
 
@@ -125,7 +130,7 @@ const renderMainTemplate = (views, viewmode, agreementurl, viewmodes) => {
  * @param {int} courseid the current courseid
  * @param {array} views list of views to update
  */
-export const updateView = async(courseid, views) => {
+export const updateView = async (courseid, views) => {
     // Set views to old.
     if (views) {
         views.forEach(view => setOld(view));
@@ -193,6 +198,9 @@ const renderEditingMode = (isEnabled) => {
         [].forEach.call(viewContainers, (e) => {
             e.setAttribute('draggable', 'false');
             e.classList.remove('draggable');
+            // Set up drag and drop functionality.
+            e.removeEventListener('dragstart', dragstart);
+            e.removeEventListener('dragend', dragend);
         });
     }
     const thingsToShow = document.querySelectorAll(".show-when-editing");
@@ -226,9 +234,135 @@ const renderEditingMode = (isEnabled) => {
             const viewContainer = document.querySelector('#block_disealytics-' + viewname);
             viewContainer.setAttribute('draggable', 'true');
             viewContainer.classList.add('draggable');
-            });
+            viewContainer.addEventListener('dragstart', dragstart);
+            viewContainer.addEventListener('dragend', dragend);
+        });
+    }
+    let mainImportButton = document.getElementById("block_disealytics_import_menu");
+    if (mainImportButton) {
+        mainImportButton.removeEventListener('click', importClick);
+        mainImportButton.addEventListener('click', importClick);
     }
 };
+
+/**
+ * Defines functionality that happens when user starts the progress of importing data into the dashboard
+ */
+export function importClick() {
+
+    /**
+     * Wrapper function for updating the view setting. Used by the actual import function below
+     * @param {{ name: string, value: string }} views The views to set.
+     */
+    async function setViewPref(views) {
+        if (typeof views === "undefined") {
+            updateView(getCourseId(), ['progress-bar-view', 'learning-goals-view', 'planner-view']);
+        } else {
+            updateSetting('write', 'views', views.value);
+            // Transform both view lists (imported from file and the actual resulting list after import) to sets of view names.
+            // Only enabled views matter here because they *would* be visible after import.
+            // Comparing the Sets of names gives the list of views that could not be enabled
+            // (maybe because these views are not available on the system).
+            let enabledViews = getViewlist().filter(v => v.enabled).map(v => v.viewname);
+            let importedEnabledViews = JSON.parse(views.value).filter(v => v.enabled).map(v => v.viewname);
+            let viewsNotEnabled = (new Set(importedEnabledViews)).difference(new Set(enabledViews));
+            await ModalAlert.create({
+                title: await getString('import_alert_title', 'block_disealytics'),
+                body: await Templates.render('block_disealytics/import_alert_modal',
+                    {hasdetails: viewsNotEnabled.size > 0, disabledviews: [...viewsNotEnabled]}),
+                show: true,
+                removeOnClose: true
+            });
+        }
+    }
+
+    let filearea = document.createElement("input");
+    filearea.setAttribute("type", "file");
+    filearea.setAttribute("accept", "application/json");
+    filearea.addEventListener("input", function () {
+        if (filearea.files.length > 0) {
+            let file = filearea.files.item(0);
+            file.text().then(function (result) {
+                try {
+                    let importData = JSON.parse(String(result));
+                    const datatypes = ['goals', 'dates', 'pages',];
+                    let views = importData.config;
+                    delete importData.config;
+                    // TODO: check for no imported data.
+                    if (!datatypes.some((e) => importData[e])) {
+                        // No data is imported, so just update the user preference if it exists.
+                        setViewPref(views);
+                    } else {
+                        let importedCoursenames = new Set(Object.entries(importData.goals)
+                            .map(e => e[1].coursename)
+                            .filter(e => e !== ""))
+                            .values().toArray();
+                        let userCourses;
+                        Ajax.call([{
+                            methodname: 'core_course_get_enrolled_courses_by_timeline_classification',
+                            args: {
+                                classification: 'all',
+                            },
+                        }])[0].then(async (result) => {
+                            userCourses = result;
+                            userCourses = userCourses.courses.map(function (e) {
+                                return {courseid: e.id, displayname: e.fullnamedisplay};
+                            });
+
+                            // Move currently displayed course to front of array, making it the default during the import process.
+                            let index = userCourses.findIndex(e => Number(e.courseid) === Number(getCourseId()));
+                            if (index > -1) { // only splice array when item is found
+                                let item = userCourses[index]; // Save the item
+                                userCourses.splice(index, 1); // 2nd parameter means remove one item only
+                                userCourses.unshift(item); // Add to front, to be first
+                            }
+                            if (theDisealyticsImportModal) {
+                                theDisealyticsImportModal.destroy();
+                            }
+
+                            theDisealyticsImportModal = await ModalSaveCancel.create({
+                                title: await getString('import_modal_title', 'block_disealytics'),
+                                body: await Templates.render('block_disealytics/import_config_modal',
+                                    {coursenames: importedCoursenames, usercourses: userCourses}),
+                                removeOnClose: true
+                            });
+
+                            theDisealyticsImportModal.getRoot().on(ModalEvents.save, async () => {
+                                let mapping = [];
+                                let selects = document.querySelectorAll('.disea-course-select');
+                                selects.forEach((select) => {
+                                    mapping.push({coursename: select.dataset.coursename, value: select.value});
+                                });
+                                Ajax.call([{
+                                    methodname: 'block_disealytics_import_user_data',
+                                    args: {
+                                        courseid: getCourseId(),
+                                        data: JSON.stringify(importData),
+                                        coursemapping: JSON.stringify(mapping),
+                                    },
+                                }])[0].then(() => {
+                                    setViewPref(views);
+                                    if (theDisealyticsImportModal) {
+                                        theDisealyticsImportModal.destroy();
+                                    }
+                                });
+                            });
+                            // TODO: Maybe close the Config modal here to avoid having multiple modals open?
+
+                            await theDisealyticsImportModal.show();
+                        });
+                    }
+                    if (theDisealyticsConfigModal) {
+                        theDisealyticsConfigModal.destroy();
+                    }
+                } catch (e) {
+
+                }
+            });
+        }
+    });
+    filearea.click();
+}
 
 /**
  * Renders the expanded part of a view, while hiding every other view
@@ -257,33 +391,33 @@ const renderExpandedView = (viewtype) => {
     [].forEach.call(expandableViews, (e) => {
         e.classList.remove("active");
     });
-if (viewtype === "none") {
-    const expandableDivs = document.querySelectorAll(".block_disealytics-expandable");
-    [].forEach.call(expandableDivs, (e) => {
-        e.classList.add("hidden");
+    if (viewtype === "none") {
+        const expandableDivs = document.querySelectorAll(".block_disealytics-expandable");
+        [].forEach.call(expandableDivs, (e) => {
+            e.classList.add("hidden");
         });
-    const allViewContainer = document.querySelectorAll(selectors.views.selectEveryViewContainer);
-    [].forEach.call(allViewContainer, (e) => {
-        e.classList.remove("hidden");
+        const allViewContainer = document.querySelectorAll(selectors.views.selectEveryViewContainer);
+        [].forEach.call(allViewContainer, (e) => {
+            e.classList.remove("hidden");
         });
-    // Sets every button to an open symbol button.
-    const ToggleButton = document.querySelectorAll(".block_disealytics-toggle-expansion-btn");
-    [].forEach.call(ToggleButton, (e) => {
-        const buttonOpen = e.querySelector(".expandable-open");
-        // On first load the buttonOpen is null. Therefore, we need an if check.
-        if (buttonOpen) {
-            buttonOpen.classList.remove('hidden');
-        }
-        const buttonClose = e.querySelector(".expandable-close");
-        // On first load the buttonClose is null. Therefore, we need an if check.
-        if (buttonClose) {
-            buttonClose.classList.add('hidden');
-        }
+        // Sets every button to an open symbol button.
+        const ToggleButton = document.querySelectorAll(".block_disealytics-toggle-expansion-btn");
+        [].forEach.call(ToggleButton, (e) => {
+            const buttonOpen = e.querySelector(".expandable-open");
+            // On first load the buttonOpen is null. Therefore, we need an if check.
+            if (buttonOpen) {
+                buttonOpen.classList.remove('hidden');
+            }
+            const buttonClose = e.querySelector(".expandable-close");
+            // On first load the buttonClose is null. Therefore, we need an if check.
+            if (buttonClose) {
+                buttonClose.classList.add('hidden');
+            }
         });
-    // The offset has to be saved temporary, because the logic of loading views has a special behaviour.
-    setOffsetTopForScroll(60);
-    return;
-}
+        // The offset has to be saved temporary, because the logic of loading views has a special behaviour.
+        setOffsetTopForScroll(60);
+        return;
+    }
 
     // Hide all elements in the views when expanded.
     [].forEach.call(elementsHide, (e) => {
@@ -297,29 +431,29 @@ if (viewtype === "none") {
     const viewSelectors = getViewSelectors(viewtype);
     const currentView = document.querySelector(viewSelectors.selectViewClass);
     // On first load the currentView is null. Therefore, we need an if check.
-if (currentView) {
-    currentView.classList.remove("hidden");
-}
+    if (currentView) {
+        currentView.classList.remove("hidden");
+    }
     const expandableView = document.querySelector(viewSelectors.selectExpandableClass);
     // On first load the expandableView is null. Therefore, we need an if check.
-if (expandableView) {
-    if (viewtype !== 'learning-materials-view') {
-        setScrollToElement('block_disealytics-panel-' + viewtype);
-        setOffsetTopForScroll(100);
+    if (expandableView) {
+        if (viewtype !== 'learning-materials-view') {
+            setScrollToElement('block_disealytics-panel-' + viewtype);
+            setOffsetTopForScroll(100);
+        }
+        expandableView.classList.add("active");
+        expandableView.classList.remove("hidden");
     }
-    expandableView.classList.add("active");
-    expandableView.classList.remove("hidden");
-}
     const ButtonOpen = document.querySelector(".block_disealytics-toggle-expansion-btn-"
         + viewtype + " .expandable-open");
-if (ButtonOpen) {
-    ButtonOpen.classList.add('hidden');
-}
+    if (ButtonOpen) {
+        ButtonOpen.classList.add('hidden');
+    }
     const ButtonClose = document.querySelector(".block_disealytics-toggle-expansion-btn-"
         + viewtype + " .expandable-close");
-if (ButtonClose) {
-    ButtonClose.classList.remove('hidden');
-}
+    if (ButtonClose) {
+        ButtonClose.classList.remove('hidden');
+    }
 };
 
 /**
@@ -332,9 +466,9 @@ if (ButtonClose) {
  */
 const renderViewTemplate = (nodeSelector, viewInfo, editing, expandedView, viewtype) => {
     if (nodeIsEmpty(nodeSelector) || viewIsOld(viewtype)) {
-        Template.renderForPromise(viewInfo.template_path, viewInfo.data)
+        Templates.renderForPromise(viewInfo.template_path, viewInfo.data)
             .then(({html, js}) => {
-                Template.replaceNodeContents(nodeSelector, html, js);
+                Templates.replaceNodeContents(nodeSelector, html, js);
                 renderEditingMode(editing);
                 renderExpandedView(expandedView);
                 if (viewtype === 'learning-goals-view') {
@@ -355,4 +489,31 @@ const nodeIsEmpty = (selector) => {
         return true;
     }
     return (document.querySelector(selector).innerHTML.trim() === "");
+};
+
+export const reorderViews = () => {
+    let container = document.querySelector(".block_disealytics-all-views-container");
+    if (container) {
+        let viewDivs = container.children;
+        let reordered = document.createDocumentFragment();
+
+        getViewlist().forEach(function (viewinfo) {
+            let node = viewDivs.namedItem(`block_disealytics-${viewinfo.viewname}`);
+            if (viewinfo.enabled) {
+                node.setAttribute("display", "block");
+                node.classList.remove("hidden");
+                node.setAttribute("data-visible", "true");
+            } else {
+                node.setAttribute("display", "none");
+                node.setAttribute("data-visible", "false");
+
+                node.classList.add("hidden");
+                //node.innerHTML = null;
+            }
+            reordered.appendChild(node.cloneNode(true));
+
+        });
+        //container.innerHTML = null;
+        container.replaceChildren(reordered);
+    }
 };

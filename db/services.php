@@ -116,5 +116,4 @@ $functions = [
                 'ajax' => true,
                 'loginrequired' => true,
         ],
-
 ];

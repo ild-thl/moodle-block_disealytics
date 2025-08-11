@@ -72,6 +72,17 @@
             <span class="show-when-editing main-viewmode-label">{{#str}} exit_editing_mode, block_disealytics{{/str}}</span>
         </a>
     </div>
+
+    <div class="show-when-editing" style="margin: 10px 0;">
+        <label for="cardselection">
+            <select id="cardselection" class="form-select" data-region="cardselectionmode">
+                <option value="all" {{#all}}selected{{/all}}>{{#str}} cardselectionmode_all, block_disealytics {{/str}}</option>
+                <option value="preset" {{#preset}}selected{{/preset}}>{{#str}} cardselectionmode_preset, block_disealytics {{/str}}</option>
+                <option value="custom" {{#custom}}selected{{/custom}}>{{#str}} cardselectionmode_custom, block_disealytics {{/str}}</option>
+            </select>
+        </label>
+    </div>
+
     <p class="show-when-no-view-enabled hidden">{{#str}} no-view-exists, block_disealytics {{/str}}</p>
     <div class="block_disealytics-all-views-container block_disealytics-drop-container">
         {{#viewtypes}}

@@ -20,30 +20,27 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
-import Ajax from 'core/ajax';
-import Template from 'core/templates';
+import Ajax from "core/ajax";
+import Template from "core/templates";
 import {
-    setVersionInfo,
-    getViewlist,
-    getViewSelectors,
-    setViewlist,
-    scrollToTargetAdjusted,
-    setScrollToElement,
-    setOffsetTopForScroll,
-    getScrollTo,
-    getScrollToElement,
-    getOffsetTopForScroll,
-    viewIsOld,
-    setOld,
-    unsetOld,
-    selectors,
-    setCourseId,
-    getCourseId
-} from 'block_disealytics/view_selection';
-import {
-    initGoalEventListeners
-} from "./learning_goals_functions";
+  setVersionInfo,
+  getViewlist,
+  getViewSelectors,
+  setViewlist,
+  scrollToTargetAdjusted,
+  setScrollToElement,
+  setOffsetTopForScroll,
+  getScrollTo,
+  getScrollToElement,
+  getOffsetTopForScroll,
+  viewIsOld,
+  setOld,
+  unsetOld,
+  selectors,
+  setCourseId,
+  getCourseId,
+} from "block_disealytics/view_selection";
+import { initGoalEventListeners } from "./learning_goals_functions";
 
 /**
  * Initializes the plugin when it first loads by rendering the main template.
@@ -54,38 +51,43 @@ import {
  * @param {string} agreementurl - URL at which the data policy can be viewed
  * @param {string} versioninfo - The current version of the plugin
  */
-export const init = async(views, viewmode, courseid, agreementurl, versioninfo) => {
-    /**
-     * Callback function to execute when the document is ready.
-     */
-    const callback = async function() {
-        // Set the available views and configured views.
-        setViewlist(views);
-        setCourseId(courseid);
-        setVersionInfo(versioninfo);
+export const init = async (
+  views,
+  viewmode,
+  courseid,
+  agreementurl,
+  versioninfo
+) => {
+  /**
+   * Callback function to execute when the document is ready.
+   */
+  const callback = async function () {
+    // Set the available views and configured views.
+    setViewlist(views);
+    setCourseId(courseid);
+    setVersionInfo(versioninfo);
 
-        // Render the main template with the available views and view mode.
-        renderMainTemplate(getViewlist(), viewmode, agreementurl);
+    // Render the main template with the available views and view mode.
+    renderMainTemplate(getViewlist(), viewmode, agreementurl);
 
-        // Update the view (optional parameters are undefined in this context).
-        await updateView(getCourseId(), undefined);
-    };
+    // Update the view (optional parameters are undefined in this context).
+    await updateView(getCourseId(), undefined);
+  };
 
-    // Check if the document is already loaded or loading and execute the callback accordingly.
-    if (
-        document.readyState === "complete" ||
-        (document.readyState !== "loading" && !document.documentElement.doScroll)
-    ) {
-        // Document is already loaded, execute the callback immediately.
-        await callback();
-    } else {
-        // Add an event listener for when the document is ready.
-        document.addEventListener("DOMContentLoaded", async function() {
-            await callback();
-        });
-    }
+  // Check if the document is already loaded or loading and execute the callback accordingly.
+  if (
+    document.readyState === "complete" ||
+    (document.readyState !== "loading" && !document.documentElement.doScroll)
+  ) {
+    // Document is already loaded, execute the callback immediately.
+    await callback();
+  } else {
+    // Add an event listener for when the document is ready.
+    document.addEventListener("DOMContentLoaded", async function () {
+      await callback();
+    });
+  }
 };
-
 
 /**
  * Called once when the plugin is loaded.
@@ -95,23 +97,25 @@ export const init = async(views, viewmode, courseid, agreementurl, versioninfo) 
  * @param {string} agreementurl - URL at which the data policy can be viewed
  */
 const renderMainTemplate = (views, viewmode, agreementurl) => {
-    const maintemplatedata = [];
-    // Use map function to receive only the 'viewname' property of the given views as 'view'.
-    maintemplatedata.viewtypes = views.map(view => {
-        return {
-            'viewname': view.viewname,
-            'enabled': (view.enabled === 1)
-        };
-    });
-    maintemplatedata.viewmode = viewmode;
-    maintemplatedata[viewmode] = true;
-    maintemplatedata.agreementurl = agreementurl;
+  const maintemplatedata = [];
+  // Use map function to receive only the 'viewname' property of the given views as 'view'.
+  maintemplatedata.viewtypes = views.map((view) => {
+    return {
+      viewname: view.viewname,
+      enabled: view.enabled === 1,
+    };
+  });
+  maintemplatedata.viewmode = viewmode;
+  maintemplatedata[viewmode] = true;
+  maintemplatedata.agreementurl = agreementurl;
 
-    Template.renderForPromise("block_disealytics/main", maintemplatedata)
-        .then(({html, js}) => {
-            Template.replaceNodeContents('.block_disealytics .content', html, js);
-             return renderEditingMode('0');
-        }).catch(ex => window.console.log(ex));
+  Template.renderForPromise("block_disealytics/main", maintemplatedata)
+    .then(({ html, js }) => {
+      Template.replaceNodeContents(".block_disealytics .content", html, js);
+      registerCardselectionListener();
+      return renderEditingMode("0");
+    })
+    .catch((ex) => window.console.log(ex));
 };
 
 /**
@@ -120,49 +124,55 @@ const renderMainTemplate = (views, viewmode, agreementurl) => {
  * @param {int} courseid the current courseid
  * @param {array} views list of views to update
  */
-export const updateView = async(courseid, views) => {
-    // Set views to old.
-    if (views) {
-        views.forEach(view => setOld(view));
-    }
-    let viewlist = JSON.stringify(getViewlist());
+export const updateView = async (courseid, views) => {
+  // Set views to old.
+  if (views) {
+    views.forEach((view) => setOld(view));
+  }
+  let viewlist = JSON.stringify(getViewlist());
 
-    // See, if there are any settings in the database for the viewtypes.
-    Ajax.call([{
-        methodname: 'block_disealytics_refresh_view',
-        args: {courseid, viewlist},
-    }])[0].done(async response => {
-        const viewData = JSON.parse(response);
-        const allViews = getViewlist();
+  // See, if there are any settings in the database for the viewtypes.
+  Ajax.call([
+    {
+      methodname: "block_disealytics_refresh_view",
+      args: { courseid, viewlist },
+    },
+  ])[0]
+    .done(async (response) => {
+      const viewData = JSON.parse(response);
+      const allViews = getViewlist();
 
-        allViews.forEach(({viewname}) => {
-            const viewSelectors = getViewSelectors(viewname);
-            const viewDataExists = viewname in viewData.views;
-            const currentView = document.querySelector(viewSelectors.selectViewClass);
+      allViews.forEach(({ viewname }) => {
+        const viewSelectors = getViewSelectors(viewname);
+        const viewDataExists = viewname in viewData.views;
+        const currentView = document.querySelector(
+          viewSelectors.selectViewClass
+        );
 
-            if (viewDataExists) {
-                const viewDataToRender = viewData.views[viewname];
-                renderViewTemplate(
-                    viewSelectors.selectViewClass,
-                    viewDataToRender,
-                    viewData.editing,
-                    viewData.expanded_view,
-                    viewname
-                );
-            } else {
-                if (currentView) {
-                    currentView.innerHTML = "";
-                }
-            }
-        });
-        // Editing Mode.
-        renderEditingMode(viewData.editing);
-        renderExpandedView(viewData.expanded_view);
-        if (getScrollTo()) {
-            scrollToTargetAdjusted(getScrollToElement(), getOffsetTopForScroll());
+        if (viewDataExists) {
+          const viewDataToRender = viewData.views[viewname];
+          renderViewTemplate(
+            viewSelectors.selectViewClass,
+            viewDataToRender,
+            viewData.editing,
+            viewData.expanded_view,
+            viewname
+          );
+        } else {
+          if (currentView) {
+            currentView.innerHTML = "";
+          }
         }
-    }).fail(err => {
-        window.console.log(err);
+      });
+      // Editing Mode.
+      renderEditingMode(viewData.editing);
+      renderExpandedView(viewData.expanded_view);
+      if (getScrollTo()) {
+        scrollToTargetAdjusted(getScrollToElement(), getOffsetTopForScroll());
+      }
+    })
+    .fail((err) => {
+      window.console.log(err);
     });
 };
 
@@ -171,58 +181,64 @@ export const updateView = async(courseid, views) => {
  * @param {string} isEnabled that represents whether the editing is on or off
  */
 const renderEditingMode = (isEnabled) => {
-    const allViewsContainer = document.querySelector(".block_disealytics-all-views-container");
+  const allViewsContainer = document.querySelector(
+    ".block_disealytics-all-views-container"
+  );
+  if (allViewsContainer) {
+    allViewsContainer.classList.add("viewmode");
+    allViewsContainer.classList.remove("editmode");
+  }
+  // Edit button to customize views.
+  const editButton = document.querySelector(
+    "#block_disealytics_main_edit_button"
+  );
+  if (editButton) {
+    editButton.classList.remove("text-danger");
+  }
+  // All views container.
+  const viewContainers = document.querySelectorAll(".view-container");
+  // All views container set draggable to false when not editing.
+  if (viewContainers) {
+    [].forEach.call(viewContainers, (e) => {
+      e.setAttribute("draggable", "false");
+      e.classList.remove("draggable");
+    });
+  }
+  const thingsToShow = document.querySelectorAll(".show-when-editing");
+  [].forEach.call(thingsToShow, (e) => {
+    e.classList.add("hidden");
+  });
+  const thingsToHide = document.querySelectorAll(".hide-when-editing");
+  [].forEach.call(thingsToHide, (e) => {
+    e.classList.remove("hidden");
+  });
+  if (isEnabled === "1") {
     if (allViewsContainer) {
-        allViewsContainer.classList.add("viewmode");
-        allViewsContainer.classList.remove("editmode");
+      allViewsContainer.classList.remove("viewmode");
+      allViewsContainer.classList.add("editmode");
     }
-    // Edit button to customize views.
-    const editButton = document.querySelector("#block_disealytics_main_edit_button");
+    // Editbutton design settings.
     if (editButton) {
-        editButton.classList.remove("text-danger");
+      editButton.classList.add("text-danger");
     }
-    // All views container.
-    const viewContainers = document.querySelectorAll(".view-container");
-    // All views container set draggable to false when not editing.
-    if (viewContainers) {
-        [].forEach.call(viewContainers, (e) => {
-            e.setAttribute('draggable', 'false');
-            e.classList.remove('draggable');
-        });
-    }
-    const thingsToShow = document.querySelectorAll(".show-when-editing");
-    [].forEach.call(thingsToShow, (e) => {
+    if (thingsToHide) {
+      [].forEach.call(thingsToHide, (e) => {
         e.classList.add("hidden");
-    });
-    const thingsToHide = document.querySelectorAll(".hide-when-editing");
-    [].forEach.call(thingsToHide, (e) => {
-        e.classList.remove("hidden");
-    });
-    if (isEnabled === '1') {
-        if (allViewsContainer) {
-            allViewsContainer.classList.remove("viewmode");
-            allViewsContainer.classList.add("editmode");
-        }
-        // Editbutton design settings.
-        if (editButton) {
-            editButton.classList.add("text-danger");
-        }
-        if (thingsToHide) {
-            [].forEach.call(thingsToHide, (e) => {
-                e.classList.add("hidden");
-            });
-        }
-        if (thingsToShow) {
-            [].forEach.call(thingsToShow, (e) => {
-                e.classList.remove("hidden");
-            });
-        }
-        getViewlist().forEach(({viewname}) => {
-            const viewContainer = document.querySelector('#block_disealytics-' + viewname);
-            viewContainer.setAttribute('draggable', 'true');
-            viewContainer.classList.add('draggable');
-            });
+      });
     }
+    if (thingsToShow) {
+      [].forEach.call(thingsToShow, (e) => {
+        e.classList.remove("hidden");
+      });
+    }
+    getViewlist().forEach(({ viewname }) => {
+      const viewContainer = document.querySelector(
+        "#block_disealytics-" + viewname
+      );
+      viewContainer.setAttribute("draggable", "true");
+      viewContainer.classList.add("draggable");
+    });
+  }
 };
 
 /**
@@ -230,91 +246,103 @@ const renderEditingMode = (isEnabled) => {
  * @param {string} viewtype that represents the view that should be expanded
  */
 const renderExpandedView = (viewtype) => {
-    // The two objects elementsHide and elementsShow are used for the visibility in the block section.
-    const elementsHide = document.querySelectorAll('.hide-when-expanded');
-    const elementsShow = document.querySelectorAll('.show-when-expanded');
-    // Show all elements in the view in the block section.
-    [].forEach.call(elementsHide, (e) => {
-        e.classList.remove("hidden");
-    });
-    // Hide all elements in the view in the block section.
-    [].forEach.call(elementsShow, (e) => {
-        e.classList.add("hidden");
-    });
-    // Set every expandable windows in the views to hidden.
-    const allViewContainer = document.querySelectorAll(".view-container");
-    [].forEach.call(allViewContainer, (e) => {
-        if (e.getAttribute('id') !== 'block_disealytics-learning-materials-view') {
-            e.classList.add("hidden");
-        }
-    });
-    const expandableViews = document.querySelectorAll(".block_disealytics-expandable");
-    [].forEach.call(expandableViews, (e) => {
-        e.classList.remove("active");
-    });
-if (viewtype === "none") {
-    const expandableDivs = document.querySelectorAll(".block_disealytics-expandable");
+  // The two objects elementsHide and elementsShow are used for the visibility in the block section.
+  const elementsHide = document.querySelectorAll(".hide-when-expanded");
+  const elementsShow = document.querySelectorAll(".show-when-expanded");
+  // Show all elements in the view in the block section.
+  [].forEach.call(elementsHide, (e) => {
+    e.classList.remove("hidden");
+  });
+  // Hide all elements in the view in the block section.
+  [].forEach.call(elementsShow, (e) => {
+    e.classList.add("hidden");
+  });
+  // Set every expandable windows in the views to hidden.
+  const allViewContainer = document.querySelectorAll(".view-container");
+  [].forEach.call(allViewContainer, (e) => {
+    if (e.getAttribute("id") !== "block_disealytics-learning-materials-view") {
+      e.classList.add("hidden");
+    }
+  });
+  const expandableViews = document.querySelectorAll(
+    ".block_disealytics-expandable"
+  );
+  [].forEach.call(expandableViews, (e) => {
+    e.classList.remove("active");
+  });
+  if (viewtype === "none") {
+    const expandableDivs = document.querySelectorAll(
+      ".block_disealytics-expandable"
+    );
     [].forEach.call(expandableDivs, (e) => {
-        e.classList.add("hidden");
-        });
-    const allViewContainer = document.querySelectorAll(selectors.views.selectEveryViewContainer);
+      e.classList.add("hidden");
+    });
+    const allViewContainer = document.querySelectorAll(
+      selectors.views.selectEveryViewContainer
+    );
     [].forEach.call(allViewContainer, (e) => {
-        e.classList.remove("hidden");
-        });
+      e.classList.remove("hidden");
+    });
     // Sets every button to an open symbol button.
-    const ToggleButton = document.querySelectorAll(".block_disealytics-toggle-expansion-btn");
+    const ToggleButton = document.querySelectorAll(
+      ".block_disealytics-toggle-expansion-btn"
+    );
     [].forEach.call(ToggleButton, (e) => {
-        const buttonOpen = e.querySelector(".expandable-open");
-        // On first load the buttonOpen is null. Therefore, we need an if check.
-        if (buttonOpen) {
-            buttonOpen.classList.remove('hidden');
-        }
-        const buttonClose = e.querySelector(".expandable-close");
-        // On first load the buttonClose is null. Therefore, we need an if check.
-        if (buttonClose) {
-            buttonClose.classList.add('hidden');
-        }
-        });
+      const buttonOpen = e.querySelector(".expandable-open");
+      // On first load the buttonOpen is null. Therefore, we need an if check.
+      if (buttonOpen) {
+        buttonOpen.classList.remove("hidden");
+      }
+      const buttonClose = e.querySelector(".expandable-close");
+      // On first load the buttonClose is null. Therefore, we need an if check.
+      if (buttonClose) {
+        buttonClose.classList.add("hidden");
+      }
+    });
     // The offset has to be saved temporary, because the logic of loading views has a special behaviour.
     setOffsetTopForScroll(60);
     return;
-}
+  }
 
-    // Hide all elements in the views when expanded.
-    [].forEach.call(elementsHide, (e) => {
-        e.classList.add("hidden");
-    });
-    // Show all elements in the views when expanded.
-    [].forEach.call(elementsShow, (e) => {
-        e.classList.remove("hidden");
-    });
-    // Hides every view except the expanded one.
-    const viewSelectors = getViewSelectors(viewtype);
-    const currentView = document.querySelector(viewSelectors.selectViewClass);
-    // On first load the currentView is null. Therefore, we need an if check.
-if (currentView) {
+  // Hide all elements in the views when expanded.
+  [].forEach.call(elementsHide, (e) => {
+    e.classList.add("hidden");
+  });
+  // Show all elements in the views when expanded.
+  [].forEach.call(elementsShow, (e) => {
+    e.classList.remove("hidden");
+  });
+  // Hides every view except the expanded one.
+  const viewSelectors = getViewSelectors(viewtype);
+  const currentView = document.querySelector(viewSelectors.selectViewClass);
+  // On first load the currentView is null. Therefore, we need an if check.
+  if (currentView) {
     currentView.classList.remove("hidden");
-}
-    const expandableView = document.querySelector(viewSelectors.selectExpandableClass);
-    // On first load the expandableView is null. Therefore, we need an if check.
-if (expandableView) {
-    if (viewtype !== 'learning-materials-view') {
-        setScrollToElement('block_disealytics-panel-' + viewtype);
-        setOffsetTopForScroll(100);
+  }
+  const expandableView = document.querySelector(
+    viewSelectors.selectExpandableClass
+  );
+  // On first load the expandableView is null. Therefore, we need an if check.
+  if (expandableView) {
+    if (viewtype !== "learning-materials-view") {
+      setScrollToElement("block_disealytics-panel-" + viewtype);
+      setOffsetTopForScroll(100);
     }
     expandableView.classList.add("active");
     expandableView.classList.remove("hidden");
-}
-    const ButtonOpen = document.querySelector(".block_disealytics-toggle-expansion-btn-"
-        + viewtype + " .expandable-open");
-if (ButtonOpen) {
-    ButtonOpen.classList.add('hidden');
-}
-    const ButtonClose = document.querySelector(".block_disealytics-toggle-expansion-btn-"
-        + viewtype + " .expandable-close");
-if (ButtonClose) {
-    ButtonClose.classList.remove('hidden');
-}
+  }
+  const ButtonOpen = document.querySelector(
+    ".block_disealytics-toggle-expansion-btn-" + viewtype + " .expandable-open"
+  );
+  if (ButtonOpen) {
+    ButtonOpen.classList.add("hidden");
+  }
+  const ButtonClose = document.querySelector(
+    ".block_disealytics-toggle-expansion-btn-" + viewtype + " .expandable-close"
+  );
+  if (ButtonClose) {
+    ButtonClose.classList.remove("hidden");
+  }
 };
 
 /**
@@ -325,19 +353,26 @@ if (ButtonClose) {
  * @param {string} expandedView which view is currently expanded
  * @param {string} viewtype current view name
  */
-const renderViewTemplate = (nodeSelector, viewInfo, editing, expandedView, viewtype) => {
-    if (nodeIsEmpty(nodeSelector) || viewIsOld(viewtype)) {
-        Template.renderForPromise(viewInfo.template_path, viewInfo.data)
-            .then(({html, js}) => {
-                Template.replaceNodeContents(nodeSelector, html, js);
-                renderEditingMode(editing);
-                renderExpandedView(expandedView);
-                if (viewtype === 'learning-goals-view') {
-                    initGoalEventListeners();
-                }
-                return unsetOld(viewtype);
-            }).catch(ex => window.console.log(ex));
-    }
+const renderViewTemplate = (
+  nodeSelector,
+  viewInfo,
+  editing,
+  expandedView,
+  viewtype
+) => {
+  if (nodeIsEmpty(nodeSelector) || viewIsOld(viewtype)) {
+    Template.renderForPromise(viewInfo.template_path, viewInfo.data)
+      .then(({ html, js }) => {
+        Template.replaceNodeContents(nodeSelector, html, js);
+        renderEditingMode(editing);
+        renderExpandedView(expandedView);
+        if (viewtype === "learning-goals-view") {
+          initGoalEventListeners();
+        }
+        return unsetOld(viewtype);
+      })
+      .catch((ex) => window.console.log(ex));
+  }
 };
 
 /**
@@ -346,8 +381,104 @@ const renderViewTemplate = (nodeSelector, viewInfo, editing, expandedView, viewt
  * @returns {boolean} whether the node is empty or not
  */
 const nodeIsEmpty = (selector) => {
-    if (document.querySelector(selector) === null) {
-        return true;
-    }
-    return (document.querySelector(selector).innerHTML.trim() === "");
+  if (document.querySelector(selector) === null) {
+    return true;
+  }
+  return document.querySelector(selector).innerHTML.trim() === "";
 };
+
+/**
+ * Filters views based on the selected card selection mode.
+ *
+ * @param {string} mode - Selected card mode: preset, custom or all.
+ * @returns {Array} Filtered view objects.
+ */
+async function getViewsForCardselection(mode) {
+  const allViews = getViewlist(); // All available views from user preferences.
+
+  if (mode === "preset") {
+    const allowed = ["learning-goals", "assignment", "planner", "progress-bar"];
+    return allViews.filter((v) => allowed.includes(v.viewname));
+  }
+
+  // Return all views for custom or all modes.
+  return allViews;
+}
+
+/**
+ * Registers change listener for the card selection dropdown.
+ */
+function registerCardselectionListener() {
+  const dropdown = document.querySelector('[data-region="cardselectionmode"]');
+
+  if (!dropdown) {
+    console.warn("Dropdown [data-region=cardselectionmode] not found.");
+    return;
+  }
+
+  dropdown.addEventListener("change", async (event) => {
+    const mode = event.target.value;
+    console.log("Cardselectionmode changed to:", mode);
+
+    try {
+      // 1. Save the new selection
+      await Ajax.call([
+        {
+          methodname: "block_disealytics_write_user_preference",
+          args: {
+            info: {
+              action: "write",
+              name: "cardselectionmode",
+              value: mode,
+            },
+          },
+        },
+      ])[0];
+
+      // 2. Get new views (via refresh_view)
+      const views = getViewlist(); // Current list as JSON
+      const viewlist = JSON.stringify(views);
+
+      const response = await Ajax.call([
+        {
+          methodname: "block_disealytics_refresh_view",
+          args: {
+            courseid: getCourseId(),
+            viewlist: viewlist,
+          },
+        },
+      ])[0];
+
+      const viewData = JSON.parse(response);
+      const allViews = getViewlist();
+
+      allViews.forEach(({ viewname }) => {
+        const viewSelectors = getViewSelectors(viewname);
+        const viewDataExists = viewname in viewData.views;
+        const currentView = document.querySelector(
+          viewSelectors.selectViewClass
+        );
+
+        if (viewDataExists) {
+          const viewDataToRender = viewData.views[viewname];
+          renderViewTemplate(
+            viewSelectors.selectViewClass,
+            viewDataToRender,
+            viewData.editing,
+            viewData.expanded_view,
+            viewname
+          );
+        } else {
+          if (currentView) {
+            currentView.innerHTML = "";
+          }
+        }
+      });
+
+      renderEditingMode(viewData.editing);
+      renderExpandedView(viewData.expanded_view);
+    } catch (err) {
+      console.error("Error updating cardselectionmode via refresh_view:", err);
+    }
+  });
+}

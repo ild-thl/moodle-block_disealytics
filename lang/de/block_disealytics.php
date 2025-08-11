@@ -446,6 +446,12 @@ $string['viewmode_module'] = 'Modulansicht';
 $string['viewmode_global'] = 'Gesamtansicht';
 $string['viewmode_halfyear'] = 'Semesteransicht';
 
+// Card selection modes.
+$string['cardselectionmode'] = 'Kartenauswahl-Modus';
+$string['cardselectionmode_all'] = 'Alle Kacheln anzeigen';
+$string['cardselectionmode_preset'] = 'Vorauswahl anzeigen';
+$string['cardselectionmode_custom'] = 'Individuelle Auswahl';
+
 $string['task_tasktransform'] = 'Tasktransformation';
 
 

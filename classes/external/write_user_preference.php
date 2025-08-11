@@ -100,6 +100,11 @@ class write_user_preference extends external_api {
                             set_user_preference('block_disealytics_' . $info["name"], $info["value"]);
                         }
                         break;
+                    case 'cardselectionmode':
+                        if (get_user_preferences('block_disealytics_' . $info["name"], 'preset') !== $info["value"]) {
+                            set_user_preference('block_disealytics_' . $info["name"], $info["value"]);
+                        }
+                        break;
                 }
                 break;
 

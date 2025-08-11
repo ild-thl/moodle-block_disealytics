@@ -450,6 +450,11 @@ $string['viewmode_module'] = 'Module view';
 $string['viewmode_global'] = 'Full view';
 $string['viewmode_halfyear'] = 'Semester view';
 
+// Card selection modes.
+$string['cardselectionmode'] = 'Card selection mode';
+$string['cardselectionmode_all'] = ' Show all cards';
+$string['cardselectionmode_preset'] = 'Show preset selection';
+$string['cardselectionmode_custom'] = 'Custom selection';
 
 $string['config_consent_text'] = 'Your declaration of consent';
 $string['config_consent_description'] = 'Please enter your declaration of consent here as HTML formatted text.';

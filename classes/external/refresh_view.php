@@ -71,6 +71,38 @@ class refresh_view extends external_api {
         // Load UserSettings or sensible defaults.
         $editing = get_user_preferences('block_disealytics_editing', '0');
         $expandedview = get_user_preferences('block_disealytics_expanded_view', "none");
+        $cardselectionmode = get_user_preferences('block_disealytics_cardselectionmode', 'preset');
+
+        // Filter views based on cardselectionmode if editing.
+        $applyFilterInViewMode = true;
+        $isediting = ($editing === '1');
+
+        if ($isediting || $applyFilterInViewMode) {
+            $views = is_array($views) ? $views : [];
+
+            switch ($cardselectionmode) {
+                case 'preset':
+                    $allowedviews = ['learning-goals-view', 'assignment-view', 'planner-view', 'progress-bar-view'];
+                    $views = array_values(array_filter($views, function ($v) use ($allowedviews) {
+                        return in_array($v->viewname, $allowedviews, true);
+                    }));
+                    foreach ($views as $v) { $v->enabled = 1; }
+                    break;
+
+                case 'custom':
+                    $views = array_values(array_filter($views, function ($v) {
+                        return !empty($v->enabled);
+                    }));
+                    break;
+
+                case 'all':
+                    foreach ($views as $v) { $v->enabled = 1; }
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
         // Build response.
         $response = [];

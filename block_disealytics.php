@@ -52,6 +52,7 @@ class block_disealytics extends block_base {
             return $this->content;
         }
         global $CFG, $COURSE, $OUTPUT, $USER;
+
         $this->content = new stdClass();
         $this->content->text = "";
 
@@ -89,6 +90,9 @@ class block_disealytics extends block_base {
 
             // Set viewmode.
             $viewmode = get_user_preferences('block_disealytics_viewmode', 'viewmode_module');
+
+            // Set cardselectionmode.
+            $cardselectionmode = get_user_preferences('block_disealytics_cardselectionmode', 'preset');
 
             // Set up views from files.
             $views = [];
@@ -136,6 +140,18 @@ class block_disealytics extends block_base {
             }
             $versioninfo = 'DiSEA Learner Dashboard ' . substr($plugin->version, 0, 4) . ' - Version ' . $plugin->release . ' ' .
                     $plugin->version;
+            
+            $templatecontext = (object) [
+                'courseid' => $COURSE->id,
+                'sesskey' => sesskey(),
+                'cardselectionmode' => $cardselectionmode,
+                'preset' => $cardselectionmode === 'preset',
+                'custom' => $cardselectionmode === 'custom',
+                'all' => $cardselectionmode === 'all',
+            ];
+            // Render HTML
+            $content = $OUTPUT->render_from_template('block_disealytics/main', $templatecontext);
+            $this->content->text = $content;
 
             // Hand over the data from the database to the update_view.js.
             $this->page->requires->js_call_amd(

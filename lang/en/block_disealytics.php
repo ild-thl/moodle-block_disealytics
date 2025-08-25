@@ -216,6 +216,9 @@ $string['main_help_views_summary'] = 'The Learner Dashboard (LD) contains so-cal
 $string['main_help_viewmodes_title'] = 'Different views';
 $string['main_help_viewmodes_summary'] = 'In the Learner Dashboard, you can view all content in the <span style="color:var(--primary)">module, semester</span> or <span style="color:var(--primary)">full view</span><br><br><strong>Module view</strong><br>In the module view, the content is displayed specifically for the module you are currently in. You receive a detailed overview of all resources and activities that belong to this module.<br><br><strong>Semester view</strong><br>The semester view shows you all the content of the modules you are taking in the current semester. This view allows you to gain a comprehensive insight into your current semester.<br><br><strong>Full view</strong><br>In the full view, you can access all the content of your degree programme. This includes all modules and activities that you have completed or are currently completing during your entire degree programme.';
 
+$string['main_help_cardselection_title'] = "Card selection";
+$string['main_help_cardselection_summary'] = 'In the Learner Dashboard, you can choose how cards are displayed via a dropdown menu.<br><br><strong>Show Preset selection</strong><br>A fixed set of cards is displayed, selected as particularly relevant for most learners. In this mode, no additional cards can be added or removed.<br><br><strong>Individual selection</strong><br>You can customise your dashboard yourself. All available cards are listed, and you can add or remove them as you wish.';
+
 $string['main_help_add_remove_title'] = "Adding or removing cards";
 $string['main_help_add_remove_summary'] = 'To add or remove cards in the Learner Dashboard, you can proceed as follows:<br>
 1. Click on the pencil icon to activate the editing mode.<br>
@@ -452,7 +455,6 @@ $string['viewmode_halfyear'] = 'Semester view';
 
 // Card selection modes.
 $string['cardselectionmode'] = 'Card selection mode';
-$string['cardselectionmode_all'] = ' Show all cards';
 $string['cardselectionmode_preset'] = 'Show preset selection';
 $string['cardselectionmode_custom'] = 'Custom selection';
 

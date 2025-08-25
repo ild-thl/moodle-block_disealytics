@@ -82,7 +82,7 @@ class refresh_view extends external_api {
 
             switch ($cardselectionmode) {
                 case 'preset':
-                    $allowedviews = ['learning-goals-view', 'assignment-view', 'planner-view', 'progress-bar-view'];
+                    $allowedviews = ['learning-goals-view', 'assignment-view', 'planner-view'];
                     $views = array_values(array_filter($views, function ($v) use ($allowedviews) {
                         return in_array($v->viewname, $allowedviews, true);
                     }));
@@ -93,10 +93,6 @@ class refresh_view extends external_api {
                     $views = array_values(array_filter($views, function ($v) {
                         return !empty($v->enabled);
                     }));
-                    break;
-
-                case 'all':
-                    foreach ($views as $v) { $v->enabled = 1; }
                     break;
 
                 default:

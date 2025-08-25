@@ -33,7 +33,7 @@
 
     }
 }}
-<div class="disealytics block_disealytics block_disealytics-plugin-container">
+<div class="disealytics block_disealytics block_disealytics-plugin-container {{#preset}}is-preset-mode{{/preset}}">
     <div class="flex-container">
         <h1 id="plugin-title">{{#str}}plugin-title, block_disealytics {{/str}}</h1>
         <div class="navigation-icons">
@@ -76,7 +76,6 @@
     <div class="show-when-editing" style="margin: 10px 0;">
         <label for="cardselection">
             <select id="cardselection" class="form-select" data-region="cardselectionmode">
-                <option value="all" {{#all}}selected{{/all}}>{{#str}} cardselectionmode_all, block_disealytics {{/str}}</option>
                 <option value="preset" {{#preset}}selected{{/preset}}>{{#str}} cardselectionmode_preset, block_disealytics {{/str}}</option>
                 <option value="custom" {{#custom}}selected{{/custom}}>{{#str}} cardselectionmode_custom, block_disealytics {{/str}}</option>
             </select>

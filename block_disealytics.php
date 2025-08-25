@@ -147,7 +147,6 @@ class block_disealytics extends block_base {
                 'cardselectionmode' => $cardselectionmode,
                 'preset' => $cardselectionmode === 'preset',
                 'custom' => $cardselectionmode === 'custom',
-                'all' => $cardselectionmode === 'all',
             ];
             // Render HTML
             $content = $OUTPUT->render_from_template('block_disealytics/main', $templatecontext);

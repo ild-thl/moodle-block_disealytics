@@ -216,6 +216,9 @@ $string['main_help_views_summary'] = 'Das Learner Dashboard (LD) enthält sogena
 $string['main_help_viewmodes_title'] = 'Verschiedene Ansichten';
 $string['main_help_viewmodes_summary'] = 'In dem Learner Dashboard können Sie sich alle Inhalte in einer <span style="color:var(--primary)">Modul-, Semester-</span> und <span style="color:var(--primary)">Gesamtansicht</span> anzeigen lassen.<br><br><strong>Modulansicht</strong><br>In der Modulansicht werden Ihnen die Inhalte spezifisch für das Modul angezeigt, in dem Sie sich gerade befinden. Sie erhalten einen detaillierten Überblick über alle Ressourcen und Aktivitäten, die zu diesem Modul gehören.<br><br><strong>Semesteransicht</strong><br>Die Semesteransicht präsentiert Ihnen sämtliche Inhalte der Module, die Sie im laufenden Semester belegen. Diese Ansicht ermöglicht es Ihnen, einen umfassenden Einblick in Ihr aktuellen Semester zu erhalten.<br><br><strong>Gesamtansicht</strong><br>In der Gesamtansicht können Sie auf alle Inhalte Ihres Studiums zugreifen. Diese umfasst sämtliche Module und Aktivitäten, die Sie während Ihres gesamten Studienverlaufs absolviert haben oder aktuell absolvieren.';
 
+$string['main_help_cardselection_title'] = "Kartenauswahl";
+$string['main_help_cardselection_summary'] = 'Im Learner Dashboard können Sie über ein Dropdown festlegen, wie die Karten angezeigt werden.<br><br><strong>Vorauswahl anzeigen</strong><br>Es wird eine feste Auswahl an Karten angezeigt, die für viele Lernende besonders relevant ist. In diesem Modus können keine zusätzlichen Karten hinzugefügt oder entfernt werden.<br><br><strong>Individuelle Auswahl</strong><br>Sie stellen Ihr Dashboard selbst zusammen. Alle verfügbaren Karten stehen zur Auswahl; Sie können Karten hinzufügen oder entfernen.';
+
 $string['main_help_add_remove_title'] = "Hinzufügen oder Entfernen von Karten";
 $string['main_help_add_remove_summary'] = 'Für das Hinzufügen oder Entfernen von Karten im Learner Dashboard können Sie wie folgt vorgehen:<br>
 1. Klicken Sie auf das Stift-Symbol, um den Bearbeitungsmodus zu aktivieren.<br>
@@ -448,7 +451,6 @@ $string['viewmode_halfyear'] = 'Semesteransicht';
 
 // Card selection modes.
 $string['cardselectionmode'] = 'Kartenauswahl-Modus';
-$string['cardselectionmode_all'] = 'Alle Kacheln anzeigen';
 $string['cardselectionmode_preset'] = 'Vorauswahl anzeigen';
 $string['cardselectionmode_custom'] = 'Individuelle Auswahl';
 

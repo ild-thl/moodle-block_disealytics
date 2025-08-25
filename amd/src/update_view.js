@@ -390,19 +390,45 @@ const nodeIsEmpty = (selector) => {
 /**
  * Filters views based on the selected card selection mode.
  *
- * @param {string} mode - Selected card mode: preset, custom or all.
+ * @param {string} mode - Selected card mode: preset or custom.
  * @returns {Array} Filtered view objects.
  */
 async function getViewsForCardselection(mode) {
   const allViews = getViewlist(); // All available views from user preferences.
 
   if (mode === "preset") {
-    const allowed = ["learning-goals", "assignment", "planner", "progress-bar"];
+    const allowed = ["learning-goals", "assignment", "planner"];
     return allViews.filter((v) => allowed.includes(v.viewname));
   }
 
   // Return all views for custom or all modes.
   return allViews;
+}
+
+/**
+ * UI helper: toggle preset/custom visibility instantly.
+ * @param {'preset'|'custom'} mode
+ */
+function togglePresetModeUI(mode) {
+  const root = document.querySelector(".block_disealytics-plugin-container");
+  if (root) {
+    root.classList.toggle("is-preset-mode", mode === "preset");
+  }
+
+  // Add button (shown only when edit mode is active due to .show-when-editing)
+  const addContainer = document.querySelector(
+    ".block_disealytics-edit-container"
+  );
+  if (addContainer) {
+    addContainer.style.display = mode === "preset" ? "none" : "";
+  }
+
+  // Remove/X icons
+  document
+    .querySelectorAll(".block_disealytics-open-delete-modal")
+    .forEach((el) => {
+      el.style.display = mode === "preset" ? "none" : "";
+    });
 }
 
 /**
@@ -477,6 +503,9 @@ function registerCardselectionListener() {
 
       renderEditingMode(viewData.editing);
       renderExpandedView(viewData.expanded_view);
+
+      // 3. Live toggle UI (no reload)
+      togglePresetModeUI(mode);
     } catch (err) {
       console.error("Error updating cardselectionmode via refresh_view:", err);
     }

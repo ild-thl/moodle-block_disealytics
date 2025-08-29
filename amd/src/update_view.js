@@ -43,6 +43,47 @@ import {
 import { initGoalEventListeners } from "./learning_goals_functions";
 
 /**
+ * Get the currently selected card mode from the dropdown.
+ * @returns {"preset"|"custom"}
+ */
+function getCurrentCardMode() {
+  const dropdown = document.querySelector('[data-region="cardselectionmode"]');
+  return dropdown?.value === "preset" ? "preset" : "custom";
+}
+
+/**
+ * Forces the edit UI for X-icons (delete buttons) and the add-card container.
+ *
+ * @param {"1"|"0"} editing  "1" = Edit mode active, "0" = not active
+ * @param {"preset"|"custom"} mode  The current card selection mode
+ */
+
+function enforceEditUI(editing, mode) {
+  // X-/Remove-Icons inside the cards
+  document
+    .querySelectorAll(".block_disealytics-open-delete-modal")
+    .forEach((el) => {
+      if (editing === "1") {
+        el.style.display = mode === "preset" ? "none" : "";
+      } else {
+        el.style.removeProperty("display");
+      }
+    });
+
+  // Plus-/Add container for adding new cards
+  const addContainer = document.querySelector(
+    ".block_disealytics-edit-container"
+  );
+  if (addContainer) {
+    if (editing === "1") {
+      addContainer.style.display = mode === "preset" ? "none" : "";
+    } else {
+      addContainer.style.removeProperty("display");
+    }
+  }
+}
+
+/**
  * Initializes the plugin when it first loads by rendering the main template.
  *
  * @param {Array} views - An array of views to be used by the plugin.
@@ -238,6 +279,11 @@ const renderEditingMode = (isEnabled) => {
       viewContainer.setAttribute("draggable", "true");
       viewContainer.classList.add("draggable");
     });
+
+    // Immediately adjust X/Plus display on entering edit mode
+    enforceEditUI("1", getCurrentCardMode());
+  } else {
+    enforceEditUI("0", getCurrentCardMode());
   }
 };
 
@@ -406,32 +452,6 @@ async function getViewsForCardselection(mode) {
 }
 
 /**
- * UI helper: toggle preset/custom visibility instantly.
- * @param {'preset'|'custom'} mode
- */
-function togglePresetModeUI(mode) {
-  const root = document.querySelector(".block_disealytics-plugin-container");
-  if (root) {
-    root.classList.toggle("is-preset-mode", mode === "preset");
-  }
-
-  // Add button (shown only when edit mode is active due to .show-when-editing)
-  const addContainer = document.querySelector(
-    ".block_disealytics-edit-container"
-  );
-  if (addContainer) {
-    addContainer.style.display = mode === "preset" ? "none" : "";
-  }
-
-  // Remove/X icons
-  document
-    .querySelectorAll(".block_disealytics-open-delete-modal")
-    .forEach((el) => {
-      el.style.display = mode === "preset" ? "none" : "";
-    });
-}
-
-/**
  * Registers change listener for the card selection dropdown.
  */
 function registerCardselectionListener() {
@@ -505,7 +525,7 @@ function registerCardselectionListener() {
       renderExpandedView(viewData.expanded_view);
 
       // 3. Live toggle UI (no reload)
-      togglePresetModeUI(mode);
+      enforceEditUI(viewData.editing, mode);
     } catch (err) {
       console.error("Error updating cardselectionmode via refresh_view:", err);
     }

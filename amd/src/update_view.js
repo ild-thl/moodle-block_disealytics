@@ -51,6 +51,13 @@ function getCurrentCardMode() {
   return dropdown?.value === "preset" ? "preset" : "custom";
 }
 
+function setCardselectionDropdown(mode) {
+  const dd = document.querySelector('[data-region="cardselectionmode"]');
+  if (dd && (mode === "preset" || mode === "custom")) {
+    dd.value = mode;
+  }
+}
+
 /**
  * Forces the edit UI for X-icons (delete buttons) and the add-card container.
  *
@@ -66,7 +73,7 @@ function enforceEditUI(editing, mode) {
       if (editing === "1") {
         el.style.display = mode === "preset" ? "none" : "";
       } else {
-        el.style.removeProperty("display");
+        el.style.display = "none";
       }
     });
 
@@ -78,7 +85,7 @@ function enforceEditUI(editing, mode) {
     if (editing === "1") {
       addContainer.style.display = mode === "preset" ? "none" : "";
     } else {
-      addContainer.style.removeProperty("display");
+      addContainer.style.display = "none";
     }
   }
 }
@@ -183,6 +190,11 @@ export const updateView = async (courseid, views) => {
       const viewData = JSON.parse(response);
       const allViews = getViewlist();
 
+      // Force re-render of all views the server returned (prevents stale frames with empty content)
+      if (viewData && viewData.views) {
+        Object.keys(viewData.views).forEach((vn) => setOld(vn));
+      }
+
       allViews.forEach(({ viewname }) => {
         const viewSelectors = getViewSelectors(viewname);
         const viewDataExists = viewname in viewData.views;
@@ -205,9 +217,18 @@ export const updateView = async (courseid, views) => {
           }
         }
       });
-      // Editing Mode.
+
       renderEditingMode(viewData.editing);
       renderExpandedView(viewData.expanded_view);
+
+      if (viewData.order && viewData.mode) {
+        setCardselectionDropdown(viewData.mode);
+        applyServerOrderAndVisibility(viewData.order, viewData.mode);
+        enforceEditUI(viewData.editing, viewData.mode);
+      } else {
+        enforceEditUI(viewData.editing, viewData.mode || getCurrentCardMode());
+      }
+
       if (getScrollTo()) {
         scrollToTargetAdjusted(getScrollToElement(), getOffsetTopForScroll());
       }
@@ -422,6 +443,40 @@ const renderViewTemplate = (
 };
 
 /**
+ * Apply server-provided order & visibility to the DOM.
+ * @param {string[]} order  Ordered list of viewnames
+ * @param {"preset"|"custom"} mode
+ */
+function applyServerOrderAndVisibility(order, mode) {
+  const container = document.querySelector(
+    ".block_disealytics-all-views-container"
+  );
+  if (!container || !Array.isArray(order)) return;
+
+  // Attach in this order and make visible
+  order.forEach((viewname) => {
+    const el = document.querySelector("#block_disealytics-" + viewname);
+    if (el) {
+      el.setAttribute("data-visible", "true");
+      el.classList.remove("hidden");
+      el.style.removeProperty("display");
+      container.appendChild(el);
+    }
+  });
+
+  container.querySelectorAll(".view-container").forEach((el) => {
+    const name = el.id.replace(/^block_disealytics-/, "");
+    if (!order.includes(name)) {
+      el.setAttribute("data-visible", "false");
+      el.classList.add("hidden");
+      el.style.display = "none";
+    } else {
+      el.style.removeProperty("display");
+    }
+  });
+}
+
+/**
  * Helper-function to check if a node in the dom-tree is truly empty
  * @param {string} selector the node-selector, typically a data-attribute
  * @returns {boolean} whether the node is empty or not
@@ -498,6 +553,10 @@ function registerCardselectionListener() {
       const viewData = JSON.parse(response);
       const allViews = getViewlist();
 
+      if (viewData && viewData.views) {
+        Object.keys(viewData.views).forEach((vn) => setOld(vn));
+      }
+
       allViews.forEach(({ viewname }) => {
         const viewSelectors = getViewSelectors(viewname);
         const viewDataExists = viewname in viewData.views;
@@ -523,6 +582,12 @@ function registerCardselectionListener() {
 
       renderEditingMode(viewData.editing);
       renderExpandedView(viewData.expanded_view);
+
+      if (viewData.order && viewData.mode) {
+        applyServerOrderAndVisibility(viewData.order, viewData.mode);
+        setCardselectionDropdown(viewData.mode);
+        enforceEditUI(viewData.editing, viewData.mode);
+      }
 
       // 3. Live toggle UI (no reload)
       enforceEditUI(viewData.editing, mode);

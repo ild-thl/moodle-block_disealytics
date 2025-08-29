@@ -83,6 +83,10 @@ class write_user_preference extends external_api {
         switch ($info['action']) {
             case "write":
                 switch ($info['name']) {
+                    case 'card_order_custom':
+                    case 'card_order_preset':
+                        set_user_preference('block_disealytics_' . $info["name"], $info["value"]);
+                        break;
                     case 'expanded_view':
                         if ((get_user_preferences('block_disealytics_' . $info["name"])) == $info["value"]) {
                             set_user_preference('block_disealytics_' . $info["name"], 'none');

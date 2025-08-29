@@ -80,21 +80,65 @@ class refresh_view extends external_api {
         if ($isediting || $applyFilterInViewMode) {
             $views = is_array($views) ? $views : [];
 
-            switch ($cardselectionmode) {
-                case 'preset':
-                    $allowedviews = ['learning-goals-view', 'assignment-view', 'planner-view'];
-                    $views = array_values(array_filter($views, function ($v) use ($allowedviews) {
-                        return in_array($v->viewname, $allowedviews, true);
-                    }));
-                    foreach ($views as $v) { $v->enabled = 1; }
-                    break;
+            // read per-mode order prefs
+            $ordercustomraw = get_user_preferences('block_disealytics_card_order_custom', null);
+            $orderpresetraw = get_user_preferences('block_disealytics_card_order_preset', null);
+            $ordercustom = $ordercustomraw ? json_decode($ordercustomraw, true) : null;
+            $orderpreset = $orderpresetraw ? json_decode($orderpresetraw, true) : null;
 
-                case 'custom':
-                    $views = array_values(array_filter($views, function ($v) {
+            switch ($cardselectionmode) {
+                case 'preset': {
+                    // Fixed set of 3 views for preset
+                    $allowedviews = ['learning-goals-view', 'assignment-view', 'planner-view'];
+
+                    $byname = [];
+                    foreach ($views as $v) {
+                        $byname[$v->viewname] = $v;
+                    }
+
+                    $rebuilt = [];
+                    foreach ($allowedviews as $name) {
+                        if (isset($byname[$name])) {
+                            $v = $byname[$name];
+                            $v->enabled = 1;
+                        } else {
+                            $v = (object)['viewname' => $name, 'enabled' => 1];
+                        }
+                        $rebuilt[] = $v;
+                    }
+
+                    // Apply preset order if available
+                    if (is_array($orderpreset) && count($orderpreset) > 0) {
+                        usort($rebuilt, function($a, $b) use ($orderpreset) {
+                            $pa = array_search($a->viewname, $orderpreset, true);
+                            $pb = array_search($b->viewname, $orderpreset, true);
+                            $pa = ($pa === false) ? PHP_INT_MAX : $pa;
+                            $pb = ($pb === false) ? PHP_INT_MAX : $pb;
+                            return $pa <=> $pb;
+                        });
+                    }
+                    $views = array_values($rebuilt);
+                    break;
+                }
+
+                case 'custom': {
+                    $filtered = array_values(array_filter($views, function ($v) {
                         return !empty($v->enabled);
                     }));
-                    break;
 
+                    // Apply custom order if available
+                    if (is_array($ordercustom) && count($ordercustom) > 0) {
+                    usort($filtered, function($a, $b) use ($ordercustom) {
+                            $pa = array_search($a->viewname, $ordercustom, true);
+                            $pb = array_search($b->viewname, $ordercustom, true);
+                            $pa = ($pa === false) ? PHP_INT_MAX : $pa;
+                            $pb = ($pb === false) ? PHP_INT_MAX : $pb;
+                            return $pa <=> $pb;
+                        });
+                    }
+                    $views = $filtered;
+                    break;
+                }
                 default:
                     break;
             }
@@ -105,6 +149,8 @@ class refresh_view extends external_api {
         $response["views"] = [];
         $response["editing"] = $editing;
         $response["expanded_view"] = $expandedview;
+        $response["order"] = array_map(function($v){ return $v->viewname; }, $views);
+        $response["mode"]  = $cardselectionmode;
 
         self::processviews($views, $response["views"]);
 

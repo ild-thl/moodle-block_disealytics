@@ -42,6 +42,17 @@ class block_disealytics extends block_base {
     }
 
     /**
+     * Ensure early page setup before any output starts.
+     */
+    public function specialization(): void {
+        // Add role-based body class: show settings for Manager or Course creator.
+        $context = $this->page->context ?? context_system::instance();
+        if (has_capability('moodle/site:config', $context) || has_capability('moodle/course:create', $context)) {
+            $this->page->add_body_class('disea-cansee-settings');
+        }
+    }
+
+    /**
      * Gets the content of the block.
      * @throws dml_exception|coding_exception
      * @throws moodle_exception

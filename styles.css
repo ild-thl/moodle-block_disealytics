@@ -1258,3 +1258,12 @@
 .block_disealytics .table-of-assignments.hidden {
     display: none;
 }
+
+
+/* Show the cog only for users with the body class (Manager or Course creator). */
+.disea-settings-toggle {
+    display: none;
+}
+.disea-cansee-settings .disea-settings-toggle {
+    display: inline-block;
+}

@@ -70,18 +70,18 @@
             </a></span>{{title}}</h1>
                 <div class="navigation-icons">
                     {{^nodata}}
-                        <a class="block_disealytics_open-progress-bar-modal dashboard-button">
-                            <i class="fa fa-pencil"></i>
+                        <a class="block_disealytics_open-progress-bar-modal dashboard-button disea-settings-toggle">
+                            <i class="fa fa-cog disea-gray"></i>
                         </a>
                     {{/nodata}}
                     {{^isexpanded}}
-                        <a id="block_disealytics_{{viewname}}_info_btn" class="dashboard-button">
-                            <i class="fa fa-question"></i>
+                        <a id="block_disealytics_{{viewname}}_info_btn" class="dashboard-button disea-settings-toggle">
+                            <i class="bi bi-info-circle-fill"></i>
                         </a>
                     {{/isexpanded}}
                     {{#isexpanded}}
-                        <a id="block_disealytics_{{viewname}}_info_btn_expanded" class="dashboard-button">
-                            <i class="fa fa-question"></i>
+                        <a id="block_disealytics_{{viewname}}_info_btn_expanded" class="dashboard-button disea-settings-toggle">
+                            <i class="bi bi-info-circle-fill"></i>
                         </a>
                     {{/isexpanded}}
                 </div>

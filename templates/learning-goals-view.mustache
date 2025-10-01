@@ -66,18 +66,18 @@
                         style="cursor: pointer; text-decoration: none" class="fa fa-arrow-left"></i>
             </a></span>{{title}}</h1>
                 <div class="navigation-icons">
-                    <a id="edit-goals" class="edit-button-{{viewname}}">
-                        <i class="fa fa-pencil editing-off"></i>
+                    <a id="edit-goals" class="edit-button-{{viewname}} disea-settings-toggle">
+                        <i class="fa fa-cog disea-gray"></i>
                         <span class="hidden">{{#str}}goal_editing, block_disealytics{{/str}}</span>
                     </a>
                     {{^isexpanded}}
-                        <a id="block_disealytics_{{viewname}}_info_btn" class="dashboard-button">
-                            <i class="fa fa-question"></i>
+                        <a id="block_disealytics_{{viewname}}_info_btn" class="dashboard-button disea-settings-toggle">
+                            <i class="bi bi-info-circle-fill"></i>
                         </a>
                     {{/isexpanded}}
                     {{#isexpanded}}
-                        <a id="block_disealytics_{{viewname}}_info_btn_expanded" class="dashboard-button">
-                            <i class="fa fa-question"></i>
+                        <a id="block_disealytics_{{viewname}}_info_btn_expanded" class="dashboard-button disea-settings-toggle">
+                            <i class="bi bi-info-circle-fill"></i>
                         </a>
                     {{/isexpanded}}
                 </div>

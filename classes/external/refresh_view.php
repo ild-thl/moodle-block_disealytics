@@ -101,8 +101,7 @@ class refresh_view extends external_api {
                         if (isset($byname[$name])) {
                             $v = $byname[$name];
                             $v->enabled = 1;
-                        }
-                        else {
+                        } else {
                             $v = (object)['viewname' => $name, 'enabled' => 1];
                         }
                         $rebuilt[] = $v;
@@ -150,7 +149,9 @@ class refresh_view extends external_api {
         $response["views"] = [];
         $response["editing"] = $editing;
         $response["expanded_view"] = $expandedview;
-        $response["order"] = array_map(function ($v) { return $v->viewname; }, $views);
+        $response["order"] = array_map(function ($v) {
+            return $v->viewname;
+        }, $views);
         $response["mode"]  = $cardselectionmode;
 
         self::processviews($views, $response["views"]);

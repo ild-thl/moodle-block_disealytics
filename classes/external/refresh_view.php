@@ -74,13 +74,13 @@ class refresh_view extends external_api {
         $cardselectionmode = get_user_preferences('block_disealytics_cardselectionmode', 'preset');
 
         // Filter views based on cardselectionmode if editing.
-        $applyFilterInViewMode = true;
+        $apply_filter_in_view_mode = true;
         $isediting = ($editing === '1');
 
-        if ($isediting || $applyFilterInViewMode) {
+        if ($isediting || $apply_filter_in_view_mode) {
             $views = is_array($views) ? $views : [];
 
-            // read per-mode order prefs
+            // read per-mode order prefs.
             $ordercustomraw = get_user_preferences('block_disealytics_card_order_custom', null);
             $orderpresetraw = get_user_preferences('block_disealytics_card_order_preset', null);
             $ordercustom = $ordercustomraw ? json_decode($ordercustomraw, true) : null;
@@ -88,7 +88,7 @@ class refresh_view extends external_api {
 
             switch ($cardselectionmode) {
                 case 'preset': {
-                    // Fixed set of 3 views for preset
+                    // Fixed set of 3 views for preset.
                     $allowedviews = ['learning-goals-view', 'assignment-view', 'planner-view'];
 
                     $byname = [];
@@ -107,7 +107,7 @@ class refresh_view extends external_api {
                         $rebuilt[] = $v;
                     }
 
-                    // Apply preset order if available
+                    // Apply preset order if available.
                     if (is_array($orderpreset) && count($orderpreset) > 0) {
                         usort($rebuilt, function($a, $b) use ($orderpreset) {
                             $pa = array_search($a->viewname, $orderpreset, true);
@@ -126,7 +126,7 @@ class refresh_view extends external_api {
                         return !empty($v->enabled);
                     }));
 
-                    // Apply custom order if available
+                    // Apply custom order if available.
                     if (is_array($ordercustom) && count($ordercustom) > 0) {
                     usort($filtered, function($a, $b) use ($ordercustom) {
                             $pa = array_search($a->viewname, $ordercustom, true);

@@ -151,7 +151,6 @@ class block_disealytics extends block_base {
             }
             $versioninfo = 'DiSEA Learner Dashboard ' . substr($plugin->version, 0, 4) . ' - Version ' . $plugin->release . ' ' .
                     $plugin->version;
-            
             $templatecontext = (object) [
                 'courseid' => $COURSE->id,
                 'sesskey' => sesskey(),
@@ -159,7 +158,7 @@ class block_disealytics extends block_base {
                 'preset' => $cardselectionmode === 'preset',
                 'custom' => $cardselectionmode === 'custom',
             ];
-            // Render HTML
+            // Render HTML.
             $content = $OUTPUT->render_from_template('block_disealytics/main', $templatecontext);
             $this->content->text = $content;
 

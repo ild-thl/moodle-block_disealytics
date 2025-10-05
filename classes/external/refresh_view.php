@@ -74,13 +74,13 @@ class refresh_view extends external_api {
         $cardselectionmode = get_user_preferences('block_disealytics_cardselectionmode', 'preset');
 
         // Filter views based on cardselectionmode if editing.
-        $apply_filter_in_view_mode = true;
+        $applyfilterinviewmode = true;
         $isediting = ($editing === '1');
 
-        if ($isediting || $apply_filter_in_view_mode) {
+        if ($isediting || $applyfilterinviewmode) {
             $views = is_array($views) ? $views : [];
 
-            // read per-mode order prefs.
+            // Read per-mode order prefs.
             $ordercustomraw = get_user_preferences('block_disealytics_card_order_custom', null);
             $orderpresetraw = get_user_preferences('block_disealytics_card_order_preset', null);
             $ordercustom = $ordercustomraw ? json_decode($ordercustomraw, true) : null;
@@ -109,7 +109,7 @@ class refresh_view extends external_api {
 
                     // Apply preset order if available.
                     if (is_array($orderpreset) && count($orderpreset) > 0) {
-                        usort($rebuilt, function($a, $b) use ($orderpreset) {
+                        usort($rebuilt, function ($a, $b) use ($orderpreset) {
                             $pa = array_search($a->viewname, $orderpreset, true);
                             $pb = array_search($b->viewname, $orderpreset, true);
                             $pa = ($pa === false) ? PHP_INT_MAX : $pa;
@@ -128,7 +128,7 @@ class refresh_view extends external_api {
 
                     // Apply custom order if available.
                     if (is_array($ordercustom) && count($ordercustom) > 0) {
-                    usort($filtered, function($a, $b) use ($ordercustom) {
+                        usort($filtered, function($a, $b) use ($ordercustom) {
                             $pa = array_search($a->viewname, $ordercustom, true);
                             $pb = array_search($b->viewname, $ordercustom, true);
                             $pa = ($pa === false) ? PHP_INT_MAX : $pa;
@@ -149,7 +149,7 @@ class refresh_view extends external_api {
         $response["views"] = [];
         $response["editing"] = $editing;
         $response["expanded_view"] = $expandedview;
-        $response["order"] = array_map(function($v){ return $v->viewname; }, $views);
+        $response["order"] = array_map(function($v) { return $v->viewname; }, $views);
         $response["mode"]  = $cardselectionmode;
 
         self::processviews($views, $response["views"]);

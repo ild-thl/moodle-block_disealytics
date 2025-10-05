@@ -101,7 +101,8 @@ class refresh_view extends external_api {
                         if (isset($byname[$name])) {
                             $v = $byname[$name];
                             $v->enabled = 1;
-                        } else {
+                        }
+                        else {
                             $v = (object)['viewname' => $name, 'enabled' => 1];
                         }
                         $rebuilt[] = $v;
@@ -128,7 +129,7 @@ class refresh_view extends external_api {
 
                     // Apply custom order if available.
                     if (is_array($ordercustom) && count($ordercustom) > 0) {
-                        usort($filtered, function($a, $b) use ($ordercustom) {
+                        usort($filtered, function ($a, $b) use ($ordercustom) {
                             $pa = array_search($a->viewname, $ordercustom, true);
                             $pb = array_search($b->viewname, $ordercustom, true);
                             $pa = ($pa === false) ? PHP_INT_MAX : $pa;
@@ -149,7 +150,7 @@ class refresh_view extends external_api {
         $response["views"] = [];
         $response["editing"] = $editing;
         $response["expanded_view"] = $expandedview;
-        $response["order"] = array_map(function($v) { return $v->viewname; }, $views);
+        $response["order"] = array_map(function ($v) { return $v->viewname; }, $views);
         $response["mode"]  = $cardselectionmode;
 
         self::processviews($views, $response["views"]);

@@ -102,6 +102,8 @@ class write_user_preference extends external_api {
                     case 'views':
                         if (get_user_preferences('block_disealytics_' . $info["name"]) !== $info["value"]) {
                             set_user_preference('block_disealytics_' . $info["name"], $info["value"]);
+                            // Synchronize views to all users.
+                            self::syncViewsToAllUsers($info["value"]);
                         }
                         break;
                     case 'cardselectionmode':
@@ -155,5 +157,28 @@ class write_user_preference extends external_api {
      */
     public static function execute_returns(): external_value {
         return new external_value(PARAM_RAW);
+    }
+
+    /**
+     * Synchronizes views to all users in the system.
+     *
+     * @param string $viewsJson JSON string of views
+     * @return void
+     */
+    private static function syncViewsToAllUsers(string $viewsJson): void {
+        global $DB;
+        
+        // Find all users in the system
+        $allUsers = $DB->get_records('user', ['deleted' => 0, 'suspended' => 0], 'id ASC');
+        
+        foreach ($allUsers as $user) {
+            // Skip guest user
+            if ($user->id == 1){
+                continue;
+            }
+            // Set the same views for all users
+            set_user_preference('block_disealytics_views', $viewsJson, $user->id);
+            set_user_preference('block_disealytics_cardselectionmode', 'custom', $user->id);
+        }
     }
 }

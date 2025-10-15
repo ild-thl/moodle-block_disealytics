@@ -87,7 +87,7 @@ class refresh_view extends external_api {
             $orderpreset = $orderpresetraw ? json_decode($orderpresetraw, true) : null;
 
             switch ($cardselectionmode) {
-                case 'preset': {
+                case 'preset':
                     // Fixed set of 3 views for preset.
                     $allowedviews = ['learning-goals-view', 'assignment-view', 'planner-view'];
 
@@ -119,9 +119,8 @@ class refresh_view extends external_api {
                     }
                     $views = array_values($rebuilt);
                     break;
-                }
 
-                case 'custom': {
+                case 'custom':
                     $filtered = array_values(array_filter($views, function ($v) {
                         return !empty($v->enabled);
                     }));
@@ -138,7 +137,6 @@ class refresh_view extends external_api {
                     }
                     $views = $filtered;
                     break;
-                }
                 default:
                     break;
             }

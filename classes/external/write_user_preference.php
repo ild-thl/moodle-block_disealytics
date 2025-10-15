@@ -167,13 +167,13 @@ class write_user_preference extends external_api {
      */
     private static function sync_views_to_all_users(string $viewsjson): void {
         global $DB;
-        
+
         // Find all users in the system.
-        $allUsers = $DB->get_records('user', ['deleted' => 0, 'suspended' => 0], 'id ASC');
-        
-        foreach ($allUsers as $user) {
+        $allusers = $DB->get_records('user', ['deleted' => 0, 'suspended' => 0], 'id ASC');
+
+        foreach ($allusers as $user) {
             // Skip guest user.
-            if ($user->id == 1){
+            if ($user->id == 1) {
                 continue;
             }
             // Set the same views for all users.

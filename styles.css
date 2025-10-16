@@ -1261,9 +1261,9 @@
 
 
 /* Show the cog only for users with the body class (Manager or Course creator). */
-.disea-settings-toggle {
-    display: none;
+.block_disealytics .disea-settings-toggle {
+    display: none !important;
 }
-.disea-cansee-settings .disea-settings-toggle {
-    display: inline-block;
+.disea-cansee-settings .block_disealytics .disea-settings-toggle {
+    display: inline-block !important;
 }

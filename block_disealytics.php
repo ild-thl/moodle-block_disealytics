@@ -151,12 +151,21 @@ class block_disealytics extends block_base {
             }
             $versioninfo = 'DiSEA Learner Dashboard ' . substr($plugin->version, 0, 4) . ' - Version ' . $plugin->release . ' ' .
                     $plugin->version;
+            
+            // Check if user has permission to see settings (Manager or Course creator).
+            $context = context_course::instance($COURSE->id);
+            $canseeSettings = has_capability('moodle/site:config', $context) || 
+                              has_capability('moodle/course:create', $context) ||
+                              has_capability('moodle/course:update', $context) ||
+                              has_capability('moodle/role:assign', $context);
+            
             $templatecontext = (object) [
                 'courseid' => $COURSE->id,
                 'sesskey' => sesskey(),
                 'cardselectionmode' => $cardselectionmode,
                 'preset' => $cardselectionmode === 'preset',
                 'custom' => $cardselectionmode === 'custom',
+                'canseeSettings' => $canseeSettings,
             ];
             // Render HTML.
             $content = $OUTPUT->render_from_template('block_disealytics/main', $templatecontext);
@@ -166,7 +175,7 @@ class block_disealytics extends block_base {
             $this->page->requires->js_call_amd(
                 'block_disealytics/update_view',
                 'init',
-                [$viewsinpref, $viewmode, $COURSE->id, $url->out(), $versioninfo]
+                [$viewsinpref, $viewmode, $COURSE->id, $url->out(), $versioninfo, $canseeSettings]
             );
         }
         $footertext = get_string('testfooter', 'block_disealytics');

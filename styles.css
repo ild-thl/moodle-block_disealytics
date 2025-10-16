@@ -1260,10 +1260,12 @@
 }
 
 
-/* Show the cog only for users with the body class (Manager or Course creator). */
-.block_disealytics .disea-settings-toggle {
-    display: none !important;
+/* Hide settings toggle for all users by default. */
+.disea-settings-toggle {
+    display: none;
 }
-.disea-cansee-settings .block_disealytics .disea-settings-toggle {
-    display: inline-block !important;
+
+/* Show settings toggle only for Manager or Course creator with body class. */
+body.disea-cansee-settings .disea-settings-toggle {
+    display: inline-block;
 }

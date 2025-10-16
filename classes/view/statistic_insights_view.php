@@ -192,9 +192,12 @@ class statistic_insights_view extends base_view {
 
         // Check if predictions for the course are available.
         if (!$this->any_course_predictions($course)) {
-            $predictionoutput['nodata'] = ['no_prediction_in_course' => get_string(
-                    'statistic-insights-view_course_prediction_not_initialized', 'block_disealytics'
-            )];
+            $predictionoutput['nodata'] = [
+                'no_prediction_in_course' => get_string(
+                    'statistic-insights-view_course_prediction_not_initialized',
+                    'block_disealytics'
+                ),
+            ];
             return $predictionoutput;
         }
 
@@ -217,8 +220,10 @@ class statistic_insights_view extends base_view {
         $modindicators = [];
 
         foreach ($calculations as $calculation) {
-            if ($calculation->value === null ||
-                    !$calculation->indicator->should_be_displayed($calculation->value, $calculation->subtype)) {
+            if (
+                $calculation->value === null ||
+                !$calculation->indicator->should_be_displayed($calculation->value, $calculation->subtype)
+            ) {
                 continue;
             }
 
@@ -240,8 +245,10 @@ class statistic_insights_view extends base_view {
             // Handle general indicators first.
             if ($indicatortype === 'indicator:activitiesdue') {
                 $entry['activitiesdue']['class'] = $calculation->value == 1 ? 'activitiesdue' : 'noactivitiesdue';
-                $indicatorvalue = get_string(self::TITLE . ($calculation->value == 1 ? '_activitiesdue' : '_noactivitiesdue'),
-                        'block_disealytics');
+                $indicatorvalue = get_string(
+                    self::TITLE . ($calculation->value == 1 ? '_activitiesdue' : '_noactivitiesdue'),
+                    'block_disealytics'
+                );
                 $entry['activitiesdue']['name'] = $indicatorname;
                 $entry['activitiesdue']['value'] = $indicatorvalue;
                 $generalindicators[] = $entry;
@@ -251,8 +258,10 @@ class statistic_insights_view extends base_view {
                 $entry['readactions']['value'] = $indicatorvalue;
                 $generalindicators[] = $entry;
             } else if ($indicatortype === 'indicator:anywriteincourse') {
-                $indicatorvalue = get_string(self::TITLE . ($calculation->value == 0 ? '_anywriteincourse' : '_nowriteincourse'),
-                        'block_disealytics');
+                $indicatorvalue = get_string(
+                    self::TITLE . ($calculation->value == 0 ? '_anywriteincourse' : '_nowriteincourse'),
+                    'block_disealytics'
+                );
                 $entry['anywriteincourse']['name'] = $indicatorname;
                 $entry['anywriteincourse']['value'] = $indicatorvalue;
                 $generalindicators[] = $entry;
@@ -322,21 +331,20 @@ class statistic_insights_view extends base_view {
             }
 
             // Store structured data.
-            $scructuredmodindicators[] = [
+                $scructuredmodindicators[] = [
                     'module_name' => $friendlyname,
                     'cognitive' => [
-                            'value' => $cognitivevalue,
-                            'name' => get_string('cognitive_indicators', 'block_disealytics'),
-                            'outcomehelp' => $cognitivehelp, // Assign cognitive outcome help.
+                        'value' => $cognitivevalue,
+                        'name' => get_string('cognitive_indicators', 'block_disealytics'),
+                        'outcomehelp' => $cognitivehelp, // Assign cognitive outcome help.
                     ],
                     'social' => [
-                            'value' => $socialvalue,
-                            'name' => get_string('social_indicators', 'block_disealytics'),
-                            'outcomehelp' => $socialhelp, // Assign social outcome help.
+                        'value' => $socialvalue,
+                        'name' => get_string('social_indicators', 'block_disealytics'),
+                        'outcomehelp' => $socialhelp, // Assign social outcome help.
                     ],
-            ];
-
-        }
+                ];
+            }
 
         $predictionoutput['insights'] = [
                 'general' => $generalindicators,
@@ -414,7 +422,6 @@ class statistic_insights_view extends base_view {
             $i++;
         }
         $this->output["courseoutputs"] = $outputs;
-
     }
 
     /**
@@ -459,3 +466,4 @@ class statistic_insights_view extends base_view {
         $this->output["courseoutputs"] = $outputs;
     }
 }
+

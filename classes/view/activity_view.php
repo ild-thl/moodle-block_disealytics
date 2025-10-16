@@ -117,16 +117,19 @@ class activity_view extends base_view {
             // Get Time of last run of Log Task.
             $transformtime = 0;
             $transformtimes = array_column(
-                    $DB->get_records('task_log', ["classname" => "block_disealytics\\task\\tasktransform"]),
-                    'timestart'
+                $DB->get_records('task_log', ["classname" => "block_disealytics\\task\\tasktransform"]),
+                'timestart'
             );
             if (count($transformtimes) > 0) {
                 $transformtime = max($transformtimes);
             }
 
             if ($transformtime) {
-                $output['datadate'] = get_string('last_refresh', 'block_disealytics',
-                        userdate($transformtime, get_string('strftimedatefullshort', 'langconfig'), 99, false));
+                $output['datadate'] = get_string(
+                    'last_refresh',
+                    'block_disealytics',
+                    userdate($transformtime, get_string('strftimedatefullshort', 'langconfig'), 99, false)
+                );
             }
             $groupedtasks = task::block_disealytics_group_and_reduce($tasks);
             // Reverse it for easy popping.
@@ -148,9 +151,11 @@ class activity_view extends base_view {
                 $chart1->add_series($series);
             }
             $colors->rewind();
-            $chart1->set_labels(array_map(function($day) {
-                return substr(get_string($day, 'block_disealytics'), 0, 2);
-            }, [
+            $chart1->set_labels(array_map(
+                function ($day) {
+                    return substr(get_string($day, 'block_disealytics'), 0, 2);
+                },
+                [
                     'Monday',
                     'Tuesday',
                     'Wednesday',
@@ -158,9 +163,13 @@ class activity_view extends base_view {
                     'Friday',
                     'Saturday',
                     'Sunday',
-            ]));
-            $output['maincharts'][] = ['chartdata' => json_encode($chart1), 'withtable' => true,
-                    'uniqid' => uniqid('block_disealytics_')];
+                ]
+            ));
+            $output['maincharts'][] = [
+                'chartdata' => json_encode($chart1),
+                'withtable' => true,
+                'uniqid' => uniqid('block_disealytics_'),
+            ];
             $dates = learningdata::get_current_halfyear_dates();
             $start = $dates["start"];
             $end = $dates["end"];
@@ -169,9 +178,9 @@ class activity_view extends base_view {
             $halfyeartasks = array_reverse($halfyeartasks, true);
 
             $halfyeartasks = task::block_disealytics_make_task_buckets(
-                    $halfyeartasks,
-                    "weeks",
-                    base_view::get_weeknrs($start, $end)
+                $halfyeartasks,
+                "weeks",
+                base_view::get_weeknrs($start, $end)
             );
             $chart2 = new chart_bar();
             $chart2->set_stacked(true);

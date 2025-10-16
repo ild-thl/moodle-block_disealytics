@@ -76,7 +76,7 @@ class tasktransform extends scheduled_task {
         $data = array_values($DB->get_records_sql($query1));
 
         $uidswconsent = array_column($DB->get_records('block_disealytics_consent', ['choice' => 1], '', 'id, userid'), 'userid');
-        $data = array_filter($data, function ($v) use ($uidswconsent) {
+        $data = array_filter($data, function($v) use ($uidswconsent) {
             return $v->courseid != -1 && (in_array($v->userid, $uidswconsent) || in_array($v->relateduserid, $uidswconsent));
         });
 
@@ -180,7 +180,7 @@ class tasktransform extends scheduled_task {
             return $data;
         }
         mtrace("Filtering data!");
-        return array_filter($data, function ($logrow) use ($filecontent) {
+        return array_filter($data, function($logrow) use ($filecontent) {
             foreach ($filecontent as $fileline) {
                 if (self::findrowmatch($logrow, $fileline)) {
                     return false;
@@ -264,7 +264,7 @@ class tasktransform extends scheduled_task {
             $databyuserid[$log->userid][] = $log;
         }
         foreach ($databyuserid as $bucket) {
-            $bucket = usort($bucket, function($a, $b) {
+            $bucket = usort($bucket, function ($a, $b) {
                 return $a->timecreated <=> $b->timecreated;
             });
         }
@@ -286,8 +286,11 @@ class tasktransform extends scheduled_task {
                     if (
                         self::findrowmatch(
                             $logrow,
-                            ['component' => $compreplacement['component'], 'target' => $compreplacement['target'],
-                            'action' => $compreplacement['action']]
+                            [
+                                'component' => $compreplacement['component'],
+                                'target' => $compreplacement['target'],
+                                'action' => $compreplacement['action'],
+                            ]
                         )
                     ) {
                         // Set durations!

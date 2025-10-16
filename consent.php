@@ -40,7 +40,7 @@ $courseid = optional_param('id', null, PARAM_INT);
 $consentdata = $DB->get_record('block_disealytics_consent', ['userid' => $USER->id]);
 
 // Create redirecting url.
-$url = $CFG->wwwroot.'/blocks/disealytics/consent.php?id=' . $courseid;
+$url = $CFG->wwwroot . '/blocks/disealytics/consent.php?id=' . $courseid;
 $courseurl = $CFG->wwwroot . '/course/view.php?id=' . $courseid;
 
 $counter = get_config("block_disealytics", "counter") ?: 1;

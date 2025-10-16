@@ -344,11 +344,11 @@ class statistic_insights_view extends base_view {
                         'outcomehelp' => $socialhelp, // Assign social outcome help.
                     ],
                 ];
-            }
+        }
 
         $predictionoutput['insights'] = [
-                'general' => $generalindicators,
-                'mod' => $scructuredmodindicators,
+            'general' => $generalindicators,
+            'mod' => $scructuredmodindicators,
         ];
 
         return $predictionoutput;
@@ -466,4 +466,3 @@ class statistic_insights_view extends base_view {
         $this->output["courseoutputs"] = $outputs;
     }
 }
-

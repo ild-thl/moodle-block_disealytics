@@ -119,4 +119,3 @@ function xmldb_block_disealytics_upgrade(int $oldversion): bool {
 
     return true;
 }
-

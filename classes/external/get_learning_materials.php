@@ -189,4 +189,3 @@ class get_learning_materials extends external_api {
         ]);
     }
 }
-

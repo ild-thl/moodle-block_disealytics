@@ -559,6 +559,20 @@ export const enableViewmodeDropdown = () => {
 };
 
 /**
+ * Adds an EventListener to the cardselection dropdown.
+ *
+ * @returns {void}
+ */
+export const enableCardselectionDropdown = () => {
+    const cardselectionDropdown = document.querySelector('[data-region="cardselectionmode"]');
+    if (cardselectionDropdown) {
+        cardselectionDropdown.addEventListener("change", function() {
+            updateSetting("write", 'cardselectionmode', cardselectionDropdown.value);
+        });
+    }
+};
+
+/**
  * Adds an EventListener to the consent buttons.
  *
  * @param {object} modal - The modal to enable the buttons for.

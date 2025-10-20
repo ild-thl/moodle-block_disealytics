@@ -109,6 +109,8 @@ class write_user_preference extends external_api {
                     case 'cardselectionmode':
                         if (get_user_preferences('block_disealytics_' . $info["name"], 'preset') !== $info["value"]) {
                             set_user_preference('block_disealytics_' . $info["name"], $info["value"]);
+                            // Propagate admin-selected mode to all users.
+                            self::sync_cardselectionmode_to_all_users($info["value"]);
                         }
                         break;
                 }
@@ -178,7 +180,27 @@ class write_user_preference extends external_api {
             }
             // Set the same views for all users.
             set_user_preference('block_disealytics_views', $viewsjson, $user->id);
-            set_user_preference('block_disealytics_cardselectionmode', 'custom', $user->id);
+        }
+    }
+
+    /**
+     * Synchronizes the card selection mode to all users in the system.
+     *
+     * @param string $mode Either 'preset' or 'custom'
+     * @return void
+     */
+    private static function sync_cardselectionmode_to_all_users(string $mode): void {
+        global $DB;
+
+        // Find all users in the system.
+        $allusers = $DB->get_records('user', ['deleted' => 0, 'suspended' => 0], 'id ASC');
+
+        foreach ($allusers as $user) {
+            // Skip guest user.
+            if ($user->id == 1) {
+                continue;
+            }
+            set_user_preference('block_disealytics_cardselectionmode', $mode, $user->id);
         }
     }
 }

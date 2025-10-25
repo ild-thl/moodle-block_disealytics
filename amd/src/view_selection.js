@@ -24,6 +24,7 @@
 let viewlist = [];
 let courseid = null;
 let versioninfo = null;
+let cardselectionmode = 'preset';
 
 /**
  * Set the viewtypes array based on the provided views. Sets them to 1 as in visible/enabled like so:
@@ -42,6 +43,14 @@ export const setViewlist = (views) => {
  */
 export const setVersionInfo = (version) => {
     versioninfo = version;
+};
+
+/**
+ * Set the card selection mode.
+ * @param {String} mode - The card selection mode ('preset' or 'custom')
+ */
+export const setCardSelectionMode = (mode) => {
+    cardselectionmode = mode;
 };
 
 /**
@@ -67,7 +76,19 @@ export const getViewlist = () => {
  * @returns {true | false} True if all views are enabled, false if not.
  */
 export const allViewsEnabled = () => {
-    return getViewlist().every(({enabled}) => enabled !== 0);
+    const viewlist = getViewlist();
+    if (!viewlist) return false;
+    
+    if (cardselectionmode === 'preset') {
+        // In preset mode, only check the 3 preset views
+        const presetViews = ['learning-goals-view', 'assignment-view', 'planner-view'];
+        return presetViews.every(presetView => 
+            viewlist.some(view => view.viewname === presetView && view.enabled === 1)
+        );
+    } else {
+        // In custom mode, check all available views
+        return viewlist.every(({enabled}) => enabled !== 0);
+    }
 };
 
 /**

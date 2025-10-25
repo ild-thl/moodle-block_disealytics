@@ -1258,14 +1258,3 @@
 .block_disealytics .table-of-assignments.hidden {
     display: none;
 }
-
-
-/* Hide settings toggle for all users by default. */
-.disea-settings-toggle {
-    display: none;
-}
-
-/* Show settings toggle only for Manager or Course creator with body class. */
-body.disea-cansee-settings .disea-settings-toggle {
-    display: inline-block;
-}

@@ -175,7 +175,7 @@ class block_disealytics extends block_base {
             $this->page->requires->js_call_amd(
                 'block_disealytics/update_view',
                 'init',
-                [$viewsinpref, $viewmode, $COURSE->id, $url->out(), $versioninfo, $canseesettings]
+                [$viewsinpref, $viewmode, $COURSE->id, $url->out(), $versioninfo, $canseesettings, $cardselectionmode]
             );
         }
         $footertext = get_string('testfooter', 'block_disealytics');

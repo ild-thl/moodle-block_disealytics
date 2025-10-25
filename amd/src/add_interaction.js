@@ -35,7 +35,8 @@ import {
     setScrollTo,
     setScrollToElement,
     setViewlist,
-    updateViewlist
+    updateViewlist,
+    setCardSelectionMode
 } from 'block_disealytics/view_selection';
 import {updateView} from 'block_disealytics/update_view';
 
@@ -567,6 +568,7 @@ export const enableCardselectionDropdown = () => {
     const cardselectionDropdown = document.querySelector('[data-region="cardselectionmode"]');
     if (cardselectionDropdown) {
         cardselectionDropdown.addEventListener("change", function() {
+            setCardSelectionMode(cardselectionDropdown.value);
             updateSetting("write", 'cardselectionmode', cardselectionDropdown.value);
         });
     }

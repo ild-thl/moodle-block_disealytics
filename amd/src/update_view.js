@@ -70,7 +70,7 @@ export const init = async(views, viewmode, courseid, agreementurl, versioninfo, 
 
 
         // Render the main template with the available views and view mode.
-        renderMainTemplate(getViewlist(), viewmode, agreementurl, canseesettings, cardselectionmode); 
+        renderMainTemplate(getViewlist(), viewmode, agreementurl, canseesettings, cardselectionmode);
 
         // Update the view (optional parameters are undefined in this context).
         await updateView(getCourseId(), undefined);
@@ -114,11 +114,11 @@ const renderMainTemplate = (views, viewmode, agreementurl, canseesettings, cards
     maintemplatedata[viewmode] = true;
     maintemplatedata.agreementurl = agreementurl;
     maintemplatedata.canseesettings = canseesettings;
-    
+
     // Add the cardselectionmode to the main template data.
     maintemplatedata.preset = cardselectionmode === 'preset';
     maintemplatedata.custom = cardselectionmode === 'custom';
-    
+
     Template.renderForPromise("block_disealytics/main", maintemplatedata)
         .then(({html, js}) => {
             Template.replaceNodeContents('.block_disealytics .content', html, js);

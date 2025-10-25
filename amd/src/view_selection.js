@@ -77,12 +77,14 @@ export const getViewlist = () => {
  */
 export const allViewsEnabled = () => {
     const viewlist = getViewlist();
-    if (!viewlist) return false;
-    
+    if (!viewlist) {
+        return false;
+    }
+
     if (cardselectionmode === 'preset') {
         // In preset mode, only check the 3 preset views
         const presetViews = ['learning-goals-view', 'assignment-view', 'planner-view'];
-        return presetViews.every(presetView => 
+        return presetViews.every(presetView =>
             viewlist.some(view => view.viewname === presetView && view.enabled === 1)
         );
     } else {

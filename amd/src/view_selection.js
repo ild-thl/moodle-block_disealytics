@@ -103,6 +103,27 @@ export const anyViewsEnabled = () => {
 
 
 /**
+ * Find the correct insert position for a priority view.
+ * @param {Array} views - The current views array
+ * @param {Array} priorityViews - Array of priority view names
+ * @returns {number} - The index where the view should be inserted
+ */
+const findPriorityInsertIndex = (views, priorityViews) => {
+    // Find the first non-priority enabled view
+    let insertIndex = views.findIndex((view) =>
+        view.enabled === 1 && !priorityViews.includes(view.viewname)
+    );
+
+    // If no non-priority view found, find the first disabled view
+    if (insertIndex === -1) {
+        insertIndex = views.findIndex((view) => view.enabled === 0);
+    }
+
+    // If still not found, insert at the end
+    return insertIndex === -1 ? views.length : insertIndex;
+};
+
+/**
  * Update the view order and which views are visible in the DOM by modifying the viewtypes array.
  *
  * @param {string} modifiedView - The view to be modified.
@@ -121,19 +142,7 @@ export const updateViewlist = (modifiedView, write) => {
             const priorityViews = ['learning-goals-view', 'assignment-view', 'planner-view'];
 
             if (priorityViews.includes(modifiedView)) {
-                // Find the first non-priority enabled view
-                let insertIndex = updatedViews.findIndex((view) =>
-                    view.enabled === 1 && !priorityViews.includes(view.viewname)
-                );
-
-                // If no non-priority view found, insert at the end of enabled views
-                if (insertIndex === -1) {
-                    insertIndex = updatedViews.findIndex((view) => view.enabled === 0);
-                    if (insertIndex === -1) {
-                        insertIndex = updatedViews.length;
-                    }
-                }
-
+                const insertIndex = findPriorityInsertIndex(updatedViews, priorityViews);
                 updatedViews.splice(insertIndex, 0, newView);
             } else {
                 // Regular views are added at the end

@@ -116,7 +116,29 @@ export const updateViewlist = (modifiedView, write) => {
         updatedViews.splice(index, 1);
         if (write === 'add') {
             const newView = {viewname: modifiedView, enabled: 1};
-            updatedViews.push(newView);
+
+            // Define priority views that should be placed at the beginning
+            const priorityViews = ['learning-goals-view', 'assignment-view', 'planner-view'];
+
+            if (priorityViews.includes(modifiedView)) {
+                // Find the first non-priority enabled view
+                let insertIndex = updatedViews.findIndex((view) =>
+                    view.enabled === 1 && !priorityViews.includes(view.viewname)
+                );
+
+                // If no non-priority view found, insert at the end of enabled views
+                if (insertIndex === -1) {
+                    insertIndex = updatedViews.findIndex((view) => view.enabled === 0);
+                    if (insertIndex === -1) {
+                        insertIndex = updatedViews.length;
+                    }
+                }
+
+                updatedViews.splice(insertIndex, 0, newView);
+            } else {
+                // Regular views are added at the end
+                updatedViews.push(newView);
+            }
         }
         if (write === 'delete') {
             const newView = {viewname: modifiedView, enabled: 0};

@@ -264,7 +264,7 @@ class tasktransform extends scheduled_task {
             $databyuserid[$log->userid][] = $log;
         }
         foreach ($databyuserid as $bucket) {
-            $bucket = usort($bucket, function($a, $b) {
+            $bucket = usort($bucket, function ($a, $b) {
                 return $a->timecreated <=> $b->timecreated;
             });
         }
@@ -286,8 +286,11 @@ class tasktransform extends scheduled_task {
                     if (
                         self::findrowmatch(
                             $logrow,
-                            ['component' => $compreplacement['component'], 'target' => $compreplacement['target'],
-                            'action' => $compreplacement['action']]
+                            [
+                                'component' => $compreplacement['component'],
+                                'target' => $compreplacement['target'],
+                                'action' => $compreplacement['action'],
+                            ]
                         )
                     ) {
                         // Set durations!

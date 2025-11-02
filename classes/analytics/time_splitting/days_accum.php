@@ -24,7 +24,6 @@ namespace block_disealytics\analytics\time_splitting;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class days_accum extends \core_analytics\local\time_splitting\accumulative_parts {
-
     /**
      *  The number of parts to split the analysable duration in. Divides the analysable timeframe into days.
      *

@@ -42,6 +42,17 @@ class block_disealytics extends block_base {
     }
 
     /**
+     * Ensure early page setup before any output starts.
+     */
+    public function specialization(): void {
+        // Add role-based body class: show settings for Manager or Course creator.
+        $context = $this->page->context ?? context_system::instance();
+        if (has_capability('moodle/site:config', $context) || has_capability('moodle/course:create', $context)) {
+            $this->page->add_body_class('disea-cansee-settings');
+        }
+    }
+
+    /**
      * Gets the content of the block.
      * @throws dml_exception|coding_exception
      * @throws moodle_exception
@@ -52,6 +63,7 @@ class block_disealytics extends block_base {
             return $this->content;
         }
         global $CFG, $COURSE, $OUTPUT, $USER;
+
         $this->content = new stdClass();
         $this->content->text = "";
 
@@ -89,6 +101,9 @@ class block_disealytics extends block_base {
 
             // Set viewmode.
             $viewmode = get_user_preferences('block_disealytics_viewmode', 'viewmode_module');
+
+            // Set cardselectionmode.
+            $cardselectionmode = get_user_preferences('block_disealytics_cardselectionmode', 'preset');
 
             // Set up views from files.
             $views = [];
@@ -137,11 +152,30 @@ class block_disealytics extends block_base {
             $versioninfo = 'DiSEA Learner Dashboard ' . substr($plugin->version, 0, 4) . ' - Version ' . $plugin->release . ' ' .
                     $plugin->version;
 
+            // Check if user has permission to see settings (Manager or Course creator).
+            $context = context_course::instance($COURSE->id);
+            $canseesettings = has_capability('moodle/site:config', $context) ||
+                              has_capability('moodle/course:create', $context) ||
+                              has_capability('moodle/course:update', $context) ||
+                              has_capability('moodle/role:assign', $context);
+
+            $templatecontext = (object) [
+                'courseid' => $COURSE->id,
+                'sesskey' => sesskey(),
+                'cardselectionmode' => $cardselectionmode,
+                'preset' => $cardselectionmode === 'preset',
+                'custom' => $cardselectionmode === 'custom',
+                'canseesettings' => $canseesettings,
+            ];
+            // Render HTML.
+            $content = $OUTPUT->render_from_template('block_disealytics/main', $templatecontext);
+            $this->content->text = $content;
+
             // Hand over the data from the database to the update_view.js.
             $this->page->requires->js_call_amd(
                 'block_disealytics/update_view',
                 'init',
-                [$viewsinpref, $viewmode, $COURSE->id, $url->out(), $versioninfo]
+                [$viewsinpref, $viewmode, $COURSE->id, $url->out(), $versioninfo, $canseesettings, $cardselectionmode]
             );
         }
         $footertext = get_string('testfooter', 'block_disealytics');

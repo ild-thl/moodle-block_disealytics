@@ -50,11 +50,11 @@ class get_planner_event extends external_api {
      */
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
-                'dateid' => new external_value(
-                        PARAM_INT,
-                        'ID of a planner date (=event)',
-                        VALUE_REQUIRED
-                ),
+            'dateid' => new external_value(
+                PARAM_INT,
+                'ID of a planner date (=event)',
+                VALUE_REQUIRED
+            ),
         ]);
     }
 
@@ -71,7 +71,7 @@ class get_planner_event extends external_api {
     public static function execute(int $dateid) {
         // Validate the parameters.
         self::validate_parameters(self::execute_parameters(), [
-                'dateid' => $dateid,
+            'dateid' => $dateid,
         ]);
 
         global $DB, $COURSE;

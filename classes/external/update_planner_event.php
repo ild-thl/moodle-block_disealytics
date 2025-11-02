@@ -50,21 +50,21 @@ class update_planner_event extends external_api {
      */
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
-                'updatetype' => new external_value(
-                    PARAM_TEXT,
-                    'The updatetype of the event (add, delete or update).',
-                    VALUE_REQUIRED
-                ),
-                'courseid' => new external_value(
-                        PARAM_INT,
-                        'The course id, that is saved for the date.',
-                        VALUE_OPTIONAL
-                ),
-                'dateid' => new external_value(
-                    PARAM_INT,
-                    'The date id, 0 if no date is created yet.',
-                    VALUE_OPTIONAL
-                ),
+            'updatetype' => new external_value(
+                PARAM_TEXT,
+                'The updatetype of the event (add, delete or update).',
+                VALUE_REQUIRED
+            ),
+            'courseid' => new external_value(
+                PARAM_INT,
+                'The course id, that is saved for the date.',
+                VALUE_OPTIONAL
+            ),
+            'dateid' => new external_value(
+                PARAM_INT,
+                'The date id, 0 if no date is created yet.',
+                VALUE_OPTIONAL
+            ),
                 'name' => new external_value(
                     PARAM_RAW,
                     'A name, that is saved for the date.',

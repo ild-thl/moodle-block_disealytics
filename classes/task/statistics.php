@@ -33,7 +33,6 @@ use stdClass;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class statistics extends scheduled_task {
-
     /**
      * Get the name of the task.
      *
@@ -58,20 +57,26 @@ class statistics extends scheduled_task {
         $stats->instances = $DB->count_records_select("block_instances", "blockname = 'disealytics'");
         // Get all block_disealytics_view preferences of users that gave consent to use their data.
         $preferences = $DB->get_records_sql(
-                "SELECT prefs.id, prefs.value
-                       FROM {user_preferences} prefs
-                       INNER JOIN {block_disealytics_consent} consent ON prefs.userid = consent.userid
-                      WHERE prefs.name = 'block_disealytics_views'
-                            AND consent.choice = 1");
+            "SELECT prefs.id, prefs.value
+                   FROM {user_preferences} prefs
+                   INNER JOIN {block_disealytics_consent} consent ON prefs.userid = consent.userid
+                  WHERE prefs.name = 'block_disealytics_views'
+                        AND consent.choice = 1"
+        );
         $stats->acceptancecount = count($preferences);
         $DB->commit_delegated_transaction($get);
-        $preferences = array_map(function($pref) {
-            return json_decode($pref->value, true);
-        }, $preferences);
+        $preferences = array_map(
+            function ($pref) {
+                return json_decode($pref->value, true);
+            },
+            $preferences
+        );
         global $CFG;
         $viewnames =
-                array_map(fn($name) => str_replace('_', '', basename($name, '.php')),
-                        glob($CFG->dirroot . '/blocks/disealytics/classes/view/*.php'));
+            array_map(
+                fn($name) => str_replace('_', '', basename($name, '.php')),
+                glob($CFG->dirroot . '/blocks/disealytics/classes/view/*.php')
+            );
         $viewnames = array_diff($viewnames, ["baseview"]);
         $viewcounts = array_fill_keys($viewnames, 0);
         $total = 0;
@@ -85,12 +90,14 @@ class statistics extends scheduled_task {
             }
         }
         $stats->cardstotal = $total;
-        array_walk($viewcounts, function($count, $key) use ($stats) {
-            $newkey = str_replace('-', "", $key);
-            $stats->$newkey = $count;
-        });
+        array_walk(
+            $viewcounts,
+            function ($count, $key) use ($stats) {
+                $newkey = str_replace('-', "", $key);
+                $stats->$newkey = $count;
+            }
+        );
         $stats->timecreated = $now;
         $DB->insert_record("block_disealytics_statistics", $stats);
     }
-
 }

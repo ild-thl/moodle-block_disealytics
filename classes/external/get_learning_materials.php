@@ -46,7 +46,6 @@ use stdClass;
  * Class get_learning_materials
  */
 class get_learning_materials extends external_api {
-
     /**
      * Describes the parameters.
      *
@@ -54,7 +53,7 @@ class get_learning_materials extends external_api {
      */
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
-                'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_OPTIONAL),
+            'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_OPTIONAL),
         ]);
     }
 
@@ -80,8 +79,8 @@ class get_learning_materials extends external_api {
 
         // Fetch learning materials.
         $learningmaterialsdata = $DB->get_records(
-                'block_disealytics_user_pages',
-                ['userid' => $USER->id, 'courseid' => $courseid]
+            'block_disealytics_user_pages',
+            ['userid' => $USER->id, 'courseid' => $courseid]
         );
 
         $modinfo = get_fast_modinfo($COURSE);
@@ -145,7 +144,6 @@ class get_learning_materials extends external_api {
                 'number_of_documents' => $filescount,
                 'nodata' => empty($learningmaterials),
         ];
-
     }
 
     /**
@@ -171,24 +169,23 @@ class get_learning_materials extends external_api {
      */
     public static function execute_returns(): external_single_structure {
         return new external_single_structure([
-                'file_names' => new external_multiple_structure(
-                        new external_single_structure([
-                                'name' => new external_value(PARAM_TEXT, 'Name of the file'),
-                        ]),
-                ),
-                'files_left' => new external_value(PARAM_BOOL, 'Files left flag'),
-                'data' => new external_multiple_structure(
-                        new external_single_structure([
-                                'learningmaterialid' => new external_value(PARAM_INT, 'ID of the learning material'),
-                                'documentname' => new external_value(PARAM_TEXT, 'Name of the document'),
-                                'currentpage' => new external_value(PARAM_INT, 'Current page of the document'),
-                                'lastpage' => new external_value(PARAM_INT, 'Last page of the document'),
-                                'expenditureoftime' => new external_value(PARAM_INT, 'Time spent on the document'),
-                        ]),
-                ),
-                'number_of_documents' => new external_value(PARAM_INT, 'Number of documents'),
-                'nodata' => new external_value(PARAM_BOOL, 'No data flag'),
+            'file_names' => new external_multiple_structure(
+                new external_single_structure([
+                    'name' => new external_value(PARAM_TEXT, 'Name of the file'),
+                ]),
+            ),
+            'files_left' => new external_value(PARAM_BOOL, 'Files left flag'),
+            'data' => new external_multiple_structure(
+                new external_single_structure([
+                    'learningmaterialid' => new external_value(PARAM_INT, 'ID of the learning material'),
+                    'documentname' => new external_value(PARAM_TEXT, 'Name of the document'),
+                    'currentpage' => new external_value(PARAM_INT, 'Current page of the document'),
+                    'lastpage' => new external_value(PARAM_INT, 'Last page of the document'),
+                    'expenditureoftime' => new external_value(PARAM_INT, 'Time spent on the document'),
+                ]),
+            ),
+            'number_of_documents' => new external_value(PARAM_INT, 'Number of documents'),
+            'nodata' => new external_value(PARAM_BOOL, 'No data flag'),
         ]);
     }
-
 }

@@ -24,6 +24,7 @@
 let viewlist = [];
 let courseid = null;
 let versioninfo = null;
+let cardselectionmode = 'preset';
 
 /**
  * Set the viewtypes array based on the provided views. Sets them to 1 as in visible/enabled like so:
@@ -42,6 +43,14 @@ export const setViewlist = (views) => {
  */
 export const setVersionInfo = (version) => {
     versioninfo = version;
+};
+
+/**
+ * Set the card selection mode.
+ * @param {String} mode - The card selection mode ('preset' or 'custom')
+ */
+export const setCardSelectionMode = (mode) => {
+    cardselectionmode = mode;
 };
 
 /**
@@ -67,7 +76,21 @@ export const getViewlist = () => {
  * @returns {true | false} True if all views are enabled, false if not.
  */
 export const allViewsEnabled = () => {
-    return getViewlist().every(({enabled}) => enabled !== 0);
+    const viewlist = getViewlist();
+    if (!viewlist) {
+        return false;
+    }
+
+    if (cardselectionmode === 'preset') {
+        // In preset mode, only check the 3 preset views
+        const presetViews = ['learning-goals-view', 'assignment-view', 'planner-view'];
+        return presetViews.every(presetView =>
+            viewlist.some(view => view.viewname === presetView && view.enabled === 1)
+        );
+    } else {
+        // In custom mode, check all available views
+        return viewlist.every(({enabled}) => enabled !== 0);
+    }
 };
 
 /**
@@ -78,6 +101,27 @@ export const anyViewsEnabled = () => {
     return getViewlist().some(({enabled}) => enabled === 1);
 };
 
+
+/**
+ * Find the correct insert position for a priority view.
+ * @param {Array} views - The current views array
+ * @param {Array} priorityViews - Array of priority view names
+ * @returns {number} - The index where the view should be inserted
+ */
+const findPriorityInsertIndex = (views, priorityViews) => {
+    // Find the first non-priority enabled view
+    let insertIndex = views.findIndex((view) =>
+        view.enabled === 1 && !priorityViews.includes(view.viewname)
+    );
+
+    // If no non-priority view found, find the first disabled view
+    if (insertIndex === -1) {
+        insertIndex = views.findIndex((view) => view.enabled === 0);
+    }
+
+    // If still not found, insert at the end
+    return insertIndex === -1 ? views.length : insertIndex;
+};
 
 /**
  * Update the view order and which views are visible in the DOM by modifying the viewtypes array.
@@ -93,7 +137,17 @@ export const updateViewlist = (modifiedView, write) => {
         updatedViews.splice(index, 1);
         if (write === 'add') {
             const newView = {viewname: modifiedView, enabled: 1};
-            updatedViews.push(newView);
+
+            // Define priority views that should be placed at the beginning
+            const priorityViews = ['learning-goals-view', 'assignment-view', 'planner-view'];
+
+            if (priorityViews.includes(modifiedView)) {
+                const insertIndex = findPriorityInsertIndex(updatedViews, priorityViews);
+                updatedViews.splice(insertIndex, 0, newView);
+            } else {
+                // Regular views are added at the end
+                updatedViews.push(newView);
+            }
         }
         if (write === 'delete') {
             const newView = {viewname: modifiedView, enabled: 0};

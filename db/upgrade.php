@@ -67,7 +67,6 @@ function xmldb_block_disealytics_upgrade(int $oldversion): bool {
         upgrade_block_savepoint(true, 2024012500, 'disealytics');
     }
     if ($oldversion < 2024091000) {
-
         // Define table block_disealytics_statistics to be created.
         $table = new xmldb_table('block_disealytics_statistics');
 
@@ -96,11 +95,18 @@ function xmldb_block_disealytics_upgrade(int $oldversion): bool {
         upgrade_block_savepoint(true, 2024091000, 'disealytics');
     }
     if ($oldversion < 2025021103) {
-
         // Define field statisticinsightsview to be added to block_disealytics_statistics.
         $table = new xmldb_table('block_disealytics_statistics');
-        $field = new xmldb_field('statisticinsightsview', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0',
-                'successchanceview');
+        $field = new xmldb_field(
+            'statisticinsightsview',
+            XMLDB_TYPE_INTEGER,
+            '10',
+            null,
+            XMLDB_NOTNULL,
+            null,
+            '0',
+            'successchanceview'
+        );
 
         // Conditionally launch add field statisticinsightsview.
         if (!$dbman->field_exists($table, $field)) {

@@ -39,7 +39,8 @@ import {
     unsetOld,
     selectors,
     setCourseId,
-    getCourseId
+    getCourseId,
+    setCardSelectionMode
 } from 'block_disealytics/view_selection';
 import {
     initGoalEventListeners
@@ -53,8 +54,10 @@ import {
  * @param {number} courseid - The ID of the course associated with the plugin.
  * @param {string} agreementurl - URL at which the data policy can be viewed
  * @param {string} versioninfo - The current version of the plugin
+ * @param {boolean} canseesettings - Whether the user can see settings
+ * @param {string} cardselectionmode - The card selection mode (preset/custom)
  */
-export const init = async(views, viewmode, courseid, agreementurl, versioninfo) => {
+export const init = async(views, viewmode, courseid, agreementurl, versioninfo, canseesettings, cardselectionmode) => {
     /**
      * Callback function to execute when the document is ready.
      */
@@ -63,9 +66,11 @@ export const init = async(views, viewmode, courseid, agreementurl, versioninfo) 
         setViewlist(views);
         setCourseId(courseid);
         setVersionInfo(versioninfo);
+        setCardSelectionMode(cardselectionmode);
+
 
         // Render the main template with the available views and view mode.
-        renderMainTemplate(getViewlist(), viewmode, agreementurl);
+        renderMainTemplate(getViewlist(), viewmode, agreementurl, canseesettings, cardselectionmode);
 
         // Update the view (optional parameters are undefined in this context).
         await updateView(getCourseId(), undefined);
@@ -93,8 +98,10 @@ export const init = async(views, viewmode, courseid, agreementurl, versioninfo) 
  * @param {array} views all implemented viewtypes
  * @param {string} viewmode the viewmode to load
  * @param {string} agreementurl - URL at which the data policy can be viewed
+ * @param {boolean} canseesettings - Whether the user can see settings
+ * @param {string} cardselectionmode - The card selection mode (preset/custom)
  */
-const renderMainTemplate = (views, viewmode, agreementurl) => {
+const renderMainTemplate = (views, viewmode, agreementurl, canseesettings, cardselectionmode) => {
     const maintemplatedata = [];
     // Use map function to receive only the 'viewname' property of the given views as 'view'.
     maintemplatedata.viewtypes = views.map(view => {
@@ -106,6 +113,11 @@ const renderMainTemplate = (views, viewmode, agreementurl) => {
     maintemplatedata.viewmode = viewmode;
     maintemplatedata[viewmode] = true;
     maintemplatedata.agreementurl = agreementurl;
+    maintemplatedata.canseesettings = canseesettings;
+
+    // Add the cardselectionmode to the main template data.
+    maintemplatedata.preset = cardselectionmode === 'preset';
+    maintemplatedata.custom = cardselectionmode === 'custom';
 
     Template.renderForPromise("block_disealytics/main", maintemplatedata)
         .then(({html, js}) => {

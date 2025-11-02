@@ -83,6 +83,10 @@ class write_user_preference extends external_api {
         switch ($info['action']) {
             case "write":
                 switch ($info['name']) {
+                    case 'card_order_custom':
+                    case 'card_order_preset':
+                        set_user_preference('block_disealytics_' . $info["name"], $info["value"]);
+                        break;
                     case 'expanded_view':
                         if ((get_user_preferences('block_disealytics_' . $info["name"])) == $info["value"]) {
                             set_user_preference('block_disealytics_' . $info["name"], 'none');
@@ -98,6 +102,15 @@ class write_user_preference extends external_api {
                     case 'views':
                         if (get_user_preferences('block_disealytics_' . $info["name"]) !== $info["value"]) {
                             set_user_preference('block_disealytics_' . $info["name"], $info["value"]);
+                            // Synchronize views to all users.
+                            self::sync_views_to_all_users($info["value"]);
+                        }
+                        break;
+                    case 'cardselectionmode':
+                        if (get_user_preferences('block_disealytics_' . $info["name"], 'preset') !== $info["value"]) {
+                            set_user_preference('block_disealytics_' . $info["name"], $info["value"]);
+                            // Propagate admin-selected mode to all users.
+                            self::sync_cardselectionmode_to_all_users($info["value"]);
                         }
                         break;
                 }
@@ -146,5 +159,48 @@ class write_user_preference extends external_api {
      */
     public static function execute_returns(): external_value {
         return new external_value(PARAM_RAW);
+    }
+
+    /**
+     * Synchronizes views to all users in the system.
+     *
+     * @param string $viewsjson JSON string of views
+     * @return void
+     */
+    private static function sync_views_to_all_users(string $viewsjson): void {
+        global $DB;
+
+        // Find all users in the system.
+        $allusers = $DB->get_records('user', ['deleted' => 0, 'suspended' => 0], 'id ASC');
+
+        foreach ($allusers as $user) {
+            // Skip guest user.
+            if ($user->id == 1) {
+                continue;
+            }
+            // Set the same views for all users.
+            set_user_preference('block_disealytics_views', $viewsjson, $user->id);
+        }
+    }
+
+    /**
+     * Synchronizes the card selection mode to all users in the system.
+     *
+     * @param string $mode Either 'preset' or 'custom'
+     * @return void
+     */
+    private static function sync_cardselectionmode_to_all_users(string $mode): void {
+        global $DB;
+
+        // Find all users in the system.
+        $allusers = $DB->get_records('user', ['deleted' => 0, 'suspended' => 0], 'id ASC');
+
+        foreach ($allusers as $user) {
+            // Skip guest user.
+            if ($user->id == 1) {
+                continue;
+            }
+            set_user_preference('block_disealytics_cardselectionmode', $mode, $user->id);
+        }
     }
 }

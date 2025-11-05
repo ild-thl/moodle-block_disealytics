@@ -1,4 +1,4 @@
-# DiSEA Learner Dashboard
+# Learner Dashboard
 
 The Learner Dashboard is a Moodle Block Plugin and offers a visual representation of the student's learning progress based on various factors and the opportunity for self-reflection. The main target group are online students.
 
@@ -22,6 +22,10 @@ Some card data is user-based. This means that the following data is saved in the
 - Dates of the 'Planning Assistant'
 
 The data can be deleted by the user inside the configuration modal of the dashboard.
+
+## References
+
+Drzyzga, G., Harder, T., Janneck, M.: Cognitive effort in interaction with software systems for self-regulation - an eye-tracking study. In: Harris, D., Li, W.-C. (eds.) HCII 2023. LNCS, vol. 14017, pp. 37–52. Springer, Cham (2023). https://doi.org/10.1007/978-3-031-35392-5_3
 
 ## Code Structure
 

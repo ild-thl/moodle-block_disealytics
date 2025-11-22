@@ -164,6 +164,7 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+    
 }
 
 .block_disealytics .navigation-icons a {
@@ -173,6 +174,7 @@
 .block_disealytics .dashboard-button i {
     font-size: 1.5em;
     cursor: pointer;
+    color: var(--secondary-color);
 }
 
 .block_disealytics .block_disealytics-delete-btn {

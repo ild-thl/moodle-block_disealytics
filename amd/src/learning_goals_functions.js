@@ -119,10 +119,10 @@ export function initGoalEventListeners() {
             // Set the color for the editing pencil on/off.
             if (editGoalsBtn.querySelector('i').classList.contains('editing-off')) {
                 editGoalsBtn.querySelector('i').classList.remove('editing-off');
-                editGoalsBtn.querySelector('i').style.color = 'var(--diseared)';
+                editGoalsBtn.querySelector('i').style.color = 'var(--primary-color)';
             } else {
                 editGoalsBtn.querySelector('i').classList.add('editing-off');
-                editGoalsBtn.querySelector('i').style.color = 'var(--primary)';
+                editGoalsBtn.querySelector('i').style.color = 'var(--secondary-color)';
             }
             // Turn settings for editing mode on.
             setEditingModeForLearningGoals();

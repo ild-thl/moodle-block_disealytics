@@ -18,8 +18,7 @@
 }
 
 .block_disealytics .hidden {
-    display: none !important;
-    /* stylelint-disable-line declaration-no-important */
+    display: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
 /* COLORS */
@@ -98,8 +97,7 @@
 }
 
 .block_disealytics a {
-    text-decoration: none !important;
-    /* stylelint-disable-line declaration-no-important */
+    text-decoration: none !important; /* stylelint-disable-line declaration-no-important */
     cursor: pointer;
 }
 
@@ -108,8 +106,7 @@
 }
 
 .block_disealytics a:hover {
-    text-decoration: none !important;
-    /* stylelint-disable-line declaration-no-important */
+    text-decoration: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
 /* BUTTONS */
@@ -176,7 +173,6 @@
 .block_disealytics .dashboard-button i {
     font-size: 1.5em;
     cursor: pointer;
-    color: var(--primary);
 }
 
 .block_disealytics .block_disealytics-delete-btn {
@@ -249,10 +245,8 @@
 
 @media (min-width: 992px) {
     .block_disealytics .chart-area .chart-image {
-        height: unset !important;
-        /* stylelint-disable-line declaration-no-important */
-        width: unset !important;
-        /* stylelint-disable-line declaration-no-important */
+        height: unset !important; /* stylelint-disable-line declaration-no-important */
+        width: unset !important; /* stylelint-disable-line declaration-no-important */
     }
 }
 
@@ -275,8 +269,7 @@
     border: 2px solid var(--primary);
     position: relative;
     border-radius: 8px;
-    background: #fff !important;
-    /* stylelint-disable-line declaration-no-important */
+    background: #fff !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .block_disealytics .editing-headline {
@@ -344,8 +337,7 @@
 
 .block_disealytics .draggable {
     cursor: grab;
-    transition: transform 0.2s ease-in-out;
-    /* Smooth movement for elements */
+    transition: transform 0.2s ease-in-out; /* Smooth movement for elements */
     z-index: 10;
 }
 
@@ -353,8 +345,7 @@
     cursor: grabbing;
     transform: rotate(3deg);
     background: #f2f2f2;
-    transition: none;
-    /* No transition for the dragging item */
+    transition: none; /* No transition for the dragging item */
     opacity: 0.7;
 }
 
@@ -675,8 +666,7 @@
     width: -moz-available;
     width: -webkit-fill-available;
     /* stylelint-enable csstree/validator, declaration-block-no-duplicate-properties */
-    margin: 5px !important;
-    /* stylelint-disable-line declaration-no-important */
+    margin: 5px !important; /* stylelint-disable-line declaration-no-important */
     grid-template-columns: 2fr 0.5fr;
     grid-template-areas:
         "name edit"
@@ -744,10 +734,8 @@
 }
 
 .block_disealytics #pvl-doughnut canvas {
-    max-height: 160px !important;
-    /* stylelint-disable-line declaration-no-important */
-    max-width: 248px !important;
-    /* stylelint-disable-line declaration-no-important */
+    max-height: 160px !important; /* stylelint-disable-line declaration-no-important */
+    max-width: 248px !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .block_disealytics .pvl-probability {
@@ -862,8 +850,7 @@
 }
 
 .block_disealytics .planner-grid-day {
-    font-size: 10px !important;
-    /* stylelint-disable-line declaration-no-important */
+    font-size: 10px !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .block_disealytics .add-event-to-planner {
@@ -871,8 +858,7 @@
 }
 
 .block_disealytics .add-event-to-planner span {
-    font-size: 10px !important;
-    /* stylelint-disable-line declaration-no-important */
+    font-size: 10px !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .block_disealytics .add-event-to-planner span.day-in-planner {
@@ -896,8 +882,7 @@
 }
 
 .block_disealytics .other-month {
-    color: var(--disea-lightgray) !important;
-    /* stylelint-disable-line declaration-no-important */
+    color: var(--disea-lightgray) !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .block_disealytics .hover-overlay:before {
@@ -1025,8 +1010,7 @@
 }
 
 .block_disealytics .event-details-right > * {
-    font-size: 10px !important;
-    /* stylelint-disable-line declaration-no-important */
+    font-size: 10px !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .block_disealytics .event-details-left {
@@ -1038,8 +1022,7 @@
 }
 
 .block_disealytics .planner-event-data .event-date > * {
-    font-size: 15px !important;
-    /* stylelint-disable-line declaration-no-important */
+    font-size: 15px !important; /* stylelint-disable-line declaration-no-important */
     font-weight: bold;
 }
 
@@ -1056,8 +1039,7 @@
 }
 
 .block_disealytics #create-planner-event-container label {
-    margin-bottom: 0 !important;
-    /* stylelint-disable-line declaration-no-important */
+    margin-bottom: 0 !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .block_disealytics .planner-event-input-block {
@@ -1089,16 +1071,14 @@
 }
 
 .block_disealytics #cancel-planner-date {
-    margin: 0 !important;
-    /* stylelint-disable-line declaration-no-important */
+    margin: 0 !important; /* stylelint-disable-line declaration-no-important */
     opacity: 1;
     font-weight: normal;
     line-height: inherit;
 }
 
 .block_disealytics #cancel-planner-date:hover {
-    text-shadow: none !important;
-    /* stylelint-disable-line declaration-no-important */
+    text-shadow: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
 /* DELETE EVENT */
@@ -1115,8 +1095,7 @@
 }
 
 .block_disealytics .planner-event-modal-title {
-    font-size: 13px !important;
-    /* stylelint-disable-line declaration-no-important */
+    font-size: 13px !important; /* stylelint-disable-line declaration-no-important */
 }
 
 /* STATISTIC INSIGHTS */
@@ -1129,12 +1108,10 @@
 }
 
 @keyframes fadeInOut {
-
     0%,
     100% {
         opacity: .7;
     }
-
     50% {
         opacity: .3;
     }
@@ -1173,15 +1150,13 @@
 .block_disealytics #block_disealytics-panel-statistic-insights-view .progressbar-cognitive {
     --size: 5rem;
     --fg: var(--primary);
-    --bg: color-mix(in srgb, var(--fg) 30%, transparent);
-    /* Lighter version of fg */
+    --bg: color-mix(in srgb, var(--fg) 30%, transparent); /* Lighter version of fg */
 }
 
 .block_disealytics #block_disealytics-panel-statistic-insights-view .progressbar-social {
     --size: 5rem;
     --fg: var(--orange);
-    --bg: color-mix(in srgb, var(--fg) 30%, transparent);
-    /* Lighter version of fg */
+    --bg: color-mix(in srgb, var(--fg) 30%, transparent); /* Lighter version of fg */
     position: absolute;
     top: 50%;
     left: 50%;

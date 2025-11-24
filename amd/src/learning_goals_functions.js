@@ -14,9 +14,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 import Ajax from 'core/ajax';
-import { updateView } from "./update_view";
-import { getCourseId } from "./view_selection";
-import { toggleAccordion } from "./add_interaction";
+import {updateView} from "./update_view";
+import {getCourseId} from "./view_selection";
+import {toggleAccordion} from "./add_interaction";
 
 /**
  * Initialize the learning goals interface.
@@ -78,21 +78,21 @@ export function initGoalEventListeners() {
 
     // Show the create a goal form.
     if (showGoalFormBtn) {
-        showGoalFormBtn.addEventListener('click', function () {
+        showGoalFormBtn.addEventListener('click', function() {
             createGoalForm.classList.remove('hidden');
         });
     }
 
     // Saving goal in database.
     if (saveGoalBtn) {
-        saveGoalBtn.addEventListener('click', function () {
+        saveGoalBtn.addEventListener('click', function() {
             saveGoal();
         });
     }
 
     // Cancel/reset the create a goal form.
     if (cancelGoalBtn) {
-        cancelGoalBtn.addEventListener('click', function () {
+        cancelGoalBtn.addEventListener('click', function() {
             const goalNameInput = document.getElementById('goal-name-input');
 
             // Reset the form.
@@ -107,7 +107,7 @@ export function initGoalEventListeners() {
 
     // Delete a goal from the database.
     for (const deleteGoalBtn of deleteGoalBtns) {
-        deleteGoalBtn.addEventListener('click', function () {
+        deleteGoalBtn.addEventListener('click', function() {
             const goalId = deleteGoalBtn.parentNode.id;
             deleteGoal(goalId);
         });
@@ -293,10 +293,10 @@ async function saveGoal() {
                         goalname: goalNameInput,
                         duedate: timestamp,
                     }
-                }])[0].done(function () {
+                }])[0].done(function() {
                     // Resolve the promise when done.
                     resolve();
-                }).fail(function (err) {
+                }).fail(function(err) {
                     // Reject the promise if there's an error.
                     reject(err);
                 });
@@ -336,7 +336,7 @@ function handleCheckboxes() {
     // Get all checkboxes.
     const allCheckboxes = document.querySelectorAll('.goal-checkbox');
     allCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', async function () {
+        checkbox.addEventListener('change', async function() {
             const id = checkbox.id.replace("goal-", "");
             const goalContent = checkbox.parentNode.parentNode.parentNode;
             const name = goalContent.querySelector('.goal-name');
@@ -400,7 +400,7 @@ function editGoal(goalContent) {
     // Save updated goal.
     const saveEditBtn = goalContent.querySelector('#save-goal-edit');
     if (saveEditBtn) {
-        saveEditBtn.addEventListener('click', async function () {
+        saveEditBtn.addEventListener('click', async function() {
             const updatedName = goalSetNameInput.value;
             const updatedDate = goalSetDateInput.value;
             const updatedTime = goalSetTimeInput.value;
@@ -441,10 +441,10 @@ async function updateGoal(id, name, date, finished) {
                 duedate: date,
                 finished: finished === true ? 1 : 0
             }
-        }])[0].done(function () {
+        }])[0].done(function() {
             updateView(getCourseId(), ['learning-goals-view']);
             resolve(); // Resolve the promise when done
-        }).fail(function (err) {
+        }).fail(function(err) {
             window.console.error(err);
             reject(err); // Reject the promise if there's an error
         });
@@ -466,12 +466,12 @@ function deleteGoal(id) {
             args: {
                 goalid: id
             }
-        }])[0].done(function () {
+        }])[0].done(function() {
             // Update the view after successfully deleting the goal.
             updateView(getCourseId(), ['learning-goals-view']);
             // Resolve the promise when done.
             resolve();
-        }).fail(function (err) {
+        }).fail(function(err) {
             // Log the error to the console.
             window.console.error(err);
             // Reject the promise if there's an error.

@@ -303,12 +303,12 @@
     color: white;
 }
 
-.block_disealytics .block_disealytics-editing:hover>.editing-icon *:not(:first-child) {
+.block_disealytics .block_disealytics-editing:hover > .editing-icon *:not(:first-child) {
     fill: transparent;
     stroke: white;
 }
 
-.block_disealytics .block_disealytics-editing:hover>.editing-icon *:first-child {
+.block_disealytics .block_disealytics-editing:hover > .editing-icon *:first-child {
     stroke: white;
 }
 
@@ -626,7 +626,7 @@
     margin: 1em 0;
 }
 
-.block_disealytics #create-goal-container>* {
+.block_disealytics #create-goal-container > * {
     margin: 0;
 }
 
@@ -1024,7 +1024,7 @@
     line-height: inherit;
 }
 
-.block_disealytics .event-details-right>* {
+.block_disealytics .event-details-right > * {
     font-size: 10px !important;
     /* stylelint-disable-line declaration-no-important */
 }
@@ -1037,7 +1037,7 @@
     font-weight: bold;
 }
 
-.block_disealytics .planner-event-data .event-date>* {
+.block_disealytics .planner-event-data .event-date > * {
     font-size: 15px !important;
     /* stylelint-disable-line declaration-no-important */
     font-weight: bold;
@@ -1078,7 +1078,7 @@
     margin-top: 3px;
 }
 
-.block_disealytics .planner-info-messages>* {
+.block_disealytics .planner-info-messages > * {
     display: block;
 }
 

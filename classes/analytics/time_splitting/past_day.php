@@ -24,7 +24,6 @@ namespace block_disealytics\analytics\time_splitting;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class past_day extends \core_analytics\local\time_splitting\past_periodic {
-
     /**
      *  Returns a lang_string object representing the name for the time splitting method.
      *

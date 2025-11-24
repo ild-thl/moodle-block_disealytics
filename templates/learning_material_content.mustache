@@ -35,7 +35,10 @@
 }}
 <div class="learning-material-container" data-learningmaterialid="{{learningmaterialid}}">
     <span id="learning-materials-deletion-successful" class="hidden">{{#str}}learning_material_delete_success, block_disealytics {{/str}}</span>
-    <h5>{{documentname}}</h5>
+    {{#documentname}}
+      <h5>{{documentname}}</h5>
+    {{/documentname}}
+
     <div>
         <span>{{#str}}learning_material_pages, block_disealytics {{/str}}: </span>
         <span>{{currentpage}} / {{lastpage}}</span>
@@ -50,7 +53,10 @@
     </div>
 </div>
 <div class="edit-learning-material-container hidden" data-learningmaterialid="{{learningmaterialid}}">
-    <h5 id="learning-material-document-name-{{learningmaterialid}}" class="learning-material-document-name">{{documentname}}</h5>
+    <h5 id="learning-material-document-name-{{learningmaterialid}}" class="learning-material-document-name">
+      {{#documentname}}{{documentname}}{{/documentname}}
+      {{^documentname}}<span class="sr-only">{{#str}} untitled_document, block_disealytics {{/str}}</span>{{/documentname}}
+    </h5>
     <p class="learning-material-update-warning warning-learning-material pageerror text-small hidden">
         {{#str}}learning_material_page_error, block_disealytics {{/str}}</p>
     <p class="learning-material-update-warning warning-learning-material nodocumentselectederror text-small hidden">

@@ -35,7 +35,8 @@ import {
     setScrollTo,
     setScrollToElement,
     setViewlist,
-    updateViewlist
+    updateViewlist,
+    setCardSelectionMode
 } from 'block_disealytics/view_selection';
 import {updateView} from 'block_disealytics/update_view';
 
@@ -176,7 +177,40 @@ export const setEditingMode = () => {
                                 }
                                 addButton.addEventListener("click", async function() {
                                     addButton.classList.add('hidden');
-                                    viewContainer.parentElement.append(viewContainer);
+
+                                    // Define priority views that should be placed at the beginning
+                                    const priorityViews = ['learning-goals-view', 'assignment-view', 'planner-view'];
+                                    const container = viewContainer.parentElement;
+
+                                    // Check if this is a priority view
+                                    if (priorityViews.includes(viewname)) {
+                                        // Find the first non-priority visible view
+                                        const allChildren = Array.from(container.children);
+                                        let insertBeforeElement = null;
+
+                                        for (const child of allChildren) {
+                                            const childViewname = child.id.replace(/^block_disealytics-/, '');
+                                            const isVisible = child.getAttribute('data-visible') === 'true';
+                                            const isPriority = priorityViews.includes(childViewname);
+
+                                            // Insert before the first visible non-priority view
+                                            if (isVisible && !isPriority) {
+                                                insertBeforeElement = child;
+                                                break;
+                                            }
+                                        }
+
+                                        if (insertBeforeElement) {
+                                            container.insertBefore(viewContainer, insertBeforeElement);
+                                        } else {
+                                            // If no non-priority views found, append at the end
+                                            container.append(viewContainer);
+                                        }
+                                    } else {
+                                        // Regular views are appended at the end
+                                        container.append(viewContainer);
+                                    }
+
                                     viewContainer.setAttribute('data-visible', 'true');
                                     setScrollToElement('block_disealytics-' + viewname);
                                     setScrollTo(true);
@@ -556,6 +590,21 @@ export const enableViewmodeDropdown = () => {
             updateSetting("write", 'viewmode', select.value);
         }
     });
+};
+
+/**
+ * Adds an EventListener to the cardselection dropdown.
+ *
+ * @returns {void}
+ */
+export const enableCardselectionDropdown = () => {
+    const cardselectionDropdown = document.querySelector('[data-region="cardselectionmode"]');
+    if (cardselectionDropdown) {
+        cardselectionDropdown.addEventListener("change", function() {
+            setCardSelectionMode(cardselectionDropdown.value);
+            updateSetting("write", 'cardselectionmode', cardselectionDropdown.value);
+        });
+    }
 };
 
 /**

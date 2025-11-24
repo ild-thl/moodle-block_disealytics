@@ -35,10 +35,11 @@ use dml_exception;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
-class provider implements core_userlist_provider,
-        \core_privacy\local\metadata\provider,
-        \core_privacy\local\request\plugin\provider,
-        \core_privacy\local\request\user_preference_provider {
+class provider implements
+    core_userlist_provider,
+    \core_privacy\local\metadata\provider,
+    \core_privacy\local\request\plugin\provider,
+    \core_privacy\local\request\user_preference_provider {
     /**
      * Get the list of metadata.
      *
@@ -47,88 +48,97 @@ class provider implements core_userlist_provider,
      */
     public static function get_metadata(collection $collection): collection {
         $collection->add_database_table(
-                'block_disealytics_consent',
-                [
-                        'userid' => 'privacy:metadata:consent_userid',
-                        'counter' => 'privacy:metadata:consent_counter',
-                        'choice' => 'privacy:metadata:consent_choice',
-                        'timecreated' => 'privacy:metadata:consent_timecreated',
-                        'timemodified' => 'privacy:metadata:consent_timemodified',
-                ],
-                'privacy:metadata:block_disealytics_consent'
+            'block_disealytics_consent',
+            [
+                'userid' => 'privacy:metadata:consent_userid',
+                'counter' => 'privacy:metadata:consent_counter',
+                'choice' => 'privacy:metadata:consent_choice',
+                'timecreated' => 'privacy:metadata:consent_timecreated',
+                'timemodified' => 'privacy:metadata:consent_timemodified',
+            ],
+            'privacy:metadata:block_disealytics_consent'
         );
         $collection->add_database_table(
-                'block_disealytics_user_goals',
-                [
-                        'usermodified' => 'privacy:metadata:user_goal_usermodified',
-                        'courseid' => 'privacy:metadata:user_goal_courseid',
-                        'userid' => 'privacy:metadata:user_goal_userid',
-                        'timecreated' => 'privacy:metadata:user_goal_timecreated',
-                        'timemodified' => 'privacy:metadata:user_goal_timemodified',
-                        'timecompleted' => 'privacy:metadata:user_goal_timecompleted',
-                        'duedate' => 'privacy:metadata:user_goal_duedate',
-                        'description' => 'privacy:metadata:user_goal_description',
-                        'finished' => 'privacy:metadata:user_goal_finished',
-                ],
-                'privacy:metadata:block_disealytics_user_goals'
+            'block_disealytics_user_goals',
+            [
+                'usermodified' => 'privacy:metadata:user_goal_usermodified',
+                'courseid' => 'privacy:metadata:user_goal_courseid',
+                'userid' => 'privacy:metadata:user_goal_userid',
+                'timecreated' => 'privacy:metadata:user_goal_timecreated',
+                'timemodified' => 'privacy:metadata:user_goal_timemodified',
+                'timecompleted' => 'privacy:metadata:user_goal_timecompleted',
+                'duedate' => 'privacy:metadata:user_goal_duedate',
+                'description' => 'privacy:metadata:user_goal_description',
+                'finished' => 'privacy:metadata:user_goal_finished',
+            ],
+            'privacy:metadata:block_disealytics_user_goals'
         );
         $collection->add_database_table(
-                'block_disealytics_user_pages',
-                [
-                        'usermodified' => 'privacy:metadata:user_pages_usermodified',
-                        'courseid' => 'privacy:metadata:user_pages_courseid',
-                        'userid' => 'privacy:metadata:user_pages_userid',
-                        'timecreated' => 'privacy:metadata:user_pages_timecreated',
-                        'timemodified' => 'privacy:metadata:user_pages_timemodified',
-                        'timecompleted' => 'privacy:metadata:user_pages_timecompleted',
-                        'name' => 'privacy:metadata:user_pages_name',
-                        'currentpage' => 'privacy:metadata:user_pages_currentpage',
-                        'lastpage' => 'privacy:metadata:user_pages_lastpage',
-                        'expenditureoftime' => 'privacy:metadata:user_pages_expenditureoftime',
-                ],
-                'privacy:metadata:block_disealytics_user_pages'
+            'block_disealytics_user_pages',
+            [
+                'usermodified' => 'privacy:metadata:user_pages_usermodified',
+                'courseid' => 'privacy:metadata:user_pages_courseid',
+                'userid' => 'privacy:metadata:user_pages_userid',
+                'timecreated' => 'privacy:metadata:user_pages_timecreated',
+                'timemodified' => 'privacy:metadata:user_pages_timemodified',
+                'timecompleted' => 'privacy:metadata:user_pages_timecompleted',
+                'name' => 'privacy:metadata:user_pages_name',
+                'currentpage' => 'privacy:metadata:user_pages_currentpage',
+                'lastpage' => 'privacy:metadata:user_pages_lastpage',
+                'expenditureoftime' => 'privacy:metadata:user_pages_expenditureoftime',
+            ],
+            'privacy:metadata:block_disealytics_user_pages'
         );
         $collection->add_database_table(
-                'block_disealytics_user_tasks',
-                [
-                        'component' => 'privacy:metadata:user_tasks_component',
-                        'target' => 'privacy:metadata:user_tasks_target',
-                        'action' => 'privacy:metadata:user_tasks_action',
-                        'eventname' => 'privacy:metadata:user_tasks_eventname',
-                        'courseid' => 'privacy:metadata:user_tasks_courseid',
-                        'userid' => 'privacy:metadata:user_tasks_userid',
-                        'timestart' => 'privacy:metadata:user_tasks_timestart',
-                        'n_events' => 'privacy:metadata:user_tasks_n_events',
-                        'duration' => 'privacy:metadata:user_tasks_duration',
-                        'timecreated' => 'privacy:metadata:user_tasks_timecreated',
-                ],
-                'privacy:metadata:block_disealytics_user_tasks'
+            'block_disealytics_user_tasks',
+            [
+                'component' => 'privacy:metadata:user_tasks_component',
+                'target' => 'privacy:metadata:user_tasks_target',
+                'action' => 'privacy:metadata:user_tasks_action',
+                'eventname' => 'privacy:metadata:user_tasks_eventname',
+                'courseid' => 'privacy:metadata:user_tasks_courseid',
+                'userid' => 'privacy:metadata:user_tasks_userid',
+                'timestart' => 'privacy:metadata:user_tasks_timestart',
+                'n_events' => 'privacy:metadata:user_tasks_n_events',
+                'duration' => 'privacy:metadata:user_tasks_duration',
+                'timecreated' => 'privacy:metadata:user_tasks_timecreated',
+            ],
+            'privacy:metadata:block_disealytics_user_tasks'
         );
         $collection->add_database_table(
-                'block_disealytics_user_dates',
-                [
-                        'name' => 'privacy:metadata:user_dates_name',
-                        'usermodified' => 'privacy:metadata:user_dates_usermodified',
-                        'courseid' => 'privacy:metadata:user_dates_courseid',
-                        'userid' => 'privacy:metadata:user_dates_userid',
-                        'timecreated' => 'privacy:metadata:user_dates_timecreated',
-                        'timemodified' => 'privacy:metadata:user_dates_timemodified',
-                        'timestart' => 'privacy:metadata:user_dates_timestart',
-                        'timeduration' => 'privacy:metadata:user_dates_timeduration',
-                        'location' => 'privacy:metadata:user_dates_location',
-                        'eventtype' => 'privacy:metadata:user_dates_eventtype',
-                        'repeatid' => 'privacy:metadata:user_dates_repeatid',
-                ],
-                'privacy:metadata:block_disealytics_user_dates'
+            'block_disealytics_user_dates',
+            [
+                'name' => 'privacy:metadata:user_dates_name',
+                'usermodified' => 'privacy:metadata:user_dates_usermodified',
+                'courseid' => 'privacy:metadata:user_dates_courseid',
+                'userid' => 'privacy:metadata:user_dates_userid',
+                'timecreated' => 'privacy:metadata:user_dates_timecreated',
+                'timemodified' => 'privacy:metadata:user_dates_timemodified',
+                'timestart' => 'privacy:metadata:user_dates_timestart',
+                'timeduration' => 'privacy:metadata:user_dates_timeduration',
+                'location' => 'privacy:metadata:user_dates_location',
+                'eventtype' => 'privacy:metadata:user_dates_eventtype',
+                'repeatid' => 'privacy:metadata:user_dates_repeatid',
+            ],
+            'privacy:metadata:block_disealytics_user_dates'
         );
-        $collection->add_database_table('block_disealytics_statistics', [],
-                'privacy:metadata:block_disealytics_statistics'
+        $collection->add_database_table(
+            'block_disealytics_statistics',
+            [],
+            'privacy:metadata:block_disealytics_statistics'
         );
-        $collection->add_user_preference("block_disealytics_editing", "privacy:metadata:preference:block_disealytics_editing");
-        $collection->add_user_preference("block_disealytics_expanded_view",
-                "privacy:metadata:preference:block_disealytics_expanded_view");
-        $collection->add_user_preference("block_disealytics_planner_currentdate",
-                "privacy:metadata:preference:block_disealytics_planner_currentdate");
+        $collection->add_user_preference(
+            "block_disealytics_editing",
+            "privacy:metadata:preference:block_disealytics_editing"
+        );
+        $collection->add_user_preference(
+            "block_disealytics_expanded_view",
+            "privacy:metadata:preference:block_disealytics_expanded_view"
+        );
+        $collection->add_user_preference(
+            "block_disealytics_planner_currentdate",
+            "privacy:metadata:preference:block_disealytics_planner_currentdate"
+        );
         $collection->add_user_preference("block_disealytics_views", "privacy:metadata:preference:block_disealytics_views");
         $collection->add_user_preference("block_disealytics_viewmode", "privacy:metadata:preference:block_disealytics_viewmode");
 
@@ -240,7 +250,7 @@ class provider implements core_userlist_provider,
 
             $sqlpages = "SELECT * FROM {block_disealytics_user_pages} WHERE userid = :userid";
             $paramspages = ['userid' => $user->id];
-            $pagesdata = $DB->get_records_sql($$sqlpages, $paramspages);
+            $pagesdata = $DB->get_records_sql($sqlpages, $paramspages);
 
             $sqlconsent = "SELECT * FROM {block_disealytics_consent} WHERE userid = :userid";
             $paramsconsent = ['userid' => $user->id];
@@ -311,8 +321,12 @@ class provider implements core_userlist_provider,
                     $editingdescription = get_string('editingyes', 'block_disealytics');
                     break;
             }
-            writer::export_user_preference('block_disealytics', 'block_disealytics_editing', $editing,
-                    $editingdescription);
+            writer::export_user_preference(
+                'block_disealytics',
+                'block_disealytics_editing',
+                $editing,
+                $editingdescription
+            );
         }
         $expanded = get_user_preferences('block_disealytics_expanded_view', null, $userid);
         if (null !== $expanded) {
@@ -321,12 +335,18 @@ class provider implements core_userlist_provider,
                     $expandeddescription = get_string('expandedno', 'block_disealytics');
                     break;
                 default:
-                    $expandeddescription = get_string('privacy:metadata:preference:block_disealytics_expanded_view',
-                            'block_disealytics');
+                    $expandeddescription = get_string(
+                        'privacy:metadata:preference:block_disealytics_expanded_view',
+                        'block_disealytics'
+                    );
                     break;
             }
-            writer::export_user_preference('block_disealytics', 'block_disealytics_expanded_view', $expanded,
-                    $expandeddescription);
+            writer::export_user_preference(
+                'block_disealytics',
+                'block_disealytics_expanded_view',
+                $expanded,
+                $expandeddescription
+            );
         }
         $date = get_user_preferences('block_disealytics_planner_currentdate', null, $userid);
         if (null !== $date) {
@@ -335,12 +355,18 @@ class provider implements core_userlist_provider,
                     $datedescription = get_string('plannerdateno', 'block_disealytics');
                     break;
                 default:
-                    $datedescription = get_string('privacy:metadata:preference:block_disealytics_planner_currentdate',
-                            'block_disealytics');
+                    $datedescription = get_string(
+                        'privacy:metadata:preference:block_disealytics_planner_currentdate',
+                        'block_disealytics'
+                    );
                     break;
             }
-            writer::export_user_preference('block_disealytics', 'block_disealytics_planner_currentdate', $date,
-                    $datedescription);
+            writer::export_user_preference(
+                'block_disealytics',
+                'block_disealytics_planner_currentdate',
+                $date,
+                $datedescription
+            );
         }
         $views = get_user_preferences('block_disealytics_views', null, $userid);
         if (null !== $views) {

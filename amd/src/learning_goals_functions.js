@@ -119,7 +119,7 @@ export function initGoalEventListeners() {
             // Set the color for the editing pencil on/off.
             if (editGoalsBtn.querySelector('i').classList.contains('editing-off')) {
                 editGoalsBtn.querySelector('i').classList.remove('editing-off');
-                editGoalsBtn.querySelector('i').style.color = 'var(--diseared)';
+                editGoalsBtn.querySelector('i').style.color = 'var(--gray-dark)';
             } else {
                 editGoalsBtn.querySelector('i').classList.add('editing-off');
                 editGoalsBtn.querySelector('i').style.color = 'var(--primary)';
@@ -192,7 +192,7 @@ function initGoalDueDate() {
     const now = new Date();
     const currentDate = `${now.getFullYear()}-${(now.getMonth() + 1)
         .toString().padStart(2, '0')}-${now.getDate()
-        .toString().padStart(2, '0')}`;
+            .toString().padStart(2, '0')}`;
     const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
 
     if (goalDueDateInput) {

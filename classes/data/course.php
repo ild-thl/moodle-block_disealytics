@@ -26,7 +26,6 @@ use dml_exception;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course {
-
     /**
      * Get all courses of the current semester.
      *
@@ -43,11 +42,11 @@ class course {
                 WHERE c.contextlevel = :contextlevel
                   AND cr.startdate <= :now";
         $params = [
-                'contextlevel' => CONTEXT_COURSE,
-                'now' => $now,
+            'contextlevel' => CONTEXT_COURSE,
+            'now' => $now,
         ];
         $data = $DB->get_records_sql($sql, $params);
-        return array_filter($data, function($item) use ($now) {
+        return array_filter($data, function ($item) use ($now) {
             if ($item->enddate == 0) {
                 return true;
             }
@@ -81,7 +80,7 @@ class course {
             'now' => $now,
         ];
         $data = $DB->get_records_sql($sql, $params);
-        return array_filter($data, function($item) use ($now) {
+        return array_filter($data, function ($item) use ($now) {
             if ($item->enddate == 0) {
                 return true;
             }

@@ -51,41 +51,41 @@ class learning_material extends external_api {
      */
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
-                'calltype' => new external_value(
-                        PARAM_ALPHA,
-                        'Defines the type calltype. Calltype might be adding, deleting or updating',
-                        VALUE_REQUIRED
-                ),
-                'id' => new external_value(
-                        PARAM_INT,
-                        'ID of the learning material',
-                        VALUE_OPTIONAL
-                ),
-                'courseid' => new external_value(
-                        PARAM_INT,
-                        'currently visiting course id',
-                        VALUE_OPTIONAL
-                ),
-                'name' => new external_value(
-                        PARAM_RAW,
-                        'Name of the document',
-                        VALUE_OPTIONAL
-                ),
-                'currentpage' => new external_value(
-                        PARAM_INT,
-                        'Page that the user finished reading last',
-                        VALUE_OPTIONAL
-                ),
-                'lastpage' => new external_value(
-                        PARAM_INT,
-                        'Final page of the document',
-                        VALUE_OPTIONAL
-                ),
-                'expenditureoftime' => new external_value(
-                        PARAM_INT,
-                        'Expenditure of time',
-                        VALUE_OPTIONAL
-                ),
+            'calltype' => new external_value(
+                PARAM_ALPHA,
+                'Defines the type calltype. Calltype might be adding, deleting or updating',
+                VALUE_REQUIRED
+            ),
+            'id' => new external_value(
+                PARAM_INT,
+                'ID of the learning material',
+                VALUE_OPTIONAL
+            ),
+            'courseid' => new external_value(
+                PARAM_INT,
+                'currently visiting course id',
+                VALUE_OPTIONAL
+            ),
+            'name' => new external_value(
+                PARAM_RAW,
+                'Name of the document',
+                VALUE_OPTIONAL
+            ),
+            'currentpage' => new external_value(
+                PARAM_INT,
+                'Page that the user finished reading last',
+                VALUE_OPTIONAL
+            ),
+            'lastpage' => new external_value(
+                PARAM_INT,
+                'Final page of the document',
+                VALUE_OPTIONAL
+            ),
+            'expenditureoftime' => new external_value(
+                PARAM_INT,
+                'Expenditure of time',
+                VALUE_OPTIONAL
+            ),
         ]);
     }
 
@@ -106,13 +106,13 @@ class learning_material extends external_api {
      * @throws restricted_context_exception
      */
     public static function execute(
-            string $calltype,
-            ?int $id = null,
-            ?int $courseid = null,
-            string $name = '',
-            int $currentpage = 0,
-            int $lastpage = 1,
-            int $expenditureoftime = 0
+        string $calltype,
+        ?int $id = null,
+        ?int $courseid = null,
+        string $name = '',
+        int $currentpage = 0,
+        int $lastpage = 1,
+        int $expenditureoftime = 0
     ): bool {
         global $CFG, $COURSE;
         self::validate_parameters(self::execute_parameters(), [

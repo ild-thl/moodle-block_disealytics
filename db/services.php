@@ -91,30 +91,4 @@ $functions = [
                 'ajax' => true,
                 'loginrequired' => true,
         ],
-        'block_disealytics_learning_material' => [
-                'classname' => 'block_disealytics\external\learning_material',
-                'methodname' => 'execute',
-                'description' => 'Update learning materials',
-                'type' => 'write',
-                'ajax' => true,
-                'loginrequired' => true,
-        ],
-        'block_disealytics_get_learning_materials' => [
-                'classname'   => 'block_disealytics\external\get_learning_materials',
-                'methodname'  => 'execute',
-                'classpath'   => 'blocks/disealytics/classes/external/get_learning_materials.php',
-                'description' => 'Get learning materials from the user and course',
-                'type'        => 'read',
-                'ajax'        => true,
-                'loginrequired' => true,
-        ],
-        'block_disealytics_modid_to_courseid' => [
-                'classname' => 'block_disealytics\external\modid_to_courseid',
-                'methodname' => 'execute',
-                'description' => 'Get a course ID for a given CourseModuleID',
-                'type' => 'read',
-                'ajax' => true,
-                'loginrequired' => true,
-        ],
-
 ];

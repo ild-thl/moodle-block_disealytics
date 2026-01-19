@@ -100,20 +100,6 @@ $string['activity-view_help_info_text_expanded'] = "Die Detailansicht der Karte 
 $string['last_refresh'] = 'Letzte Aktualisierung der Daten am {$a}';
 
 // Assignment view.
-$string['assignment-view'] = 'Aufgabenübersicht';
-$string['assignment-view_help_info_text'] = "<p>Die Karte \"Aufgaben\" listet alle Aufgaben des Kurses auf, die Ihnen zur Verfügung stehen und zeigt einen aktuellen Status der Aufgabe. Wenn Sie auf den Link zu einer Aufgabe klicken, gelangen Sie auf die Seite mit den Details zu dieser Aufgabe.</p> <p style='color: var(--primary)'>Symbolbedeutung:</p> <p> <span style='color: var(--primary)'>Neutraler Status (Grauer Kreis):</span> Der grau ausgefüllte Kreis steht für einen neutralen Status der Aufgabe. Hier besteht kein Handlungsbedarf. <p> <span style='color: var(--primary)'>Nicht bestanden (Rotes 'X')</span> Das rote  \"X\" weist darauf hin, dass die entsprechende Aufgabe bewertet, aber nicht bestanden wurde. Für weitere Details klicken Sie bitte auf den Link der Aufgabe. <p> <span style='color: var(--primary)'>  Noch nicht bearbeitet (Graues \"X\"):</span> Das graue \"X\" weist darauf hin, dass die entsprechende Aufgabe noch nicht abgegeben / bearbeitet wurde. Für weitere Details klicken Sie bitte auf den Link der Aufgabe. <p><span style='color: var(--primary)'>Unvollständig (Gelbes Warnzeichen):</span> Das gelbe Warnzeichen zeigt an, dass die Aufgabe unvollständig ist, die Aufgabe noch nicht bearbeitet werden kann, weil noch Voraussetzungen fehlen oder gegebenenfalls nach dem Fälligkeitsdatum abgegeben wurde. Außerdem kann es sein, dass die Aufgabe zwar nicht bestanden wurde, aber noch weitere Versuche möglich sind. Für weitere Details klicken Sie bitte auf den Link der Aufgabe.  <p><span style='color: var(--primary)'>Rechtzeitig abgegeben (Grauer Pfeil):</span> Der graue Pfeil weist darauf hin, dass eine rechtzeitige Abgabe erfolgt ist. Für weitere Details klicken Sie bitte auf den Link der Aufgabe. <p> <span style='color: var(--primary)'>Unvollstaendig/Warnung (Gelbes Warnzeichen):</span> Das gelbe Warnzeichen zeigt an, dass die Aufgabe unvollständig ist, die Aufgabe noch nicht bearbeitet werden kann, weil noch Voraussetzungen fehlen oder gegebenenfalls nach dem Fälligkeitsdatum abgegeben wurde. Außerdem kann es sein, dass die Aufgabe zwar nicht bestanden wurde, aber noch weitere Versuche möglich sind. Für weitere Details klicken Sie bitte auf den Link der Aufgabe.  <p> <span style='color: var(--primary)'>Rechtzeitig abgegeben (Grauer Pfeil): </span> Der graue Pfeil weist darauf hin, dass eine rechtzeitige Abgabe erfolgt ist. Für weitere Details klicken Sie bitte auf den Link der Aufgabe. <p> <span style='color: var(--primary)'> Selbst als erledigt markiert (Gelber Pfeil): </span> Der gelbe Pfeil weist darauf hin, dass die Aufgabe vom Studierenden selbst als erledigt markiert wurde, aber gegebenenfalls noch vom Lehrenden überprüft werden muss. Für weitere Details klicken Sie bitte auf den Link der Aufgabe. <p><span style='color: var(--primary)'>Bestanden (Grüner Pfeil): </span> Der grüne Pfeil weist darauf hin, dass die Aufgabe bestanden ist. Für weitere Details klicken Sie bitte auf den Link der Aufgabe.";
-$string['assignment-view_help_info_text_expanded'] = "<p>Die Karte \"Aufgaben\" listet alle Aufgaben des Kurses auf, die Ihnen zur Verfügung stehen und zeigt einen aktuellen Status der Aufgabe. Wenn Sie auf den Link zu einer Aufgabe klicken, gelangen Sie auf die Seite mit den Details zu dieser Aufgabe.</p> <p style='color: var(--primary)'>Symbolbedeutung:</p> <p> <span style='color: var(--primary)'>Neutraler Status (Grauer Kreis):</span> Der grau ausgefüllte Kreis steht für einen neutralen Status der Aufgabe. Hier besteht kein Handlungsbedarf. <p> <span style='color: var(--primary)'>Nicht bestanden (Rotes 'X')</span> Das rote  \"X\" weist darauf hin, dass die entsprechende Aufgabe bewertet, aber nicht bestanden wurde. Für weitere Details klicken Sie bitte auf den Link der Aufgabe. <p> <span style='color: var(--primary)'>  Noch nicht bearbeitet (Graues \"X\"):</span> Das graue \"X\" weist darauf hin, dass die entsprechende Aufgabe noch nicht abgegeben / bearbeitet wurde. Für weitere Details klicken Sie bitte auf den Link der Aufgabe. <p><span style='color: var(--primary)'>Unvollständig (Gelbes Warnzeichen):</span> Das gelbe Warnzeichen zeigt an, dass die Aufgabe unvollständig ist, die Aufgabe noch nicht bearbeitet werden kann, weil noch Voraussetzungen fehlen oder gegebenenfalls nach dem Fälligkeitsdatum abgegeben wurde. Außerdem kann es sein, dass die Aufgabe zwar nicht bestanden wurde, aber noch weitere Versuche möglich sind. Für weitere Details klicken Sie bitte auf den Link der Aufgabe.  <p><span style='color: var(--primary)'>Rechtzeitig abgegeben (Grauer Pfeil):</span> Der graue Pfeil weist darauf hin, dass eine rechtzeitige Abgabe erfolgt ist. Für weitere Details klicken Sie bitte auf den Link der Aufgabe. <p> <span style='color: var(--primary)'>Unvollstaendig/Warnung (Gelbes Warnzeichen):</span> Das gelbe Warnzeichen zeigt an, dass die Aufgabe unvollständig ist, die Aufgabe noch nicht bearbeitet werden kann, weil noch Voraussetzungen fehlen oder gegebenenfalls nach dem Fälligkeitsdatum abgegeben wurde. Außerdem kann es sein, dass die Aufgabe zwar nicht bestanden wurde, aber noch weitere Versuche möglich sind. Für weitere Details klicken Sie bitte auf den Link der Aufgabe.  <p> <span style='color: var(--primary)'>Rechtzeitig abgegeben (Grauer Pfeil): </span> Der graue Pfeil weist darauf hin, dass eine rechtzeitige Abgabe erfolgt ist. Für weitere Details klicken Sie bitte auf den Link der Aufgabe. <p> <span style='color: var(--primary)'> Selbst als erledigt markiert (Gelber Pfeil): </span> Der gelbe Pfeil weist darauf hin, dass die Aufgabe vom Studierenden selbst als erledigt markiert wurde, aber gegebenenfalls noch vom Lehrenden überprüft werden muss. Für weitere Details klicken Sie bitte auf den Link der Aufgabe. <p><span style='color: var(--primary)'>Bestanden (Grüner Pfeil): </span> Der grüne Pfeil weist darauf hin, dass die Aufgabe bestanden ist. Für weitere Details klicken Sie bitte auf den Link der Aufgabe.";
-$string['assignment_info_text'] = "Hier sehen Sie Ihren Status der zur Verfügung stehenden Aufgaben des Kurses.";
-$string['assignment_view_hover_failed'] = 'Aufgaben nicht bestanden';
-$string['assignment_view_hover_okay'] = 'Aufgaben bestanden';
-$string['assignment_view_hover_notsubmitted'] = 'Aufgabe noch nicht abgegeben';
-$string['assignment_view_hover_submitted'] = 'Aufgabe abgegeben, aber noch nicht bewertet';
-$string['assignment_view_hover_incomplete'] = 'Aufgabe unvollständig, nach Fälligkeit eingereicht, mit fehlender Voraussetzung oder im ersten Versuch nicht bestanden';
-$string['assignment_view_hover_selfcheck'] = 'Aufgabe wurde als erledigt markiert, ist ggf. aber noch vom Lehrenden zu prüfen';
-$string['assignment_view_hover_neutral'] = 'Neutraler Status. Es besteht kein Handlungsbedarf';
-$string['assignment_view_load-less-assignments'] = 'Weniger anzeigen';
-$string['assignment_view_specific_scale'] = 'nicht bestanden, Nacharbeit, bestanden';
-$string['assignment_view_no_assignments_available'] = 'Sie sind in keinem Kurs des ausgewählten Semesters eingeschrieben, der Aufgaben enthält.';
 
 // Learninggoals view.
 $string['learning-goals-view'] = 'Lernziele';
@@ -143,10 +129,6 @@ $string['goal_name_invalid'] = 'Bitte verwenden Sie nur Buchstaben, Zahlen, Leer
 $string['goal_date_missing'] = 'Bitte geben Sie ein Fälligkeitsdatum für das Lernziel ein.';
 
 // Progressbar view.
-$string['progress-bar-view'] = 'Lesefortschrittsbalken';
-$string['progress_config_title'] = 'Lesefortschrittsbalken';
-$string['progress_config_help_title'] = 'Lesefortschrittsbalken: Hinzufügen von Lernmaterialien';
-$string['progress-bar-view_help_info_text'] = '<p>Der Lesefortschrittsbalken zeigt Ihnen den Lesefortschritt Ihrer aktuellen Lektüre.</p><p style="color: var(--primary)">Hinzufügen von Lernmaterialien</p><p>In der Standardeinstellung ist die Karte leer. Sie können dieser Karte den Fortschritt der Lernmaterialien dieses Kurses über das Zahnrad rechts oben in der Karte hinzufügen.</p><p style="color: var(--primary)">Grafikdaten anzeigen</p><p>Dies zeigt Ihnen eine detaillierte Tabelle mit den Lernmaterialien, die Sie eingegeben haben, an.';
 
 $string['study-progress-view'] = "Lernfortschritt";
 $string['data_entry_view'] = "Dateneingabe";
@@ -156,9 +138,6 @@ $string['add_view_button'] = 'Karte hinzufügen';
 $string['add_activity_view'] = '"Nutzungsaktivität" hinzufügen';
 $string['add_study_progress_view'] = '"Lernfortschrittsanzeige" hinzufügen';
 $string['add_learning_goals_view'] = '"Lernziele" hinzufügen';
-$string['add_assignment_view'] = '"Aufgabenübersicht" hinzufügen';
-$string['add_progress_bar_view'] = '"Lesefortschrittsbalken" hinzufügen';
-$string['add_success_chance_view'] = '"PVL-Wahrscheinlichkeit" hinzufügen';
 $string['add_planner_view'] = '"Planungsassistent" hinzufügen';
 $string['add_statistic-insights_view'] = '"Statistische Einblicke" hinzufügen';
 
@@ -169,34 +148,7 @@ $string['total_study_period'] = 'Gesamtes Studium';
 $string['current_semester'] = 'Aktuelles Semester';
 
 // Optional input fields.
-$string['progress_bar_add_learning_material'] = 'Lernmaterialien des Kurses hinzufügen';
-$string['progress_bar_manage_learning_material'] = 'Lernmaterialien des Kurses verwalten';
-$string['progress_bar_modal_intro'] = 'Sie können hier Dokumente, Videos oder Links, die im aufgerufenen Kurs hochgeladen sind, als Lernmaterialien hinzufügen oder die vorhandenen Lernmaterialien des aufgerufenen Kurses bearbeiten.';
-$string['progress_bar_additional_help'] = 'Hilfe zur Verwaltung der Lernmaterialien';
-$string['add-learning-material'] = 'Lernmaterial aus dem Kurs hinzufügen';
-$string['learning_material_no_selection'] = 'Keine Auswahl';
-$string['learning_material_all_inputs_set'] = 'Sie haben alle verfügbaren Lernmaterialien des Kurses hinzugefügt.';
-$string['learning_material_document'] = 'Dokument auswählen';
-$string['learning_material_pages'] = 'Gelesene Seiten';
-$string['learning_material_current_page'] = 'Aktuelle Seite';
-$string['learning_material_last_page'] = 'Letzte Seite';
-$string['learning_material_expenditureoftime'] = 'Zeitaufwand (in Stunden)';
-$string['learning_material_save'] = 'Speichern';
-$string['learning_material_edit'] = 'Bearbeiten';
-$string['learning_material_delete'] = 'Löschen';
-$string['learning_material_cancel'] = 'Abbrechen';
-$string['learning_material_page_error'] = 'Aktuelle Seite kann nicht höher sein als die letzte Seite.';
-$string['learning_material_no_document_selected_error'] = 'Bitte wählen Sie ein Dokument, bevor Sie speichern.';
-$string['learning_material_page_zero_error'] = 'Die letzte Seite kann nicht 0 sein.';
-$string['learning_material_negative_page_error'] = 'Es können keine negativen Zahlen in den Seitenzahlen, oder im Zeitaufwand gespeichert werden.';
-$string['learning_material_page_overflow_error'] = 'Es können keine Seitenzahlen größer als 1000 gespeichert werden.';
-$string['learning_material_expenditure_of_time_overflow_error'] = 'Es kann kein Zeitaufwand größer als 500 gespeichert werden.';
-$string['learning_material_pattern_error'] = 'Bitte verwenden Sie nur Zahlen.';
-$string['learning_material_save_success'] = 'Der Lesefortschritt wurde erfolgreich gespeichert.';
-$string['learning_material_delete_success'] = 'Der Lesefortschritt wurde erfolgreich gelöscht.';
-$string['progress_bar_title'] = "Lesefortschritt";
-$string['pages_read'] = "Gelesen";
-$string['pages_left'] = "Verbleibend";
+
 $string['missing_points'] = "Nicht erreichte Punkte";
 
 $string['title_detail_name'] = "Detailansicht";
@@ -232,14 +184,10 @@ $string['main_help_edit_title'] = "Bearbeitungsfunktion";
 $string['main_help_edit_summary'] = 'Ein Klick auf das Stift-Symbol startet die Bearbeitungsfunktion zum Hinzufügen oder Löschen von Karten im Dashboard. Mit dieser Funktion können Sie sich Ihr Dashboard nach den eigenen Vorstellungen und mit den für Sie relevanten Karten zusammenstellen. Klicken Sie auf das rote X an der entsprechenden Karte, um diese zu entfernen. Eine neue Karte fügen Sie hinzu, wenn Sie den Button "Karte hinzufügen" wählen. Dieser Button öffnet einen neuen Dialog mit den zur Verfügung stehenden Karten.';
 
 // Main help cards.
-$string['main_help_assignment-view'] = 'Die Karte <span style="color:var(--primary)">Aufgabenübersicht</span> listet alle Einsendeaufgaben auf, die Ihnen in den entsprechenden Modulen zur Verfügung stehen und zeigt einen aktuellen Status der Aufgabe.';
 $string['main_help_activity-view'] = 'Die Karte <span style="color:var(--primary)">Nutzungsaktivität</span> betrachtet Ihre Lernzeit auf einen Blick! Die farbigen Segmente repräsentieren unterschiedliche Aktivitäten und ihre Höhe zeigt die Dauer jeder Aktivität.';
 $string['main_help_learning-goals-view'] = 'In der Karte <span style="color:var(--primary)">Lernziele</span> können Sie jegliche Lernziele festhalten. Diese Funktion können Sie auch Semesterübergreifend verwenden.';
 $string['main_help_planner-view'] = 'Diese Karte <span style="color:var(--primary)">Planungsassistent</span> zeigt Ihnen einen Überblick über Ihre anstehenden Webkonferenzen, Einsendeaufgaben oder andere Aktivitäten.';
-$string['main_help_progress-bar-view'] = 'In der Karte <span style="color:var(--primary)">Lesefortschrittsbalken</span> können Sie manuell Lernmaterialien hinzufügen und erhalten in Form eines Diagramms den aktuellen Lesefortschritt Ihrer aktuellen Lektüre.';
 $string['main_help_study-progress-view'] = 'Das Speedometer in der Karte <span style="color:var(--primary)">Lernfortschrittsanzeige</span> zeigt Ihnen Ihren Lernfortschritt an und stellt dar, wie weit Sie auf dem Weg zum Ziel sind. Die Grundlage der Berechnung sind die Bewertungen in den Aufgaben, die für Sie im Kurs zugeordnet sind.';
-$string['main_help_success-chance-view'] = 'In der Karte <span style="color:var(--primary)">PVL-Wahrscheinlichkeit</span> werden alle Einsendeaufgaben (inkl. Bewertungspunkte) dargestellt. Die jeweilige PVL-Wahrscheinlichkeit errechnet sich aus den Bewertungspunkten der einzelnen Abgaben und stellt diese als Prozentsatz dar.';
-
 
 $string['main_add_view_title'] = "Karten hinzufügen";
 $string['main_add_view_info_text'] = "Wählen Sie die gewünschten Karten aus, die Sie im DiSEA-Dashboard angezeigt haben möchten.";
@@ -311,6 +259,7 @@ $string['statistic-insights-view_help_info_text_expanded'] = '<p>
     Für jedes Kursmodul zeigt die Karte zusätzliche Leistungsdaten an - insbesondere kognitive und soziale
     Indikatoren, die einen tieferen Einblick in bestimmte Bereiche des Lernfortschritts ermöglichen.
 </p>';
+
 $string['statistic-insights-view_at_risk'] = '<span style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> Sie sind gefährdet, den Kurs nicht zu bestehen.</span>';
 $string['statistic-insights-view_not_at_risk'] = '<p style="color: var(--gray);"><i class="fa fa-check-circle" style="color: var(--green);"></i> Bei gleichbleibender Beteiligung am Kurs werden Sie diesen wahrscheinlich bestehen.</p>';
 $string['analytics_at_risk:explanation'] = 'Teilnehmer/innen, die Gefahr laufen, aus dem Kurs auszusteigen';
@@ -354,27 +303,6 @@ $string['study-progress_eval_halfyear'] = "Bewertung für Ihr Semester";
 $string['study-progress_eval_global'] = "Bewertung für Ihr Studium";
 
 // Success chance view.
-$string['success-chance-view'] = 'PVL-Wahrscheinlichkeit';
-$string['success-chance-view_help_info_text'] = '<p>In der Karte "PVL-Wahrscheinlichkeit" werden alle Einsendeaufgaben (inkl. Bewertungspunkte) vollständig dargestellt. Die jeweilige PVL-Wahrscheinlichkeit errechnet sich aus den Status der einzelnen Abgaben und stellt diese als Prozentsatz dar.</p> <p><span style="color: var(--primary)">HINWEIS</span><br> Bitte beachten Sie, dass der Wert der "PVL-Wahrscheinlichkeit" lediglich auf Basis der vergangenen Einsendeaufgaben berechnet wird. Es ist wichtig zu verstehen, dass eine hohe PVL-Wahrscheinlichkeit daher keine Garantie für Erfolg bedeutet und dass eine gewisse Unsicherheit besteht. Letztendlich hängt Ihr Erfolg von vielen Faktoren ab, einschließlich Ihrer Anstrengungen und Umstände, die außerhalb unserer Kontrolle liegen. Nutzen Sie die PVL-Wahrscheinlichkeit als eine Orientierungshilfe, aber lassen Sie sich nicht entmutigen, wenn Ihre tatsächlichen Ergebnisse davon abweichen.';
-$string['success-chance-view_help_info_text_expanded'] = 'In der Detailansicht der "PVL-Wahrscheinlichkeit" erhalten Sie eine vollständige Auflistung der Einsendeaufgaben und deren Status, die zur Berechnung der PVL-Wahrscheinlichkeit beitragen.';
-$string['success-chance_info_text'] = 'Betrachten Sie die PVL-Wahrscheinlichkeit: Die PVL-Wahrscheinlichkeit zeigt Ihnen, wie viele Bewertungspunkte Sie erhalten haben.';
-$string['success-chance_info_text_expanded'] = 'Die PVL-Wahrscheinlichkeit zeigt Ihnen den Status der Einsendeaufgaben an.';
-$string['pvl_success-chance-chart-text'] = 'PVL-Wahrscheinlichkeit';
-$string['success-chance-label-failed'] = 'PVL-Wahrscheinlichkeit';
-$string['success-chance_no_course_available'] = 'Sie sind in keinem Kurs des ausgewählten Semesters eingeschrieben, für den eine PVL-Wahrscheinlichkeit berechnet werden kann.';
-
-
-$string['pvl_assignment_info_text_summary_modul'] = 'Im laufenden Modul sieht Ihre Bilanz wie folgt aus:';
-$string['pvl_assignment_info_text_summary_semester'] = 'Im laufenden Semester sieht Ihre Bilanz wie folgt aus:';
-$string['pvl_assignment_info_text_summary_global'] = 'Im gesamten Studium sieht Ihre Bilanz wie folgt aus:';
-$string['pvl_assignment_info_text_okay'] = 'Einsendeaufgaben sind bestanden.';
-$string['pvl_assignment_info_text_incomplete'] = 'Einsendeaufgaben sind unvollständig.';
-$string['pvl_assignment_info_text_submitted'] = 'Einsendeaufgaben sind abgegeben.';
-$string['pvl_assignment_info_text_notsubmitted'] = 'Einsendeaufgaben sind noch nicht abgegeben.';
-$string['pvl_assignment_info_text_selfcheck'] = 'Einsendeaufgaben sind als erledigt markiert.';
-$string['pvl_assignment_info_text_failed'] = 'Einsendeaufgaben sind nicht bestanden.';
-$string['pvl_assignment_view_hover_okay'] = 'Einsendeaufgaben sind vollständig.';
-$string['pvl_assignment_view_hover_incomplete'] = 'Einsendeaufgaben sind noch nicht vollständig';
 
 $string['status'] = 'Status';
 $string['success-chance-failed-text'] = 'nicht bestanden';
@@ -446,14 +374,6 @@ $string['viewmode_module'] = 'Modulansicht';
 $string['viewmode_global'] = 'Gesamtansicht';
 $string['viewmode_halfyear'] = 'Semesteransicht';
 
-$string['task_tasktransform'] = 'Tasktransformation';
-
-
-$string['config_title'] = 'Kurs f&uuml;r Logdaten';
-$string['config_text'] = 'Bitte geben Sie hier die Kurs ID f&uuml;r den Kurs ein, in dem die Logdaten gespeichert werden sollen.';
-
-$string['config_key_title'] = '&Ouml;ffentlicher Schl&uuml;ssel zum Verschl&uuml;sseln der Daten';
-$string['config_key_text'] = 'Bitte f&uuml;gen Sie hier den &ouml;ffentlichen Schl&uuml;ssel ein.';
 
 $string['config_consent_text'] = 'Ihre Einwilligungserkl&auml;rung';
 $string['config_consent_description'] = 'Bitte geben Sie hier ihre Einwilligungserkl&auml;rung als HTML formatierten Text ein.';

@@ -100,20 +100,6 @@ $string['activity-view_help_info_text_expanded'] = "In the activity card’s det
 $string['last_refresh'] = 'Latest data from {$a}';
 
 // Assignment view.
-$string['assignment-view'] = 'Assignments';
-$string['assignment-view_help_info_text'] = "<p>The 'Assignments' card lists all the assignments of the course available to you and shows the current status of the assignment. When you click on the link of an assignment, you will be forwarded to the page with the details of that assignment.</p> <p style='color: var(--primary)'>Symbol meanings:</p> <p> <span style='color: var(--primary)'>Neutral status (grey circle):</span> The grey circle represents the neutral status of the assignment. No action is required. <p> <span style='color: var(--primary)'>Not passed (red 'X'):</span> The red 'X' indicates that the respective assignment has been assessed but not passed. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Not yet attempted (grey 'X'):</span> The grey 'X' indicates that the respective assignment has not yet been submitted / attempted. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Incomplete (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p><span style='color: var(--primary)'>Submitted on time (grey check mark):</span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Incomplete/Warning (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p> <span style='color: var(--primary)'>Submitted on time (Grey check mark): </span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Marked as completed by yourself (Yellow check mark): </span> The yellow check mark indicates that the assignment has been self-marked as complete by the student, but may still need to be reviewed by the instructor. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Passed (Green check mark): </span> The green check mark indicates that the assignment was passed. For more details, please click on the assignment link.";
-$string['assignment-view_help_info_text_expanded'] = "<p>The 'Assignments' card lists all the assignments of the course available to you and shows the current status of the assignment. When you click on the link of an assignment, you will be forwarded to the page with the details of that assignment.</p> <p style='color: var(--primary)'>Symbol meanings:</p> <p> <span style='color: var(--primary)'>Neutral status (grey circle):</span> The grey circle represents the neutral status of the assignment. No action is required. <p> <span style='color: var(--primary)'>Not passed (red 'X'):</span> The red 'X' indicates that the respective assignment has been assessed but not passed. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Not yet attempted (grey 'X'):</span> The grey 'X' indicates that the respective assignment has not yet been submitted / attempted. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Incomplete (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p><span style='color: var(--primary)'>Submitted on time (grey check mark):</span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Incomplete/Warning (yellow warning sign):</span> The yellow warning sign indicates that the assignment is incomplete, cannot be attempted yet because of missing requirements, or may have been submitted after the due date. Additionally, it may indicate that the assignment has not been passed but further attempts are possible. For more details, please click on the assignment link.  <p> <span style='color: var(--primary)'>Submitted on time (Grey check mark): </span> The grey check mark indicates that the submission was made on time. For more details, please click on the assignment link. <p> <span style='color: var(--primary)'>Marked as completed by yourself (Yellow check mark): </span> The yellow check mark indicates that the assignment has been self-marked as complete by the student, but may still need to be reviewed by the instructor. For more details, please click on the assignment link. <p><span style='color: var(--primary)'>Passed (Green check mark): </span> The green check mark indicates that the assignment was passed. For more details, please click on the assignment link.";
-$string['assignment_info_text'] = "Here you can see the status of the assignments available in the course.";
-$string['assignment_view_hover_failed'] = 'Assignment failed';
-$string['assignment_view_hover_okay'] = 'Assignment passed';
-$string['assignment_view_hover_notsubmitted'] = 'Assignment not yet submitted';
-$string['assignment_view_hover_submitted'] = 'Assignment submitted but not yet evaluated';
-$string['assignment_view_hover_incomplete'] = 'Assignment incomplete, submitted after the due date, with missing requirements or failed on first attempt';
-$string['assignment_view_hover_selfcheck'] = 'Assignment has been self-marked as completed, but may still need to be reviewed by the instructor';
-$string['assignment_view_hover_neutral'] = 'Neutral status. No action is required';
-$string['assignment_view_load-less-assignments'] = 'Show less';
-$string['assignment_view_specific_scale'] = 'failed, rework, passed';
-$string['assignment_view_no_assignments_available'] = 'You are not enrolled in any course in the selected semester that contains assignments.';
 
 // Learninggoals view.
 $string['learning-goals-view'] = 'Learning Goals';
@@ -143,10 +129,6 @@ $string['goal_name_invalid'] = 'Please use only letters, numbers, spaces and the
 $string['goal_date_missing'] = 'Please enter a due date for the learning goal.';
 
 // Progressbar view.
-$string['progress-bar-view'] = 'Progressbar';
-$string['progress_config_title'] = 'Progressbar';
-$string['progress_config_help_title'] = 'Reading Progressbar: Add learning material';
-$string['progress-bar-view_help_info_text'] = "<p>The 'Progressbar' card shows you the reading progress of your current learning material.</p><p style='color: var(--primary)'>Add learning material</p><p>By default, the card is empty. You can add the progress of learning materials belonging to this course to the card through the gear icon at the top right corner.</p><p style='color: var(--primary)'>Viewing graphic data</p><p>This will show you a detailed table of the learning materials you have submitted.";
 
 $string['study-progress-view'] = "Study Progress";
 $string['data_entry_view'] = "Data entry";
@@ -156,9 +138,6 @@ $string['add_view_button'] = 'Add card';
 $string['add_activity_view'] = "Add 'Activity'";
 $string['add_study_progress_view'] = "Add 'Study Progress'";
 $string['add_learning_goals_view'] = "Add 'Learning Goals'";
-$string['add_assignment_view'] = "Add 'Assignments'";
-$string['add_progress_bar_view'] = "Add 'Progressbar'";
-$string['add_success_chance_view'] = "Add 'PVL-Probability'";
 $string['add_planner_view'] = "Add 'Planning Assistent'";
 $string['add_statistic-insights_view'] = "Add 'Statistical Insights'";
 
@@ -169,34 +148,7 @@ $string['total_study_period'] = 'Entire study program';
 $string['current_semester'] = 'Current semester';
 
 // Optional input fields.
-$string['progress_bar_add_learning_material'] = 'Add course learning material';
-$string['progress_bar_manage_learning_material'] = 'Manage course learning material';
-$string['progress_bar_modal_intro'] = 'Here you can add documents, videos or links that have been uploaded in the selected course as learning material.';
-$string['progress_bar_additional_help'] = 'Further help with managing learning materials';
-$string['add-learning-material'] = 'Add course learning material';
-$string['learning_material_no_selection'] = 'No selection';
-$string['learning_material_all_inputs_set'] = 'You added all available learning materials of the course.';
-$string['learning_material_document'] = 'Select document';
-$string['learning_material_pages'] = 'Pages read';
-$string['learning_material_current_page'] = 'Current page';
-$string['learning_material_last_page'] = 'Last page';
-$string['learning_material_expenditureoftime'] = 'Expenditure of time (in hours)';
-$string['learning_material_save'] = 'Save';
-$string['learning_material_edit'] = 'Edit';
-$string['learning_material_delete'] = 'Delete';
-$string['learning_material_cancel'] = 'Cancel';
-$string['learning_material_page_error'] = 'Current page cannot be higher than the last page.';
-$string['learning_material_no_document_selected_error'] = 'Please select a document before saving.';
-$string['learning_material_page_zero_error'] = 'The last page cannot be 0.';
-$string['learning_material_negative_page_error'] = 'Negative numbers cannot be saved as page numbers or as expenditure of time.';
-$string['learning_material_page_overflow_error'] = 'Page numbers greater than 1000 cannot be saved.';
-$string['learning_material_expenditure_of_time_overflow_error'] = 'Time expenditure greater than 500 cannot be saved.';
-$string['learning_material_pattern_error'] = 'Please use numbers only.';
-$string['learning_material_save_success'] = 'The reading progress was saved successfully.';
-$string['learning_material_delete_success'] = 'The reading progress was deleted successfully.';
-$string['progress_bar_title'] = "Reading progress";
-$string['pages_read'] = "Pages read";
-$string['pages_left'] = "Pages left";
+
 $string['missing_points'] = "Points not reached";
 
 $string['title_detail_name'] = "Detail view";
@@ -232,13 +184,10 @@ $string['main_help_edit_title'] = "Editing function";
 $string['main_help_edit_summary'] = 'Click on the pencil icon to start the editing function for adding or deleting cards in the dashboard. You can use this function to customise your dashboard with the cards that are relevant to you. Click on the red X on the relevant card to remove it. You can add a new card by selecting the ‘Add card’ button. This button opens a new dialogue with the available cards.';
 
 // Main help cards.
-$string['main_help_assignment-view'] = 'The card <span style="color:var(--primary)">Assignments</span> lists all submission tasks that are available to you in the corresponding modules and shows the current status of the task.';
 $string['main_help_activity-view'] = 'The card <span style="color:var(--primary)">Activity</span> views your learning time at a glance! The coloured segments represent different activities and their height shows the duration of each activity.';
 $string['main_help_learning-goals-view'] = 'In the card <span style="color:var(--primary)">Learning Goals</span> you can record any learning objectives. You can also use this function across semesters.';
 $string['main_help_planner-view'] = 'The card <span style="color:var(--primary)">Planning Assistent</span> shows you an overview of your upcoming web conference, submission tasks or other activities.';
-$string['main_help_progress-bar-view'] = 'In the card <span style="color:var(--primary)">Progressbar</span> you can add learning materials manually and receive the current reading progress of your current reading in the form of a diagram.';
 $string['main_help_study-progress-view'] = 'The speedometer on the card <span style="color:var(--primary)">Study Progress</span> shows you your learning progress and how far you are towards your goal. The calculation is based on the assessments in the tasks that are assigned to you in the course.';
-$string['main_help_success-chance-view'] = 'In the card <span style="color:var(--primary)">PVL-Probability</span> all submissions (including assessment points) are displayed. The respective PVL probability is calculated from the assessment points of the individual submissions and displayed as a percentage.';
 
 $string['main_add_view_title'] = "Add cards";
 $string['main_add_view_info_text'] = "Select the cards you would like to have displayed in the Learner Dashboard.";
@@ -314,6 +263,7 @@ $string['statistic-insights-view_help_info_text_expanded'] = "<p>
     For each course module, the card displays additional performance data — particularly cognitive and social
     indicators — offering a deeper dive into specific areas of your progress.
 </p>";
+
 $string['statistic-insights-view_at_risk'] = '<span style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> You are currently at risk of not passing this course.</span>';
 $string['statistic-insights-view_not_at_risk'] = '<p style="color: var(--gray);"><i class="fa fa-check-circle" style="color: var(--green);"></i> Your progress on the course so far is good.</p>';
 $string['analytics_at_risk:explanation'] = 'Student at risk of dropping out';
@@ -357,27 +307,6 @@ $string['study-progress_eval_halfyear'] = "Evaluation for this semester";
 $string['study-progress_eval_global'] = "Evaluation for your studies";
 
 // Success chance view.
-$string['success-chance-view'] = 'PVL-Probability';
-$string['success-chance-view_help_info_text'] = "<p>All submitted assignments (including assessment points) are displayed in full on the 'PVL-Probability' card. The respective PVL-Probability is calculated from the status of the individual submissions and represents this as a percentage.</p><p><span style=\"color: var(--primary)\">NOTE</span><br> Please note, that the value of the PVL-Probability is only calculated based on the past assignments submitted. It is important to understand that a high PVL-Probability does not therefore mean a guarantee of success and that there is some uncertainty. Ultimately, your success depends on many factors, including your efforts and circumstances beyond our control. Use the PVL-Probability as a guide, but do not be discouraged if your actual results differ.";
-$string['success-chance-view_help_info_text_expanded'] = "In the detailed view of the card 'PVL-Probability', you will find a complete list of the submission assignments and their status, which contribute to the calculation of the PVL-Probability.";
-$string['success-chance_info_text'] = 'Look at the PVL-Probability: The PVL-Probability shows you how many assessment points you have received.';
-$string['success-chance_info_text_expanded'] = 'The PVL-Probability shows you the status of the submitted assignments.';
-$string['pvl_success-chance-chart-text'] = 'PVL-Probability';
-$string['success-chance-label-failed'] = 'PVL-Probability';
-$string['success-chance_no_course_available'] = 'You are not enrolled in any course in this semester a PVL-Probability can be calculated for.';
-
-$string['pvl_assignment_info_text_summary_modul'] = 'Your PVL-Probability for the current module is as follows:';
-$string['pvl_assignment_info_text_summary_semester'] = 'Your PVL-Probability for the current semester is as follows:';
-$string['pvl_assignment_info_text_summary_global'] = 'Your overall PVL-Probability is as follows:';
-
-$string['pvl_assignment_info_text_okay'] = 'assignments have been passed.';
-$string['pvl_assignment_info_text_incomplete'] = 'assignments are incomplete.';
-$string['pvl_assignment_info_text_submitted'] = 'assignments have been submitted.';
-$string['pvl_assignment_info_text_notsubmitted'] = 'assignments have not yet been submitted.';
-$string['pvl_assignment_info_text_selfcheck'] = 'assignments are marked as completed.';
-$string['pvl_assignment_info_text_failed'] = 'assignments are not passed.';
-$string['pvl_assignment_view_hover_okay'] = 'assignments are complete.';
-$string['pvl_assignment_view_hover_incomplete'] = 'assignments are not yet complete';
 
 $string['status'] = 'Status';
 $string['success-chance-failed-text'] = 'failed';

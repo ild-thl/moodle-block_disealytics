@@ -139,7 +139,6 @@ $string['add_activity_view'] = '"Nutzungsaktivität" hinzufügen';
 $string['add_study_progress_view'] = '"Lernfortschrittsanzeige" hinzufügen';
 $string['add_learning_goals_view'] = '"Lernziele" hinzufügen';
 $string['add_planner_view'] = '"Planungsassistent" hinzufügen';
-$string['add_statistic-insights_view'] = '"Statistische Einblicke" hinzufügen';
 
 $string['learning-materials-view'] = 'Lernmaterialien hinzufügen';
 
@@ -214,73 +213,6 @@ $string['learning_materials-view_help_info_text'] = '<p>Bleiben Sie bezüglich I
 <p>Unter "Lernmaterialien des Kurses verwalten" können Sie Ihre bereits eingetragenen Materialien bearbeiten oder einzelne Lesefortschritte aus Ihrem persönlichen Bereich entfernen.</p>';
 
 // Statistic insights view.
-$string['statistic-insights-view'] = 'Statistische Einblicke';
-$string['statistic-insights-view_help_info_text'] = '<p>
-    Die Karte „Statistische Einblicke“ gibt einen Überblick über Ihre Berechnungen des Moodle Learning Analytics Modells
-    „Students at risk of dropping out“. Sie ist in die folgenden Abschnitte unterteilt:
-</p>
-<p style="color: var(--primary)">Risikostatus:</p>
-<p>
-    Zeigt an, ob Sie aufgrund von Analysen als „gefährdet“ eingestuft werden. Wenn ja, bietet ein begleitendes Hilfesymbol
-    zusätzlichen Kontext.
-</p>
-<p style="color: var(--primary)">Informationen zum Kursabschluss:</p>
-<p>
-    Wenn die Verfolgung des Kursabschlusses aktiviert ist, zeigt die Karte den aktuellen Fortschritt und Kriterien an.
-</p>
-<p style="color: var(--primary)">Allgemeine Engagement-Metriken:</p>
-<p>
-    Fasst wichtige Maßnahmen wie ausstehende Aktivitäten, Leseaktionen und schriftliches Engagement zusammen. Diese Indikatoren helfen, die allgemeine Beteiligung zu beurteilen.
-</p>
-<p style="color: var(--primary)">Modul-spezifische Einblicke:</p>
-<p>
-    Für jedes Kursmodul zeigt die Karte zusätzliche Leistungsdaten an - insbesondere kognitive und soziale
-    Indikatoren, die einen tieferen Einblick in bestimmte Bereiche des Lernfortschritts ermöglichen.
-</p>';
-$string['statistic-insights-view_help_info_text_expanded'] = '<p>
-    Die Karte „Statistische Einblicke“ gibt einen Überblick über Ihre Berechnungen des Moodle Learning Analytics Modells
-    „Students at risk of dropping out“. Sie ist in die folgenden Abschnitte unterteilt:
-</p>
-<p style="color: var(--primary)">Risikostatus:</p>
-<p>
-    Zeigt an, ob Sie aufgrund von Analysen als „gefährdet“ eingestuft werden. Wenn ja, bietet ein begleitendes Hilfesymbol
-    zusätzlichen Kontext.
-</p>
-<p style="color: var(--primary)">Informationen zum Kursabschluss:</p>
-<p>
-    Wenn die Verfolgung des Kursabschlusses aktiviert ist, zeigt die Karte den aktuellen Fortschritt und Kriterien an.
-</p>
-<p style="color: var(--primary)">Allgemeine Engagement-Metriken:</p>
-<p>
-    Fasst wichtige Maßnahmen wie ausstehende Aktivitäten, Leseaktionen und schriftliches Engagement zusammen. Diese Indikatoren helfen, die allgemeine Beteiligung zu beurteilen.
-</p>
-<p style="color: var(--primary)">Modul-spezifische Einblicke:</p>
-<p>
-    Für jedes Kursmodul zeigt die Karte zusätzliche Leistungsdaten an - insbesondere kognitive und soziale
-    Indikatoren, die einen tieferen Einblick in bestimmte Bereiche des Lernfortschritts ermöglichen.
-</p>';
-
-$string['statistic-insights-view_at_risk'] = '<span style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> Sie sind gefährdet, den Kurs nicht zu bestehen.</span>';
-$string['statistic-insights-view_not_at_risk'] = '<p style="color: var(--gray);"><i class="fa fa-check-circle" style="color: var(--green);"></i> Bei gleichbleibender Beteiligung am Kurs werden Sie diesen wahrscheinlich bestehen.</p>';
-$string['analytics_at_risk:explanation'] = 'Teilnehmer/innen, die Gefahr laufen, aus dem Kurs auszusteigen';
-$string['analytics_at_risk:explanation_help'] = 'Das Analysemodell prognostiziert die Wahrscheinlichkeit, dass ein/e Studierende/r seinen/ihren Kurs abbricht, basierend auf seiner/ihrer Aktivität und Beteiligung. Es analysiert Faktoren wie Anmeldungen, Forenbeiträge, Einsendungen von Aufgaben und andere Interaktionen, um eine Schätzung des Engagements zu erstellen. Es handelt sich hierbei nur um eine Vorhersage, die eher als Leitfaden dienen sollte. Die Studierenden werden ermutigt, aktiv zu bleiben und bei Bedarf Unterstützung zu suchen.';
-$string['analytics_at_risk:explanation_link'] = 'Teilnehmer/innen,_die_Gefahr_laufen,_aus_dem_Kurs_auszusteigen';
-$string['general_indicators'] = 'Übersicht';
-$string['statistic-insights-view_anywriteincourse'] = '<p style="color: var(--green);"><i class="fa fa-check-circle"></i></p><p>Sie haben bereits Schreibaktivität in diesem Kurs.</p>';
-$string['statistic-insights-view_nowriteincourse'] = '<p style="color: var(--gray);"><i class="fa fa-warning"></i></p><p>Sie haben noch keine Schreibaktivität in diesem Kurs.</p>';
-$string['statistic-insights-view_activitiesdue'] = '<p style="color: var(--white);"><i class="fa fa-warning"></i></p><p>Sie haben fällige Aufgaben!</p>';
-$string['statistic-insights-view_noactivitiesdue'] = '<p style="color: var(--white);"><i class="fa fa-check-circle"></i></p><p>Sie haben keine fälligen Aufgaben.</p>';
-$string['cognitive_indicators'] = 'Kognitiv';
-$string['social_indicators'] = 'Sozial';
-$string['mod_indicators'] = 'Status des Engagement in den Kursaktivitäten';
-$string['mod_indicators_subtitle'] = 'Engagement';
-$string['statistic-insights-view_completion_title'] = 'Status des Kursabschlusses';
-$string['analytics_completion:explanation'] = 'Kursabschluss';
-$string['analytics_completion:explanation_help'] = 'Der Kursabschluss ist in diesem Kurs aktiviert. Der aktuelle Fortschritt bezüglich der Beendigung des Kurses kann unten eingesehen werden.';
-$string['analytics_completion:explanation_link'] = 'Kursabschluss';
-$string['statistic-insights-view_course_prediction_not_initialized'] = '<span style="color: var(--gray);"><i class="fa fa-warning"></i> Es sind keine Vorhersagen zu Ihrem aktuellen Fortschritt in diesem Kurs verfügbar oder wurden von der administrierenden Person nicht initiiert.</span>';
-$string['statistic-insights-view_global_additional_info'] = 'Hinweis: Die Prognosen können nur für laufende Kurse ausgegeben werden. Daher entspricht die globale Ansicht in dieser Karte der Semesteransicht.';
-$string['statistic-insights-view_no_course_available'] = 'Es liegen keine Statistiken vor, da Sie in diesem Semester in keinem Kurs eingeschrieben sind.';
 
 // Study progress view.
 $string['study-progress-view'] = "Lernfortschrittsanzeige";

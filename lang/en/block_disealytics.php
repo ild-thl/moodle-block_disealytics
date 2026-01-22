@@ -139,7 +139,6 @@ $string['add_activity_view'] = "Add 'Activity'";
 $string['add_study_progress_view'] = "Add 'Study Progress'";
 $string['add_learning_goals_view'] = "Add 'Learning Goals'";
 $string['add_planner_view'] = "Add 'Planning Assistent'";
-$string['add_statistic-insights_view'] = "Add 'Statistical Insights'";
 
 $string['learning-materials-view'] = "Add learning material";
 
@@ -214,77 +213,6 @@ $string['learning_materials-view_help_info_text'] = '<p>Stay up to date with you
 <p>Under "Manage course learning materials" you can edit the materials you have already entered or remove individual reading progress from your personal area.</p>';
 
 // Statistical insights view.
-$string['statistic-insights-view'] = 'Statistical Insights';
-$string['statistic-insights-view_help_info_text'] = "<p>
-    The 'Statistical Insights' card provides an overview of your calculations of Moodle's Learning Analytics model
-    'students at risk of dropping out'. It is separated into the following sections:
-</p>
-<p style='color: var(--primary)'>Student Risk Status:</p>
-<p>
-    Displays whether you are predicted to be 'at risk' based on analytics. If so, an accompanying help icon offers
-    additional context and guidance.
-</p>
-<p style='color: var(--primary)'>Course Completion Information:</p>
-<p>
-    If course completion tracking is enabled, the card shows current progress and detailed criteria, allowing you to see
-    how close you are to meeting course requirements.
-</p>
-<p style='color: var(--primary)'>General Engagement Metrics:</p>
-<p>
-    Summarizes key measures such as pending activities, reading actions, and writing engagement. These indicators help
-    you quickly assess your overall involvement.
-</p>
-<p style='color: var(--primary)'>Module-Specific Insights:</p>
-<p>
-    For each course module, the card displays additional performance data — particularly cognitive and social
-    indicators — offering a deeper dive into specific areas of your progress.
-</p>";
-$string['statistic-insights-view_help_info_text_expanded'] = "<p>
-    The 'Statistical Insights' card provides an overview of your calculations of Moodle's Learning Analytics model
-    'students at risk of dropping out'. It is separated into the following sections:
-</p>
-<p style='color: var(--primary)'>Student Risk Status:</p>
-<p>
-    Displays whether you are predicted to be 'at risk' based on analytics. If so, an accompanying help icon offers
-    additional context and guidance.
-</p>
-<p style='color: var(--primary)'>Course Completion Information:</p>
-<p>
-    If course completion tracking is enabled, the card shows current progress and detailed criteria, allowing you to see
-    how close you are to meeting course requirements.
-</p>
-<p style='color: var(--primary)'>General Engagement Metrics:</p>
-<p>
-    Summarizes key measures such as pending activities, reading actions, and writing engagement. These indicators help
-    you quickly assess your overall involvement.
-</p>
-<p style='color: var(--primary)'>Module-Specific Insights:</p>
-<p>
-    For each course module, the card displays additional performance data — particularly cognitive and social
-    indicators — offering a deeper dive into specific areas of your progress.
-</p>";
-
-$string['statistic-insights-view_at_risk'] = '<span style="color: var(--danger)"><i class="fa fa-warning" style="color: var(--danger);"></i> You are currently at risk of not passing this course.</span>';
-$string['statistic-insights-view_not_at_risk'] = '<p style="color: var(--gray);"><i class="fa fa-check-circle" style="color: var(--green);"></i> Your progress on the course so far is good.</p>';
-$string['analytics_at_risk:explanation'] = 'Student at risk of dropping out';
-$string['analytics_at_risk:explanation_help'] = 'The analytics model predicts the likelihood of a student disengaging from a course based on their activity and participation. It analyzes factors like logins, forum posts, assignment submissions, and other interactions to provide an estimation of their engagement level. This is only a prediction and should be used as a guide rather than a definite outcome, encouraging students to stay active and seek support if needed.';
-$string['analytics_at_risk:explanation_link'] = 'Students_at_risk_of_dropping_out';
-$string['general_indicators'] = 'Overview';
-$string['statistic-insights-view_anywriteincourse'] = '<p style="color: var(--green);"><i class="fa fa-check-circle"></i></p><p>You have completed a "write" action (saved content) in this course.</p>';
-$string['statistic-insights-view_nowriteincourse'] = '<p style="color: var(--gray);"><i class="fa fa-warning"></i></p><p>You have not yet completed a "write" action (saved content) in this course.</p>';
-$string['statistic-insights-view_activitiesdue'] = '<p style="color: var(--white);"><i class="fa fa-warning"></i></p><p>You have activities due in this course!</p>';
-$string['statistic-insights-view_noactivitiesdue'] = '<p style="color: var(--white);"><i class="fa fa-check-circle"></i></p><p>You do not have any activities due currently.</p>';
-$string['cognitive_indicators'] = 'Cognitive';
-$string['social_indicators'] = 'Social';
-$string['mod_indicators'] = 'Status of engagement in course activities';
-$string['mod_indicators_subtitle'] = 'Engagement';
-$string['statistic-insights-view_completion_title'] = 'Status of course completion';
-$string['analytics_completion:explanation'] = 'Course completion';
-$string['analytics_completion:explanation_help'] = 'The course completion is enabled in this course. View your current progress in completing the course below.';
-$string['analytics_completion:explanation_link'] = 'Course_completion';
-$string['statistic-insights-view_course_prediction_not_initialized'] = '<span style="color: var(--gray);"><i class="fa fa-warning"></i> No predictions of your current progress in this course are available or have not been initiated by the administrator.</span>';
-$string['statistic-insights-view_global_additional_info'] = 'Note: The predictions can only be generated for currently ongoing courses. Therefore, the full view in this card corresponds to the semester view.';
-$string['statistic-insights-view_no_course_available'] = 'There are no insights available because you are not enrolled in any course this semester.';
 
 // Study progress view.
 $string['study-progress-view'] = "Study Progress";

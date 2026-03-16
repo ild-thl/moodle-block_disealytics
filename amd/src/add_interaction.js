@@ -37,7 +37,7 @@ import {
     setViewlist,
     updateViewlist
 } from 'block_disealytics/view_selection';
-import {updateView} from 'block_disealytics/update_view';
+import {updateView, privacyurl} from 'block_disealytics/update_view';
 
 let theDisealyticsAddModal = null;
 let theDisealyticsRemoveModal = null;
@@ -435,7 +435,8 @@ export const toggleMainConfigModal = () => {
                         // Create and show the consent modal.
                         theDisealyticsConfigConsentModal = await ModalFactory.create({
                             title: await getString('consent_config_title', 'block_disealytics'),
-                            body: await Templates.render('block_disealytics/config_menu_consent', {id: 2}),
+                            body: await Templates.render('block_disealytics/config_menu_consent',
+                                {id: 2, agreementurl: privacyurl}),
                             removeOnClose: true
                         });
 

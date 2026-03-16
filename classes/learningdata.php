@@ -16,7 +16,7 @@
 
 namespace block_disealytics;
 
-use block_disealytics\data\course;
+use DateInterval;
 use DateTime;
 use dml_exception;
 use Exception;
@@ -40,11 +40,13 @@ class learningdata {
     private const PAGESTABLE = 'block_disealytics_user_pages';
     /**
      * helper number
+     *
      * @var int
      */
     private static int $number = 0;
     /**
      * storage to hold data.
+     *
      * @var array
      */
     private array $storage;
@@ -65,6 +67,7 @@ class learningdata {
 
     /**
      * Add a goal to the database.
+     *
      * @param stdClass $newgoal
      * @return bool|int
      * @throws dml_exception
@@ -79,6 +82,7 @@ class learningdata {
 
     /**
      * Update a goal.
+     *
      * @param stdClass $updatedgoal
      * @return void
      * @throws dml_exception
@@ -94,6 +98,7 @@ class learningdata {
 
     /**
      * Delete a goal.
+     *
      * @param int $id
      * @return void
      * @throws dml_exception
@@ -107,6 +112,7 @@ class learningdata {
 
     /**
      * Write learning material.
+     *
      * @param stdClass $data
      * @return bool
      * @throws dml_exception
@@ -122,6 +128,7 @@ class learningdata {
 
     /**
      * Update learning material.
+     *
      * @param stdClass $data
      * @return void
      * @throws dml_exception
@@ -137,6 +144,7 @@ class learningdata {
 
     /**
      * Delete learning material
+     *
      * @param int $id
      * @return void
      * @throws dml_exception
@@ -149,7 +157,30 @@ class learningdata {
     }
 
     /**
+     * Get current halfyear dates
+     *
+     * @return array
+     * @throws Exception
+     */
+    public static function get_current_halfyear_dates(): array {
+        $now = new DateTime("now");
+        $month = intval($now->format("m"));
+        $year = intval($now->format("Y"));
+        // Start of Year, current semester started last year.
+        if ($month <= 2) {
+            return ["start" => new DateTime(($year - 1) . "-08-01"), "end" => new DateTime($year . "-04-00")];
+            // During the year, semester is this year.
+        } else if ($month <= 8) {
+            return ["start" => new DateTime($year . "-01-01"), "end" => new DateTime($year . "-10-00")];
+            // End of year, semester starts this year, ends next year.
+        } else {
+            return ["start" => new DateTime($year . "-08-01"), "end" => new DateTime(($year + 1) . "-04-00")];
+        }
+    }
+
+    /**
      * Get submissions
+     *
      * @return array
      * @throws dml_exception
      */
@@ -159,9 +190,9 @@ class learningdata {
                 global $DB, $USER;
                 $this->storage['submissions'][$assignment->id] =
                         $DB->get_record(
-                            'assign_submission',
-                            ['userid' => $USER->id, 'assignment' => $assignment->id],
-                            'id, status, timemodified'
+                                'assign_submission',
+                                ['userid' => $USER->id, 'assignment' => $assignment->id],
+                                'id, status, timemodified'
                         );
             }
         }
@@ -170,6 +201,7 @@ class learningdata {
 
     /**
      * Get assignments
+     *
      * @return array
      * @throws dml_exception
      */
@@ -184,6 +216,7 @@ class learningdata {
 
     /**
      * Get grades
+     *
      * @return array
      * @throws dml_exception
      */
@@ -200,6 +233,7 @@ class learningdata {
 
     /**
      * Get logs
+     *
      * @param ?callable $filter
      * @return mixed
      * @throws dml_exception
@@ -208,10 +242,10 @@ class learningdata {
         if (!$this->storage['logs']) {
             global $DB, $USER;
             $this->storage['logs'] = $DB->get_records(
-                'logstore_standard_log',
-                ['userid' => $USER->id],
-                '',
-                'id, courseid, timecreated, action, target'
+                    'logstore_standard_log',
+                    ['userid' => $USER->id],
+                    '',
+                    'id, courseid, timecreated, action, target'
             );
         }
         return $filter ? array_filter($this->storage['logs'], $filter) : $this->storage['logs'];
@@ -219,6 +253,7 @@ class learningdata {
 
     /**
      * Get goals
+     *
      * @return array
      * @throws dml_exception
      * @throws Exception
@@ -227,8 +262,8 @@ class learningdata {
         if (!$this->storage['goals']) {
             global $DB, $USER, $COURSE;
             $goals = $DB->get_records(
-                self::GOALTABLE,
-                ['userid' => $USER->id, 'courseid' => $COURSE->id]
+                    self::GOALTABLE,
+                    ['userid' => $USER->id, 'courseid' => $COURSE->id]
             );
             $resultgoals = [];
             foreach ($goals as $goal) {
@@ -267,6 +302,7 @@ class learningdata {
 
     /**
      * Generate unique number
+     *
      * @return string
      *
      */
@@ -276,24 +312,26 @@ class learningdata {
 
     /**
      * Get coursename from id
+     *
      * @param int $courseid
      * @return mixed
      * @throws dml_exception
      */
     private function get_coursename_from_id(int $courseid) {
         global $DB;
-        return $DB->get_field('course', 'fullname', ['id' => $courseid]);
+        return format_string($DB->get_field('course', 'fullname', ['id' => $courseid]));
     }
 
     /**
      * Get goals for semester
+     *
      * @return array
      * @throws dml_exception
      * @throws Exception
      */
     public function get_goals_semester(): array {
         global $DB, $USER;
-        $semestercourseids = course::get_all_courses_of_current_semester();
+        $semestercourseids = self::get_all_courses_of_user_current_semester();
         $courseids = array_column($semestercourseids, 'courseid');
         $resultgoals = [];
         foreach ($courseids as $courseid) {
@@ -305,6 +343,51 @@ class learningdata {
         }
         $this->storage['goals'] = $resultgoals;
         return $this->storage['goals'];
+    }
+
+    /**
+     * Get all courses of a user in the current semester.
+     *
+     * @return array
+     * @throws dml_exception
+     */
+    public static function get_all_courses_of_user_current_semester(): array {
+        $now = (new DateTime())->format("U");
+        return array_filter(self::get_all_user_courses(), function($item) use ($now) {
+            if ($item->enddate == 0) {
+                return true;
+            }
+            $end = DateTime::createFromFormat("U", $item->enddate)->add(new DateInterval("P1M"));
+            return $end->format("U") >= $now;
+        });
+    }
+
+    /**
+     * Get all courses of a user with category data.
+     *
+     * @return array
+     * @throws dml_exception
+     */
+    public static function get_all_user_courses(): array {
+        $courses = enrol_get_my_courses("enddate", "c.enddate");
+        $ids = array_unique(array_column($courses, "category"));
+        global $DB;
+
+        if (count($ids) > 0) {
+            $categorydata =
+                    $DB->get_records_select('course_categories', 'id IN (' . implode(', ', array_fill(0, count($ids), '?')) . ')',
+                            $ids,
+                            "id",
+                            "id, name");
+            return array_map(function($e) use ($categorydata) {
+                $e->categoryname = format_string($categorydata["$e->category"]->name);
+                $e->fullname = format_string($e->fullname);
+                return $e;
+            }, $courses);
+        } else {
+            return $courses;
+        }
+
     }
 
     /**
@@ -341,8 +424,8 @@ class learningdata {
         if (!$this->storage['finished_goals']) {
             global $DB, $USER, $COURSE;
             $goals = $DB->get_records(
-                self::GOALTABLE,
-                ['userid' => $USER->id, 'courseid' => $courseid ?? $COURSE->id]
+                    self::GOALTABLE,
+                    ['userid' => $USER->id, 'courseid' => $courseid ?? $COURSE->id]
             );
             $finishedgoals = [];
             foreach ($goals as $goal) {
@@ -357,13 +440,14 @@ class learningdata {
 
     /**
      * Get finished goals for the semester
+     *
      * @return array
      * @throws dml_exception
      * @throws Exception
      */
     public function get_finished_goals_semester(): array {
         global $DB, $USER;
-        $semestercourseids = course::get_all_courses_of_current_semester();
+        $semestercourseids = self::get_all_courses_of_user_current_semester();
         $courseids = array_column($semestercourseids, 'courseid');
         $finishedgoals = [];
         foreach ($courseids as $courseid) {
@@ -412,13 +496,13 @@ class learningdata {
         global $DB, $USER, $COURSE;
         if ($courseid != null) {
             $learningmaterials = $DB->get_records(
-                self::PAGESTABLE,
-                ['userid' => $USER->id, 'courseid' => $courseid]
+                    self::PAGESTABLE,
+                    ['userid' => $USER->id, 'courseid' => $courseid]
             );
         } else {
             $learningmaterials = $DB->get_records(
-                self::PAGESTABLE,
-                ['userid' => $USER->id, 'courseid' => $COURSE->id]
+                    self::PAGESTABLE,
+                    ['userid' => $USER->id, 'courseid' => $COURSE->id]
             );
         }
         $resultlearningmaterials = [];
@@ -436,27 +520,5 @@ class learningdata {
         $this->storage['learning_materials'] = $resultlearningmaterials;
 
         return $filter ? array_filter($this->storage['learning_materials'], $filter) : $this->storage['learning_materials'];
-    }
-
-    /**
-     * Get current halfyear dates
-     *
-     * @return array
-     * @throws Exception
-     */
-    public static function get_current_halfyear_dates(): array {
-        $now = new DateTime("now");
-        $month = intval($now->format("m"));
-        $year = intval($now->format("Y"));
-        // Start of Year, current semester started last year.
-        if ($month <= 2) {
-            return ["start" => new DateTime(($year - 1) . "-08-01"), "end" => new DateTime($year . "-04-00")];
-            // During the year, semester is this year.
-        } else if ($month <= 8) {
-            return ["start" => new DateTime($year . "-01-01"), "end" => new DateTime($year . "-10-00")];
-            // End of year, semester starts this year, ends next year.
-        } else {
-            return ["start" => new DateTime($year . "-08-01"), "end" => new DateTime(($year + 1) . "-04-00")];
-        }
     }
 }

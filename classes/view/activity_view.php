@@ -22,7 +22,6 @@ require_once($CFG->dirroot . '/blocks/disealytics/classes/view/base_view.php');
 require_once($CFG->dirroot . '/blocks/disealytics/classes/data/task.php');
 
 use ArrayIterator;
-use block_disealytics\data\course;
 use block_disealytics\data\style;
 use block_disealytics\data\task;
 use block_disealytics\learningdata;
@@ -33,6 +32,7 @@ use DateTime;
 use dml_exception;
 use Exception;
 use stdClass;
+use function enrol_get_my_courses;
 
 /**
  * Class activity_view
@@ -109,8 +109,8 @@ class activity_view extends base_view {
         $output = null;
         $output["nodata"] = false;
 
-        $output["coursename"] = $course->coursename;
-        $tasks = task::block_disealytics_get_user_tasks($monday, $now, $course->courseid);
+        $output["coursename"] = $course->fullname;
+        $tasks = task::block_disealytics_get_user_tasks($monday, $now, $course->id);
         $output["datadate"] = get_string("nodata", 'block_disealytics');
         if (count($tasks) > 0) {
             global $DB;
@@ -215,7 +215,7 @@ class activity_view extends base_view {
         $this->output["help_info_text_expanded"] = get_string('activity-view_help_info_text_expanded', 'block_disealytics');
 
         $outputs = [];
-        $allcoursesofusercurrentsemester = course::get_all_courses_of_user_current_semester($USER->id);
+        $allcoursesofusercurrentsemester = learningdata::get_all_courses_of_user_current_semester();
         foreach ($allcoursesofusercurrentsemester as $course) {
             $outputs[] = $this->get_course_output($course);
         }
@@ -254,22 +254,23 @@ class activity_view extends base_view {
 
         $outputs = [];
         $this->output["categories"] = [];
-        $allusercourses = course::get_all_courses_of_user($USER->id);
-        $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->categoryname);
+        $allusercourses = learningdata::get_all_user_courses();
+        $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->category);
         foreach ($allusercourses as $course) {
-            $categorydata = $course->categoryname;
+            $categoryid = $course->category;
 
-            $issemester = ($semesterfilter === $categorydata);
+            $issemester = ($semesterfilter === $categoryid);
             $categoryexists = false;
             foreach ($this->output["categories"] as $category) {
-                if ($category["name"] === $categorydata) {
+                if ($category["categoryid"] === $categoryid) {
                     $categoryexists = true;
                     break;
                 }
             }
 
             if (!$categoryexists) {
-                $this->output["categories"][] = ["name" => $categorydata, "selected" => $issemester];
+                $this->output["categories"][] =
+                        ["categoryid" => $course->category, "name" => $course->categoryname, "selected" => $issemester];
             }
 
             if ($issemester) {

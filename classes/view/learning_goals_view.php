@@ -22,6 +22,7 @@ use coding_exception;
 use DateTime;
 use dml_exception;
 use Exception;
+use function enrol_get_my_courses;
 
 defined('MOODLE_INTERNAL') || die();
 global $CFG;
@@ -200,26 +201,27 @@ class learning_goals_view extends base_view {
 
         $goalsforselectedsemester = [];
 
-        $allusercourses = course::get_all_courses();
-        $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->categoryname);
-
+        $allusercourses = learningdata::get_all_user_courses();
+        $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->category);
         foreach ($allusercourses as $course) {
-            if ($semesterfilter === $course->categoryname) {
-                $goalsforselectedsemester[] = $course->courseid;
-            }
-            $categorydata = $course->categoryname;
+            $categoryid = $course->category;
 
-            $issemesterfilter = ($semesterfilter === $categorydata);
+            $issemesterfilter = ($semesterfilter === $categoryid);
+            if ($issemesterfilter) {
+                $goalsforselectedsemester[] = $course->id;
+            }
+
             $categoryexists = false;
             foreach ($this->output["categories"] as $category) {
-                if ($category["name"] === $categorydata) {
+                if ($category["categoryid"] === $categoryid) {
                     $categoryexists = true;
                     break;
                 }
             }
 
             if (!$categoryexists) {
-                $this->output["categories"][] = ["name" => $categorydata, "selected" => $issemesterfilter];
+                $this->output["categories"][] =
+                        ["categoryid" => $course->category, "name" => $course->categoryname, "selected" => $issemesterfilter];
             }
         }
 

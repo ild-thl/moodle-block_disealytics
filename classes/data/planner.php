@@ -18,6 +18,7 @@ namespace block_disealytics\data;
 
 use coding_exception;
 use core_date;
+use core_table\local\filter\string_filter;
 use DateTime;
 use dml_exception;
 use Exception;
@@ -363,7 +364,7 @@ class planner {
         $storagedate->location = $dbdate->location;
         $storagedate->eventType = $dbdate->eventtype;
         $course = $DB->get_record('course', ['id' => $dbdate->courseid]);
-        $storagedate->courseName = $course->fullname;
+        $storagedate->courseName = format_string($course->fullname);
 
         // Get weekday name for the date.
         $storagedate->dayNameShort = $this->block_disealytics_get_this_day_name($timestampstart);

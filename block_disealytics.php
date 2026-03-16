@@ -98,6 +98,9 @@ class block_disealytics extends block_base {
                     $viewname = str_replace('_', '-', $basename);
                     // Set the view to enabled (1).
                     $views[] = (object) ['viewname' => $viewname, 'enabled' => 1];
+
+                    // Reset view preferences since category-ids saved for global and semester views might not be valid anymore.
+                    unset_user_preference("block_disealytics_" . $viewname);
                 }
             }
 

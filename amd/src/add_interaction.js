@@ -581,8 +581,8 @@ export const setCourseCategory = (viewname) => {
 
     courseCategories.forEach(category => {
         category.addEventListener("click", function() {
-            const selectedCategory = this.textContent.trim();
-            updateSetting("select_category", viewname, selectedCategory);
+            const selectedCategoryid = this.dataset.categoryid;
+            updateSetting("select_category", viewname, selectedCategoryid);
         });
     });
 };

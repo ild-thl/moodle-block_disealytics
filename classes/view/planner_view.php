@@ -16,7 +16,6 @@
 
 namespace block_disealytics\view;
 
-use block_disealytics\data\course;
 use block_disealytics\data\planner;
 use block_disealytics\learningdata;
 use coding_exception;
@@ -25,6 +24,7 @@ use DateTime;
 use dml_exception;
 use Exception;
 use moodle_exception;
+use function enrol_get_my_courses;
 
 defined('MOODLE_INTERNAL') || die();
 global $CFG;
@@ -70,15 +70,15 @@ class planner_view extends base_view {
      * @throws Exception
      */
     private function block_disealytics_build_planner(planner $planner): array {
-        global $COURSE, $USER;
+        global $COURSE;
         $outputplanner = [];
 
         $defaultcourseid = $COURSE->id;
-        $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
+        $allusercourses = learningdata::get_all_courses_of_user_current_semester();
         $outputplanner["courses"] = array_values($allusercourses);
 
         foreach ($outputplanner["courses"] as $course) {
-            $course->isDefault = ($course->courseid === $defaultcourseid);
+            $course->isDefault = ($course->id === $defaultcourseid);
         }
 
         $outputplanner["this_day"] = $planner->block_disealytics_get_this_day();
@@ -223,10 +223,10 @@ class planner_view extends base_view {
             $selecteddate = json_decode(get_user_preferences('block_disealytics_planner_currentdate', 0), true);
             $planner = planner::block_disealytics_create_planner($selecteddate);
             $this->output["viewmode_halfyear"]['calendar'] = $this->block_disealytics_build_planner($planner);
-            $allusercourses = course::get_all_courses_of_current_semester();
+            $allusercourses = learningdata::get_all_courses_of_user_current_semester();
             $this->output["viewmode_halfyear"]['course'] = [];
             foreach ($allusercourses as $course) {
-                $courseevents = $this->get_dates_for_planner($planner, $course->courseid);
+                $courseevents = $this->get_dates_for_planner($planner, $course->id);
                 $course->events = $courseevents;
                 $this->output["viewmode_halfyear"]['course'][] = $course;
             }
@@ -262,28 +262,29 @@ class planner_view extends base_view {
             $selecteddate = json_decode(get_user_preferences('block_disealytics_planner_currentdate', 0), true);
             $planner = planner::block_disealytics_create_planner($selecteddate);
             $this->output["viewmode_global"]['calendar'] = $this->block_disealytics_build_planner($planner);
-            $allusercourses = course::get_all_courses();
-            $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->categoryname);
+            $allusercourses = learningdata::get_all_user_courses();
+            $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->category);
             $this->output["viewmode_global"]['course'] = [];
             $this->output["categories"] = [];
             foreach ($allusercourses as $course) {
-                $categorydata = $course->categoryname;
+                $categoryid = $course->category;
 
-                $issemester = ($semesterfilter === $categorydata);
+                $issemester = ($semesterfilter === $categoryid);
                 $categoryexists = false;
                 foreach ($this->output["categories"] as $category) {
-                    if ($category["name"] === $categorydata) {
+                    if ($category["categoryid"] === $categoryid) {
                         $categoryexists = true;
                         break;
                     }
                 }
 
                 if (!$categoryexists) {
-                    $this->output["categories"][] = ["name" => $categorydata, "selected" => $issemester];
+                    $this->output["categories"][] =
+                            ["categoryid" => $course->category, "name" => $course->categoryname, "selected" => $issemester];
                 }
 
                 if ($issemester) {
-                    $courseevents = $this->get_dates_for_planner($planner, $course->courseid);
+                    $courseevents = $this->get_dates_for_planner($planner, $course->id);
                     $course->events = $courseevents;
                     $this->output["viewmode_global"]['course'][] = $course;
                 }

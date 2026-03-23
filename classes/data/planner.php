@@ -292,7 +292,10 @@ class planner {
             );
             $resultdates = [];
             foreach ($dates as $date) {
-                $resultdates[] = $this->add_date_to_storage($date);
+                $result = $this->add_date_to_storage($date);
+                if ($result) {
+                    $resultdates[] = $result;
+                }
             }
             $this->storage['dates'] = $resultdates;
         }
@@ -314,7 +317,10 @@ class planner {
         );
         $resultdates = [];
         foreach ($dates as $date) {
-            $resultdates[] = $this->add_date_to_storage($date);
+            $result = $this->add_date_to_storage($date);
+            if ($result) {
+                $resultdates[] = $result;
+            }
         }
         return $resultdates;
     }
@@ -346,7 +352,7 @@ class planner {
      * @return stdClass The storage date.
      * @throws Exception
      */
-    private function add_date_to_storage($dbdate): stdClass {
+    private function add_date_to_storage($dbdate): stdClass | bool {
         global $DB;
         $storagedate = new stdClass();
         $storagedate->dateid = $dbdate->id;
@@ -364,6 +370,9 @@ class planner {
         $storagedate->location = $dbdate->location;
         $storagedate->eventType = $dbdate->eventtype;
         $course = $DB->get_record('course', ['id' => $dbdate->courseid]);
+        if ($course === false) {
+            return false;
+        }
         $storagedate->courseName = format_string($course->fullname);
 
         // Get weekday name for the date.

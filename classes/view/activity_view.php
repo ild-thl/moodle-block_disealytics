@@ -164,7 +164,7 @@ class activity_view extends base_view {
             $dates = learningdata::get_current_halfyear_dates();
             $start = $dates["start"];
             $end = $dates["end"];
-            $halfyeartasks = task::block_disealytics_get_user_tasks($start->format("U"), $end->format("U"), $course->courseid);
+            $halfyeartasks = task::block_disealytics_get_user_tasks($start->format("U"), $end->format("U"), $course->id);
             $halfyeartasks = task::block_disealytics_group_and_reduce($halfyeartasks);
             $halfyeartasks = array_reverse($halfyeartasks, true);
 

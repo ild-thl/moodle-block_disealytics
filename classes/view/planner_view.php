@@ -198,7 +198,7 @@ class planner_view extends base_view {
         $this->output["help_info_text"] =
                 get_string('planner-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] =
-                get_string('planner-view-view_help_info_text_expanded', 'block_disealytics');
+                get_string('planner-view_help_info_text_expanded', 'block_disealytics');
     }
 
     /**
@@ -238,7 +238,7 @@ class planner_view extends base_view {
         $this->output["help_info_text"] =
                 get_string('planner-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] =
-                get_string('planner-view-view_help_info_text_expanded', 'block_disealytics');
+                get_string('planner-view_help_info_text_expanded', 'block_disealytics');
     }
 
     /**
@@ -297,6 +297,6 @@ class planner_view extends base_view {
         $this->output["help_info_text"] =
                 get_string('planner-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] =
-                get_string('planner-view-view_help_info_text_expanded', 'block_disealytics');
+                get_string('planner-view_help_info_text_expanded', 'block_disealytics');
     }
 }

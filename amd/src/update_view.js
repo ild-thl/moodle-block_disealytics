@@ -45,6 +45,8 @@ import {
     initGoalEventListeners
 } from "./learning_goals_functions";
 
+export let privacyurl;
+
 /**
  * Initializes the plugin when it first loads by rendering the main template.
  *
@@ -63,7 +65,7 @@ export const init = async(views, viewmode, courseid, agreementurl, versioninfo) 
         setViewlist(views);
         setCourseId(courseid);
         setVersionInfo(versioninfo);
-
+        privacyurl = agreementurl;
         // Render the main template with the available views and view mode.
         renderMainTemplate(getViewlist(), viewmode, agreementurl);
 

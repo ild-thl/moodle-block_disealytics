@@ -17,7 +17,8 @@
 namespace block_disealytics\view;
 
 use block_completionstatus;
-use block_disealytics\data\course;
+
+use block_disealytics\learningdata;
 use coding_exception;
 use core_analytics\prediction;
 use core_course\analytics\indicator\completion_enabled;
@@ -188,7 +189,7 @@ class statistic_insights_view extends base_view {
         global $PAGE;
         $pageoutput = $PAGE->get_renderer('core'); // Get a generic core renderer.
         $predictionoutput = [];
-        $predictionoutput['coursename'] = $course->fullname;
+        $predictionoutput['coursename'] = format_string($course->fullname);
 
         // Check if predictions for the course are available.
         if (!$this->any_course_predictions($course)) {
@@ -398,7 +399,7 @@ class statistic_insights_view extends base_view {
         $this->output["help_info_text"] = get_string(self::TITLE . '_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] = get_string(self::TITLE . '_help_info_text_expanded', 'block_disealytics');
 
-        $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
+        $allusercourses = learningdata::get_all_courses_of_user_current_semester();
 
         if (count($allusercourses) == 0) {
             $this->output['nocourses'] = get_string(self::TITLE . '_no_course_available', 'block_disealytics');
@@ -407,7 +408,7 @@ class statistic_insights_view extends base_view {
         $outputs = [];
         $i = 1;
         foreach ($allusercourses as $usercourse) {
-            $course = get_course($usercourse->courseid);
+            $course = get_course($usercourse->id);
             $output = $this->get_prediction_output($course);
             $output['output_index'] = $i; // Add index inside the output.
             $outputs[] = $output; // Append to the outputs array.
@@ -441,7 +442,7 @@ class statistic_insights_view extends base_view {
         $this->output["help_info_text_expanded"] = get_string(self::TITLE . '_help_info_text_expanded', 'block_disealytics');
         $this->output["additional_info"] = get_string(self::TITLE . '_global_additional_info', 'block_disealytics');
 
-        $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
+        $allusercourses = learningdata::get_all_courses_of_user_current_semester();
 
         if (count($allusercourses) == 0) {
             $this->output['nocourses'] = get_string(self::TITLE . '_no_course_available', 'block_disealytics');
@@ -450,7 +451,7 @@ class statistic_insights_view extends base_view {
         $outputs = [];
         $i = 1;
         foreach ($allusercourses as $usercourse) {
-            $course = get_course($usercourse->courseid);
+            $course = get_course($usercourse->id);
             $output = $this->get_prediction_output($course);
             $output['output_index'] = $i; // Add index inside the output.
             $outputs[] = $output; // Append to the outputs array.

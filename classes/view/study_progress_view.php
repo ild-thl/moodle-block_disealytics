@@ -17,15 +17,14 @@
 namespace block_disealytics\view;
 
 use block_disealytics\data\assignment;
-use block_disealytics\data\course;
 use block_disealytics\data\style;
+use block_disealytics\learningdata;
 use coding_exception;
 use core\chart_bar;
 use core\chart_series;
 use dml_exception;
 use Exception;
 use moodle_exception;
-use moodle_url;
 use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
@@ -114,21 +113,21 @@ class study_progress_view extends base_view {
 
         switch ($type) {
             case 'halfyear':
-                $courses = course::get_all_courses_of_user_current_semester($USER->id);
+                $courses = learningdata::get_all_courses_of_user_current_semester();
                 break;
             case 'global':
-                $courses = course::get_all_courses_of_user($USER->id);
+                $courses = learningdata::get_all_user_courses();
                 break;
             case 'module':
             default:
                 $course = new stdClass();
-                $course->courseid = $COURSE->id;
+                $course->id = $COURSE->id;
                 $courses[] = $course;
                 break;
         }
 
         foreach ($courses as $course) {
-            foreach (assignment::block_disealytics_get_course_assignments($course->courseid) as $assign) {
+            foreach (assignment::block_disealytics_get_course_assignments($course->id) as $assign) {
                 switch ($assign->block_disealytics_gen_grade_status()) {
                     case assignment::GRADE_STATUS_FAILED:
                         $assignscore--;

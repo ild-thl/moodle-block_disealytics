@@ -154,6 +154,7 @@ class assignment {
         $this->id = $moduleinfo->instance;
 
         $this->assign = $DB->get_record('assign', ['id' => $this->id]);
+        $this->assign->name = format_string($this->assign->name);
         $this->gradeitem = $DB->get_record(
             'grade_items',
             ['courseid' => $courseid ?? $COURSE->id, 'itemtype' => 'mod', 'itemmodule' => 'assign', 'iteminstance' => $this->id]
@@ -360,9 +361,9 @@ class assignment {
     public function block_disealytics_build_name_link(): string {
         global $CFG;
         if ($this->modinfo->available) {
-            return html_writer::link($CFG->wwwroot . "/mod/assign/view.php?id=" . $this->modinfo->id, $this->modinfo->name);
+            return html_writer::link($CFG->wwwroot . "/mod/assign/view.php?id=" . $this->modinfo->id, $this->assign->name);
         } else {
-            return $this->modinfo->name;
+            return $this->assign->name;
         }
     }
 
@@ -371,7 +372,7 @@ class assignment {
      * @return string Returns the name of the assignment.
      */
     public function block_disealytics_get_assignment_name(): string {
-        return $this->modinfo->name;
+        return $this->assign->name;
     }
 
     /**

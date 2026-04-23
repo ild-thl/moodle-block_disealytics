@@ -16,7 +16,6 @@
 
 namespace block_disealytics\view;
 
-use block_disealytics\data\course;
 use block_disealytics\data\style;
 use block_disealytics\learningdata;
 use coding_exception;
@@ -26,7 +25,6 @@ use dml_exception;
 use Exception;
 use moodle_exception;
 use stdClass;
-use theme_config;
 
 defined('MOODLE_INTERNAL') || die();
 global $CFG;
@@ -62,23 +60,61 @@ class progress_bar_view extends base_view {
     }
 
     /**
-     * Checks if name exists.
+     * Get the output for the viewmode: module.
      *
-     * @param string $name
-     * @param array $array
-     * @return bool
+     * @return void
+     * @throws coding_exception
+     * @throws dml_exception
      */
-    private function check_name_exists(string $name, array $array): bool {
-        foreach ($array as $obj) {
-            if ($name === $obj->documentname) {
-                return true;
+    protected function get_module_output(): void {
+        global $COURSE;
+        // Texts.
+        $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
+        $this->output["help_info_text"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
+        $this->output["help_info_text_expanded"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
+        $this->output["learning_material-view_help_info_text"] =
+                get_string('learning_materials-view_help_info_text', 'block_disealytics');
+        // Viewmode settings.
+        $iseditmode = get_user_preferences("block_disealytics_editing", "0");
+        $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
+        // If in editing mode.
+        if ($iseditmode == 1) {
+            $this->output["editmode"] = true;
+        } else {
+            $this->output["viewmode"] = true;
+
+            // Data for learning material modal.
+            try {
+                $this->output["learning_materials"] = $this->get_user_pages();
+
+                if (count($this->output["learning_materials"]["file_names"]) > 0) {
+                    $this->output["files_left"] = true;
+                }
+            } catch (dml_exception|moodle_exception $e) {
+                debugging('Caught exception: ' . $e->getMessage());
+            }
+
+            // Display data for summary view.
+            $course = new stdClass();
+            $course->id = $COURSE->id;
+            $data = $this->learningdata->get_learning_materials(
+                    function($v) {
+                        return !empty($v->documentname);
+                    },
+                    $course->id
+            );
+            $initalbars = 3;
+            if ($this->generate_chart_and_preview($data, $initalbars, $course)) {
+                $this->output["viewmode_module"]['course'][] = $course;
+            } else {
+                $this->output["viewmode_module"]['nodata'] = true;
             }
         }
-        return false;
     }
 
     /**
      * Get user pages.
+     *
      * @return array of pages.
      * @throws moodle_exception
      * @throws dml_exception
@@ -141,6 +177,22 @@ class progress_bar_view extends base_view {
     }
 
     /**
+     * Checks if name exists.
+     *
+     * @param string $name
+     * @param array $array
+     * @return bool
+     */
+    private function check_name_exists(string $name, array $array): bool {
+        foreach ($array as $obj) {
+            if ($name === $obj->documentname) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Generate chart and preview.
      *
      * @param array $data
@@ -151,7 +203,7 @@ class progress_bar_view extends base_view {
      */
     private function generate_chart_and_preview(array $data, int $initalbars, object $course): bool {
         global $PAGE;
-        if (!empty($data) && $course->courseid != 1) {
+        if (!empty($data) && $course->id != 1) {
             $readpages = [];
             $lastpages = [];
             $leftpages = [];
@@ -218,59 +270,8 @@ class progress_bar_view extends base_view {
     }
 
     /**
-     * Get the output for the viewmode: module.
-     * @return void
-     * @throws coding_exception
-     * @throws dml_exception
-     */
-    protected function get_module_output(): void {
-        global $COURSE;
-        // Texts.
-        $this->output["title"] = get_string(self::TITLE, 'block_disealytics');
-        $this->output["help_info_text"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
-        $this->output["help_info_text_expanded"] = get_string('progress-bar-view_help_info_text', 'block_disealytics');
-        $this->output["learning_material-view_help_info_text"] =
-                get_string('learning_materials-view_help_info_text', 'block_disealytics');
-        // Viewmode settings.
-        $iseditmode = get_user_preferences("block_disealytics_editing", "0");
-        $this->output["isexpanded"] = get_user_preferences("block_disealytics_expanded_view", 'none') == self::TITLE;
-        // If in editing mode.
-        if ($iseditmode == 1) {
-            $this->output["editmode"] = true;
-        } else {
-            $this->output["viewmode"] = true;
-
-            // Data for learning material modal.
-            try {
-                $this->output["learning_materials"] = $this->get_user_pages();
-
-                if (count($this->output["learning_materials"]["file_names"]) > 0) {
-                    $this->output["files_left"] = true;
-                }
-            } catch (dml_exception | moodle_exception $e) {
-                debugging('Caught exception: ' . $e->getMessage());
-            }
-
-            // Display data for summary view.
-            $course = new stdClass();
-            $course->courseid = $COURSE->id;
-            $data = $this->learningdata->get_learning_materials(
-                function ($v) {
-                    return !empty($v->documentname);
-                },
-                $course->courseid
-            );
-            $initalbars = 3;
-            if ($this->generate_chart_and_preview($data, $initalbars, $course)) {
-                $this->output["viewmode_module"]['course'][] = $course;
-            } else {
-                $this->output["viewmode_module"]['nodata'] = true;
-            }
-        }
-    }
-
-    /**
      * Get the output for the viewmode: halfyear.
+     *
      * @return void
      * @throws coding_exception
      * @throws dml_exception
@@ -291,9 +292,11 @@ class progress_bar_view extends base_view {
             $this->output["editmode"] = true;
         } else {
             $this->output["viewmode"] = true;
-            $allusercourses = course::get_all_courses_of_current_semester();
+            $allusercourses = learningdata::get_all_courses_of_user_current_semester();
 
             foreach ($allusercourses as $course) {
+                $coursedisplaydata = new stdClass();
+                $coursedisplaydata->id = $course->id;
                 // Data for learning material modal.
                 try {
                     $this->output["learning_materials"] = $this->get_user_pages();
@@ -301,20 +304,21 @@ class progress_bar_view extends base_view {
                     if (count($this->output["learning_materials"]["file_names"]) > 0) {
                         $this->output["files_left"] = true;
                     }
-                } catch (dml_exception | moodle_exception $e) {
+                } catch (dml_exception|moodle_exception $e) {
                     debugging('Caught exception: ' . $e->getMessage());
                 }
 
                 // Display data for summary view.
                 $data = $this->learningdata->get_learning_materials(
-                    function ($v) {
-                        return !empty($v->documentname);
-                    },
-                    $course->courseid
+                        function($v) {
+                            return !empty($v->documentname);
+                        },
+                        $course->id
                 );
+                $coursedisplaydata->coursename = format_string($course->fullname);
                 $initalbars = 3;
-                if ($this->generate_chart_and_preview($data, $initalbars, $course)) {
-                    $this->output["viewmode_halfyear"]['course'][] = $course;
+                if ($this->generate_chart_and_preview($data, $initalbars, $coursedisplaydata)) {
+                    $this->output["viewmode_halfyear"]['course'][] = $coursedisplaydata;
                 }
             }
             if (empty($this->output["viewmode_halfyear"]['course'])) {
@@ -325,6 +329,7 @@ class progress_bar_view extends base_view {
 
     /**
      * Get the output for the viewmode: global.
+     *
      * @return void
      * @throws coding_exception
      * @throws dml_exception
@@ -343,24 +348,27 @@ class progress_bar_view extends base_view {
             $this->output["editmode"] = true;
         } else {
             $this->output["viewmode"] = true;
-            $allusercourses = course::get_all_courses();
-            $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->categoryname);
+            $allusercourses = learningdata::get_all_user_courses();
+            $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->category);
             $this->output["viewmode_global"]['course'] = [];
             $this->output["categories"] = [];
             foreach ($allusercourses as $course) {
-                $categorydata = $course->categoryname;
+                $coursedisplaydata = new stdClass();
+                $coursedisplaydata->id = $course->id;
+                $categoryid = $course->category;
 
-                $issemester = ($semesterfilter === $categorydata);
+                $issemester = ($semesterfilter === $categoryid);
                 $categoryexists = false;
                 foreach ($this->output["categories"] as $category) {
-                    if ($category["name"] === $categorydata) {
+                    if ($category["categoryid"] === $categoryid) {
                         $categoryexists = true;
                         break;
                     }
                 }
 
                 if (!$categoryexists) {
-                    $this->output["categories"][] = ["name" => $categorydata, "selected" => $issemester];
+                    $this->output["categories"][] =
+                            ["categoryid" => $course->category, "name" => $course->categoryname, "selected" => $issemester];
                 }
 
                 if ($issemester) {
@@ -374,17 +382,17 @@ class progress_bar_view extends base_view {
                     } catch (dml_exception | moodle_exception $e) {
                         debugging('Caught exception: ' . $e->getMessage());
                     }
-
+                    $coursedisplaydata->coursename = format_string($course->fullname);
                     // Display data for summary view.
                     $data = $this->learningdata->get_learning_materials(
-                        function ($v) {
-                            return !empty($v->documentname);
-                        },
-                        $course->courseid
+                            function($v) {
+                                return !empty($v->documentname);
+                            },
+                            $coursedisplaydata->id
                     );
                     $initalbars = 3;
-                    if ($this->generate_chart_and_preview($data, $initalbars, $course)) {
-                        $this->output["viewmode_global"]['course'][] = $course;
+                    if ($this->generate_chart_and_preview($data, $initalbars, $coursedisplaydata)) {
+                        $this->output["viewmode_global"]['course'][] = $coursedisplaydata;
                     }
                 }
             }

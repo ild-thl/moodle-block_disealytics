@@ -18,7 +18,6 @@ namespace block_disealytics\data;
 
 use coding_exception;
 use core_date;
-use core_table\local\filter\string_filter;
 use DateTime;
 use dml_exception;
 use Exception;

@@ -16,13 +16,12 @@
 
 namespace block_disealytics\view;
 
-use block_disealytics\data\course;
+
 use block_disealytics\learningdata;
 use coding_exception;
 use DateTime;
 use dml_exception;
 use Exception;
-use function enrol_get_my_courses;
 
 defined('MOODLE_INTERNAL') || die();
 global $CFG;

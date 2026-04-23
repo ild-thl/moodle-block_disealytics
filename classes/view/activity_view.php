@@ -32,7 +32,6 @@ use DateTime;
 use dml_exception;
 use Exception;
 use stdClass;
-use function enrol_get_my_courses;
 
 /**
  * Class activity_view

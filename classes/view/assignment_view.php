@@ -21,7 +21,7 @@ require_once($CFG->dirroot . '/blocks/disealytics/classes/view/base_view.php');
 require_once($CFG->dirroot . '/blocks/disealytics/classes/data/assignment.php');
 
 use block_disealytics\data\assignment;
-use block_disealytics\data\course;
+use block_disealytics\learningdata;
 use coding_exception;
 use dml_exception;
 use moodle_exception;
@@ -58,13 +58,13 @@ class assignment_view extends base_view {
         $output["tables"] = [];
         $output["categories"] = [];
 
-        $allusercourses = course::get_all_courses_of_user($USER->id);
+        $allusercourses = learningdata::get_all_user_courses();
 
         foreach ($allusercourses as $course) {
             if ($course->categoryname == $selectedcategory) {
-                $assignments = assignment::block_disealytics_get_course_assignments((int) $course->courseid);
+                $assignments = assignment::block_disealytics_get_course_assignments((int) $course->id);
 
-                if ($course->courseid != 1 && count($assignments) > 0) {
+                if ($course->id != 1 && count($assignments) > 0) {
                     $table = [];
                     $table["table"] = 'yes';
                     $table["assignstring"] = get_string('assignment', 'block_disealytics');
@@ -166,12 +166,12 @@ class assignment_view extends base_view {
         $this->output["help_info_text_expanded"] = get_string('assignment-view_help_info_text_expanded', 'block_disealytics');
         $this->output["tables"] = [];
 
-        $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
+        $allusercourses = learningdata::get_all_courses_of_user_current_semester();
 
         $this->output["data_in_course"] = false;
 
         foreach ($allusercourses as $course) {
-            $assignments = assignment::block_disealytics_get_course_assignments($course->courseid);
+            $assignments = assignment::block_disealytics_get_course_assignments($course->id);
 
             $this->block_disealytics_generate_assignments($course, $assignments);
         }
@@ -199,27 +199,28 @@ class assignment_view extends base_view {
         $this->output["help_info_text_expanded"] = get_string('assignment-view_help_info_text_expanded', 'block_disealytics');
         $this->output["tables"] = [];
         $this->output["categories"] = [];
-        $allusercourses = course::get_all_courses_of_user($USER->id);
-        $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->categoryname);
+        $allusercourses = learningdata::get_all_user_courses();
+        $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->category);
         $this->output["data_in_course"] = false;
         foreach ($allusercourses as $course) {
-            $assignments = assignment::block_disealytics_get_course_assignments((int) $course->courseid);
-            if ($semesterfilter === $course->categoryname || !$semesterfilter) {
+            $assignments = assignment::block_disealytics_get_course_assignments((int) $course->id);
+            if ($semesterfilter === $course->category || !$semesterfilter) {
                 $this->block_disealytics_generate_assignments($course, $assignments);
             }
-            $categorydata = $course->categoryname;
+            $categoryid = $course->category;
 
-            $issemesterfilter = ($semesterfilter === $categorydata);
+            $issemesterfilter = ($semesterfilter === $categoryid);
             $categoryexists = false;
             foreach ($this->output["categories"] as $category) {
-                if ($category["name"] === $categorydata) {
+                if ($category["categoryid"] === $categoryid) {
                     $categoryexists = true;
                     break;
                 }
             }
 
             if (!$categoryexists) {
-                $this->output["categories"][] = ["name" => $categorydata, "selected" => $issemesterfilter];
+                $this->output["categories"][] =
+                        ["categoryid" => $course->category, "name" => $course->categoryname, "selected" => $issemesterfilter];
             }
         }
     }
@@ -234,12 +235,12 @@ class assignment_view extends base_view {
      * @throws moodle_exception
      */
     protected function block_disealytics_generate_assignments(object $course, array $assignments): void {
-        if ($course->courseid != 1 && count($assignments) > 0) {
+        if ($course->id != 1 && count($assignments) > 0) {
             $table = [];
             $table["table"] = true;
             $table["assignstring"] = get_string('assignment', 'block_disealytics');
             $table["submitstring"] = get_string('status', 'block_disealytics');
-            $table["coursename"] = $course->coursename;
+            $table["coursename"] = $course->fullname;
             $table["assigns"] = [];
             $table["first_three"] = [];
             $table["after_first_three"] = [];
@@ -268,7 +269,7 @@ class assignment_view extends base_view {
             $this->output["after_first_three_elements"] = $table["after_first_three"];
             $this->output["data_in_course"] = true;
         }
-        if (count(assignment::block_disealytics_get_course_assignments($course->courseid)) > 3) {
+        if (count(assignment::block_disealytics_get_course_assignments($course->id)) > 3) {
             $this->output["more_than_three"][] = 'yes';
         }
     }

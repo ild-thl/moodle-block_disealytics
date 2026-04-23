@@ -24,7 +24,6 @@ use DateTime;
 use dml_exception;
 use Exception;
 use moodle_exception;
-use function enrol_get_my_courses;
 
 defined('MOODLE_INTERNAL') || die();
 global $CFG;

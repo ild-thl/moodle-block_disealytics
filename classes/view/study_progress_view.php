@@ -26,7 +26,6 @@ use dml_exception;
 use Exception;
 use moodle_exception;
 use stdClass;
-use function enrol_get_my_courses;
 
 defined('MOODLE_INTERNAL') || die();
 global $CFG;

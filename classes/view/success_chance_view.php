@@ -17,7 +17,8 @@
 namespace block_disealytics\view;
 
 use block_disealytics\data\assignment;
-use block_disealytics\data\course;
+
+use block_disealytics\learningdata;
 use coding_exception;
 use core\chart_pie;
 use core\chart_series;
@@ -264,7 +265,7 @@ class success_chance_view extends base_view {
         $this->output["help_info_text"] = get_string('success-chance-view_help_info_text', 'block_disealytics');
         $this->output["help_info_text_expanded"] = get_string('success-chance-view_help_info_text_expanded', 'block_disealytics');
 
-        $allusercourses = course::get_all_courses_of_user_current_semester($USER->id);
+        $allusercourses = learningdata::get_all_courses_of_user_current_semester();
 
         if (count($allusercourses) == 0) {
             $this->output['nodata'] = get_string('success-chance_no_course_available', 'block_disealytics');
@@ -282,7 +283,7 @@ class success_chance_view extends base_view {
             $this->generate_describtions_for_each_course($courseassignments, $table);
         }
 
-        $chartdatastatus = $this->calculate_chartdata_status($assignments, $course->courseid);
+        $chartdatastatus = $this->calculate_chartdata_status($assignments);
         $this->output['charts'][] = ['chartdata' => json_encode($chartdatastatus),
                 'uniqid' => uniqid('block_disealytics_')];
     }
@@ -375,13 +376,13 @@ class success_chance_view extends base_view {
         $this->output["help_info_text_expanded"] = get_string('success-chance-view_help_info_text_expanded', 'block_disealytics');
 
         $this->output["categories"] = [];
-        $allusercourses = course::get_all_courses_of_user($USER->id);
-        $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->categoryname);
+        $allusercourses = learningdata::get_all_user_courses();
+        $semesterfilter = get_user_preferences("block_disealytics_" . self::TITLE, reset($allusercourses)->category);
         $assignments = [];
 
         foreach ($allusercourses as $course) {
             if ($semesterfilter === $course->categoryname || !$semesterfilter) {
-                $courseassignments = assignment::block_disealytics_get_course_assignments($course->courseid);
+                $courseassignments = assignment::block_disealytics_get_course_assignments($course->id);
                 $table = [];
                 $table["coursename"] = $course->coursename;
                 foreach ($courseassignments as $assignment) {
@@ -389,19 +390,20 @@ class success_chance_view extends base_view {
                 }
                 $this->generate_describtions_for_each_course($courseassignments, $table);
             }
-            $categorydata = $course->categoryname;
+            $categoryid = $course->category;
 
-            $issemesterfilter = ($semesterfilter === $categorydata);
+            $issemesterfilter = ($semesterfilter === $categoryid);
             $categoryexists = false;
             foreach ($this->output["categories"] as $category) {
-                if ($category["name"] === $categorydata) {
+                if ($category["categoryid"] === $categoryid) {
                     $categoryexists = true;
                     break;
                 }
             }
 
             if (!$categoryexists) {
-                $this->output["categories"][] = ["name" => $categorydata, "selected" => $issemesterfilter];
+                $this->output["categories"][] =
+                        ["categoryid" => $course->category, "name" => $course->categoryname, "selected" => $issemesterfilter];
             }
         }
 

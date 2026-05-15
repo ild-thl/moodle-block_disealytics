@@ -90,6 +90,13 @@ class block_disealytics extends block_base {
             // Set viewmode.
             $viewmode = get_user_preferences('block_disealytics_viewmode', 'viewmode_module');
 
+            // If halfyear-view is disabled in settings, but user had it selected last, reset their preference.
+            $halfyearenabled = get_config('block_disealytics', 'halfyear_view_enabled');
+            if (!$halfyearenabled && $viewmode === 'viewmode_halfyear') {
+                $viewmode = 'viewmode_module';
+                set_user_preference('block_disealytics_viewmode', 'viewmode_module');
+            }
+
             // Set up views from files.
             $views = [];
             foreach (glob($CFG->dirroot . '/blocks/disealytics/classes/view/*.php') as $filename) {
@@ -140,11 +147,13 @@ class block_disealytics extends block_base {
             $versioninfo = 'DiSEA Learner Dashboard ' . substr($plugin->version, 0, 4) . ' - Version ' . $plugin->release . ' ' .
                     $plugin->version;
 
+            $enabledviewmodes =
+                    ['viewmode_module' => 1, 'viewmode_halfyear' => intval($halfyearenabled), 'viewmode_global' => 1];
             // Hand over the data from the database to the update_view.js.
             $this->page->requires->js_call_amd(
                 'block_disealytics/update_view',
                 'init',
-                [$viewsinpref, $viewmode, $COURSE->id, $url->out(), $versioninfo]
+                [$viewsinpref, $viewmode, $COURSE->id, $url->out(), $versioninfo, $enabledviewmodes]
             );
         }
         $footertext = get_string('testfooter', 'block_disealytics');

@@ -25,6 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['config_halfyear_view_enabled_text'] = 'Controls if halfyear view should be enabled, courses need to be categorised by semester for this to work correctly.';
+$string['config_halfyear_view_enabled_title'] = 'Enable halfyear view';
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
 $string['disea'] = 'Learner Dashboard';

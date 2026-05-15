@@ -59,4 +59,11 @@ if ($ADMIN->fulltree) {
         'disea',
         20
     ));
+
+    $settings->add(new admin_setting_configcheckbox(
+            'block_disealytics/halfyear_view_enabled',
+            get_string('config_halfyear_view_enabled_title', 'block_disealytics'),
+            get_string('config_halfyear_view_enabled_text', 'block_disealytics'),
+            0
+    ));
 }

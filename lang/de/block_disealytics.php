@@ -25,6 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['config_halfyear_view_enabled_title'] = 'Semesteransicht aktivieren';
+$string['config_halfyear_view_enabled_text'] = 'Steuert, ob die Semesteransicht aktiviert ist. Kurse müssen nach Semestern kategorisiert sein, damit die Semesteransicht korrekt funktioniert.';
 $string['pluginname'] = 'Learner Dashboard';
 $string['plugin-title'] = 'Learner Dashboard';
 $string['disea'] = 'Learner Dashboard';

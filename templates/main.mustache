@@ -58,7 +58,9 @@
         <label for="viewmode">
             <select id="viewmode" class="block_disealytics main-viewmode-selection">
                 <option value="viewmode_module"{{#viewmode_module}} selected {{/viewmode_module}}>{{#str}} viewmode_module, block_disealytics{{/str}}</option>
+                {{#viewmode_halfyear_enabled}}
                 <option value="viewmode_halfyear"{{#viewmode_halfyear}} selected {{/viewmode_halfyear}}>{{#str}} viewmode_halfyear, block_disealytics{{/str}}</option>
+                {{/viewmode_halfyear_enabled}}
                 <option value="viewmode_global"{{#viewmode_global}} selected {{/viewmode_global}}>{{#str}} viewmode_global, block_disealytics{{/str}}</option>
             </select>
         </label>

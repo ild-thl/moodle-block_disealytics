@@ -55,8 +55,9 @@ export let privacyurl;
  * @param {number} courseid - The ID of the course associated with the plugin.
  * @param {string} agreementurl - URL at which the data policy can be viewed
  * @param {string} versioninfo - The current version of the plugin
+ * @param {array} viewmodes - The viewmodes enabled for the plugin
  */
-export const init = async(views, viewmode, courseid, agreementurl, versioninfo) => {
+export const init = async(views, viewmode, courseid, agreementurl, versioninfo, viewmodes) => {
     /**
      * Callback function to execute when the document is ready.
      */
@@ -67,7 +68,7 @@ export const init = async(views, viewmode, courseid, agreementurl, versioninfo) 
         setVersionInfo(versioninfo);
         privacyurl = agreementurl;
         // Render the main template with the available views and view mode.
-        renderMainTemplate(getViewlist(), viewmode, agreementurl);
+        renderMainTemplate(getViewlist(), viewmode, agreementurl, viewmodes);
 
         // Update the view (optional parameters are undefined in this context).
         await updateView(getCourseId(), undefined);
@@ -95,8 +96,9 @@ export const init = async(views, viewmode, courseid, agreementurl, versioninfo) 
  * @param {array} views all implemented viewtypes
  * @param {string} viewmode the viewmode to load
  * @param {string} agreementurl - URL at which the data policy can be viewed
+ * @param {array} viewmodes - array describing which viewmodes are available
  */
-const renderMainTemplate = (views, viewmode, agreementurl) => {
+const renderMainTemplate = (views, viewmode, agreementurl, viewmodes) => {
     const maintemplatedata = [];
     // Use map function to receive only the 'viewname' property of the given views as 'view'.
     maintemplatedata.viewtypes = views.map(view => {
@@ -105,6 +107,7 @@ const renderMainTemplate = (views, viewmode, agreementurl) => {
             'enabled': (view.enabled === 1)
         };
     });
+    Object.entries(viewmodes).forEach(([mode, enabled]) => {maintemplatedata[mode + "_enabled"] = enabled;});
     maintemplatedata.viewmode = viewmode;
     maintemplatedata[viewmode] = true;
     maintemplatedata.agreementurl = agreementurl;

@@ -455,7 +455,10 @@ class assignment {
                             if ($this->block_disealytics_gets_graded()) {
                                 $this->gradestatus = $this->block_disealytics_gen_grade_status();
                             }
-                            return $this->submissonstatus = self::SUBMISSION_STATUS_SUBMITTED;
+                            if ($this->block_disealytics_has_submission()) {
+                                return $this->submissonstatus = self::SUBMISSION_STATUS_SUBMITTED;
+                            }
+                            return $this->submissonstatus = self::SUBMISSION_STATUS_NEUTRAL;
                         } else {
                             if ($this->block_disealytics_has_submission()) {
                                 if ($this->block_disealytics_gets_graded()) {

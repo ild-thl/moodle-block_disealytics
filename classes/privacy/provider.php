@@ -36,10 +36,10 @@ use dml_exception;
  *
  */
 class provider implements
-    core_userlist_provider,
     \core_privacy\local\metadata\provider,
     \core_privacy\local\request\plugin\provider,
-    \core_privacy\local\request\user_preference_provider {
+    \core_privacy\local\request\user_preference_provider,
+    core_userlist_provider {
     /**
      * Get the list of metadata.
      *

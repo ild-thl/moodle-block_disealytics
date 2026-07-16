@@ -158,11 +158,15 @@ class assignment {
             'grade_items',
             ['courseid' => $courseid ?? $COURSE->id, 'itemtype' => 'mod', 'itemmodule' => 'assign', 'iteminstance' => $this->id]
         );
-        $this->gradegrade = $DB->get_record(
-            'grade_grades',
-            ['itemid' => $this->gradeitem->id,
-            'userid' => $USER->id]
-        );
+        if ($this->gradeitem) {
+            $this->gradegrade = $DB->get_record(
+                'grade_grades',
+                ['itemid' => $this->gradeitem->id,
+                'userid' => $USER->id]
+            );
+        } else {
+            $this->gradegrade = false;
+        }
         $this->attempts = [];
         foreach ($DB->get_records('assign_submission', ['assignment' => $this->id, 'userid' => $USER->id]) as $submission) {
             $this->attempts[$submission->attemptnumber]['submission'] = $submission;
@@ -269,7 +273,7 @@ class assignment {
      * @return bool Returns true if the assignment gets graded, false otherwise.
      */
     public function block_disealytics_gets_graded(): bool {
-        return in_array($this->gradeitem->gradetype, [self::GRADETYPE_SCALE, self::GRADETYPE_VALUE], true);
+        return $this->gradeitem && in_array($this->gradeitem->gradetype, [self::GRADETYPE_SCALE, self::GRADETYPE_VALUE], true);
     }
 
     /**
@@ -285,7 +289,7 @@ class assignment {
      * @return Returns the grade type of assignment.
      */
     public function block_disealytics_get_gradetype() {
-        return $this->gradeitem->gradetype;
+        return $this->gradeitem ? $this->gradeitem->gradetype : false;
     }
 
     /**
@@ -294,7 +298,7 @@ class assignment {
      * @throws dml_exception
      */
     private function block_disealytics_get_scale_grade_text() {
-        if ($this->gradeitem->gradetype !== self::GRADETYPE_SCALE) {
+        if (!$this->gradeitem || $this->gradeitem->gradetype !== self::GRADETYPE_SCALE) {
             return false;
         }
         global $DB;
@@ -350,7 +354,7 @@ class assignment {
      * @return float|int Returns the grade for the assignment.
      */
     public function block_disealytics_get_gradepass() {
-        return $this->gradeitem->gradepass;
+        return $this->gradeitem ? $this->gradeitem->gradepass : 0;
     }
 
     /**

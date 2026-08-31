@@ -22,7 +22,6 @@
 
 
 import Ajax from 'core/ajax';
-import ModalFactory from 'core/modal_factory';
 import ModalEvents from 'core/modal_events';
 import Templates from 'core/templates';
 import {get_string as getString} from 'core/str';
@@ -38,6 +37,8 @@ import {
     updateViewlist
 } from 'block_disealytics/view_selection';
 import {updateView, privacyurl} from 'block_disealytics/update_view';
+import ModalSaveCancel from "core/modal_save_cancel";
+import Modal from "core/modal";
 
 let theDisealyticsAddModal = null;
 let theDisealyticsRemoveModal = null;
@@ -147,7 +148,7 @@ export const setEditingMode = () => {
                         if (theDisealyticsAddModal) {
                             theDisealyticsAddModal.destroy();
                         }
-                        theDisealyticsAddModal = await ModalFactory.create({
+                        theDisealyticsAddModal = await Modal.create({
                             title: await getString('main_add_view_title', 'block_disealytics'),
                             body: await Templates.render('block_disealytics/addview_modal', {id: 6}),
                             footer: getVersionInfo(),
@@ -297,8 +298,7 @@ const registerEventListener = (viewname) => {
                 theDisealyticsRemoveModal.destroy();
             }
             // Create the remove modal
-            theDisealyticsRemoveModal = await ModalFactory.create({
-                type: ModalFactory.types.SAVE_CANCEL,
+            theDisealyticsRemoveModal = await ModalSaveCancel.create({
                 title: await getString('modal_remove_title', 'block_disealytics'),
                 body: `${modalRemoveText1} <strong>${modalRemoveView}</strong> ${modalRemoveText2}`,
                 removeOnClose: true,
@@ -358,7 +358,7 @@ export const toggleInformationModal = (viewname) => {
                 theDisealyticsInfoModal.destroy();
             }
 
-            theDisealyticsInfoModal = await ModalFactory.create({
+            theDisealyticsInfoModal = await Modal.create({
                 title: viewname === 'main' ?
                     await getString('main_help_title', 'block_disealytics') :
                     await getString(viewname, 'block_disealytics'),
@@ -379,7 +379,7 @@ export const toggleInformationModal = (viewname) => {
 
     if (btnExpanded) {
         btnExpanded.addEventListener('click', async function() {
-            const modal = await ModalFactory.create({
+            const modal = await Modal.create({
                 title: getString(viewname, 'block_disealytics'),
                 body: getString(viewname + '_help_info_text_expanded', 'block_disealytics'),
                 removeOnClose: true
@@ -404,7 +404,7 @@ export const toggleMainConfigModal = () => {
                 theDisealyticsConfigModal.destroy();
             }
             // Create the main config modal with custom content.
-            theDisealyticsConfigModal = await ModalFactory.create({
+            theDisealyticsConfigModal = await Modal.create({
                 title: await getString('main_config_title', 'block_disealytics'),
                 body: await Templates.render('block_disealytics/config_menu', {id: 1}),
                 removeOnClose: true
@@ -433,7 +433,7 @@ export const toggleMainConfigModal = () => {
                             theDisealyticsConfigConsentModal.destroy();
                         }
                         // Create and show the consent modal.
-                        theDisealyticsConfigConsentModal = await ModalFactory.create({
+                        theDisealyticsConfigConsentModal = await Modal.create({
                             title: await getString('consent_config_title', 'block_disealytics'),
                             body: await Templates.render('block_disealytics/config_menu_consent',
                                 {id: 2, agreementurl: privacyurl}),

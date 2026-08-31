@@ -18,9 +18,9 @@ import {get_string as getString} from 'core/str';
 import {updateView} from "./update_view";
 import {getCourseId} from "./view_selection";
 import {getValueById} from "./add_interaction";
-import ModalFactory from 'core/modal_factory';
 import Templates from "core/templates";
 import ModalEvents from "core/modal_events";
+import ModalSaveCancel from "core/modal_save_cancel";
 
 let theDisealyticsPlannerAddEventModal = null;
 let theDisealyticsPlannerEventDetailsModal = null;
@@ -118,8 +118,7 @@ function initModalEventListeners() {
                     theDisealyticsPlannerEventDetailsModal.destroy();
                 }
                 // Create the modal with the custom content.
-                theDisealyticsPlannerEventDetailsModal = await ModalFactory.create({
-                    type: ModalFactory.types.SAVE_CANCEL,
+                theDisealyticsPlannerEventDetailsModal = await ModalSaveCancel.create({
                     title: plannerEvent.name,
                     body: await Templates.render('block_disealytics/planner_event_modal', plannerEvent),
                     removeOnClose: true,
@@ -162,8 +161,7 @@ function initAddEventListeners() {
                 if (theDisealyticsPlannerAddEventModal) {
                     theDisealyticsPlannerAddEventModal.destroy();
                 }
-                theDisealyticsPlannerAddEventModal = await ModalFactory.create({
-                    type: ModalFactory.types.SAVE_CANCEL,
+                theDisealyticsPlannerAddEventModal = await ModalSaveCancel.create({
                     title: getString('planner_add_event_modal', 'block_disealytics'),
                     body: await Templates.render('block_disealytics/planner_add_event_modal', {id: 1}),
                     removeOnClose: true

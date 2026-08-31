@@ -122,7 +122,7 @@ export function initGoalEventListeners() {
                 editGoalsBtn.querySelector('i').style.color = 'var(--diseared)';
             } else {
                 editGoalsBtn.querySelector('i').classList.add('editing-off');
-                editGoalsBtn.querySelector('i').style.color = 'var(--primary)';
+                editGoalsBtn.querySelector('i').style.color = 'var(--bs-primary)';
             }
             // Turn settings for editing mode on.
             setEditingModeForLearningGoals();

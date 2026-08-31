@@ -40,8 +40,8 @@
          data-container="block_disealytics/editing-{{viewname}}">
         <svg id="{{viewname}}-editing-icon" class="editing-icon" width="47" height="44" viewBox="0 0 47 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M45.6135 22C45.6135 33.7086 35.7336 43.25 23.4835 43.25C11.2335 43.25 1.35352 33.7086 1.35352 22C1.35352 10.2914 11.2335 0.75 23.4835 0.75C35.7336 0.75 45.6135 10.2914 45.6135 22Z"
-                  stroke="var(--primary)" stroke-width="1.5"/>
-            <rect x="11.0029" y="9" width="26" height="25" fill="var(--primary)"/>
+                  stroke="var(--bs-primary)" stroke-width="1.5"/>
+            <rect x="11.0029" y="9" width="26" height="25" fill="var(--bs-primary)"/>
             <path d="M14.1211 21.5H30.1357" stroke="white" stroke-width="2" stroke-linecap="round"/>
             <path d="M14.1211 13.8076H30.1357" stroke="white" stroke-width="2" stroke-linecap="round"/>
             <path d="M33.8828 13.8076H34.9228" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
@@ -83,7 +83,7 @@
         {{#viewmode_module}}
             <div class="panel-body hide-when-expanded">
                 {{#table}}
-                    <table class="table-of-assignments">
+                    <table class="table-of-assignments table-reboot">
                         <tr>
                             <th>{{assignstring}}</th>
                             <th>{{submitstring}}</th>
@@ -112,7 +112,7 @@
                 {{#table_elements_first_three}}{{/table_elements_first_three}}
 
                 {{#table}}
-                    <table class="table-of-assignments">
+                    <table class="table-of-assignments table-reboot">
                         <tr>
                             <th>{{assignstring}}</th>
                             <th>{{submitstring}}</th>
@@ -136,7 +136,7 @@
                     <i class="fa fa-chevron-down course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
                 </button>
                 <div class="hidden panel-body master-table-of-assignments">
-                    <table class="table-of-assignments" data-coursename="{{coursename}}">
+                    <table class="table-of-assignments table-reboot" data-coursename="{{coursename}}">
                         <tr>
                             <th>{{assignstring}}</th>
                             <th>{{submitstring}}</th>
@@ -159,7 +159,7 @@
 
             <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
                 {{#tables}}
-                    <table class="table-of-assignments" data-coursename="{{coursename}}">
+                    <table class="table-reboot table-of-assignments" data-coursename="{{coursename}}">
                         <div class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container">
                             <span id="accordion-subtitle">{{coursename}}</span>
                             <i class="fa fa-chevron-up course-category-icon course-category-icon-{{viewname}}" data-coursename="{{coursename}}"></i>
@@ -209,7 +209,7 @@
                 </button>
                 <div class="hidden panel-body">
                     <div class="master-table-of-assignments">
-                        <table class="table-of-assignments" data-coursename="{{coursename}}">
+                        <table class="table-reboot table-of-assignments" data-coursename="{{coursename}}">
                             <tr>
                                 <th>{{assignstring}}</th>
                                 <th>{{submitstring}}</th>
@@ -231,7 +231,7 @@
                 </div>
             {{/tables}}
             <div class="block_disealytics-expandable block_disealytics-expandable-{{viewname}}" data-container="block_disealytics/expandable-{{viewname}}">
-                <div class="master-table-of-assignments">
+                <div class="table-reboot master-table-of-assignments">
                     {{#tables}}
                         <table class="table-of-assignments" data-coursename="{{coursename}}">
                             <button class="course-category-header-container accordion-head-course-category-{{viewname}} flex-container hide-when-expanded">

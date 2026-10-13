@@ -15,7 +15,9 @@
 
 import {toggleAccordion} from "./add_interaction";
 import Ajax from 'core/ajax';
-import ModalFactory from 'core/modal_factory';
+import Modal from 'core/modal';
+import ModalSaveCancel from 'core/modal_save_cancel';
+import Alert from 'core/local/modal/alert';
 import Templates from "core/templates";
 import {getCourseId} from "./view_selection";
 import {updateView} from "./update_view";
@@ -46,7 +48,7 @@ function initProgressBarModal() {
                 if (theDisealyticsProgressbarModal) {
                     theDisealyticsProgressbarModal.destroy();
                 }
-                theDisealyticsProgressbarModal = await ModalFactory.create({
+                theDisealyticsProgressbarModal = await Modal.create({
                     title: await getString('progress_config_title', 'block_disealytics'),
                     body: await Templates.render('block_disealytics/progress_bar_modal', learningMaterials),
                     removeOnClose: true,
@@ -88,8 +90,7 @@ function initButtonsInProgressBarModal(learningMaterials) {
             if (theDisealyticsProgressbarHelpModal) {
                 theDisealyticsProgressbarHelpModal.destroy();
             }
-            theDisealyticsProgressbarHelpModal = await ModalFactory.create({
-                type: ModalFactory.types.OK,
+            theDisealyticsProgressbarHelpModal = await Alert.create({
                 title: await getString('progress_config_help_title', 'block_disealytics'),
                 body: await getString('learning_materials-view_help_info_text', 'block_disealytics'),
                 removeOnClose: true,
@@ -107,8 +108,7 @@ function initButtonsInProgressBarModal(learningMaterials) {
             if (theDisealyticsProgressbarAddModal) {
                 theDisealyticsProgressbarAddModal.destroy();
             }
-            theDisealyticsProgressbarAddModal = await ModalFactory.create({
-                type: ModalFactory.types.SAVE_CANCEL,
+            theDisealyticsProgressbarAddModal = await ModalSaveCancel.create({
                 title: await getString('progress_config_help_title', 'block_disealytics'),
                 body: await Templates.render('block_disealytics/learning_material_add_inputs', learningMaterials),
                 removeOnClose: true,

@@ -297,18 +297,23 @@ export function importClick() {
                             .map(e => e[1].coursename)
                             .filter(e => e !== ""))
                             .values().toArray();
-                        let userCourses;
-                        Ajax.call([{
-                            methodname: 'core_course_get_enrolled_courses_by_timeline_classification',
-                            args: {
-                                classification: 'all',
+                        const calls = Ajax.call([
+                            {
+                                methodname: 'core_course_get_enrolled_courses_by_timeline_classification',
+                                args: {
+                                    classification: 'all',
+                                },
                             },
-                        }])[0].then(async (result) => {
-                            userCourses = result;
+                            {
+                                methodname: 'block_disealytics_get_dashboard_courses',
+                                args: {
+                                },
+                            },
+                        ]);
+                        Promise.all(calls).then(async ([userCourses, dashboardcourses]) => {
                             userCourses = userCourses.courses.map(function (e) {
                                 return {courseid: e.id, displayname: e.fullnamedisplay};
-                            });
-
+                            }).filter(course => dashboardcourses.includes(course.courseid));
                             // Move currently displayed course to front of array, making it the default during the import process.
                             let index = userCourses.findIndex(e => Number(e.courseid) === Number(getCourseId()));
                             if (index > -1) { // only splice array when item is found

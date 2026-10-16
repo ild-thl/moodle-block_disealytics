@@ -132,4 +132,12 @@ $functions = [
                 'ajax' => true,
                 'loginrequired' => true,
         ],
+        'block_disealytics_get_dashboard_courses' => [
+                'classname' => 'block_disealytics\external\get_dashboard_courses',
+                'methodname' => 'execute',
+                'description' => 'Query a list of courses the dashboard is active in.',
+                'type' => 'read',
+                'ajax' => true,
+                'loginrequired' => true,
+        ],
 ];

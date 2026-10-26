@@ -381,10 +381,10 @@ class success_chance_view extends base_view {
         $assignments = [];
 
         foreach ($allusercourses as $course) {
-            if ($semesterfilter === $course->categoryname || !$semesterfilter) {
+            if ($semesterfilter === $course->category || !$semesterfilter) {
                 $courseassignments = assignment::block_disealytics_get_course_assignments($course->id);
                 $table = [];
-                $table["coursename"] = $course->coursename;
+                $table["coursename"] = $course->fullname;
                 foreach ($courseassignments as $assignment) {
                     $assignments[] = $assignment;
                 }
